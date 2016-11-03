@@ -13,7 +13,7 @@ import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.USER;
 
-public class MySqlCmd {
+public class SQLCmd {
 	// 通用參數
 	public static final String DB = "GIFT";
 	public static final String[] TABLES = { USER.class.getSimpleName(), AEMP.class.getSimpleName(),
@@ -35,7 +35,7 @@ public class MySqlCmd {
 	public static final String DROP = "";
 	public static final String UPDATE_USER_MANAGER = "";
 
-	private static String getSqlType(String type) {
+	public static String getSqlType(String type) {
 		String sqlType = "";
 		switch (type) {
 		case "String":
@@ -61,28 +61,6 @@ public class MySqlCmd {
 			break;
 		}
 		return sqlType;
-	}
-
-	public static String createTable(String tableName, String[] values, String[] types, String primary,
-			String[] unique) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("create table").append(" ").append(DB).append(".").append(tableName).append(" ").append("(");
-		for (int i = 0; i < values.length; i++) {
-			sb.append(values[i]).append(" ").append(getSqlType(types[i])).append(" ").append("NOT NULL");
-			for (String string : unique) {
-				if (values[i].equals(string)) {
-					sb.append(" ").append("UNIQUE");
-				}
-			}
-
-			sb.append(",");
-		}
-		if (!primary.equals("")) {
-			sb.append("PRIMARY KEY").append("(").append(primary).append("));");
-		} else {
-			sb.replace(sb.length() - 1, sb.length(), ");");
-		}
-		return sb.toString();
 	}
 
 }

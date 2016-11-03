@@ -3,34 +3,34 @@ package tw.youth.project.gift2016.sql.aio;
 public class AIO {
 	// 多廠別進/銷主檔
 
-	private String VHNO = "";
+	private String vhno = "";
 	// 單據編號
-	private String FNO = "";
+	private String fno = "";
 	// 廠別
-	private Integer VHDT = 0;
+	private Integer vhdt = 0;
 	// 單據日期
-	private String ANO = "";
+	private String ano = "";
 	// 單位編號
-	private Character DC = 'D'; // ?
+	private Character dc = 'D'; // ?
 	// 進/銷
-	private Float TAMT = 0.0f;
+	private Float tamt = 0.0f;
 	// 進銷金額
-	private String MEMO = "";
+	private String memo = "";
 	// 調撥理由
 
-	private String[] values = { "VHNO", "FNO", "VHDT", "ANO", "DC", "TAMT", "MEMO" };
-	private String[] types = { VHNO.getClass().getSimpleName(), FNO.getClass().getSimpleName(),
-			VHDT.getClass().getSimpleName(), ANO.getClass().getSimpleName(), DC.getClass().getSimpleName(),
-			TAMT.getClass().getSimpleName(), MEMO.getClass().getSimpleName() };
-	private String primary = "VHNO";
-	private String[] unique = { "" };
-	
+	private String[] keys = { "vhno", "fno", "vhdt", "ano", "dc", "tamt", "memo" };
+	private String[] types = { vhno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+			vhdt.getClass().getSimpleName(), ano.getClass().getSimpleName(), dc.getClass().getSimpleName(),
+			tamt.getClass().getSimpleName(), memo.getClass().getSimpleName() };
+	private String[] uniques = { "" };
+	private String primary = "vhno";
+
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
-	
-	public String[] getValues() {
-		return values;
+
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -41,65 +41,65 @@ public class AIO {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
-	//以下是儲存的值
+	// 以下是儲存的值
 
-	public String getVHNO() {
-		return VHNO;
-	}
-
-	public void setVHNO(String vHNO) {
-		VHNO = vHNO;
+	public String getVhno() {
+		return vhno;
 	}
 
-	public String getFNO() {
-		return FNO;
+	public void setVhno(String vhno) {
+		this.vhno = vhno;
 	}
 
-	public void setFNO(String fNO) {
-		FNO = fNO;
+	public String getFno() {
+		return fno;
 	}
 
-	public int getVHDT() {
-		return VHDT;
+	public void setFno(String fno) {
+		this.fno = fno;
 	}
 
-	public void setVHDT(int vHDT) {
-		VHDT = vHDT;
+	public Integer getVhdt() {
+		return vhdt;
 	}
 
-	public String getANO() {
-		return ANO;
+	public void setVhdt(Integer vhdt) {
+		this.vhdt = vhdt;
 	}
 
-	public void setANO(String aNO) {
-		ANO = aNO;
+	public String getAno() {
+		return ano;
 	}
 
-	public char getDC() {
-		return DC;
+	public void setAno(String ano) {
+		this.ano = ano;
 	}
 
-	public void setDC(char dC) {
-		DC = dC;
+	public Character getDc() {
+		return dc;
 	}
 
-	public float getTAMT() {
-		return TAMT;
+	public void setDc(Character dc) {
+		this.dc = dc;
 	}
 
-	public void setTAMT(float tAMT) {
-		TAMT = tAMT;
+	public Float getTamt() {
+		return tamt;
 	}
 
-	public String getMEMO() {
-		return MEMO;
+	public void setTamt(Float tamt) {
+		this.tamt = tamt;
 	}
 
-	public void setMEMO(String mEMO) {
-		MEMO = mEMO;
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
 }

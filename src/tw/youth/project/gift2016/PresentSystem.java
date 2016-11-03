@@ -2,7 +2,7 @@ package tw.youth.project.gift2016;
 
 import javax.swing.JFrame;
 import tw.youth.project.gift2016.info.SystemInfo;
-import tw.youth.project.gift2016.sql.OperDAO;
+import tw.youth.project.gift2016.sql.DBManager;
 
 public class PresentSystem extends JFrame {
 
@@ -11,7 +11,7 @@ public class PresentSystem extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	OperDAO dao;
+	DBManager dao;
 
 	public static void main(String[] args) {
 		new PresentSystem().setVisible(true);
@@ -27,14 +27,14 @@ public class PresentSystem extends JFrame {
 
 	public synchronized boolean login(String name, String password) {
 		System.out.println("Initial login");
-		dao = new OperDAO("localhost", name, password);
+		dao = new DBManager("localhost", name, password);
 		return dao.starup();
 	}
 
 	public synchronized boolean logout() {
 		System.out.println("Initial logout");
 		if (dao.getConn() != null) {
-			dao.closeSQL();
+			dao.close();
 		}
 		return dao.getConn() == null;
 	}

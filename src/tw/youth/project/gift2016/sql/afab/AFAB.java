@@ -3,22 +3,22 @@ package tw.youth.project.gift2016.sql.afab;
 public class AFAB {
 	// 廠別基本檔
 
-	private String FNO = "";
+	private String fno = "";
 	// 廠別代碼
-	private String FNAME = "";
+	private String fname = "";
 	// 廠別名稱
 
-	private String[] values = { "FNO", "FNAME" };
-	private String[] types = { FNO.getClass().getSimpleName(), FNAME.getClass().getSimpleName() };
-	private String primary = "FNO";
-	private String[] unique = { "" };
-	
+	private String[] keys = { "fno", "fname" };
+	private String[] types = { fno.getClass().getSimpleName(), fname.getClass().getSimpleName() };
+	private String[] uniques = { "" };
+	private String primary = "fno";
+
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
-	
-	public String[] getValues() {
-		return values;
+
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -29,24 +29,24 @@ public class AFAB {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
-	//以下是儲存的值
+	// 以下是儲存的值
 
-	public String getFNO() {
-		return FNO;
-	}
-
-	public void setFNO(String fNO) {
-		FNO = fNO;
+	public String getFno() {
+		return fno;
 	}
 
-	public String getFNAME() {
-		return FNAME;
+	public void setFno(String fno) {
+		this.fno = fno;
 	}
 
-	public void setFNAME(String fNAME) {
-		FNAME = fNAME;
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFame(String fname) {
+		this.fname = fname;
 	}
 }

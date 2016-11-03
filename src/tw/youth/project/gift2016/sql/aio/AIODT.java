@@ -3,32 +3,32 @@ package tw.youth.project.gift2016.sql.aio;
 public class AIODT {
 	// 多廠別進/銷副檔
 
-	private String VHNO = ""; // auto
+	private String vhno = ""; // auto
 	// 單據編號
-	private String FGNO = "";
+	private String fgno = "";
 	// 禮品編號
-	private Integer QTY = 0;
+	private Integer qty = 0;
 	// 進銷數量
-	private Float PRC = 0.0f; // auto
+	private Float prc = 0.0f; // auto
 	// 禮品單價
-	private String ORDER1 = "";
+	private String order1 = "";
 	// 訂單編號
-	private String NOTE1 = "";
+	private String note1 = "";
 	// 備註
 
-	private String[] values = { "VHNO", "FGNO", "QTY", "PRC", "ORDER1", "NOTE1" };
-	private String[] types = { VHNO.getClass().getSimpleName(), FGNO.getClass().getSimpleName(),
-			QTY.getClass().getSimpleName(), PRC.getClass().getSimpleName(), ORDER1.getClass().getSimpleName(),
-			NOTE1.getClass().getSimpleName() };
-	private String primary = "VHNO";
-	private String[] unique = { "" };
+	private String[] keys = { "vhno", "fgno", "qty", "prc", "order1", "note1" };
+	private String[] types = { vhno.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
+			qty.getClass().getSimpleName(), prc.getClass().getSimpleName(), order1.getClass().getSimpleName(),
+			note1.getClass().getSimpleName() };
+	private String[] uniques = { "" };
+	private String primary = "vhno";
 
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 	
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -39,57 +39,57 @@ public class AIODT {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	//以下是儲存的值
 
-	public String getVHNO() {
-		return VHNO;
+	public String getVhno() {
+		return vhno;
 	}
 
-	public void setVHNO(String vHNO) {
-		VHNO = vHNO;
+	public void setVhno(String vhno) {
+		this.vhno = vhno;
 	}
 
-	public String getFGNO() {
-		return FGNO;
+	public String getFgno() {
+		return fgno;
 	}
 
-	public void setFGNO(String fGNO) {
-		FGNO = fGNO;
+	public void setFgno(String fgno) {
+		this.fgno = fgno;
 	}
 
-	public int getQTY() {
-		return QTY;
+	public Integer getQty() {
+		return qty;
 	}
 
-	public void setQTY(int qTY) {
-		QTY = qTY;
+	public void setQty(Integer qty) {
+		this.qty = qty;
 	}
 
-	public float getPRC() {
-		return PRC;
+	public Float getPrc() {
+		return prc;
 	}
 
-	public void setPRC(float pRC) {
-		PRC = pRC;
+	public void setPrc(Float prc) {
+		this.prc = prc;
 	}
 
-	public String getORDER1() {
-		return ORDER1;
+	public String getOrder1() {
+		return order1;
 	}
 
-	public void setORDER1(String oRDER1) {
-		ORDER1 = oRDER1;
+	public void setOrder1(String order1) {
+		this.order1 = order1;
 	}
 
-	public String getNOTE1() {
-		return NOTE1;
+	public String getNote1() {
+		return note1;
 	}
 
-	public void setNOTE1(String nOTE1) {
-		NOTE1 = nOTE1;
-	}
+	public void setNote1(String note1) {
+		this.note1 = note1;
+	}	
 
 }

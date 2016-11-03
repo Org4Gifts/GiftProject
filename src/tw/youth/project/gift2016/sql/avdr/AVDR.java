@@ -3,50 +3,50 @@ package tw.youth.project.gift2016.sql.avdr;
 public class AVDR {
 	// 廠/客基本資料檔
 
-	private String CONO = "";
+	private String cono = "";
 	// 公司編號
-	private String NA = "";
+	private String na = "";
 	// 公司簡稱
-	private String NAME = "";
+	private String name = "";
 	// 公司名稱
-	private String ID = "";
+	private String id = "";
 	// 統一編號
-	private String BOSE = "";
+	private String bose = "";
 	// 負責人
-	private String AGENT = "";
+	private String agent = "";
 	// 業務代表
-	private String TITLE = "";
+	private String title = "";
 	// 職稱
-	private String TEL1 = "";
+	private String tel1 = "";
 	// 電話1
-	private String TEL2 = "";
+	private String tel2 = "";
 	// 電話2
-	private String PTEL = "";
+	private String ptel = "";
 	// 手機
-	private String FAX = "";
+	private String fax = "";
 	// 傳真
-	private String IADD = "";
+	private String iadd = "";
 	// 公司地址
-	private String MEMO = "";
+	private String memo = "";
 	// 備註
 
-	private String[] values = { "CONO", "NA", "NAME", "ID", "BOSE", "AGENT", "TITLE", "TEL1", "TEL2", "PTEL", "FAX",
-			"IADD", "MEMO" };
-	private String[] types = { CONO.getClass().getSimpleName(), NA.getClass().getSimpleName(),
-			NAME.getClass().getSimpleName(), ID.getClass().getSimpleName(), BOSE.getClass().getSimpleName(),
-			AGENT.getClass().getSimpleName(), TITLE.getClass().getSimpleName(), TEL1.getClass().getSimpleName(),
-			TEL2.getClass().getSimpleName(), PTEL.getClass().getSimpleName(), FAX.getClass().getSimpleName(),
-			IADD.getClass().getSimpleName(), MEMO.getClass().getSimpleName() };
-	
-	private String primary = "CONO";
-	private String[] unique = { "ID" };
+	private String[] keys = { "cono", "na", "name", "id", "bose", "agent", "title", "tel1", "tel2", "ptel", "fax",
+			"iadd", "memo" };
+	private String[] types = { cono.getClass().getSimpleName(), na.getClass().getSimpleName(),
+			name.getClass().getSimpleName(), id.getClass().getSimpleName(), bose.getClass().getSimpleName(),
+			agent.getClass().getSimpleName(), title.getClass().getSimpleName(), tel1.getClass().getSimpleName(),
+			tel2.getClass().getSimpleName(), ptel.getClass().getSimpleName(), fax.getClass().getSimpleName(),
+			iadd.getClass().getSimpleName(), memo.getClass().getSimpleName() };
+	private String[] uniques = { "id" };
+	private String primary = "cono";
+
 
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 	
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -57,113 +57,115 @@ public class AVDR {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	//以下是儲存的值
 
-	public String getCONO() {
-		return CONO;
+	public String getCono() {
+		return cono;
 	}
 
-	public void setCONO(String cONO) {
-		CONO = cONO;
+	public void setCono(String cono) {
+		this.cono = cono;
 	}
 
-	public String getNA() {
-		return NA;
+	public String getNa() {
+		return na;
 	}
 
-	public void setNA(String nA) {
-		NA = nA;
+	public void setNa(String na) {
+		this.na = na;
 	}
 
-	public String getNAME() {
-		return NAME;
+	public String getName() {
+		return name;
 	}
 
-	public void setNAME(String nAME) {
-		NAME = nAME;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getBOSE() {
-		return BOSE;
+	public String getBose() {
+		return bose;
 	}
 
-	public void setBOSE(String bOSE) {
-		BOSE = bOSE;
+	public void setBose(String bose) {
+		this.bose = bose;
 	}
 
-	public String getAGENT() {
-		return AGENT;
+	public String getAgent() {
+		return agent;
 	}
 
-	public void setAGENT(String aGENT) {
-		AGENT = aGENT;
+	public void setAgent(String agent) {
+		this.agent = agent;
 	}
 
-	public String getTITLE() {
-		return TITLE;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTITLE(String tITLE) {
-		TITLE = tITLE;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getTEL1() {
-		return TEL1;
+	public String getTel1() {
+		return tel1;
 	}
 
-	public void setTEL1(String tEL1) {
-		TEL1 = tEL1;
+	public void setTel1(String tel1) {
+		this.tel1 = tel1;
 	}
 
-	public String getTEL2() {
-		return TEL2;
+	public String getTel2() {
+		return tel2;
 	}
 
-	public void setTEL2(String tEL2) {
-		TEL2 = tEL2;
+	public void setTel2(String tel2) {
+		this.tel2 = tel2;
 	}
 
-	public String getPTEL() {
-		return PTEL;
+	public String getPtel() {
+		return ptel;
 	}
 
-	public void setPTEL(String pTEL) {
-		PTEL = pTEL;
+	public void setPtel(String ptel) {
+		this.ptel = ptel;
 	}
 
-	public String getFAX() {
-		return FAX;
+	public String getFax() {
+		return fax;
 	}
 
-	public void setFAX(String fAX) {
-		FAX = fAX;
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
 
-	public String getIADD() {
-		return IADD;
+	public String getIadd() {
+		return iadd;
 	}
 
-	public void setIADD(String iADD) {
-		IADD = iADD;
+	public void setIadd(String iadd) {
+		this.iadd = iadd;
 	}
 
-	public String getMEMO() {
-		return MEMO;
+	public String getMemo() {
+		return memo;
 	}
 
-	public void setMEMO(String mEMO) {
-		MEMO = mEMO;
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
+
+	
 }

@@ -3,36 +3,37 @@ package tw.youth.project.gift2016.sql.user;
 public class AEMP {
 	// 員工基本資料檔
 
-	private String EMPNO = "";
+	private String empno = "";
 	// 工號
-	private String ENAME = "";
+	private String ename = "";
 	// 中文姓名
-	private String EMAIL = "";
+	private String email = "";
 	// 電子郵件地址
-	private String JOB = "";
+	private String job = "";
 	// 職稱
-	private String AUTHORITY = ""; // auto
+	private String authority = ""; // auto
 	// 簽核層級
-	private String EXT = "";
+	private String ext = "";
 	// 分機
-	private String MGR = "";
+	private String mgr = "";
 	// 直屬主管工號
-	private String DNO = "";
+	private String dno = "";
 	// 部門代碼
 
-	private String[] values = { "EMPNO", "ENAME", "EMAIL", "JOB", "AUTHORITY", "EXT", "MGR", "DNO" };
-	private String[] types = { EMPNO.getClass().getSimpleName(), ENAME.getClass().getSimpleName(),
-			EMAIL.getClass().getSimpleName(), JOB.getClass().getSimpleName(), AUTHORITY.getClass().getSimpleName(),
-			EXT.getClass().getSimpleName(), MGR.getClass().getSimpleName(), DNO.getClass().getSimpleName() };
-	private String primary = "EMPNO";
-	private String[] unique = { "EMAIL" };
+	private String[] keys = { "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno" };
+	private String[] types = { empno.getClass().getSimpleName(), ename.getClass().getSimpleName(),
+			email.getClass().getSimpleName(), job.getClass().getSimpleName(), authority.getClass().getSimpleName(),
+			ext.getClass().getSimpleName(), mgr.getClass().getSimpleName(), dno.getClass().getSimpleName() };
+	private String[] uniques = { "email" };
+	private String primary = "empno";
+
 
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 	
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -43,73 +44,73 @@ public class AEMP {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	//以下是儲存的值
 
-	public String getEMPNO() {
-		return EMPNO;
+	public String getEmpno() {
+		return empno;
 	}
 
-	public void setEMPNO(String eMPNO) {
-		EMPNO = eMPNO;
+	public void setEmpno(String empno) {
+		this.empno = empno;
 	}
 
-	public String getENAME() {
-		return ENAME;
+	public String getEname() {
+		return ename;
 	}
 
-	public void setENAME(String eNAME) {
-		ENAME = eNAME;
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 
-	public String getEMAIL() {
-		return EMAIL;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEMAIL(String eMAIL) {
-		EMAIL = eMAIL;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getJOB() {
-		return JOB;
+	public String getJob() {
+		return job;
 	}
 
-	public void setJOB(String jOB) {
-		JOB = jOB;
+	public void setJob(String job) {
+		this.job = job;
 	}
 
-	public String getAUTHORITY() {
-		return AUTHORITY;
+	public String getAuthority() {
+		return authority;
 	}
 
-	public void setAUTHORITY(String aUTHORITY) {
-		AUTHORITY = aUTHORITY;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
-	public String getEXT() {
-		return EXT;
+	public String getExt() {
+		return ext;
 	}
 
-	public void setEXT(String eXT) {
-		EXT = eXT;
+	public void setExt(String ext) {
+		this.ext = ext;
 	}
 
-	public String getMGR() {
-		return MGR;
+	public String getMgr() {
+		return mgr;
 	}
 
-	public void setMGR(String mGR) {
-		MGR = mGR;
+	public void setMgr(String mgr) {
+		this.mgr = mgr;
 	}
 
-	public String getDNO() {
-		return DNO;
+	public String getDno() {
+		return dno;
 	}
 
-	public void setDNO(String dNO) {
-		DNO = dNO;
-	}
+	public void setDno(String dno) {
+		this.dno = dno;
+	}	
 
 }

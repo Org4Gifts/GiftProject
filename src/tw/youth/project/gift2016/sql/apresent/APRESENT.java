@@ -3,39 +3,39 @@ package tw.youth.project.gift2016.sql.apresent;
 public class APRESENT {
 	// 禮品基本檔
 
-	private String FGNO = "";
+	private String fgno = "";
 	// 禮品編號
-	private String FGNAME = "";
+	private String fgname = "";
 	// 禮品名稱
-	private Float PRC = 0.0f;
+	private Float prc = 0.0f;
 	// 禮品單價
-	private Short GRADE = 0;
+	private Short grade = 0;
 	// 禮品等級
-	private Short AUTHORITY = 0;
+	private Short authority = 0;
 	// 申請層級
-	private String STATUS = "";
+	private String status = "";
 	// 申請狀態
-	private String NOTE1 = "";
+	private String note1 = "";
 	// 備註
-	private Integer FQTY = 0;
+	private Integer fqty = 0;
 	// 安全庫存量
-	private Integer IQTY = 0; // auto
+	private Integer iqty = 0; // auto
 	// 即時庫存量
 
-	private String[] values = { "FGNO", "FGNAME", "PRC", "GRADE", "AUTHORITY", "STATUS", "NOTE1", "FQTY", "IQTY" };
-	private String[] types = { FGNO.getClass().getSimpleName(), FGNAME.getClass().getSimpleName(),
-			PRC.getClass().getSimpleName(), GRADE.getClass().getSimpleName(), AUTHORITY.getClass().getSimpleName(),
-			STATUS.getClass().getSimpleName(), NOTE1.getClass().getSimpleName(), FQTY.getClass().getSimpleName(),
-			IQTY.getClass().getSimpleName() };
-	private String primary = "FGNO";
-	private String[] unique = { "FGNAME" };
+	private String[] keys = { "fgno", "fgname", "prc", "grade", "authority", "status", "note1", "fqty", "iqty" };
+	private String[] types = { fgno.getClass().getSimpleName(), fgname.getClass().getSimpleName(),
+			prc.getClass().getSimpleName(), grade.getClass().getSimpleName(), authority.getClass().getSimpleName(),
+			status.getClass().getSimpleName(), note1.getClass().getSimpleName(), fqty.getClass().getSimpleName(),
+			iqty.getClass().getSimpleName() };
+	private String[] uniques = { "fgname" };
+	private String primary = "fgno";
 	
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 	
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -46,81 +46,83 @@ public class APRESENT {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	//以下是儲存的值
 
-	public String getFGNO() {
-		return FGNO;
+	public String getFgno() {
+		return fgno;
 	}
 
-	public void setFGNO(String fGNO) {
-		FGNO = fGNO;
+	public void setFgno(String fgno) {
+		this.fgno = fgno;
 	}
 
-	public String getFGNAME() {
-		return FGNAME;
+	public String getFgname() {
+		return fgname;
 	}
 
-	public void setFGNAME(String fGNAME) {
-		FGNAME = fGNAME;
+	public void setFgname(String fgname) {
+		this.fgname = fgname;
 	}
 
-	public float getPRC() {
-		return PRC;
+	public Float getPrc() {
+		return prc;
 	}
 
-	public void setPRC(float pRC) {
-		PRC = pRC;
+	public void setPrc(Float prc) {
+		this.prc = prc;
 	}
 
-	public short getGRADE() {
-		return GRADE;
+	public Short getGrade() {
+		return grade;
 	}
 
-	public void setGRADE(short gRADE) {
-		GRADE = gRADE;
+	public void setGrade(Short grade) {
+		this.grade = grade;
 	}
 
-	public short getAUTHORITY() {
-		return AUTHORITY;
+	public Short getAuthority() {
+		return authority;
 	}
 
-	public void setAUTHORITY(short aUTHORITY) {
-		AUTHORITY = aUTHORITY;
+	public void setAuthority(Short authority) {
+		this.authority = authority;
 	}
 
-	public String getSTATUS() {
-		return STATUS;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setSTATUS(String sTATUS) {
-		STATUS = sTATUS;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public String getNOTE1() {
-		return NOTE1;
+	public String getNote1() {
+		return note1;
 	}
 
-	public void setNOTE1(String nOTE1) {
-		NOTE1 = nOTE1;
+	public void setNote1(String note1) {
+		this.note1 = note1;
 	}
 
-	public int getFQTY() {
-		return FQTY;
+	public Integer getFqty() {
+		return fqty;
 	}
 
-	public void setFQTY(int fQTY) {
-		FQTY = fQTY;
+	public void setFqty(Integer fqty) {
+		this.fqty = fqty;
 	}
 
-	public int getIQTY() {
-		return IQTY;
+	public Integer getIqty() {
+		return iqty;
 	}
 
-	public void setIQTY(int iQTY) {
-		IQTY = iQTY;
+	public void setIqty(Integer iqty) {
+		this.iqty = iqty;
 	}
+
+	
 
 }

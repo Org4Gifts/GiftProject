@@ -3,25 +3,26 @@ package tw.youth.project.gift2016.sql.adep;
 public class ADEP {
 	// 部門基本資料檔
 	
-	private String DNO = "";
+	private String dno = "";
 	// 部門代碼
-	private String DNAME = "";
+	private String dname = "";
 	// 部門名稱
-	private String FNO = "";
+	private String fno = "";
 	// 所在廠區
 
-	private String[] values = { "DNO", "DNAME", FNO };
-	private String[] types = { DNO.getClass().getSimpleName(), DNAME.getClass().getSimpleName(),
-			FNO.getClass().getSimpleName() };
-	private String primary = "DNO";
-	private String[] unique = { "" };
+	private String[] keys = { "dno", "dname", fno };
+	private String[] types = { dno.getClass().getSimpleName(), dname.getClass().getSimpleName(),
+			fno.getClass().getSimpleName() };
+	private String[] uniques = { "" };
+	private String primary = "dno";
+
 
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 	
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -32,33 +33,33 @@ public class ADEP {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	//以下是儲存的值
 
-	public String getDNO() {
-		return DNO;
+	public String getDno() {
+		return dno;
 	}
 
-	public void setDNO(String dNO) {
-		DNO = dNO;
+	public void setDno(String dno) {
+		this.dno = dno;
 	}
 
-	public String getDNAME() {
-		return DNAME;
+	public String getDname() {
+		return dname;
 	}
 
-	public void setDNAME(String dNAME) {
-		DNAME = dNAME;
+	public void setDname(String dname) {
+		this.dname = dname;
 	}
 
-	public String getFNO() {
-		return FNO;
+	public String getFno() {
+		return fno;
 	}
 
-	public void setFNO(String fNO) {
-		FNO = fNO;
+	public void setFno(String fno) {
+		this.fno = fno;
 	}
 
 }

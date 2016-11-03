@@ -6,22 +6,22 @@ import java.security.NoSuchAlgorithmException;
 
 public class USER {
 
-	private String EMPNO = "";
-	private String USER = "";
-	private String PASS = "";
+	private String empno = "";
+	private String user = "";
+	private String pass = "";
 
-	private String[] values = { "EMPNO", "USER", "PASS" };
-	private String[] types = { EMPNO.getClass().getSimpleName(), USER.getClass().getSimpleName(),
-			PASS.getClass().getSimpleName() };
-	private String primary = "EMPNO";
-	private String[] unique = { "USER" };
+	private String[] keys = { "empno", "user", "pass" };
+	private String[] types = { empno.getClass().getSimpleName(), user.getClass().getSimpleName(),
+			pass.getClass().getSimpleName() };
+	private String[] uniques = { "user" };
+	private String primary = "empno";
 
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -32,8 +32,8 @@ public class USER {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	//以下是儲存的值
 
@@ -61,28 +61,29 @@ public class USER {
 		return sb.toString();
 	}
 
-	public String getUSER() {
-		return USER;
+	public String getEmpno() {
+		return empno;
 	}
 
-	public void setUSER(String uSER) {
-		USER = uSER;
+	public void setEmpno(String empno) {
+		this.empno = empno;
 	}
 
-	public String getPASS() {
-		return PASS;
+	public String getUser() {
+		return user;
 	}
 
-	public void setPASS(String pASS) {
-		PASS = pASS;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
-	public String getEMPNO() {
-		return EMPNO;
+	public String getPass() {
+		return pass;
 	}
 
-	public void setEMPNO(String eMPNO) {
-		EMPNO = eMPNO;
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
+
 
 }

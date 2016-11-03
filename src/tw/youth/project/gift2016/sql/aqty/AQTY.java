@@ -3,32 +3,32 @@ package tw.youth.project.gift2016.sql.aqty;
 public class AQTY {
 	// 多廠別進/銷彙總檔
 
-	private Integer YYMM = 0; // auto
+	private Integer yymm = 0; // auto
 	// 資料年月
-	private String FNO = ""; // auto
+	private String fno = ""; // auto
 	// 廠別
-	private String FGNO = ""; // auto
+	private String fgno = ""; // auto
 	// 禮品編號
-	private Integer PMQTY = 0; // auto
+	private Integer pmqty = 0; // auto
 	// 期初數量
-	private Integer INQTY = 0; // auto
+	private Integer inqty = 0; // auto
 	// 本月進貨
-	private Integer UDQTY = 0; // auto
+	private Integer udqty = 0; // auto
 	// 本月銷貨
 
-	private String[] values = { "YYMM", "FNO", "FGNO", "PMQTY", "INQTY", "UDQTY" };
-	private String[] types = { YYMM.getClass().getSimpleName(), FNO.getClass().getSimpleName(),
-			FGNO.getClass().getSimpleName(), PMQTY.getClass().getSimpleName(), INQTY.getClass().getSimpleName(),
-			UDQTY.getClass().getSimpleName() };
+	private String[] keys = { "yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
+	private String[] types = { yymm.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+			fgno.getClass().getSimpleName(), pmqty.getClass().getSimpleName(), inqty.getClass().getSimpleName(),
+			udqty.getClass().getSimpleName() };
+	private String[] uniques = { "" };
 	private String primary = "";
-	private String[] unique = { "" };
 
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -39,57 +39,57 @@ public class AQTY {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	// 以下是儲存的值
 
-	public int getYYMM() {
-		return YYMM;
+	public Integer getYymm() {
+		return yymm;
 	}
 
-	public void setYYMM(int yYMM) {
-		YYMM = yYMM;
+	public void setYymm(Integer yymm) {
+		this.yymm = yymm;
 	}
 
-	public String getFNO() {
-		return FNO;
+	public String getFno() {
+		return fno;
 	}
 
-	public void setFNO(String fNO) {
-		FNO = fNO;
+	public void setFno(String fno) {
+		this.fno = fno;
 	}
 
-	public String getFGNO() {
-		return FGNO;
+	public String getFgno() {
+		return fgno;
 	}
 
-	public void setFGNO(String fGNO) {
-		FGNO = fGNO;
+	public void setFgno(String fgno) {
+		this.fgno = fgno;
 	}
 
-	public int getPMQTY() {
-		return PMQTY;
+	public Integer getPmqty() {
+		return pmqty;
 	}
 
-	public void setPMQTY(int pMQTY) {
-		PMQTY = pMQTY;
+	public void setPmqty(Integer pmqty) {
+		this.pmqty = pmqty;
 	}
 
-	public int getINQTY() {
-		return INQTY;
+	public Integer getInqty() {
+		return inqty;
 	}
 
-	public void setINQTY(int iNQTY) {
-		INQTY = iNQTY;
+	public void setInqty(Integer inqty) {
+		this.inqty = inqty;
 	}
 
-	public int getUDQTY() {
-		return UDQTY;
+	public Integer getUdqty() {
+		return udqty;
 	}
 
-	public void setUDQTY(int uDQTY) {
-		UDQTY = uDQTY;
-	}
+	public void setUdqty(Integer udqty) {
+		this.udqty = udqty;
+	}	
 
 }

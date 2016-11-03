@@ -3,29 +3,29 @@ package tw.youth.project.gift2016.sql.aodr;
 public class AODR {
 	// 訂單主檔
 
-	private String ORDER1 = "";
+	private String order1 = "";
 	// 訂單編號
-	private Integer ODATE = 0;
+	private Integer odate = 0;
 	// 訂定日期
-	private String EMPNO = "";
+	private String empno = "";
 	// 員工編號
-	private Long TAMT = 0L;
+	private Long tamt = 0L;
 	// 訂單金額
-	private String PURPOSE = "";
+	private String purpose = "";
 	// 需求目的
 
-	private String[] values = { "ORDER1", "ODATE", "EMPNO", "TAMT", "PURPOSE" };
-	private String[] types = { ORDER1.getClass().getSimpleName(), ODATE.getClass().getSimpleName(),
-			EMPNO.getClass().getSimpleName(), TAMT.getClass().getSimpleName(), PURPOSE.getClass().getSimpleName() };
+	private String[] keys = { "ORDER1", "ODATE", "EMPNO", "TAMT", "PURPOSE" };
+	private String[] types = { order1.getClass().getSimpleName(), odate.getClass().getSimpleName(),
+			empno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), purpose.getClass().getSimpleName() };
+	private String[] uniques = { "" };
 	private String primary = "ORDER1";
-	private String[] unique = { "" };
 	
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
 	
-	public String[] getValues() {
-		return values;
+	public String[] getKeys() {
+		return keys;
 	}
 
 	public String[] getTypes() {
@@ -36,49 +36,49 @@ public class AODR {
 		return primary;
 	}
 
-	public String[] getUnique() {
-		return unique;
+	public String[] getUniques() {
+		return uniques;
 	}
 	//以下是儲存的值
 
-	public String getORDER1() {
-		return ORDER1;
+	public String getOrder1() {
+		return order1;
 	}
 
-	public void setORDER1(String oRDER1) {
-		ORDER1 = oRDER1;
+	public void setOrder1(String order1) {
+		this.order1 = order1;
 	}
 
-	public int getODATE() {
-		return ODATE;
+	public Integer getOdate() {
+		return odate;
 	}
 
-	public void setODATE(int oDATE) {
-		ODATE = oDATE;
+	public void setOdate(Integer odate) {
+		this.odate = odate;
 	}
 
-	public String getEMPNO() {
-		return EMPNO;
+	public String getEmpno() {
+		return empno;
 	}
 
-	public void setEMPNO(String eMPNO) {
-		EMPNO = eMPNO;
+	public void setEmpno(String empno) {
+		this.empno = empno;
 	}
 
-	public long getTAMT() {
-		return TAMT;
+	public Long getTamt() {
+		return tamt;
 	}
 
-	public void setTAMT(long tAMT) {
-		TAMT = tAMT;
+	public void setTamt(Long tamt) {
+		this.tamt = tamt;
 	}
 
-	public String getPURPOSE() {
-		return PURPOSE;
+	public String getPurpose() {
+		return purpose;
 	}
 
-	public void setPURPOSE(String pURPOSE) {
-		PURPOSE = pURPOSE;
-	}
+	public void setPurpose(String purpose) {
+		this.purpose = purpose;
+	}	
 
 }
