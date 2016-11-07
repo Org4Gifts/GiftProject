@@ -6,7 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import tw.youth.project.gift2016.sql.adep.ADEP;
+import tw.youth.project.gift2016.sql.afab.AFAB;
+import tw.youth.project.gift2016.sql.ainventory.AINVENTORY;
+import tw.youth.project.gift2016.sql.aio.AIO;
+import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
+import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.apresent.APRESENT;
+import tw.youth.project.gift2016.sql.aqty.AQTY;
+import tw.youth.project.gift2016.sql.avdr.AVDR;
+import tw.youth.project.gift2016.sql.user.AEMP;
+import tw.youth.project.gift2016.sql.user.USER;
 
 public class DBManager {
 	private static Connection conn;
@@ -51,16 +62,62 @@ public class DBManager {
 		return chk;
 	}
 
+	public Object getTableObject(String tableName) {
+		Object table = null;
+		switch (tableName) {
+		case "USER":
+			table = new USER();
+			break;
+		case "AEMP":
+			table = new AEMP();
+			break;
+		case "AVDR":
+			table = new AVDR();
+			break;
+		case "AQTY":
+			table = new AQTY();
+			break;
+		case "APRESENT":
+			table = new APRESENT();
+			break;
+		case "AODRDT":
+			table = new AODRDT();
+			break;
+		case "AODR":
+			table = new AODR();
+			break;
+		case "AIODT":
+			table = new AIODT();
+			break;
+		case "AIO":
+			table = new AIO();
+			break;
+		case "AINVENTORY":
+			table = new AINVENTORY();
+			break;
+		case "AFAB":
+			table = new AFAB();
+			break;
+		case "ADEP":
+			table = new ADEP();
+			break;
+		}
+		return table;
+	}
+
 	public boolean starup() {
 		conn = new DAO().getConn(url, name, password);
 		return conn != null;
 	}
 
-	public String createTable(String tableName, String[] keys, String[] types, String[] uniques,String primary) {
+	public String createTable(String tableName, String[] keys, String[] types, String[] uniques, String primary) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("CREATE").append(" ").append("TABLE").append(" ").append(tableName).append(" ").append("(");
 		for (int i = 0; i < keys.length; i++) {
 			sb.append(keys[i]).append(" ").append(SQLCmd.getSqlType(types[i])).append(" ").append("NOT NULL");
+			if (i == 0) {
+				sb.append(" ").append("AUTO_INCREMENT");
+			}
 			for (String string : uniques) {
 				if (keys[i].equals(string)) {
 					sb.append(" ").append("UNIQUE");
@@ -82,39 +139,95 @@ public class DBManager {
 		return sb.toString();
 	}
 
-	public boolean insert(String tableName, String[] keys, Object[] values, String[] types) {
+	public synchronized String insert(String tableName, String[] keys, Object[] values) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
 		for (String key : keys) {
 			sb.append(key).append(",");
 		}
 		sb.replace(sb.length() - 1, sb.length(), ")").append(" ").append("VALUES").append("(");
-		for (int i = 0; i < keys.length; i++) {
+		for (String key : keys) {
 			sb.append("?").append(",");
 		}
 		sb.replace(sb.length() - 1, sb.length(), ")");
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
 			for (int i = 0; i < values.length; i++) {
-				ps.setObject(i, values[i]);
+				ps.setObject(i + 1, values[i]);
 			}
-			return ps.executeUpdate() > 0;
+			return "Insert " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-			return false;
+			return "Insert error, " + e.getMessage();
 		}
 
 	}
 
-	public boolean update() {
+	public synchronized String update(String tableName, String[] keys, Object[] values) {
+		// "UPDATE library_db.books SET
+		// TITLE=?,ORIGINALTITLE=?,ISBN=?,AUTHOR=?,"
+		// +
+		// "EDITION=?,BINDING=?,PUBLISHER=?,PUBLISHED=?,LISTPRICE=?,COLUMNS=?,SUBJECT=?,WEBSITE=?,BORROWER=?,"
+		// + "REMARK=?,REFERENCE=?,COMMENT=? WHERE NUMBER=?";
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE").append(" ").append(tableName).append(" ").append("SET").append(" ");
+		for (String key : keys) {
+			sb.append(key).append("=?,");
+		}
+		sb.replace(sb.length() - 1, sb.length(), " ");
+		sb.append("WHERE").append(" ").append(keys[0]).append("=?");
 
-		return true;
+		try {
+			PreparedStatement ps = conn.prepareStatement(sb.toString());
+			for (int i = 0; i < values.length; i++) {
+				ps.setObject(i + 1, values[i]);
+			}
+			return "update " + (ps.executeUpdate() > 0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return "update error, " + e.getMessage();
+		}
 	}
 
-	public boolean drop() {
+	public String drop(String tableName, String key, Object value) {
+		String dropTable = "DELETE from %s WHERE %s=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(String.format(dropTable, tableName, key));
+			ps.setObject(1, value);
+			return "drop " + (ps.executeUpdate() > 0);
 
-		return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return "drop error, " + e.getMessage();
+		}
+	}
+
+	public ArrayList<Object[]> query(String tableName, String key, Object value, int length) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT").append(" ").append("*").append("from").append(tableName).append(" ").append("WHERE")
+				.append(" ").append(key).append(" ").append("=?");
+
+		try {
+			PreparedStatement ps = conn.prepareStatement(sb.toString());
+			ps.setObject(1, value);
+			ResultSet rs = ps.executeQuery();
+			ArrayList<Object[]> arr = new ArrayList<>();
+			while (rs.next()) {
+				Object[] objs = new Object[length];
+				for (int i = 0; i < length; i++) {
+					objs[i] = rs.getObject(i + 1);
+				}
+				arr.add(objs);
+			}
+			return arr;
+		} catch (
+
+		SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+			return null;
+		}
+
 	}
 
 	public <T> Object query(T tableName) {

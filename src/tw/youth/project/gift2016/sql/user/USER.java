@@ -6,12 +6,13 @@ import java.security.NoSuchAlgorithmException;
 
 public class USER {
 
+	private Integer _id =0;
 	private String empno = "";
 	private String user = "";
 	private String pass = "";
 
-	private String[] keys = { "empno", "user", "pass" };
-	private String[] types = { empno.getClass().getSimpleName(), user.getClass().getSimpleName(),
+	private String[] keys = { "_id","empno", "user", "pass" };
+	private String[] types = { _id.getClass().getSimpleName(),empno.getClass().getSimpleName(), user.getClass().getSimpleName(),
 			pass.getClass().getSimpleName() };
 	private String[] uniques = { "user" };
 	private String primary = "empno";
@@ -35,8 +36,9 @@ public class USER {
 	public String[] getUniques() {
 		return uniques;
 	}
-	//以下是儲存的值
 
+	//檢驗MD5密碼
+	
 	public String checkPass(String source) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -59,6 +61,16 @@ public class USER {
 			sb.append(hex);
 		}
 		return sb.toString();
+	}
+	
+	//以下是儲存的值
+
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
 	}
 
 	public String getEmpno() {

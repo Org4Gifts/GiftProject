@@ -2,14 +2,16 @@ package tw.youth.project.gift2016.sql.afab;
 
 public class AFAB {
 	// 廠別基本檔
+	private Integer _id = 0;
 
 	private String fno = "";
 	// 廠別代碼
 	private String fname = "";
 	// 廠別名稱
 
-	private String[] keys = { "fno", "fname" };
-	private String[] types = { fno.getClass().getSimpleName(), fname.getClass().getSimpleName() };
+	private String[] keys = { "_id", "fno", "fname" };
+	private String[] types = { _id.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+			fname.getClass().getSimpleName() };
 	private String[] uniques = { "" };
 	private String primary = "fno";
 
@@ -34,6 +36,14 @@ public class AFAB {
 	}
 	// 以下是儲存的值
 
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+	
 	public String getFno() {
 		return fno;
 	}

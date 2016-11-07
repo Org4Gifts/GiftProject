@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.avdr;
 
 public class AVDR {
 	// 廠/客基本資料檔
+	private Integer _id=0;
 
 	private String cono = "";
 	// 公司編號
@@ -30,9 +31,9 @@ public class AVDR {
 	private String memo = "";
 	// 備註
 
-	private String[] keys = { "cono", "na", "name", "id", "bose", "agent", "title", "tel1", "tel2", "ptel", "fax",
+	private String[] keys = { "_id","cono", "na", "name", "id", "bose", "agent", "title", "tel1", "tel2", "ptel", "fax",
 			"iadd", "memo" };
-	private String[] types = { cono.getClass().getSimpleName(), na.getClass().getSimpleName(),
+	private String[] types = { _id.getClass().getSimpleName(),cono.getClass().getSimpleName(), na.getClass().getSimpleName(),
 			name.getClass().getSimpleName(), id.getClass().getSimpleName(), bose.getClass().getSimpleName(),
 			agent.getClass().getSimpleName(), title.getClass().getSimpleName(), tel1.getClass().getSimpleName(),
 			tel2.getClass().getSimpleName(), ptel.getClass().getSimpleName(), fax.getClass().getSimpleName(),

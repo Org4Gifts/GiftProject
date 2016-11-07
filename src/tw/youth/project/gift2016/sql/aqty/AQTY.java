@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.aqty;
 
 public class AQTY {
 	// 多廠別進/銷彙總檔
+	private Integer _id =0;
 
 	private Integer yymm = 0; // auto
 	// 資料年月
@@ -16,8 +17,8 @@ public class AQTY {
 	private Integer udqty = 0; // auto
 	// 本月銷貨
 
-	private String[] keys = { "yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
-	private String[] types = { yymm.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+	private String[] keys = { "_id","yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
+	private String[] types = { _id.getClass().getSimpleName(),yymm.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			fgno.getClass().getSimpleName(), pmqty.getClass().getSimpleName(), inqty.getClass().getSimpleName(),
 			udqty.getClass().getSimpleName() };
 	private String[] uniques = { "" };
@@ -44,6 +45,14 @@ public class AQTY {
 	}
 	// 以下是儲存的值
 
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+	
 	public Integer getYymm() {
 		return yymm;
 	}

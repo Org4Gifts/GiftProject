@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.apresent;
 
 public class APRESENT {
 	// 禮品基本檔
+	private Integer _id = 0;
 
 	private String fgno = "";
 	// 禮品編號
@@ -22,18 +23,18 @@ public class APRESENT {
 	private Integer iqty = 0; // auto
 	// 即時庫存量
 
-	private String[] keys = { "fgno", "fgname", "prc", "grade", "authority", "status", "note1", "fqty", "iqty" };
-	private String[] types = { fgno.getClass().getSimpleName(), fgname.getClass().getSimpleName(),
-			prc.getClass().getSimpleName(), grade.getClass().getSimpleName(), authority.getClass().getSimpleName(),
-			status.getClass().getSimpleName(), note1.getClass().getSimpleName(), fqty.getClass().getSimpleName(),
-			iqty.getClass().getSimpleName() };
+	private String[] keys = { "_id", "fgno", "fgname", "prc", "grade", "authority", "status", "note1", "fqty", "iqty" };
+	private String[] types = { _id.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
+			fgname.getClass().getSimpleName(), prc.getClass().getSimpleName(), grade.getClass().getSimpleName(),
+			authority.getClass().getSimpleName(), status.getClass().getSimpleName(), note1.getClass().getSimpleName(),
+			fqty.getClass().getSimpleName(), iqty.getClass().getSimpleName() };
 	private String[] uniques = { "fgname" };
 	private String primary = "fgno";
-	
+
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
-	
+
 	public String[] getKeys() {
 		return keys;
 	}
@@ -49,7 +50,15 @@ public class APRESENT {
 	public String[] getUniques() {
 		return uniques;
 	}
-	//以下是儲存的值
+
+	// 以下是儲存的值
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
 
 	public String getFgno() {
 		return fgno;
@@ -122,7 +131,5 @@ public class APRESENT {
 	public void setIqty(Integer iqty) {
 		this.iqty = iqty;
 	}
-
-	
 
 }

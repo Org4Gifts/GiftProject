@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.ainventory;
 
 public class AINVENTORY {
 	// 多廠別盤存檔
+	private Integer _id = 0;
 
 	private String invo = "";
 	// 盤點單號
@@ -16,17 +17,17 @@ public class AINVENTORY {
 	private Integer sqty = 0; // auto
 	// 系統數量
 
-	private String[] keys = { "invo", "fno", "yymm", "fgno", "ivqty", "sqty" };
-	private String[] types = { invo.getClass().getSimpleName(), fno.getClass().getSimpleName(),
-			yymm.getClass().getSimpleName(), fgno.getClass().getSimpleName(), ivqty.getClass().getSimpleName(),
-			sqty.getClass().getSimpleName() };
+	private String[] keys = { "_id", "invo", "fno", "yymm", "fgno", "ivqty", "sqty" };
+	private String[] types = { _id.getClass().getSimpleName(), invo.getClass().getSimpleName(),
+			fno.getClass().getSimpleName(), yymm.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
+			ivqty.getClass().getSimpleName(), sqty.getClass().getSimpleName() };
 	private String[] uniques = { "" };
 	private String primary = "invo";
-	
+
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
-	
+
 	public String[] getKeys() {
 		return keys;
 	}
@@ -42,7 +43,16 @@ public class AINVENTORY {
 	public String[] getUniques() {
 		return uniques;
 	}
-	//以下是儲存的值
+	// 以下是儲存的值
+	
+
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
 
 	public String getInvo() {
 		return invo;
@@ -90,6 +100,6 @@ public class AINVENTORY {
 
 	public void setSqty(Integer sqty) {
 		this.sqty = sqty;
-	}	
+	}
 
 }

@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.aio;
 
 public class AIODT {
 	// 多廠別進/銷副檔
+	private Integer _id = 0;
 
 	private String vhno = ""; // auto
 	// 單據編號
@@ -16,17 +17,17 @@ public class AIODT {
 	private String note1 = "";
 	// 備註
 
-	private String[] keys = { "vhno", "fgno", "qty", "prc", "order1", "note1" };
-	private String[] types = { vhno.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
-			qty.getClass().getSimpleName(), prc.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			note1.getClass().getSimpleName() };
+	private String[] keys = { "_id", "vhno", "fgno", "qty", "prc", "order1", "note1" };
+	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
+			fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(), prc.getClass().getSimpleName(),
+			order1.getClass().getSimpleName(), note1.getClass().getSimpleName() };
 	private String[] uniques = { "" };
 	private String primary = "vhno";
 
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
-	
+
 	public String[] getKeys() {
 		return keys;
 	}
@@ -42,7 +43,15 @@ public class AIODT {
 	public String[] getUniques() {
 		return uniques;
 	}
-	//以下是儲存的值
+	// 以下是儲存的值
+
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
 
 	public String getVhno() {
 		return vhno;
@@ -90,6 +99,6 @@ public class AIODT {
 
 	public void setNote1(String note1) {
 		this.note1 = note1;
-	}	
+	}
 
 }

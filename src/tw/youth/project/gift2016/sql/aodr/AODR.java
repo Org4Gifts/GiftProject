@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.aodr;
 
 public class AODR {
 	// 訂單主檔
+	private Integer _id = 0;
 
 	private String order1 = "";
 	// 訂單編號
@@ -14,16 +15,17 @@ public class AODR {
 	private String purpose = "";
 	// 需求目的
 
-	private String[] keys = { "ORDER1", "ODATE", "EMPNO", "TAMT", "PURPOSE" };
-	private String[] types = { order1.getClass().getSimpleName(), odate.getClass().getSimpleName(),
-			empno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), purpose.getClass().getSimpleName() };
+	private String[] keys = { "_id", "ORDER1", "ODATE", "EMPNO", "TAMT", "PURPOSE" };
+	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
+			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), tamt.getClass().getSimpleName(),
+			purpose.getClass().getSimpleName() };
 	private String[] uniques = { "" };
 	private String primary = "ORDER1";
-	
+
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
-	
+
 	public String[] getKeys() {
 		return keys;
 	}
@@ -39,7 +41,15 @@ public class AODR {
 	public String[] getUniques() {
 		return uniques;
 	}
-	//以下是儲存的值
+
+	// 以下是儲存的值
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
 
 	public String getOrder1() {
 		return order1;
@@ -79,6 +89,6 @@ public class AODR {
 
 	public void setPurpose(String purpose) {
 		this.purpose = purpose;
-	}	
+	}
 
 }

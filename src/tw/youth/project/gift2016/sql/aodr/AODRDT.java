@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.aodr;
 
 public class AODRDT {
 	// 訂單副檔
+	private Integer _id = 0;
 
 	private String order1 = "";
 	// 訂單編號
@@ -16,10 +17,10 @@ public class AODRDT {
 	private Integer oqty = 0; // auto
 	// 已出貨量
 
-	private String[] keys = { "order1", "fgno", "qty", "prc", "note1", "oqty" };
-	private String[] types = { order1.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
-			qty.getClass().getSimpleName(), prc.getClass().getSimpleName(), note1.getClass().getSimpleName(),
-			oqty.getClass().getSimpleName() };
+	private String[] keys = { "_id", "order1", "fgno", "qty", "prc", "note1", "oqty" };
+	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
+			fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(), prc.getClass().getSimpleName(),
+			note1.getClass().getSimpleName(), oqty.getClass().getSimpleName() };
 	private String[] uniques = { "" };
 	private String primary = "order1";
 
@@ -44,6 +45,14 @@ public class AODRDT {
 	}
 	// 以下是儲存的值
 
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
+	
 	public String getOrder1() {
 		return order1;
 	}

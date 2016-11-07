@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.sql.aio;
 
 public class AIO {
 	// 多廠別進/銷主檔
+	private Integer _id = 0;
 
 	private String vhno = "";
 	// 單據編號
@@ -18,10 +19,10 @@ public class AIO {
 	private String memo = "";
 	// 調撥理由
 
-	private String[] keys = { "vhno", "fno", "vhdt", "ano", "dc", "tamt", "memo" };
-	private String[] types = { vhno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
-			vhdt.getClass().getSimpleName(), ano.getClass().getSimpleName(), dc.getClass().getSimpleName(),
-			tamt.getClass().getSimpleName(), memo.getClass().getSimpleName() };
+	private String[] keys = { "_id", "vhno", "fno", "vhdt", "ano", "dc", "tamt", "memo" };
+	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
+			fno.getClass().getSimpleName(), vhdt.getClass().getSimpleName(), ano.getClass().getSimpleName(),
+			dc.getClass().getSimpleName(), tamt.getClass().getSimpleName(), memo.getClass().getSimpleName() };
 	private String[] uniques = { "" };
 	private String primary = "vhno";
 
@@ -45,6 +46,14 @@ public class AIO {
 		return uniques;
 	}
 	// 以下是儲存的值
+
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
 
 	public String getVhno() {
 		return vhno;
