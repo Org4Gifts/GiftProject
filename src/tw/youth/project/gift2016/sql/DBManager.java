@@ -204,12 +204,12 @@ public class DBManager {
 
 	public ArrayList<Object[]> query(String tableName, String key, Object value, int length) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT").append(" ").append("*").append("from").append(tableName).append(" ").append("WHERE")
-				.append(" ").append(key).append(" ").append("=?");
+		sb.append("SELECT").append(" ").append("*").append("FROM").append(tableName).append(" ").append("WHERE")
+				.append(" ").append(key).append(" ").append("LIKE").append(" ").append("?");
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
-			ps.setObject(1, value);
+			ps.setObject(1, "%" + value + "%");
 			ResultSet rs = ps.executeQuery();
 			ArrayList<Object[]> arr = new ArrayList<>();
 			while (rs.next()) {
