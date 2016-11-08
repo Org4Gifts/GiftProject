@@ -21,11 +21,10 @@ public class AODRDT {
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(), prc.getClass().getSimpleName(),
 			note1.getClass().getSimpleName(), oqty.getClass().getSimpleName() };
-	private String[] uniques = { "" };
-	private String primary = "order1";
+	private String[] uniques = { "order1" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -34,10 +33,6 @@ public class AODRDT {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {
@@ -52,7 +47,7 @@ public class AODRDT {
 	public void set_id(Integer _id) {
 		this._id = _id;
 	}
-	
+
 	public String getOrder1() {
 		return order1;
 	}

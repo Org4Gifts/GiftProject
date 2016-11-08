@@ -110,7 +110,7 @@ public class DBManager {
 		return conn != null;
 	}
 
-	public String createTable(String tableName, String[] keys, String[] types, String[] uniques, String primary) {
+	public String createTable(String tableName, String[] keys, String[] types, String[] uniques) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("CREATE").append(" ").append("TABLE").append(" ").append(tableName).append(" ").append("(");
 		for (int i = 0; i < keys.length; i++) {
@@ -128,14 +128,15 @@ public class DBManager {
 		}
 		// created timestamp default 0,updated timestamp on update
 		// current_timestamp
-		sb.append("CREATED").append(" ").append("TIMESTAMP").append(" ").append("DEFAULT").append(" ").append("0")
-				.append(",").append("UPDATED").append(" ").append("TIMESTAMP").append(" ").append("ON").append(" ")
-				.append("UPDATE").append("CURRENT_TIMESTAMP").append(",");
-		if (!primary.equals("")) {
-			sb.append("PRIMARY KEY").append("(").append(primary).append("));");
-		} else {
-			sb.replace(sb.length() - 1, sb.length(), ");");
-		}
+		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("DEFAULT").append(" ").append("0")
+				.append(",").append("updated").append(" ").append("TIMESTAMP").append(" ").append("ON").append(" ")
+				.append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(",");
+//		if (!primary.equals("")) {
+//			sb.append("PRIMARY KEY").append("(").append(primary).append("));");
+			sb.append("PRIMARY KEY").append("(").append("_id").append("));");
+//		} else {
+//			sb.replace(sb.length() - 1, sb.length(), ");");
+//		}
 		return sb.toString();
 	}
 
@@ -172,6 +173,8 @@ public class DBManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE").append(" ").append(tableName).append(" ").append("SET").append(" ");
 		for (String key : keys) {
+			if (key.equals("_id"))
+				continue;
 			sb.append(key).append("=?,");
 		}
 		sb.replace(sb.length() - 1, sb.length(), " ");

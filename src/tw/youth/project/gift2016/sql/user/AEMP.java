@@ -3,7 +3,7 @@ package tw.youth.project.gift2016.sql.user;
 public class AEMP {
 	// 員工基本資料檔
 	private Integer _id = 0;
-	
+
 	private String empno = "";
 	// 工號
 	private String ename = "";
@@ -21,18 +21,17 @@ public class AEMP {
 	private String dno = "";
 	// 部門代碼
 
-	private String[] keys = { "_id","empno", "ename", "email", "job", "authority", "ext", "mgr", "dno" };
-	private String[] types = { _id.getClass().getSimpleName(),empno.getClass().getSimpleName(), ename.getClass().getSimpleName(),
-			email.getClass().getSimpleName(), job.getClass().getSimpleName(), authority.getClass().getSimpleName(),
-			ext.getClass().getSimpleName(), mgr.getClass().getSimpleName(), dno.getClass().getSimpleName() };
-	private String[] uniques = { "email" };
-	private String primary = "empno";
-
+	private String[] keys = { "_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno" };
+	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
+			ename.getClass().getSimpleName(), email.getClass().getSimpleName(), job.getClass().getSimpleName(),
+			authority.getClass().getSimpleName(), ext.getClass().getSimpleName(), mgr.getClass().getSimpleName(),
+			dno.getClass().getSimpleName() };
+	private String[] uniques = { "empno", "email" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
-	
+
 	public String[] getKeys() {
 		return keys;
 	}
@@ -41,15 +40,10 @@ public class AEMP {
 		return types;
 	}
 
-	public String getPrimary() {
-		return primary;
-	}
-
 	public String[] getUniques() {
 		return uniques;
 	}
-	//以下是儲存的值
-	
+	// 以下是儲存的值
 
 	public Integer get_id() {
 		return _id;
@@ -58,7 +52,7 @@ public class AEMP {
 	public void set_id(Integer _id) {
 		this._id = _id;
 	}
-	
+
 	public String getEmpno() {
 		return empno;
 	}
@@ -121,6 +115,6 @@ public class AEMP {
 
 	public void setDno(String dno) {
 		this.dno = dno;
-	}	
+	}
 
 }

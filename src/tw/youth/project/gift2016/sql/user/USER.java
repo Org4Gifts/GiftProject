@@ -6,19 +6,18 @@ import java.security.NoSuchAlgorithmException;
 
 public class USER {
 
-	private Integer _id =0;
+	private Integer _id = 0;
 	private String empno = "";
 	private String user = "";
 	private String pass = "";
 
-	private String[] keys = { "_id","empno", "user", "pass" };
-	private String[] types = { _id.getClass().getSimpleName(),empno.getClass().getSimpleName(), user.getClass().getSimpleName(),
-			pass.getClass().getSimpleName() };
-	private String[] uniques = { "user" };
-	private String primary = "empno";
+	private String[] keys = { "_id", "empno", "user", "pass" };
+	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
+			user.getClass().getSimpleName(), pass.getClass().getSimpleName() };
+	private String[] uniques = { "empno", "user" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -29,16 +28,12 @@ public class USER {
 		return types;
 	}
 
-	public String getPrimary() {
-		return primary;
-	}
-
 	public String[] getUniques() {
 		return uniques;
 	}
 
-	//檢驗MD5密碼
-	
+	// 檢驗MD5密碼
+
 	public String checkPass(String source) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -62,8 +57,8 @@ public class USER {
 		}
 		return sb.toString();
 	}
-	
-	//以下是儲存的值
+
+	// 以下是儲存的值
 
 	public Integer get_id() {
 		return _id;
@@ -96,6 +91,5 @@ public class USER {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-
 
 }

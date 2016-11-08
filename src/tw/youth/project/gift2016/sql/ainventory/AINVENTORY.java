@@ -21,11 +21,10 @@ public class AINVENTORY {
 	private String[] types = { _id.getClass().getSimpleName(), invo.getClass().getSimpleName(),
 			fno.getClass().getSimpleName(), yymm.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
 			ivqty.getClass().getSimpleName(), sqty.getClass().getSimpleName() };
-	private String[] uniques = { "" };
-	private String primary = "invo";
+	private String[] uniques = { "invo" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -36,15 +35,10 @@ public class AINVENTORY {
 		return types;
 	}
 
-	public String getPrimary() {
-		return primary;
-	}
-
 	public String[] getUniques() {
 		return uniques;
 	}
 	// 以下是儲存的值
-	
 
 	public Integer get_id() {
 		return _id;

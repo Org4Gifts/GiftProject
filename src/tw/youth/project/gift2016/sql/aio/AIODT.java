@@ -21,11 +21,10 @@ public class AIODT {
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
 			fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(), prc.getClass().getSimpleName(),
 			order1.getClass().getSimpleName(), note1.getClass().getSimpleName() };
-	private String[] uniques = { "" };
-	private String primary = "vhno";
+	private String[] uniques = { "vhno" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -34,10 +33,6 @@ public class AIODT {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {

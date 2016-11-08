@@ -21,7 +21,7 @@ import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.USER;
 
-public class TestCase {
+public class TestSQL {
 
 	// @Test
 	public void testSQL() throws SQLException { // 測試OK
@@ -40,15 +40,28 @@ public class TestCase {
 
 	@Test
 	public void testTableExist() { // 測試OK
+		boolean exists = false;
+
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
 		dao.starup();
 
 		try {
 			PreparedStatement ps = dao.getConn().prepareStatement("show tables");
 			ResultSet rs = ps.executeQuery();
-			System.out.println("Read data");
 			while (rs.next()) {
 				System.out.println(rs.getString(1));
+				if (rs.getString(1) == USER.class.getSimpleName().toLowerCase()) {
+					exists = true;
+					break;
+				}
+			}
+
+			USER user = new USER();
+			if (!exists) {
+				String table = dao.createTable(user.getTableName(), user.getKeys(), user.getTypes(), user.getUniques());
+				System.out.println(table);
+				ps = dao.getConn().prepareStatement(table);
+				System.out.println(ps.execute());
 			}
 			rs.close();
 			ps.close();
@@ -56,6 +69,7 @@ public class TestCase {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
+
 		// 無法使用
 		// DatabaseMetaData meta = OperDAO.conn.getMetaData();
 		// ResultSet set = meta.getSchemas();
@@ -78,58 +92,50 @@ public class TestCase {
 		// }
 	}
 
-	@Test
+	// @Test
 	public void testCreateTable() { // 測試OK，尚待進一步檢查
 
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
 
 		USER user = new USER();
-		System.out.println(dao.createTable(user.getTableName(), user.getKeys(), user.getTypes(), user.getUniques(),
-				user.getPrimary()));
+		System.out.println(dao.createTable(user.getTableName(), user.getKeys(), user.getTypes(), user.getUniques()));
 
 		AEMP aemp = new AEMP();
-		System.out.println(dao.createTable(aemp.getTableName(), aemp.getKeys(), aemp.getTypes(), aemp.getUniques(),
-				aemp.getPrimary()));
+		System.out.println(dao.createTable(aemp.getTableName(), aemp.getKeys(), aemp.getTypes(), aemp.getUniques()));
 
 		AVDR avdr = new AVDR();
-		System.out.println(dao.createTable(avdr.getTableName(), avdr.getKeys(), avdr.getTypes(), avdr.getUniques(),
-				avdr.getPrimary()));
+		System.out.println(dao.createTable(avdr.getTableName(), avdr.getKeys(), avdr.getTypes(), avdr.getUniques()));
 
 		AQTY aqty = new AQTY();
-		System.out.println(dao.createTable(aqty.getTableName(), aqty.getKeys(), aqty.getTypes(), aqty.getUniques(),
-				aqty.getPrimary()));
+		System.out.println(dao.createTable(aqty.getTableName(), aqty.getKeys(), aqty.getTypes(), aqty.getUniques()));
 
 		APRESENT apresent = new APRESENT();
 		System.out.println(dao.createTable(apresent.getTableName(), apresent.getKeys(), apresent.getTypes(),
-				apresent.getUniques(), apresent.getPrimary()));
+				apresent.getUniques()));
 
 		AODR aodr = new AODR();
-		System.out.println(dao.createTable(aodr.getTableName(), aodr.getKeys(), aodr.getTypes(), aodr.getUniques(),
-				aodr.getPrimary()));
+		System.out.println(dao.createTable(aodr.getTableName(), aodr.getKeys(), aodr.getTypes(), aodr.getUniques()));
 
 		AODRDT aodrdt = new AODRDT();
-		System.out.println(dao.createTable(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getTypes(),
-				aodrdt.getUniques(), aodrdt.getPrimary()));
+		System.out.println(
+				dao.createTable(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getTypes(), aodrdt.getUniques()));
 
 		AIO aio = new AIO();
-		System.out.println(
-				dao.createTable(aio.getTableName(), aio.getKeys(), aio.getTypes(), aio.getUniques(), aio.getPrimary()));
+		System.out.println(dao.createTable(aio.getTableName(), aio.getKeys(), aio.getTypes(), aio.getUniques()));
 
 		AIODT aiodt = new AIODT();
-		System.out.println(dao.createTable(aiodt.getTableName(), aiodt.getKeys(), aiodt.getTypes(), aiodt.getUniques(),
-				aiodt.getPrimary()));
+		System.out
+				.println(dao.createTable(aiodt.getTableName(), aiodt.getKeys(), aiodt.getTypes(), aiodt.getUniques()));
 
 		AINVENTORY ainventory = new AINVENTORY();
 		System.out.println(dao.createTable(ainventory.getTableName(), ainventory.getKeys(), ainventory.getTypes(),
-				ainventory.getUniques(), ainventory.getPrimary()));
+				ainventory.getUniques()));
 
 		AFAB afab = new AFAB();
-		System.out.println(dao.createTable(afab.getTableName(), afab.getKeys(), afab.getTypes(), afab.getUniques(),
-				afab.getPrimary()));
+		System.out.println(dao.createTable(afab.getTableName(), afab.getKeys(), afab.getTypes(), afab.getUniques()));
 
 		ADEP adep = new ADEP();
-		System.out.println(dao.createTable(adep.getTableName(), adep.getKeys(), adep.getTypes(), adep.getUniques(),
-				adep.getPrimary()));
+		System.out.println(dao.createTable(adep.getTableName(), adep.getKeys(), adep.getTypes(), adep.getUniques()));
 
 	}
 
@@ -147,7 +153,7 @@ public class TestCase {
 	// conn.commit();
 	// conn.releaseSavepoint(savepoint); 釋放savepoint
 
-	@Test
+	// @Test
 	public void test() {
 		Object[] obj = { "String", 1, 30.5 };
 		for (Object object : obj) {

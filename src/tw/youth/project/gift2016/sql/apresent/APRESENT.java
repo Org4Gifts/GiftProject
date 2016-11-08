@@ -28,9 +28,8 @@ public class APRESENT {
 			fgname.getClass().getSimpleName(), prc.getClass().getSimpleName(), grade.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), status.getClass().getSimpleName(), note1.getClass().getSimpleName(),
 			fqty.getClass().getSimpleName(), iqty.getClass().getSimpleName() };
-	private String[] uniques = { "fgname" };
-	private String primary = "fgno";
-
+	private String[] uniques = { "fgno","fgname" };
+	
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
@@ -41,10 +40,6 @@ public class APRESENT {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {

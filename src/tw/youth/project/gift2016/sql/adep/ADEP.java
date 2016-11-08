@@ -15,11 +15,10 @@ public class ADEP {
 	private String[] keys = { "_id", "dno", "dname", fno };
 	private String[] types = { _id.getClass().getSimpleName(), dno.getClass().getSimpleName(),
 			dname.getClass().getSimpleName(), fno.getClass().getSimpleName() };
-	private String[] uniques = { "" };
-	private String primary = "dno";
+	private String[] uniques = { "dno" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -28,10 +27,6 @@ public class ADEP {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {

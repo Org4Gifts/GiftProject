@@ -2,7 +2,7 @@ package tw.youth.project.gift2016.sql.aqty;
 
 public class AQTY {
 	// 多廠別進/銷彙總檔
-	private Integer _id =0;
+	private Integer _id = 0;
 
 	private Integer yymm = 0; // auto
 	// 資料年月
@@ -17,15 +17,14 @@ public class AQTY {
 	private Integer udqty = 0; // auto
 	// 本月銷貨
 
-	private String[] keys = { "_id","yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
-	private String[] types = { _id.getClass().getSimpleName(),yymm.getClass().getSimpleName(), fno.getClass().getSimpleName(),
-			fgno.getClass().getSimpleName(), pmqty.getClass().getSimpleName(), inqty.getClass().getSimpleName(),
-			udqty.getClass().getSimpleName() };
+	private String[] keys = { "_id", "yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
+	private String[] types = { _id.getClass().getSimpleName(), yymm.getClass().getSimpleName(),
+			fno.getClass().getSimpleName(), fgno.getClass().getSimpleName(), pmqty.getClass().getSimpleName(),
+			inqty.getClass().getSimpleName(), udqty.getClass().getSimpleName() };
 	private String[] uniques = { "" };
-	private String primary = "";
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -34,10 +33,6 @@ public class AQTY {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {
@@ -52,7 +47,7 @@ public class AQTY {
 	public void set_id(Integer _id) {
 		this._id = _id;
 	}
-	
+
 	public Integer getYymm() {
 		return yymm;
 	}
@@ -99,6 +94,6 @@ public class AQTY {
 
 	public void setUdqty(Integer udqty) {
 		this.udqty = udqty;
-	}	
+	}
 
 }

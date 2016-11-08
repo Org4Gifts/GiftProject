@@ -12,11 +12,10 @@ public class AFAB {
 	private String[] keys = { "_id", "fno", "fname" };
 	private String[] types = { _id.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			fname.getClass().getSimpleName() };
-	private String[] uniques = { "" };
-	private String primary = "fno";
-
+	private String[] uniques = { "fno" };
+	
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -25,10 +24,6 @@ public class AFAB {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {
@@ -43,7 +38,7 @@ public class AFAB {
 	public void set_id(Integer _id) {
 		this._id = _id;
 	}
-	
+
 	public String getFno() {
 		return fno;
 	}

@@ -23,11 +23,10 @@ public class AIO {
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
 			fno.getClass().getSimpleName(), vhdt.getClass().getSimpleName(), ano.getClass().getSimpleName(),
 			dc.getClass().getSimpleName(), tamt.getClass().getSimpleName(), memo.getClass().getSimpleName() };
-	private String[] uniques = { "" };
-	private String primary = "vhno";
+	private String[] uniques = { "vhno" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -36,10 +35,6 @@ public class AIO {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {

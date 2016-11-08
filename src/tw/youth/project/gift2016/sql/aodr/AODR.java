@@ -15,15 +15,14 @@ public class AODR {
 	private String purpose = "";
 	// 需求目的
 
-	private String[] keys = { "_id", "ORDER1", "ODATE", "EMPNO", "TAMT", "PURPOSE" };
+	private String[] keys = { "_id", "order1", "odate", "empno", "tamt", "purpose" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), tamt.getClass().getSimpleName(),
 			purpose.getClass().getSimpleName() };
-	private String[] uniques = { "" };
-	private String primary = "ORDER1";
+	private String[] uniques = { "order1" };
 
 	public String getTableName() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	public String[] getKeys() {
@@ -32,10 +31,6 @@ public class AODR {
 
 	public String[] getTypes() {
 		return types;
-	}
-
-	public String getPrimary() {
-		return primary;
 	}
 
 	public String[] getUniques() {
