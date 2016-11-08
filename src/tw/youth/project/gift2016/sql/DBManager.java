@@ -131,12 +131,12 @@ public class DBManager {
 		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("DEFAULT").append(" ").append("0")
 				.append(",").append("updated").append(" ").append("TIMESTAMP").append(" ").append("ON").append(" ")
 				.append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(",");
-//		if (!primary.equals("")) {
-//			sb.append("PRIMARY KEY").append("(").append(primary).append("));");
-			sb.append("PRIMARY KEY").append("(").append("_id").append("));");
-//		} else {
-//			sb.replace(sb.length() - 1, sb.length(), ");");
-//		}
+		// if (!primary.equals("")) {
+		// sb.append("PRIMARY KEY").append("(").append(primary).append("));");
+		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
+		// } else {
+		// sb.replace(sb.length() - 1, sb.length(), ");");
+		// }
 		return sb.toString();
 	}
 
@@ -144,10 +144,14 @@ public class DBManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
 		for (String key : keys) {
+			if (key.equals("_id"))
+				continue;
 			sb.append(key).append(",");
 		}
 		sb.replace(sb.length() - 1, sb.length(), ")").append(" ").append("VALUES").append("(");
 		for (String key : keys) {
+			if (key.equals("_id"))
+				continue;
 			sb.append("?").append(",");
 		}
 		sb.replace(sb.length() - 1, sb.length(), ")");
@@ -164,12 +168,7 @@ public class DBManager {
 
 	}
 
-	public synchronized String update(String tableName, String[] keys, Object[] values) {
-		// "UPDATE library_db.books SET
-		// TITLE=?,ORIGINALTITLE=?,ISBN=?,AUTHOR=?,"
-		// +
-		// "EDITION=?,BINDING=?,PUBLISHER=?,PUBLISHED=?,LISTPRICE=?,COLUMNS=?,SUBJECT=?,WEBSITE=?,BORROWER=?,"
-		// + "REMARK=?,REFERENCE=?,COMMENT=? WHERE NUMBER=?";
+	public synchronized String update(String tableName, String[] keys, Object[] values, int _id) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE").append(" ").append(tableName).append(" ").append("SET").append(" ");
 		for (String key : keys) {
@@ -182,9 +181,12 @@ public class DBManager {
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
-			for (int i = 0; i < values.length; i++) {
+			int i;
+			for (i = 0; i < values.length; i++) {
 				ps.setObject(i + 1, values[i]);
 			}
+			ps.setObject(i + 1, _id);
+
 			return "update " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -207,8 +209,8 @@ public class DBManager {
 
 	public ArrayList<Object[]> query(String tableName, String key, Object value, int length) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT").append(" ").append("*").append("FROM").append(tableName).append(" ").append("WHERE")
-				.append(" ").append(key).append(" ").append("LIKE").append(" ").append("?");
+		sb.append("SELECT").append(" ").append("*").append("FROM").append(" ").append(tableName).append(" ")
+				.append("WHERE").append(" ").append(key).append(" ").append("LIKE").append(" ").append("?");
 
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());

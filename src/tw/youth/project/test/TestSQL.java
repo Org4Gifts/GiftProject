@@ -3,6 +3,7 @@ package tw.youth.project.test;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -49,8 +50,8 @@ public class TestSQL {
 			PreparedStatement ps = dao.getConn().prepareStatement("show tables");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				System.out.println(rs.getString(1));
-				if (rs.getString(1) == USER.class.getSimpleName().toLowerCase()) {
+				System.out.println("find table : " + rs.getString(1));
+				if (rs.getString(1).equals(USER.class.getSimpleName().toLowerCase())) {
 					exists = true;
 					break;
 				}
@@ -63,6 +64,39 @@ public class TestSQL {
 				ps = dao.getConn().prepareStatement(table);
 				System.out.println(ps.execute());
 			}
+			Object[] objs = { "K123456", "odise", "116025" };
+			System.out.println(dao.insert(user.getTableName(), user.getKeys(), objs));
+
+			int key = 1;
+			ArrayList<Object[]> arr = dao.query(user.getTableName(), "user", "o", 4);
+			for (Object[] objects : arr) {
+				int i = 0;
+				for (Object object : objects) {
+					if (i++ == 0)
+						key = (int) object;
+					System.out.println(object);
+				}
+			}
+
+			objs[2] = "116022";
+			System.out.println(dao.update(user.getTableName(), user.getKeys(), objs, key));
+
+			ArrayList<Object[]> arr2 = dao.query(user.getTableName(), "user", "o", 4);
+			for (Object[] objects : arr2) {
+				for (Object object : objects) {
+					System.out.println(object);
+				}
+			}
+
+			System.out.println(dao.drop(user.getTableName(), "user", "odise"));
+
+			ArrayList<Object[]> arr3 = dao.query(user.getTableName(), "user", "o", 4);
+			for (Object[] objects : arr3) {
+				for (Object object : objects) {
+					System.out.println(object);
+				}
+			}
+
 			rs.close();
 			ps.close();
 		} catch (SQLException e) {
