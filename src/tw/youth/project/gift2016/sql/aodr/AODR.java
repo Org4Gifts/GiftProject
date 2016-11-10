@@ -6,7 +6,7 @@ public class AODR {
 
 	private String order1 = "";
 	// 訂單編號
-	private Integer odate = 0;
+	private Long odate = 0L;
 	// 訂定日期
 	private String empno = "";
 	// 員工編號
@@ -54,11 +54,11 @@ public class AODR {
 		this.order1 = order1;
 	}
 
-	public Integer getOdate() {
+	public Long getOdate() {
 		return odate;
 	}
 
-	public void setOdate(Integer odate) {
+	public void setOdate(Long odate) {
 		this.odate = odate;
 	}
 

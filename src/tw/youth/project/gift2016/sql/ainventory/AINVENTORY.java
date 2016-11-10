@@ -8,7 +8,7 @@ public class AINVENTORY {
 	// 盤點單號
 	private String fno = "";
 	// 儲存廠別
-	private Integer yymm = 0;
+	private Long yymm = 0L;
 	// 資料年月
 	private String fgno = "";
 	// 禮品編號
@@ -64,11 +64,11 @@ public class AINVENTORY {
 		this.fno = fno;
 	}
 
-	public Integer getYymm() {
+	public Long getYymm() {
 		return yymm;
 	}
 
-	public void setYymm(Integer yymm) {
+	public void setYymm(Long yymm) {
 		this.yymm = yymm;
 	}
 

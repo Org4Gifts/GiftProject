@@ -128,9 +128,10 @@ public class DBManager {
 		}
 		// created timestamp default 0,updated timestamp on update
 		// current_timestamp
-		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("DEFAULT").append(" ").append("0")
-				.append(",").append("updated").append(" ").append("TIMESTAMP").append(" ").append("ON").append(" ")
-				.append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(",");
+		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("DEFAULT").append(" ")
+				.append("CURRENT_TIMESTAMP").append(",").append("updated").append(" ").append("TIMESTAMP").append(" ")
+				.append("ON").append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ")
+				.append("DEFAULT").append(" ").append("CURRENT_TIMESTAMP").append(",");
 		// if (!primary.equals("")) {
 		// sb.append("PRIMARY KEY").append("(").append(primary).append("));");
 		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
@@ -220,7 +221,7 @@ public class DBManager {
 			while (rs.next()) {
 				Object[] objs = new Object[length];
 				for (int i = 0; i < length; i++) {
-					objs[i] = rs.getObject(i + 1);
+						objs[i] = rs.getObject(i + 1);
 				}
 				arr.add(objs);
 			}
@@ -229,7 +230,7 @@ public class DBManager {
 
 		SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
+			System.out.println("Query SQLException : " + e.getMessage());
 			return null;
 		}
 

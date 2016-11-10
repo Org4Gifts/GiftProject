@@ -12,7 +12,7 @@ public class ADEP {
 	private String fno = "";
 	// 所在廠區
 
-	private String[] keys = { "_id", "dno", "dname", fno };
+	private String[] keys = { "_id", "dno", "dname", "fno" };
 	private String[] types = { _id.getClass().getSimpleName(), dno.getClass().getSimpleName(),
 			dname.getClass().getSimpleName(), fno.getClass().getSimpleName() };
 	private String[] uniques = { "dno" };

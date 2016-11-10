@@ -8,7 +8,7 @@ public class AIO {
 	// 單據編號
 	private String fno = "";
 	// 廠別
-	private Integer vhdt = 0;
+	private Long vhdt = 0L;
 	// 單據日期
 	private String ano = "";
 	// 單位編號
@@ -66,11 +66,11 @@ public class AIO {
 		this.fno = fno;
 	}
 
-	public Integer getVhdt() {
+	public Long getVhdt() {
 		return vhdt;
 	}
 
-	public void setVhdt(Integer vhdt) {
+	public void setVhdt(Long vhdt) {
 		this.vhdt = vhdt;
 	}
 

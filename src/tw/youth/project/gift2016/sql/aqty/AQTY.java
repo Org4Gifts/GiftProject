@@ -4,7 +4,7 @@ public class AQTY {
 	// 多廠別進/銷彙總檔
 	private Integer _id = 0;
 
-	private Integer yymm = 0; // auto
+	private Long yymm = 0L; // auto
 	// 資料年月
 	private String fno = ""; // auto
 	// 廠別
@@ -48,11 +48,11 @@ public class AQTY {
 		this._id = _id;
 	}
 
-	public Integer getYymm() {
+	public Long getYymm() {
 		return yymm;
 	}
 
-	public void setYymm(Integer yymm) {
+	public void setYymm(Long yymm) {
 		this.yymm = yymm;
 	}
 
