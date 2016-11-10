@@ -234,7 +234,7 @@ public class TestSQL {
 
 	}
 
-//	@Test
+	@Test
 	public void testInsertQueryUpdateDropTableColumns() { //測試OK
 		System.out.println("testInsertUpdateDropTables : " + new Date(System.currentTimeMillis()).toString());
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
@@ -269,7 +269,7 @@ public class TestSQL {
 		// AEMP
 		System.out.println("AEMP");
 		AEMP aemp = new AEMP();
-		Object[] objs1 = { "K123456", "odise", "123@com", "eng", "0", "132-5979", "K123400", "DEP" };
+		Object[] objs1 = { "K123456", "odise", "123@com", "eng", 0, "132-5979", "K123400", "DEP" };
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), objs1));
 		key = 1;
 		arr = dao.query(aemp.getTableName(), "empno", "K", aemp.getKeys().length + 2);

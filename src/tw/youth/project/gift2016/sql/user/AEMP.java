@@ -12,7 +12,7 @@ public class AEMP {
 	// 電子郵件地址
 	private String job = "";
 	// 職稱
-	private String authority = ""; // auto
+	private Short authority = 0; // auto
 	// 簽核層級
 	private String ext = "";
 	// 分機
@@ -85,11 +85,11 @@ public class AEMP {
 		this.job = job;
 	}
 
-	public String getAuthority() {
+	public Short getAuthority() {
 		return authority;
 	}
 
-	public void setAuthority(String authority) {
+	public void setAuthority(Short authority) {
 		this.authority = authority;
 	}
 
