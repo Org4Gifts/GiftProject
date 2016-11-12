@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.user;
 
+import java.sql.Timestamp;
+
 public class AEMP {
 	// 員工基本資料檔
 	private Integer _id = 0;
@@ -20,6 +22,8 @@ public class AEMP {
 	// 直屬主管工號
 	private String dno = "";
 	// 部門代碼
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno" };
 	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
@@ -42,6 +46,10 @@ public class AEMP {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 	// 以下是儲存的值
 
@@ -117,4 +125,56 @@ public class AEMP {
 		this.dno = dno;
 	}
 
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setEmpno((String) values[i++]);
+		setEname((String) values[i++]);
+		setEmail((String) values[i++]);
+		setJob((String) values[i++]);
+		setAuthority((Short) values[i++]);
+		setExt((String) values[i++]);
+		setMgr((String) values[i++]);
+		setDno((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setEmpno((String) values[i++]);
+		setEname((String) values[i++]);
+		setEmail((String) values[i++]);
+		setJob((String) values[i++]);
+		setAuthority((Short) values[i++]);
+		setExt((String) values[i++]);
+		setMgr((String) values[i++]);
+		setDno((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getEmpno(), getEname(), getEmail(), getJob(), getAuthority(), getExt(), getMgr(),
+				getDno() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getEmpno(), getEname(), getEmail(), getJob(), getAuthority(), getExt(),
+				getMgr(), getDno(), getCreated(), getUpdated() };
+	}
 }

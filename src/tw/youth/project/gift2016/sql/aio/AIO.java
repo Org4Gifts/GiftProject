@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.aio;
 
+import java.sql.Timestamp;
+
 public class AIO {
 	// 多廠別進/銷主檔
 	private Integer _id = 0;
@@ -18,6 +20,8 @@ public class AIO {
 	// 進銷金額
 	private String memo = "";
 	// 調撥理由
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "vhno", "fno", "vhdt", "ano", "dc", "tamt", "memo" };
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
@@ -39,6 +43,10 @@ public class AIO {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 	// 以下是儲存的值
 
@@ -104,6 +112,56 @@ public class AIO {
 
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setVhno((String) values[i++]);
+		setFno((String) values[i++]);
+		setVhdt((Long) values[i++]);
+		setAno((String) values[i++]);
+		setDc((Character) values[i++]);
+		setTamt((Float) values[i++]);
+		setMemo((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setVhno((String) values[i++]);
+		setFno((String) values[i++]);
+		setVhdt((Long) values[i++]);
+		setAno((String) values[i++]);
+		setDc((Character) values[i++]);
+		setTamt((Float) values[i++]);
+		setMemo((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getVhno(), getFno(), getVhdt(), getAno(), getDc(), getTamt(), getMemo() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getVhno(), getFno(), getVhdt(), getAno(), getDc(), getTamt(), getMemo(),
+				getCreated(), getUpdated() };
 	}
 
 }

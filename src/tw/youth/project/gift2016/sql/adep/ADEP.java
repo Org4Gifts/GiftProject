@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.adep;
 
+import java.sql.Timestamp;
+
 public class ADEP {
 	// 部門基本資料檔
 
@@ -11,6 +13,8 @@ public class ADEP {
 	// 部門名稱
 	private String fno = "";
 	// 所在廠區
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "dno", "dname", "fno" };
 	private String[] types = { _id.getClass().getSimpleName(), dno.getClass().getSimpleName(),
@@ -31,6 +35,10 @@ public class ADEP {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 	// 以下是儲存的值
 
@@ -64,6 +72,47 @@ public class ADEP {
 
 	public void setFno(String fno) {
 		this.fno = fno;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setDno((String) values[i++]);
+		setDname((String) values[i++]);
+		setFno((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setDno((String) values[i++]);
+		setDname((String) values[i++]);
+		setFno((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getDno(), getDname(), getFno() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getDno(), getDname(), getFno(), getCreated(), getUpdated() };
 	}
 
 }

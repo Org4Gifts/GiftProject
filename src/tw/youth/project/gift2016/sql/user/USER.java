@@ -3,6 +3,7 @@ package tw.youth.project.gift2016.sql.user;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 
 public class USER {
 
@@ -10,6 +11,9 @@ public class USER {
 	private String empno = "";
 	private String user = "";
 	private String pass = "";
+
+	private Timestamp  created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "empno", "user", "pass" };
 	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
@@ -32,9 +36,13 @@ public class USER {
 		return uniques;
 	}
 
-	// 檢驗MD5密碼
+	public int getLength() {
+		return getKeys().length + 2;
+	}
 
-	public String checkPass(String source) {
+	// 轉換成md5
+
+	public String toMD5Pass(String source) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] bytes = md.digest(source.getBytes("UTF-8"));
@@ -90,6 +98,47 @@ public class USER {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setEmpno((String) values[i++]);
+		setUser((String) values[i++]);
+		setPass((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setEmpno((String) values[i++]);
+		setUser((String) values[i++]);
+		setPass((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getEmpno(), getUser(), getPass() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getEmpno(), getUser(), getPass(), getCreated(), getUpdated() };
 	}
 
 }

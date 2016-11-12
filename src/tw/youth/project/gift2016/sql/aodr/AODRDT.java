@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.aodr;
 
+import java.sql.Timestamp;
+
 public class AODRDT {
 	// 訂單副檔
 	private Integer _id = 0;
@@ -16,6 +18,8 @@ public class AODRDT {
 	// 備註
 	private Integer oqty = 0; // auto
 	// 已出貨量
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "order1", "fgno", "qty", "prc", "note1", "oqty" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
@@ -37,6 +41,10 @@ public class AODRDT {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 	// 以下是儲存的值
 
@@ -94,6 +102,54 @@ public class AODRDT {
 
 	public void setOqty(Integer oqty) {
 		this.oqty = oqty;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setOrder1((String) values[i++]);
+		setFgno((String) values[i++]);
+		setQty((Integer) values[i++]);
+		setPrc((Float) values[i++]);
+		setNote1((String) values[i++]);
+		setOqty((Integer) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setOrder1((String) values[i++]);
+		setFgno((String) values[i++]);
+		setQty((Integer) values[i++]);
+		setPrc((Float) values[i++]);
+		setNote1((String) values[i++]);
+		setOqty((Integer) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getOrder1(), getFgno(), getQty(), getPrc(), getNote1(), getOqty() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getOrder1(), getFgno(), getQty(), getPrc(), getNote1(), getOqty(), getCreated(),
+				getUpdated() };
 	}
 
 }

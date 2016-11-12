@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.avdr;
 
+import java.sql.Timestamp;
+
 public class AVDR {
 	// 廠/客基本資料檔
 	private Integer _id = 0;
@@ -30,6 +32,8 @@ public class AVDR {
 	// 公司地址
 	private String memo = "";
 	// 備註
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "cono", "na", "name", "id", "bose", "agent", "title", "tel1", "tel2", "ptel",
 			"fax", "iadd", "memo" };
@@ -55,7 +59,19 @@ public class AVDR {
 	public String[] getUniques() {
 		return uniques;
 	}
+
+	public int getLength() {
+		return getKeys().length + 2;
+	}
+
 	// 以下是儲存的值
+	public Integer get_id() {
+		return _id;
+	}
+
+	public void set_id(Integer _id) {
+		this._id = _id;
+	}
 
 	public String getCono() {
 		return cono;
@@ -159,6 +175,69 @@ public class AVDR {
 
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setCono((String) values[i++]);
+		setNa((String) values[i++]);
+		setName((String) values[i++]);
+		setId((String) values[i++]);
+		setBose((String) values[i++]);
+		setAgent((String) values[i++]);
+		setTitle((String) values[i++]);
+		setTel1((String) values[i++]);
+		setTel2((String) values[i++]);
+		setPtel((String) values[i++]);
+		setFax((String) values[i++]);
+		setIadd((String) values[i++]);
+		setMemo((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setCono((String) values[i++]);
+		setNa((String) values[i++]);
+		setName((String) values[i++]);
+		setId((String) values[i++]);
+		setBose((String) values[i++]);
+		setAgent((String) values[i++]);
+		setTitle((String) values[i++]);
+		setTel1((String) values[i++]);
+		setTel2((String) values[i++]);
+		setPtel((String) values[i++]);
+		setFax((String) values[i++]);
+		setIadd((String) values[i++]);
+		setMemo((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getCono(), getNa(), getName(), getId(), getBose(), getAgent(), getTitle(), getTel1(),
+				getTel2(), getPtel(), getFax(), getIadd(), getMemo() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getCono(), getNa(), getName(), getId(), getBose(), getAgent(), getTitle(),
+				getTel1(), getTel2(), getPtel(), getFax(), getIadd(), getMemo(), getCreated(), getUpdated() };
 	}
 
 }

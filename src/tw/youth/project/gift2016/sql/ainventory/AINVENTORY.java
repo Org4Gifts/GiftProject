@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.ainventory;
 
+import java.sql.Timestamp;
+
 public class AINVENTORY {
 	// 多廠別盤存檔
 	private Integer _id = 0;
@@ -16,6 +18,8 @@ public class AINVENTORY {
 	// 盤點數量
 	private Integer sqty = 0; // auto
 	// 系統數量
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "invo", "fno", "yymm", "fgno", "ivqty", "sqty" };
 	private String[] types = { _id.getClass().getSimpleName(), invo.getClass().getSimpleName(),
@@ -37,6 +41,10 @@ public class AINVENTORY {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 	// 以下是儲存的值
 
@@ -96,4 +104,51 @@ public class AINVENTORY {
 		this.sqty = sqty;
 	}
 
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setInvo((String) values[i++]);
+		setFno((String) values[i++]);
+		setYymm((Long) values[i++]);
+		setFgno((String) values[i++]);
+		setIvqty((Integer) values[i++]);
+		setSqty((Integer) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setInvo((String) values[i++]);
+		setFno((String) values[i++]);
+		setYymm((Long) values[i++]);
+		setFgno((String) values[i++]);
+		setIvqty((Integer) values[i++]);
+		setSqty((Integer) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getInvo(), getFno(), getYymm(), getFgno(), getIvqty(), getSqty() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getInvo(), getFno(), getYymm(), getFgno(), getIvqty(), getSqty(), getCreated(),
+				getUpdated() };
+	}
 }

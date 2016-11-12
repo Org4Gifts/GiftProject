@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.apresent;
 
+import java.sql.Timestamp;
+
 public class APRESENT {
 	// 禮品基本檔
 	private Integer _id = 0;
@@ -22,14 +24,16 @@ public class APRESENT {
 	// 安全庫存量
 	private Integer iqty = 0; // auto
 	// 即時庫存量
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "fgno", "fgname", "prc", "grade", "authority", "status", "note1", "fqty", "iqty" };
 	private String[] types = { _id.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
 			fgname.getClass().getSimpleName(), prc.getClass().getSimpleName(), grade.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), status.getClass().getSimpleName(), note1.getClass().getSimpleName(),
 			fqty.getClass().getSimpleName(), iqty.getClass().getSimpleName() };
-	private String[] uniques = { "fgno","fgname" };
-	
+	private String[] uniques = { "fgno", "fgname" };
+
 	public String getTableName() {
 		return getClass().getSimpleName();
 	}
@@ -44,6 +48,10 @@ public class APRESENT {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 
 	// 以下是儲存的值
@@ -127,4 +135,58 @@ public class APRESENT {
 		this.iqty = iqty;
 	}
 
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setFgno((String) values[i++]);
+		setFgname((String) values[i++]);
+		setPrc((Float) values[i++]);
+		setGrade((Short) values[i++]);
+		setAuthority((Short) values[i++]);
+		setStatus((String) values[i++]);
+		setNote1((String) values[i++]);
+		setFqty((Integer) values[i++]);
+		setIqty((Integer) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setFgno((String) values[i++]);
+		setFgname((String) values[i++]);
+		setPrc((Float) values[i++]);
+		setGrade((Short) values[i++]);
+		setAuthority((Short) values[i++]);
+		setStatus((String) values[i++]);
+		setNote1((String) values[i++]);
+		setFqty((Integer) values[i++]);
+		setIqty((Integer) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getStatus(), getNote1(),
+				getFqty(), getIqty() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getStatus(),
+				getNote1(), getFqty(), getIqty(), getCreated(), getUpdated() };
+	}
 }

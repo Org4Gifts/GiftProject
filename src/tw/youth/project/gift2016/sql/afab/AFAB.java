@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.afab;
 
+import java.sql.Timestamp;
+
 public class AFAB {
 	// 廠別基本檔
 	private Integer _id = 0;
@@ -8,12 +10,14 @@ public class AFAB {
 	// 廠別代碼
 	private String fname = "";
 	// 廠別名稱
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "fno", "fname" };
 	private String[] types = { _id.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			fname.getClass().getSimpleName() };
 	private String[] uniques = { "fno" };
-	
+
 	public String getTableName() {
 		return getClass().getSimpleName().toLowerCase();
 	}
@@ -28,6 +32,10 @@ public class AFAB {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 	// 以下是儲存的值
 
@@ -53,5 +61,44 @@ public class AFAB {
 
 	public void setFame(String fname) {
 		this.fname = fname;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setFno((String) values[i++]);
+		setFame((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setFno((String) values[i++]);
+		setFame((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getFno(), getFname() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getFno(), getFname(), getCreated(), getUpdated() };
 	}
 }

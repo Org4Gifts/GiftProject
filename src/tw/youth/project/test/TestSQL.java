@@ -66,23 +66,20 @@ public class TestSQL {
 				System.out.println(ps.execute());
 			}
 			Object[] objs = { "K123456", "odise", "116025" };
+			user.setValues(objs);
 			System.out.println(dao.insert(user.getTableName(), user.getKeys(), objs));
-
-			int key = 1;
 			ArrayList<Object[]> arr = dao.query(user.getTableName(), "user", "o", 6);
 			for (Object[] objects : arr) {
-				int i = 0;
 				for (Object object : objects) {
-					if (i++ == 0)
-						key = (int) object;
 					System.out.println("arr1 : " + object);
 				}
+				user.setValuesFull(objects);
 			}
 
-			objs[2] = "116022";
+			user.setPass("116022");
 			System.out.println("Thread sleep 1.5Second");
 			Thread.sleep(1500);
-			System.out.println(dao.update(user.getTableName(), user.getKeys(), objs, key));
+			System.out.println(dao.update(user.getTableName(), user.getKeys(), user.getValuesFull()));
 
 			ArrayList<Object[]> arr2 = dao.query(user.getTableName(), "user", "o", 6);
 			for (Object[] objects : arr2) {
@@ -156,7 +153,7 @@ public class TestSQL {
 
 	}
 
-//	@Test
+	// @Test
 	public void testCreateTables() { // 測試OK
 		testDropTables();
 
@@ -235,7 +232,7 @@ public class TestSQL {
 	}
 
 	@Test
-	public void testInsertQueryUpdateDropTableColumns() { //測試OK
+	public void testInsertQueryUpdateDropTableColumns() { // 測試OK
 		System.out.println("testInsertUpdateDropTables : " + new Date(System.currentTimeMillis()).toString());
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
 		dao.starup();
@@ -244,21 +241,19 @@ public class TestSQL {
 		System.out.println("USER");
 		USER user = new USER();
 		Object[] objs = { "K123456", "odise", "116025" };
-		System.out.println(dao.insert(user.getTableName(), user.getKeys(), objs));
-		int key = 1;
-		ArrayList<Object[]> arr = dao.query(user.getTableName(), "user", "o", user.getKeys().length + 2);
+		user.setValues(objs);
+		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
+		ArrayList<Object[]> arr = dao.query(user.getTableName(), "user", "o", user.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
+			user.setValuesFull(objects);
 		}
 
-		objs[2] = "116022";
-		System.out.println(dao.update(user.getTableName(), user.getKeys(), objs, key));
-		ArrayList<Object[]> arr2 = dao.query(user.getTableName(), "user", "o", user.getKeys().length + 2);
+		user.setPass("116022");
+		System.out.println(dao.update(user.getTableName(), user.getKeys(), user.getValuesFull()));
+		ArrayList<Object[]> arr2 = dao.query(user.getTableName(), "user", "o", user.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -270,21 +265,19 @@ public class TestSQL {
 		System.out.println("AEMP");
 		AEMP aemp = new AEMP();
 		Object[] objs1 = { "K123456", "odise", "123@com", "eng", 0, "132-5979", "K123400", "DEP" };
-		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), objs1));
-		key = 1;
-		arr = dao.query(aemp.getTableName(), "empno", "K", aemp.getKeys().length + 2);
+		aemp.setValues(objs1);
+		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
+		arr = dao.query(aemp.getTableName(), "empno", "K", aemp.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			aemp.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
-		objs1[2] = "456@com";
-		System.out.println(dao.update(aemp.getTableName(), aemp.getKeys(), objs1, key));
-		arr2 = dao.query(aemp.getTableName(), "empno", "K", aemp.getKeys().length + 2);
+		aemp.setEmail("456@com");
+		System.out.println(dao.update(aemp.getTableName(), aemp.getKeys(), aemp.getValuesFull()));
+		arr2 = dao.query(aemp.getTableName(), "empno", "K", aemp.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -297,21 +290,20 @@ public class TestSQL {
 		AVDR avdr = new AVDR();
 		Object[] objs2 = { "P001", "CG", "ComDim", "42610659", "李嘉明", "真會發", "Manager", "(087)433-5679",
 				"(087)422-5998", "0998-477966", "(087)422-5778", "桃園市幼獅區幼獅路2段", "無" };
-		System.out.println(dao.insert(avdr.getTableName(), avdr.getKeys(), objs2));
-		key = 1;
-		arr = dao.query(avdr.getTableName(), "id", "426", avdr.getKeys().length + 2);
+		avdr.setValues(objs2);
+		System.out.println(dao.insert(avdr.getTableName(), avdr.getKeys(), avdr.getValues()));
+		arr = dao.query(avdr.getTableName(), "id", "426", avdr.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			avdr.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs2[2] = "CardGame";
-		System.out.println(dao.update(avdr.getTableName(), avdr.getKeys(), objs2, key));
-		arr2 = dao.query(avdr.getTableName(), "id", "426", avdr.getKeys().length + 2);
+		avdr.setValues(objs2);
+		System.out.println(dao.update(avdr.getTableName(), avdr.getKeys(), avdr.getValuesFull()));
+		arr2 = dao.query(avdr.getTableName(), "id", "426", avdr.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -323,21 +315,20 @@ public class TestSQL {
 		System.out.println("AQTY");
 		AQTY aqty = new AQTY();
 		Object[] objs3 = { 20161108, "P00", "P001", 100, 10, 5 };
-		System.out.println(dao.insert(aqty.getTableName(), aqty.getKeys(), objs3));
-		key = 1;
-		arr = dao.query(aqty.getTableName(), "fgno", "P", aqty.getKeys().length + 2);
+		aqty.setValues(objs3);
+		System.out.println(dao.insert(aqty.getTableName(), aqty.getKeys(), aqty.getValues()));
+		arr = dao.query(aqty.getTableName(), "fgno", "P", aqty.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			aqty.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs3[3] = 200;
-		System.out.println(dao.update(aqty.getTableName(), aqty.getKeys(), objs3, key));
-		arr2 = dao.query(aqty.getTableName(), "fgno", "P", aqty.getKeys().length + 2);
+		aqty.setValues(objs3);
+		System.out.println(dao.update(aqty.getTableName(), aqty.getKeys(), aqty.getValuesFull()));
+		arr2 = dao.query(aqty.getTableName(), "fgno", "P", aqty.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -349,21 +340,20 @@ public class TestSQL {
 		System.out.println("APRESENT");
 		APRESENT apresent = new APRESENT();
 		Object[] objs4 = { "P001", "筆記本", 10, 1, 1, "可申請", "無備註", 100, 150 };
-		System.out.println(dao.insert(apresent.getTableName(), apresent.getKeys(), objs4));
-		key = 1;
-		arr = dao.query(apresent.getTableName(), "fgname", "筆", apresent.getKeys().length + 2);
+		apresent.setValues(objs4);
+		System.out.println(dao.insert(apresent.getTableName(), apresent.getKeys(), apresent.getValues()));
+		arr = dao.query(apresent.getTableName(), "fgname", "筆", apresent.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			apresent.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs4[1] = "記事本";
-		System.out.println(dao.update(apresent.getTableName(), apresent.getKeys(), objs4, key));
-		arr2 = dao.query(apresent.getTableName(), "fgname", "筆", apresent.getKeys().length + 2);
+		apresent.setValues(objs4);
+		System.out.println(dao.update(apresent.getTableName(), apresent.getKeys(), apresent.getValuesFull()));
+		arr2 = dao.query(apresent.getTableName(), "fgname", "筆", apresent.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -375,21 +365,20 @@ public class TestSQL {
 		System.out.println("AODRDT");
 		AODRDT aodrdt = new AODRDT();
 		Object[] objs5 = { "A20161108", "P001", 5, 10, "無備註", 5 };
-		System.out.println(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), objs5));
-		key = 1;
-		arr = dao.query(aodrdt.getTableName(), "order1", "1108", aodrdt.getKeys().length + 2);
+		aodrdt.setValues(objs5);
+		System.out.println(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues()));
+		arr = dao.query(aodrdt.getTableName(), "order1", "1108", aodrdt.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			aodrdt.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs5[2] = 4;
-		System.out.println(dao.update(aodrdt.getTableName(), aodrdt.getKeys(), objs5, key));
-		arr2 = dao.query(aodrdt.getTableName(), "order1", "1108", aodrdt.getKeys().length + 2);
+		aodrdt.setValues(objs5);
+		System.out.println(dao.update(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()));
+		arr2 = dao.query(aodrdt.getTableName(), "order1", "1108", aodrdt.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -401,21 +390,20 @@ public class TestSQL {
 		System.out.println("AODR");
 		AODR aodr = new AODR();
 		Object[] objs6 = { "A20161108", 20161108, "K123456", 100, "送禮" };
-		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), objs6));
-		key = 1;
-		arr = dao.query(aodr.getTableName(), "empno", "234", aodr.getKeys().length + 2);
+		aodr.setValues(objs6);
+		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));
+		arr = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			aodr.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs6[4] = "自用";
-		System.out.println(dao.update(aodr.getTableName(), aodr.getKeys(), objs6, key));
-		arr2 = dao.query(aodr.getTableName(), "empno", "234", aodr.getKeys().length + 2);
+		aodr.setValues(objs6);
+		System.out.println(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
+		arr2 = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -427,21 +415,20 @@ public class TestSQL {
 		System.out.println("AIODT");
 		AIODT aiodt = new AIODT();
 		Object[] objs7 = { "C60989", "P001", 5, 2, "A20161108", "送禮" };
-		System.out.println(dao.insert(aiodt.getTableName(), aiodt.getKeys(), objs7));
-		key = 1;
-		arr = dao.query(aiodt.getTableName(), "order1", "A20", aiodt.getKeys().length + 2);
+		aiodt.setValues(objs7);
+		System.out.println(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues()));
+		arr = dao.query(aiodt.getTableName(), "order1", "A20", aiodt.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			aiodt.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs7[2] = 6;
-		System.out.println(dao.update(aiodt.getTableName(), aiodt.getKeys(), objs7, key));
-		arr2 = dao.query(aiodt.getTableName(), "order1", "A20", aiodt.getKeys().length + 2);
+		aiodt.setValues(objs7);
+		System.out.println(dao.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull()));
+		arr2 = dao.query(aiodt.getTableName(), "order1", "A20", aiodt.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -453,21 +440,20 @@ public class TestSQL {
 		System.out.println("AIO");
 		AIO aio = new AIO();
 		Object[] objs8 = { "C60989", "eng", 20161108, "P00", "D", 100, "eng廠區庫存不足" };
-		System.out.println(dao.insert(aio.getTableName(), aio.getKeys(), objs8));
-		key = 1;
-		arr = dao.query(aio.getTableName(), "vhno", "C60", aio.getKeys().length + 2);
+		aio.setValues(objs8);
+		System.out.println(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues()));
+		arr = dao.query(aio.getTableName(), "vhno", "C60", aio.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
+			aio.setValuesFull(objects);
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs8[5] = 200;
-		System.out.println(dao.update(aio.getTableName(), aio.getKeys(), objs8, key));
-		arr2 = dao.query(aio.getTableName(), "vhno", "C60", aio.getKeys().length + 2);
+		aio.setValues(objs8);
+		System.out.println(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull()));
+		arr2 = dao.query(aio.getTableName(), "vhno", "C60", aio.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -479,21 +465,19 @@ public class TestSQL {
 		System.out.println("AINVENTORY");
 		AINVENTORY ainventory = new AINVENTORY();
 		Object[] objs9 = { "Q123501", "eng", 20161108, "P001", 100, 99 };
-		System.out.println(dao.insert(ainventory.getTableName(), ainventory.getKeys(), objs9));
-		key = 1;
-		arr = dao.query(ainventory.getTableName(), "invo", "235", ainventory.getKeys().length + 2);
+		ainventory.setValues(objs9);
+		System.out.println(dao.insert(ainventory.getTableName(), ainventory.getKeys(), ainventory.getValues()));
+		arr = dao.query(ainventory.getTableName(), "invo", "235", ainventory.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs9[5] = 200;
-		System.out.println(dao.update(ainventory.getTableName(), ainventory.getKeys(), objs9, key));
-		arr2 = dao.query(ainventory.getTableName(), "invo", "235", ainventory.getKeys().length + 2);
+		ainventory.setValues(objs9);
+		System.out.println(dao.update(ainventory.getTableName(), ainventory.getKeys(), ainventory.getValuesFull()));
+		arr2 = dao.query(ainventory.getTableName(), "invo", "235", ainventory.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);
@@ -505,21 +489,19 @@ public class TestSQL {
 		System.out.println("AFAB");
 		AFAB afab = new AFAB();
 		Object[] objs10 = { "eng", "A廠區" };
-		System.out.println(dao.insert(afab.getTableName(), afab.getKeys(), objs10));
-		key = 1;
-		arr = dao.query(afab.getTableName(), "fno", "en", afab.getKeys().length + 2);
+		afab.setValues(objs10);
+		System.out.println(dao.insert(afab.getTableName(), afab.getKeys(), afab.getValues()));
+		arr = dao.query(afab.getTableName(), "fno", "en", afab.getLength());
 		for (Object[] objects : arr) {
-			int i = 0;
 			for (Object object : objects) {
-				if (i++ == 0)
-					key = (int) object;
 				System.out.println("arr1 : " + object);
 			}
 		}
 
 		objs10[1] = "B廠區";
-		System.out.println(dao.update(afab.getTableName(), afab.getKeys(), objs10, key));
-		arr2 = dao.query(afab.getTableName(), "fno", "en", afab.getKeys().length + 2);
+		afab.setValues(objs10);
+		System.out.println(dao.update(afab.getTableName(), afab.getKeys(), afab.getValuesFull()));
+		arr2 = dao.query(afab.getTableName(), "fno", "en", afab.getLength());
 		for (Object[] objects : arr2) {
 			for (Object object : objects) {
 				System.out.println("arr2 : " + object);

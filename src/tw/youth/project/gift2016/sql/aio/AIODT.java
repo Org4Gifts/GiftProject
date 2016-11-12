@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.aio;
 
+import java.sql.Timestamp;
+
 public class AIODT {
 	// 多廠別進/銷副檔
 	private Integer _id = 0;
@@ -16,6 +18,8 @@ public class AIODT {
 	// 訂單編號
 	private String note1 = "";
 	// 備註
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "vhno", "fgno", "qty", "prc", "order1", "note1" };
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
@@ -37,6 +41,10 @@ public class AIODT {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 	// 以下是儲存的值
 
@@ -94,6 +102,52 @@ public class AIODT {
 
 	public void setNote1(String note1) {
 		this.note1 = note1;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setVhno((String) values[i++]);
+		setFgno((String) values[i++]);
+		setQty((Integer) values[i++]);
+		setNote1((String) values[i++]);
+		setOrder1((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setVhno((String) values[i++]);
+		setFgno((String) values[i++]);
+		setQty((Integer) values[i++]);
+		setNote1((String) values[i++]);
+		setOrder1((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getVhno(), getFgno(), getQty(), getPrc(), getOrder1(), getNote1() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getVhno(), getFgno(), getQty(), getPrc(), getOrder1(), getNote1(), getCreated(),
+				getUpdated() };
 	}
 
 }

@@ -1,5 +1,7 @@
 package tw.youth.project.gift2016.sql.aodr;
 
+import java.sql.Timestamp;
+
 public class AODR {
 	// 訂單主檔
 	private Integer _id = 0;
@@ -14,6 +16,8 @@ public class AODR {
 	// 訂單金額
 	private String purpose = "";
 	// 需求目的
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "order1", "odate", "empno", "tamt", "purpose" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
@@ -35,6 +39,10 @@ public class AODR {
 
 	public String[] getUniques() {
 		return uniques;
+	}
+
+	public int getLength() {
+		return getKeys().length + 2;
 	}
 
 	// 以下是儲存的值
@@ -84,6 +92,52 @@ public class AODR {
 
 	public void setPurpose(String purpose) {
 		this.purpose = purpose;
+	}
+
+	public Timestamp getCreated() {
+		return created;
+	}
+
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+
+	public Timestamp getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Timestamp updated) {
+		this.updated = updated;
+	}
+
+	public void setValues(Object[] values) {
+		int i = 0;
+		setOrder1((String) values[i++]);
+		setOdate((Long) values[i++]);
+		setEmpno((String) values[i++]);
+		setTamt((Long) values[i++]);
+		setPurpose((String) values[i++]);
+	}
+
+	public void setValuesFull(Object[] values) {
+		int i = 0;
+		set_id((Integer) values[i++]);
+		setOrder1((String) values[i++]);
+		setOdate((Long) values[i++]);
+		setEmpno((String) values[i++]);
+		setTamt((Long) values[i++]);
+		setPurpose((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
+	}
+
+	public Object[] getValues() {
+		return new Object[] { getOrder1(), getOdate(), getEmpno(), getTamt(), getPurpose() };
+	}
+
+	public Object[] getValuesFull() {
+		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getTamt(), getPurpose(), getCreated(),
+				getUpdated() };
 	}
 
 }

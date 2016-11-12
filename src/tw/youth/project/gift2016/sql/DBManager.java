@@ -145,6 +145,7 @@ public class DBManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
 		for (String key : keys) {
+			System.out.println(key);
 			if (key.equals("_id"))
 				continue;
 			sb.append(key).append(",");
@@ -158,6 +159,7 @@ public class DBManager {
 		sb.replace(sb.length() - 1, sb.length(), ")");
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
+			System.out.println("setObj");
 			for (int i = 0; i < values.length; i++) {
 				ps.setObject(i + 1, values[i]);
 			}
@@ -169,12 +171,42 @@ public class DBManager {
 
 	}
 
-	public synchronized String update(String tableName, String[] keys, Object[] values, int _id) {
+	// public synchronized String update(String tableName, String[] keys,
+	// Object[] values, int _id) {
+	// StringBuilder sb = new StringBuilder();
+	// sb.append("UPDATE").append(" ").append(tableName).append("
+	// ").append("SET").append(" ");
+	// for (String key : keys) {
+	// if (key.equals("_id"))
+	// continue;
+	// sb.append(key).append("=?,");
+	// }
+	// sb.replace(sb.length() - 1, sb.length(), " ");
+	// sb.append("WHERE").append(" ").append(keys[0]).append("=?");
+	//
+	// try {
+	// PreparedStatement ps = conn.prepareStatement(sb.toString());
+	// int i;
+	// for (i = 0; i < values.length; i++) {
+	// ps.setObject(i + 1, values[i]);
+	// }
+	// ps.setObject(i + 1, _id);
+	//
+	// return "update " + (ps.executeUpdate() > 0);
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// return "update error, " + e.getMessage();
+	// }
+	// }
+
+	public synchronized String update(String tableName, String[] keys, Object[] values) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE").append(" ").append(tableName).append(" ").append("SET").append(" ");
 		for (String key : keys) {
 			if (key.equals("_id"))
 				continue;
+			if (key.equals("created"))
+				break;
 			sb.append(key).append("=?,");
 		}
 		sb.replace(sb.length() - 1, sb.length(), " ");
@@ -183,10 +215,12 @@ public class DBManager {
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
 			int i;
-			for (i = 0; i < values.length; i++) {
-				ps.setObject(i + 1, values[i]);
+			for (i = 1; i < values.length; i++) {
+				if (values[i].equals("created"))
+					break;
+				ps.setObject(i, values[i]);
 			}
-			ps.setObject(i + 1, _id);
+			ps.setObject(i, values[0]);
 
 			return "update " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
@@ -195,7 +229,7 @@ public class DBManager {
 		}
 	}
 
-	public String drop(String tableName, String key, Object value) {
+	public synchronized String drop(String tableName, String key, Object value) {
 		String dropTable = "DELETE from %s WHERE %s=?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(String.format(dropTable, tableName, key));
@@ -208,7 +242,7 @@ public class DBManager {
 		}
 	}
 
-	public ArrayList<Object[]> query(String tableName, String key, Object value, int length) {
+	public synchronized ArrayList<Object[]> query(String tableName, String key, Object value, int length) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT").append(" ").append("*").append("FROM").append(" ").append(tableName).append(" ")
 				.append("WHERE").append(" ").append(key).append(" ").append("LIKE").append(" ").append("?");
@@ -221,7 +255,7 @@ public class DBManager {
 			while (rs.next()) {
 				Object[] objs = new Object[length];
 				for (int i = 0; i < length; i++) {
-						objs[i] = rs.getObject(i + 1);
+					objs[i] = rs.getObject(i + 1);
 				}
 				arr.add(objs);
 			}
@@ -241,7 +275,7 @@ public class DBManager {
 		return null;
 	}
 
-	public boolean close() {
+	public synchronized boolean close() {
 		try {
 			conn.close();
 		} catch (SQLException e) {

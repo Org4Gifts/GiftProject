@@ -39,7 +39,7 @@ public class SQLCmd {
 		String sqlType = "";
 		switch (type) {
 		case "String":
-			sqlType = "VARCHAR(20)";
+			sqlType = "VARCHAR(32)";
 			break;
 		case "Integer":
 			sqlType = "INT";
