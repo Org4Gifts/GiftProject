@@ -125,8 +125,9 @@ public class AIODT {
 		setVhno((String) values[i++]);
 		setFgno((String) values[i++]);
 		setQty((Integer) values[i++]);
-		setNote1((String) values[i++]);
+		setPrc((Float) values[i++]);
 		setOrder1((String) values[i++]);
+		setNote1((String) values[i++]);
 	}
 
 	public void setValuesFull(Object[] values) {
@@ -135,8 +136,9 @@ public class AIODT {
 		setVhno((String) values[i++]);
 		setFgno((String) values[i++]);
 		setQty((Integer) values[i++]);
-		setNote1((String) values[i++]);
+		setPrc((Float) values[i++]);
 		setOrder1((String) values[i++]);
+		setNote1((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
 	}

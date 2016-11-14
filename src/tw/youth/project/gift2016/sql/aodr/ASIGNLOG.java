@@ -2,32 +2,22 @@ package tw.youth.project.gift2016.sql.aodr;
 
 import java.sql.Timestamp;
 
-public class AODR {
+public class ASIGNLOG {
 	// 訂單主檔
 	private Integer _id = 0;
 
 	private String order1 = "";
 	// 訂單編號
-	private String odate = "";
-	// 訂定日期
-	private String empno = "";
-	// 員工編號
-	private Long tamt = 0L;
-	// 訂單金額
+	private String signature = "";
+	private Float spent = 0.0f;
 	private String status = "";
 	// 訂單狀態
-	private Short authority = 0;
-	// 訂單最高簽核層級
-	private String purpose = "";
-	// 需求目的
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "order1", "odate", "empno", "tamt", "status", "authority", "purpose" };
+	private String[] keys = { "_id", "order1", "signature", "spent", "status" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), tamt.getClass().getSimpleName(),
-			status.getClass().getSimpleName(), authority.getClass().getSimpleName(),
-			purpose.getClass().getSimpleName() };
+			signature.getClass().getSimpleName(), spent.getClass().getSimpleName(), status.getClass().getSimpleName() };
 	private String[] uniques = { "order1" };
 
 	public String getTableName() {
@@ -67,36 +57,20 @@ public class AODR {
 		this.order1 = order1;
 	}
 
-	public String getOdate() {
-		return odate;
+	public String getSignature() {
+		return signature;
 	}
 
-	public void setOdate(String odate) {
-		this.odate = odate;
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
-	public String getEmpno() {
-		return empno;
+	public Float getSpent() {
+		return spent;
 	}
 
-	public void setEmpno(String empno) {
-		this.empno = empno;
-	}
-
-	public Long getTamt() {
-		return tamt;
-	}
-
-	public void setTamt(Long tamt) {
-		this.tamt = tamt;
-	}
-
-	public String getPurpose() {
-		return purpose;
-	}
-
-	public void setPurpose(String purpose) {
-		this.purpose = purpose;
+	public void setSpent(Float spent) {
+		this.spent = spent;
 	}
 
 	public String getStatus() {
@@ -105,14 +79,6 @@ public class AODR {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public Short getAuthority() {
-		return authority;
-	}
-
-	public void setAuthority(Short authority) {
-		this.authority = authority;
 	}
 
 	public Timestamp getCreated() {
@@ -134,31 +100,28 @@ public class AODR {
 	public void setValues(Object[] values) {
 		int i = 0;
 		setOrder1((String) values[i++]);
-		setOdate((String) values[i++]);
-		setEmpno((String) values[i++]);
-		setTamt((Long) values[i++]);
-		setPurpose((String) values[i++]);
+		setSignature((String) values[i++]);
+		setSpent(Float.parseFloat(Integer.toString((Integer) values[i++])));
+		setStatus((String) values[i++]);
 	}
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
 		set_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
-		setOdate((String) values[i++]);
-		setEmpno((String) values[i++]);
-		setTamt((Long) values[i++]);
-		setPurpose((String) values[i++]);
+		setSignature((String) values[i++]);
+		setSpent(Float.parseFloat(Integer.toString((Integer) values[i++])));
+		setStatus((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
+		
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getOrder1(), getOdate(), getEmpno(), getTamt(), getPurpose() };
+		return new Object[] { getOrder1(), getPurpose() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getTamt(), getPurpose(), getCreated(),
-				getUpdated() };
+		return new Object[] { get_id(), getOrder1(), getPurpose(), getCreated(), getUpdated() };
 	}
-
 }

@@ -15,7 +15,7 @@ public class AEMP {
 	private String job = "";
 	// 職稱
 	private Short authority = 0; // auto
-	// 簽核層級
+	// 簽核層級 0職員、1課長、2經理級、3處長級、4副總經理級、5總經理、6董事長
 	private String ext = "";
 	// 分機
 	private String mgr = "";
@@ -147,7 +147,8 @@ public class AEMP {
 		setEname((String) values[i++]);
 		setEmail((String) values[i++]);
 		setJob((String) values[i++]);
-		setAuthority((Short) values[i++]);
+		System.out.println(values[i].getClass().getSimpleName());
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);
 		setDno((String) values[i++]);
@@ -160,7 +161,8 @@ public class AEMP {
 		setEname((String) values[i++]);
 		setEmail((String) values[i++]);
 		setJob((String) values[i++]);
-		setAuthority((Short) values[i++]);
+		System.out.println(values[i].getClass().getSimpleName());
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);
 		setDno((String) values[i++]);

@@ -14,7 +14,7 @@ public class APRESENT {
 	// 禮品單價
 	private Short grade = 0;
 	// 禮品等級
-	private Short authority = 0;
+	private Integer authority = 0;
 	// 申請層級
 	private String status = "";
 	// 申請狀態
@@ -95,11 +95,11 @@ public class APRESENT {
 		this.grade = grade;
 	}
 
-	public Short getAuthority() {
+	public Integer getAuthority() {
 		return authority;
 	}
 
-	public void setAuthority(Short authority) {
+	public void setAuthority(Integer authority) {
 		this.authority = authority;
 	}
 
@@ -156,8 +156,8 @@ public class APRESENT {
 		setFgno((String) values[i++]);
 		setFgname((String) values[i++]);
 		setPrc((Float) values[i++]);
-		setGrade((Short) values[i++]);
-		setAuthority((Short) values[i++]);
+		setGrade(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setStatus((String) values[i++]);
 		setNote1((String) values[i++]);
 		setFqty((Integer) values[i++]);
@@ -170,8 +170,8 @@ public class APRESENT {
 		setFgno((String) values[i++]);
 		setFgname((String) values[i++]);
 		setPrc((Float) values[i++]);
-		setGrade((Short) values[i++]);
-		setAuthority((Short) values[i++]);
+		setGrade(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setStatus((String) values[i++]);
 		setNote1((String) values[i++]);
 		setFqty((Integer) values[i++]);

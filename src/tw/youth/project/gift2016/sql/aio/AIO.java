@@ -10,11 +10,11 @@ public class AIO {
 	// 單據編號
 	private String fno = "";
 	// 廠別
-	private Long vhdt = 0L;
+	private String vhdt = "";
 	// 單據日期
 	private String ano = "";
 	// 單位編號
-	private Character dc = 'D'; // ?
+	private String dc = "D"; // ?
 	// 進/銷
 	private Float tamt = 0.0f;
 	// 進銷金額
@@ -74,11 +74,11 @@ public class AIO {
 		this.fno = fno;
 	}
 
-	public Long getVhdt() {
+	public String getVhdt() {
 		return vhdt;
 	}
 
-	public void setVhdt(Long vhdt) {
+	public void setVhdt(String vhdt) {
 		this.vhdt = vhdt;
 	}
 
@@ -90,11 +90,11 @@ public class AIO {
 		this.ano = ano;
 	}
 
-	public Character getDc() {
+	public String getDc() {
 		return dc;
 	}
 
-	public void setDc(Character dc) {
+	public void setDc(String dc) {
 		this.dc = dc;
 	}
 
@@ -134,9 +134,9 @@ public class AIO {
 		int i = 0;
 		setVhno((String) values[i++]);
 		setFno((String) values[i++]);
-		setVhdt((Long) values[i++]);
+		setVhdt((String) values[i++]);
 		setAno((String) values[i++]);
-		setDc((Character) values[i++]);
+		setDc((String) values[i++]);
 		setTamt((Float) values[i++]);
 		setMemo((String) values[i++]);
 	}
@@ -146,9 +146,9 @@ public class AIO {
 		set_id((Integer) values[i++]);
 		setVhno((String) values[i++]);
 		setFno((String) values[i++]);
-		setVhdt((Long) values[i++]);
+		setVhdt((String) values[i++]);
 		setAno((String) values[i++]);
-		setDc((Character) values[i++]);
+		setDc((String) values[i++]);
 		setTamt((Float) values[i++]);
 		setMemo((String) values[i++]);
 		setCreated((Timestamp) values[i++]);

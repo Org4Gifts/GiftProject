@@ -11,12 +11,12 @@ import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
-import tw.youth.project.gift2016.sql.user.USER;
+import tw.youth.project.gift2016.sql.user.AUSER;
 
 public class SQLCmd {
 	// 通用參數
 	public static final String DB = "GIFT";
-	public static final String[] TABLES = { USER.class.getSimpleName(), AEMP.class.getSimpleName(),
+	public static final String[] TABLES = { AUSER.class.getSimpleName(), AEMP.class.getSimpleName(),
 			AVDR.class.getSimpleName(), AQTY.class.getSimpleName(), APRESENT.class.getSimpleName(),
 			AODRDT.class.getSimpleName(), AODR.class.getSimpleName(), AIODT.class.getSimpleName(),
 			AIO.class.getSimpleName(), AINVENTORY.class.getSimpleName(), AFAB.class.getSimpleName(),

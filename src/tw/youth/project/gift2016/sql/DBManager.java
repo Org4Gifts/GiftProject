@@ -17,7 +17,7 @@ import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
-import tw.youth.project.gift2016.sql.user.USER;
+import tw.youth.project.gift2016.sql.user.AUSER;
 
 public class DBManager {
 	private static Connection conn;
@@ -65,8 +65,8 @@ public class DBManager {
 	public Object getTableObject(String tableName) {
 		Object table = null;
 		switch (tableName) {
-		case "USER":
-			table = new USER();
+		case "AUSER":
+			table = new AUSER();
 			break;
 		case "AEMP":
 			table = new AEMP();
@@ -126,18 +126,11 @@ public class DBManager {
 
 			sb.append(",");
 		}
-		// created timestamp default 0,updated timestamp on update
-		// current_timestamp
 		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("DEFAULT").append(" ")
 				.append("CURRENT_TIMESTAMP").append(",").append("updated").append(" ").append("TIMESTAMP").append(" ")
 				.append("ON").append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ")
 				.append("DEFAULT").append(" ").append("CURRENT_TIMESTAMP").append(",");
-		// if (!primary.equals("")) {
-		// sb.append("PRIMARY KEY").append("(").append(primary).append("));");
 		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
-		// } else {
-		// sb.replace(sb.length() - 1, sb.length(), ");");
-		// }
 		return sb.toString();
 	}
 
@@ -145,7 +138,6 @@ public class DBManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
 		for (String key : keys) {
-			System.out.println(key);
 			if (key.equals("_id"))
 				continue;
 			sb.append(key).append(",");
@@ -159,7 +151,6 @@ public class DBManager {
 		sb.replace(sb.length() - 1, sb.length(), ")");
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
-			System.out.println("setObj");
 			for (int i = 0; i < values.length; i++) {
 				ps.setObject(i + 1, values[i]);
 			}
@@ -171,56 +162,25 @@ public class DBManager {
 
 	}
 
-	// public synchronized String update(String tableName, String[] keys,
-	// Object[] values, int _id) {
-	// StringBuilder sb = new StringBuilder();
-	// sb.append("UPDATE").append(" ").append(tableName).append("
-	// ").append("SET").append(" ");
-	// for (String key : keys) {
-	// if (key.equals("_id"))
-	// continue;
-	// sb.append(key).append("=?,");
-	// }
-	// sb.replace(sb.length() - 1, sb.length(), " ");
-	// sb.append("WHERE").append(" ").append(keys[0]).append("=?");
-	//
-	// try {
-	// PreparedStatement ps = conn.prepareStatement(sb.toString());
-	// int i;
-	// for (i = 0; i < values.length; i++) {
-	// ps.setObject(i + 1, values[i]);
-	// }
-	// ps.setObject(i + 1, _id);
-	//
-	// return "update " + (ps.executeUpdate() > 0);
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// return "update error, " + e.getMessage();
-	// }
-	// }
-
 	public synchronized String update(String tableName, String[] keys, Object[] values) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE").append(" ").append(tableName).append(" ").append("SET").append(" ");
 		for (String key : keys) {
 			if (key.equals("_id"))
 				continue;
-			if (key.equals("created"))
-				break;
 			sb.append(key).append("=?,");
 		}
 		sb.replace(sb.length() - 1, sb.length(), " ");
 		sb.append("WHERE").append(" ").append(keys[0]).append("=?");
-
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
 			int i;
 			for (i = 1; i < values.length; i++) {
-				if (values[i].equals("created"))
-					break;
+				if (values.length - i <= 2)
+					continue;
 				ps.setObject(i, values[i]);
 			}
-			ps.setObject(i, values[0]);
+			ps.setObject(i - 2, values[0]);
 
 			return "update " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
@@ -270,10 +230,10 @@ public class DBManager {
 
 	}
 
-	public <T> Object query(T tableName) {
-
-		return null;
-	}
+//	public <T> Object query(T tableName) {
+//
+//		return null;
+//	}
 
 	public synchronized boolean close() {
 		try {

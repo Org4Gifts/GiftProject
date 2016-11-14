@@ -5,15 +5,19 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 
-public class USER {
+public class AUSER {
 
 	private Integer _id = 0;
 	private String empno = "";
 	private String user = "";
 	private String pass = "";
-
-	private Timestamp  created;
+	private Timestamp created;
 	private Timestamp updated;
+
+	
+	private Short authority;
+	private String dno;
+	private Short role;
 
 	private String[] keys = { "_id", "empno", "user", "pass" };
 	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
@@ -114,6 +118,30 @@ public class USER {
 
 	public void setUpdated(Timestamp updated) {
 		this.updated = updated;
+	}
+	
+	public Short getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Short authority) {
+		this.authority = authority;
+	}
+
+	public String getDno() {
+		return dno;
+	}
+
+	public void setDno(String dno) {
+		this.dno = dno;
+	}
+
+	public Short getRole() {
+		return role;
+	}
+
+	public void setRole(Short role) {
+		this.role = role;
 	}
 
 	public void setValues(Object[] values) {

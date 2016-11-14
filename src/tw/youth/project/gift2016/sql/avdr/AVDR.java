@@ -12,7 +12,7 @@ public class AVDR {
 	// 公司簡稱
 	private String name = "";
 	// 公司名稱
-	private String id = "";
+	private Integer id = 0;
 	// 統一編號
 	private String bose = "";
 	// 負責人
@@ -97,11 +97,11 @@ public class AVDR {
 		this.name = name;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -198,7 +198,7 @@ public class AVDR {
 		setCono((String) values[i++]);
 		setNa((String) values[i++]);
 		setName((String) values[i++]);
-		setId((String) values[i++]);
+		setId((Integer) values[i++]);
 		setBose((String) values[i++]);
 		setAgent((String) values[i++]);
 		setTitle((String) values[i++]);
@@ -216,7 +216,7 @@ public class AVDR {
 		setCono((String) values[i++]);
 		setNa((String) values[i++]);
 		setName((String) values[i++]);
-		setId((String) values[i++]);
+		setId((Integer) values[i++]);
 		setBose((String) values[i++]);
 		setAgent((String) values[i++]);
 		setTitle((String) values[i++]);

@@ -10,7 +10,7 @@ public class AINVENTORY {
 	// 盤點單號
 	private String fno = "";
 	// 儲存廠別
-	private Long yymm = 0L;
+	private String yymm = "";
 	// 資料年月
 	private String fgno = "";
 	// 禮品編號
@@ -72,11 +72,11 @@ public class AINVENTORY {
 		this.fno = fno;
 	}
 
-	public Long getYymm() {
+	public String getYymm() {
 		return yymm;
 	}
 
-	public void setYymm(Long yymm) {
+	public void setYymm(String yymm) {
 		this.yymm = yymm;
 	}
 
@@ -124,7 +124,7 @@ public class AINVENTORY {
 		int i = 0;
 		setInvo((String) values[i++]);
 		setFno((String) values[i++]);
-		setYymm((Long) values[i++]);
+		setYymm((String) values[i++]);
 		setFgno((String) values[i++]);
 		setIvqty((Integer) values[i++]);
 		setSqty((Integer) values[i++]);
@@ -135,7 +135,7 @@ public class AINVENTORY {
 		set_id((Integer) values[i++]);
 		setInvo((String) values[i++]);
 		setFno((String) values[i++]);
-		setYymm((Long) values[i++]);
+		setYymm((String) values[i++]);
 		setFgno((String) values[i++]);
 		setIvqty((Integer) values[i++]);
 		setSqty((Integer) values[i++]);

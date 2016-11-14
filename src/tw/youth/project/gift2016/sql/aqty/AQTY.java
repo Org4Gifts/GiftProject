@@ -6,7 +6,7 @@ public class AQTY {
 	// 多廠別進/銷彙總檔
 	private Integer _id = 0;
 
-	private Long yymm = 0L; // auto
+	private String yymm = ""; // auto
 	// 資料年月
 	private String fno = ""; // auto
 	// 廠別
@@ -56,11 +56,11 @@ public class AQTY {
 		this._id = _id;
 	}
 
-	public Long getYymm() {
+	public String getYymm() {
 		return yymm;
 	}
 
-	public void setYymm(Long yymm) {
+	public void setYymm(String yymm) {
 		this.yymm = yymm;
 	}
 
@@ -122,7 +122,7 @@ public class AQTY {
 
 	public void setValues(Object[] values) {
 		int i = 0;
-		setYymm((Long) values[i++]);
+		setYymm((String) values[i++]);
 		setFno((String) values[i++]);
 		setFgno((String) values[i++]);
 		setPmqty((Integer) values[i++]);
@@ -133,7 +133,7 @@ public class AQTY {
 	public void setValuesFull(Object[] values) {
 		int i = 0;
 		set_id((Integer) values[i++]);
-		setYymm((Long) values[i++]);
+		setYymm((String) values[i++]);
 		setFno((String) values[i++]);
 		setFgno((String) values[i++]);
 		setPmqty((Integer) values[i++]);
