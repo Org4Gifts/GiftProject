@@ -16,6 +16,12 @@ public class AODR {
 	// 訂單金額
 	private String status = "";
 	// 訂單狀態
+	// Status0 : Rejected (單據被退件)
+	// Status1 : Preparing (單據準備中，尚未送出)
+	// STatus2 : Processing (單據被送出，待簽核中)
+	// Status8 : Approved (簽核流程結束)
+	// Status9 : Completed (行政部門結案，禮品被領走，系統自動扣除 【及時庫存量】)
+	// Status10 : Obsoleted (行政部門作廢，系統自動加回 【及時庫存量】)
 	private Short authority = 0;
 	// 訂單最高簽核層級
 	private String purpose = "";
@@ -137,6 +143,8 @@ public class AODR {
 		setOdate((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setTamt((Long) values[i++]);
+		setStatus((String) values[i++]);
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setPurpose((String) values[i++]);
 	}
 
@@ -147,18 +155,21 @@ public class AODR {
 		setOdate((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setTamt((Long) values[i++]);
+		setStatus((String) values[i++]);
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setPurpose((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getOrder1(), getOdate(), getEmpno(), getTamt(), getPurpose() };
+		return new Object[] { getOrder1(), getOdate(), getEmpno(), getTamt(), getStatus(), getAuthority(),
+				getPurpose() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getTamt(), getPurpose(), getCreated(),
-				getUpdated() };
+		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getTamt(), getStatus(), getAuthority(),
+				getPurpose(), getCreated(), getUpdated() };
 	}
 
 }

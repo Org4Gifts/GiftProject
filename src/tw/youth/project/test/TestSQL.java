@@ -17,6 +17,7 @@ import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.aodr.ASIGNLOG;
 import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
@@ -133,13 +134,14 @@ public class TestSQL {
 		dao.starup();
 		System.out.println("testDropTables : " + new Date(System.currentTimeMillis()).toString());
 		try {
-			System.out.println("drop user " + dao.getConn().prepareStatement("Drop table user;").execute());
+			System.out.println("drop auser " + dao.getConn().prepareStatement("Drop table auser;").execute());
 			System.out.println("drop aemp " + dao.getConn().prepareStatement("Drop table aemp;").execute());
 			System.out.println("drop avdr " + dao.getConn().prepareStatement("Drop table avdr;").execute());
 			System.out.println("drop aqty " + dao.getConn().prepareStatement("Drop table aqty;").execute());
 			System.out.println("drop apresent " + dao.getConn().prepareStatement("Drop table apresent;").execute());
 			System.out.println("drop aodrdt " + dao.getConn().prepareStatement("Drop table aodrdt;").execute());
 			System.out.println("drop aodr " + dao.getConn().prepareStatement("Drop table aodr;").execute());
+			System.out.println("drop asignlog " + dao.getConn().prepareStatement("Drop table asignlog;").execute());
 			System.out.println("drop aiodt " + dao.getConn().prepareStatement("Drop table aiodt;").execute());
 			System.out.println("drop aio " + dao.getConn().prepareStatement("Drop table aio;").execute());
 			System.out.println("drop ainventory " + dao.getConn().prepareStatement("Drop table ainventory;").execute());
@@ -199,6 +201,12 @@ public class TestSQL {
 			System.out.println(table);
 			System.out.println(aodrdt.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
+			ASIGNLOG asignlog = new ASIGNLOG();
+			table = dao.createTable(asignlog.getTableName(), asignlog.getKeys(), asignlog.getTypes(),
+					asignlog.getUniques());
+			System.out.println(table);
+			System.out.println(asignlog.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+
 			AIO aio = new AIO();
 			table = dao.createTable(aio.getTableName(), aio.getKeys(), aio.getTypes(), aio.getUniques());
 			System.out.println(table);
@@ -238,7 +246,7 @@ public class TestSQL {
 		dao.starup();
 
 		// USER
-		System.out.println("USER");
+		System.out.println("AUSER");
 		AUSER user = new AUSER();
 		Object[] objs = { "K123456", "odise", "116025" };
 		user.setValues(objs);
@@ -452,7 +460,7 @@ public class TestSQL {
 		// AODR
 		System.out.println("AODR");
 		AODR aodr = new AODR();
-		Object[] objs6 = { "A20161108", "2016-11-08", "K123456", 100L, "送禮" };
+		Object[] objs6 = { "A20161108", "2016-11-08", "K123456", 100L, "Signing", 2, "送禮" };
 		aodr.setValues(objs6);
 		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));
 		arr = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
@@ -465,7 +473,7 @@ public class TestSQL {
 			aodr.setValuesFull(objects);
 		}
 
-		objs6[4] = "自用";
+		objs6[4] = "Reject";
 		aodr.setValues(objs6);
 		System.out.println(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
 		arr2 = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
@@ -477,6 +485,35 @@ public class TestSQL {
 			System.out.println(str);
 		}
 		System.out.println(dao.drop(aodr.getTableName(), "empno", "K123456") + "\n");
+
+		// ASIGNLOG
+		System.out.println("ASIGNLOG");
+		ASIGNLOG asignlog = new ASIGNLOG();
+		objs6 = new Object[] { "A20161108", "K123456", "歐帝斯", 0.0f, "Preparing" };
+		asignlog.setValues(objs6);
+		System.out.println(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
+		arr = dao.query(asignlog.getTableName(), "order1", "1108", asignlog.getLength());
+		for (Object[] objects : arr) {
+			String str = "arr1 ";
+			for (Object object : objects) {
+				str += object + ", ";
+			}
+			System.out.println(str);
+			asignlog.setValuesFull(objects);
+		}
+
+		objs6[4] = "Processing";
+		asignlog.setValues(objs6);
+		System.out.println(dao.update(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValuesFull()));
+		arr2 = dao.query(asignlog.getTableName(), "order1", "1108", asignlog.getLength());
+		for (Object[] objects : arr2) {
+			String str = "arr2 ";
+			for (Object object : objects) {
+				str += object + ", ";
+			}
+			System.out.println(str);
+		}
+		System.out.println(dao.drop(asignlog.getTableName(), "order1", "A20161108") + "\n");
 
 		// AIODT
 		System.out.println("AIODT");
@@ -594,10 +631,10 @@ public class TestSQL {
 		}
 		System.out.println(dao.drop(afab.getTableName(), "fno", "eng") + "\n");
 
-		objs10 = new Object[]{ "eng", "A廠區" };
+		objs10 = new Object[] { "eng", "A廠區" };
 		afab.setValues(objs10);
 		System.out.println(dao.insert(afab.getTableName(), afab.getKeys(), afab.getValues()));
-		objs10 = new Object[]{ "enc", "B廠區" };
+		objs10 = new Object[] { "enc", "B廠區" };
 		afab.setValues(objs10);
 		System.out.println(dao.insert(afab.getTableName(), afab.getKeys(), afab.getValues()));
 

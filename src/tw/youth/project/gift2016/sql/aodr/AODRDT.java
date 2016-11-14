@@ -25,7 +25,7 @@ public class AODRDT {
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(), prc.getClass().getSimpleName(),
 			note1.getClass().getSimpleName(), oqty.getClass().getSimpleName() };
-	private String[] uniques = { "order1" };
+	private String[] uniques = { "" };
 
 	public String getTableName() {
 		return getClass().getSimpleName().toLowerCase();

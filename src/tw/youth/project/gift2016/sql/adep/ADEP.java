@@ -10,7 +10,7 @@ public class ADEP {
 	private String dno = "";
 	// 部門代碼
 	private Short role = 0;
-	// 部門權限 : 一般部門0、核銷部門1、庫存部門2、管理部門3、董事長
+	// 部門權限 : 一般部門0、核銷部門1、庫存部門2、管理部門3、董事長4
 	private String dname = "";
 	// 部門名稱
 	private String fno = "";

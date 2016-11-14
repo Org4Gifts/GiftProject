@@ -33,20 +33,20 @@ public class TestQuery {
 		Query query = new Query(user);
 
 		System.out.println("管理者查詢:使用者");
-		user = query.getUser(dao, "odise");
+		user = query.getUsers(dao, user.getKeys()[2], "odise").get(0);
 		System.out.println(user.getUser());
 		System.out.println("管理者查詢:全部使用者");
-		ArrayList<AUSER> users = query.getUsers(dao);
+		ArrayList<AUSER> users = query.getUsers(dao, user.getKeys()[2], "");
 		for (AUSER u : users) {
 			System.out.println(u.getUser());
 		}
 
 		aemp = new AEMP();
 		System.out.println("\n" + "管理者查詢:員工的基本資料");
-		aemp = query.getAemp(dao, user.getEmpno());
+		aemp = query.getAemps(dao, user.getKeys()[1], user.getEmpno()).get(0);
 		System.out.println(aemp.getEmail());
 		System.out.println("\n" + "管理者查詢:全部員工的基本資料");
-		ArrayList<AEMP> aemps = query.getAemps(dao);
+		ArrayList<AEMP> aemps = query.getAemps(dao, user.getKeys()[1], "");
 		for (AEMP aemp2 : aemps) {
 			System.out.println(aemp2.getEmail());
 		}

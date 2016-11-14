@@ -8,17 +8,22 @@ public class ASIGNLOG {
 
 	private String order1 = "";
 	// 訂單編號
+	private String empno = "";
+	// 簽核人員工號
 	private String signature = "";
+	// 簽核人員名稱
 	private Float spent = 0.0f;
+	// 簽核花費時間 (上一個簽核人員的時間為主)
 	private String status = "";
-	// 訂單狀態
+	// 訂單簽核狀態 Send 發送請求者 ,None 尚未簽核 ,Approve 同意 ,Reject 拒絕 ,Complete 完成
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "order1", "signature", "spent", "status" };
+	private String[] keys = { "_id", "order1", "empno", "signature", "spent", "status" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			signature.getClass().getSimpleName(), spent.getClass().getSimpleName(), status.getClass().getSimpleName() };
-	private String[] uniques = { "order1" };
+			empno.getClass().getSimpleName(), signature.getClass().getSimpleName(), spent.getClass().getSimpleName(),
+			status.getClass().getSimpleName() };
+	private String[] uniques = { "" };
 
 	public String getTableName() {
 		return getClass().getSimpleName().toLowerCase();
@@ -55,6 +60,14 @@ public class ASIGNLOG {
 
 	public void setOrder1(String order1) {
 		this.order1 = order1;
+	}
+
+	public String getEmpno() {
+		return empno;
+	}
+
+	public void setEmpno(String empno) {
+		this.empno = empno;
 	}
 
 	public String getSignature() {
@@ -100,6 +113,7 @@ public class ASIGNLOG {
 	public void setValues(Object[] values) {
 		int i = 0;
 		setOrder1((String) values[i++]);
+		setEmpno((String) values[i++]);
 		setSignature((String) values[i++]);
 		setSpent(Float.parseFloat(Integer.toString((Integer) values[i++])));
 		setStatus((String) values[i++]);
@@ -109,19 +123,21 @@ public class ASIGNLOG {
 		int i = 0;
 		set_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
+		setEmpno((String) values[i++]);
 		setSignature((String) values[i++]);
 		setSpent(Float.parseFloat(Integer.toString((Integer) values[i++])));
 		setStatus((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
-		
+
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getOrder1(), getPurpose() };
+		return new Object[] { getOrder1(), getEmpno(), getSignature(), getSpent(), getStatus() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getPurpose(), getCreated(), getUpdated() };
+		return new Object[] { get_id(), getOrder1(), getEmpno(), getSignature(), getSpent(), getStatus(), getCreated(),
+				getUpdated() };
 	}
 }
