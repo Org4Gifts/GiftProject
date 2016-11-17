@@ -133,6 +133,32 @@ public class DBManager {
 		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
 		return sb.toString();
 	}
+	
+	//這個專門用於phpMyAdmin
+	public String createTable2(String tableName, String[] keys, String[] types, String[] uniques) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("CREATE").append(" ").append("TABLE").append(" ").append(tableName).append(" ").append("(");
+		for (int i = 0; i < keys.length; i++) {
+			sb.append(keys[i]).append(" ").append(SQLCmd.getSqlType(types[i])).append(" ").append("NOT NULL");
+			if (i == 0) {
+				sb.append(" ").append("AUTO_INCREMENT");
+			}
+			for (String string : uniques) {
+				if (keys[i].equals(string)) {
+					sb.append(" ").append("UNIQUE");
+				}
+			}
+
+			sb.append(",");
+		}
+		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("NOT").append(" ").append("NULL")
+		.append(" ").append("DEFAULT").append("0").append(" ").append("CURRENT_TIMESTAMP").append(",")
+		.append("updated").append(" ").append("TIMESTAMP").append(" ").append("NOT").append(" ").append("NULL").append(" ")
+				.append("ON").append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ")
+				.append("DEFAULT").append(" ").append("CURRENT_TIMESTAMP").append(",");
+		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
+		return sb.toString();
+	}
 
 	public synchronized String insert(String tableName, String[] keys, Object[] values) {
 		StringBuilder sb = new StringBuilder();
@@ -154,6 +180,38 @@ public class DBManager {
 			for (int i = 0; i < values.length; i++) {
 				ps.setObject(i + 1, values[i]);
 			}
+			return "Insert " + (ps.executeUpdate() > 0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return "Insert error, " + e.getMessage();
+		}
+
+	}
+	
+	//這個用於phpMyAdmin
+	public synchronized String insert2(String tableName, String[] keys, Object[] values) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
+		for (String key : keys) {
+			if (key.equals("_id"))
+				continue;
+			sb.append(key).append(",");
+		}
+		sb.append("created").append(","); //增加的地方
+		sb.replace(sb.length() - 1, sb.length(), ")").append(" ").append("VALUES").append("(");
+		for (String key : keys) {
+			if (key.equals("_id"))
+				continue;
+			sb.append("?").append(",");
+		}
+		sb.append("?").append(",");//增加的地方
+		sb.replace(sb.length() - 1, sb.length(), ")");
+		try {
+			PreparedStatement ps = conn.prepareStatement(sb.toString());
+			for (int i = 0; i < values.length; i++) {
+				ps.setObject(i + 1, values[i]);
+			}
+			ps.setObject(values.length+1, "now()"); //增加的地方
 			return "Insert " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

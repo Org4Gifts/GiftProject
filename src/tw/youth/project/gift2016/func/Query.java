@@ -7,8 +7,10 @@ import tw.youth.project.gift2016.sql.adep.ADEP;
 import tw.youth.project.gift2016.sql.afab.AFAB;
 import tw.youth.project.gift2016.sql.ainventory.AINVENTORY;
 import tw.youth.project.gift2016.sql.aio.AIO;
+import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.aodr.ASIGNLOG;
 import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
@@ -24,7 +26,7 @@ public class Query {
 		this.user = user;
 	}
 
-	public ArrayList<APRESENT> getPresents(DBManager dao, String key, String value) {
+	public ArrayList<APRESENT> getApresents(DBManager dao, String key, String value) {
 		// 查詢禮品資料檔 value 不填入 即為全查詢
 		APRESENT apresent = new APRESENT();
 		ArrayList<Object[]> arr = dao.query(apresent.getTableName(), key, value, apresent.getLength());
@@ -37,7 +39,7 @@ public class Query {
 		return apresents;
 	}
 
-	public ArrayList<AFAB> getFabs(DBManager dao, String key, String value) {
+	public ArrayList<AFAB> getAfabs(DBManager dao, String key, String value) {
 		// 查詢廠區 value 不填入 即為全查詢
 		AFAB afab = new AFAB();
 		ArrayList<Object[]> arr = dao.query(afab.getTableName(), key, value, afab.getLength());
@@ -51,6 +53,7 @@ public class Query {
 	}
 
 	public ArrayList<ADEP> getAdeps(DBManager dao, String key, String value) {
+		// 查詢部門的訂單 value 不填入 即為全查詢
 		ADEP adep = new ADEP();
 		ArrayList<Object[]> arr = dao.query(adep.getTableName(), key, value, adep.getLength());
 		ArrayList<ADEP> adeps = new ArrayList<>();
@@ -63,7 +66,6 @@ public class Query {
 	}
 
 	public ArrayList<AODR> getAodrs(DBManager dao) {
-		// 資料不足
 		// 查詢部門內的訂單 value 不填入 即為全查詢
 		if (user.getAuthority() > 0) {
 			// 課長級簽核權限使用之功能
@@ -99,7 +101,7 @@ public class Query {
 	}
 
 	public ArrayList<AODRDT> getAodrdts(DBManager dao, String value) {
-		// 查詢訂單的訂單副檔 不填入 即為全查詢
+		// 查詢訂單的訂單副檔 value不填入 即為全查詢，但此方法因需搭配aodr，所以這裡是指定查詢
 		AODRDT aodrdt = new AODRDT();
 		ArrayList<Object[]> arr = dao.query(aodrdt.getTableName(), aodrdt.getKeys()[1], value, aodrdt.getLength());
 		ArrayList<AODRDT> aodrdts = new ArrayList<>();
@@ -109,6 +111,21 @@ public class Query {
 			aodrdt = new AODRDT();
 		}
 		return aodrdts;
+	}
+
+	public ArrayList<ASIGNLOG> getAsignlogs(DBManager dao, String value) {
+		// 查詢簽核人員 value不填入 即為全查詢，但此方法因需搭配aodr或aio，所以這裡是指定查詢
+		// AODR(一般訂單)跟AIO(調撥單)共用功能
+		ASIGNLOG asignlog = new ASIGNLOG();
+		ArrayList<Object[]> arr = dao.query(asignlog.getTableName(), asignlog.getKeys()[1], value,
+				asignlog.getLength());
+		ArrayList<ASIGNLOG> asignlogs = new ArrayList<>();
+		for (Object[] objects : arr) {
+			asignlog.setValuesFull(objects);
+			asignlogs.add(asignlog);
+			asignlog = new ASIGNLOG();
+		}
+		return asignlogs;
 	}
 
 	// 以下是核銷部門以上層級才能操作的功能
@@ -130,7 +147,7 @@ public class Query {
 
 	// 以下是庫存部門以上層級才能操作的功能
 
-	public ArrayList<AQTY> getAqty(DBManager dao, String key, String value) {
+	public ArrayList<AQTY> getAqtys(DBManager dao, String key, String value) {
 		// 查詢符合條件之多廠別進銷匯總檔 value 不填入 即為全查詢
 		if (user.getRole() > 1) {
 			AQTY aqty = new AQTY();
@@ -197,8 +214,20 @@ public class Query {
 	}
 
 	public ArrayList<AIO> getAios(DBManager dao, String key, String value) {
-		// 查詢符合條件之多個調撥單狀態 value 不填入 即為全查詢
-		if (user.getRole() > 2) {
+		// 查詢符合條件之多個調撥單狀態 value 不填入 即為全查詢 目前兩個權限的功能一樣
+		if (user.getRole() > 2 && user.getAuthority() > 0) {
+			// 管理部門以上單位以及課長級以上職位才可使用
+			AIO aio = new AIO();
+			ArrayList<AIO> aios = new ArrayList<>();
+			ArrayList<Object[]> arr = dao.query(aio.getTableName(), key, value, aio.getLength());
+			for (Object[] objects : arr) {
+				aio.setValuesFull(objects);
+				aios.add(aio);
+				aio = new AIO();
+			}
+			return aios.size() > 0 ? aios : null;
+		} else if (user.getRole() > 2) {
+			// 管理部門以上單位才可使用
 			AIO aio = new AIO();
 			ArrayList<AIO> aios = new ArrayList<>();
 			ArrayList<Object[]> arr = dao.query(aio.getTableName(), key, value, aio.getLength());
@@ -212,21 +241,34 @@ public class Query {
 		return null;
 	}
 
-	// 管理部門以上單位以及課長級以上職位才可使用
-	public ArrayList<AIO> getAios(DBManager dao) {
-		// 查詢所有調撥單狀態
-		if (user.getRole() > 2 && user.getAuthority() > 0) {
-			AIO aio = new AIO();
-			ArrayList<AIO> aios = new ArrayList<>();
-			ArrayList<Object[]> arr = dao.query(aio.getTableName(), aio.getKeys()[1], "", aio.getLength());
-			for (Object[] objects : arr) {
-				aio.setValuesFull(objects);
-				aios.add(aio);
-				aio = new AIO();
-			}
-			return aios.size() > 0 ? aios : null;
+	// public ArrayList<AIO> getAios(DBManager dao) {
+	// // 查詢所有調撥單狀態
+	// if (user.getRole() > 2 && user.getAuthority() > 0) {
+	// AIO aio = new AIO();
+	// ArrayList<AIO> aios = new ArrayList<>();
+	// ArrayList<Object[]> arr = dao.query(aio.getTableName(), aio.getKeys()[1],
+	// "", aio.getLength());
+	// for (Object[] objects : arr) {
+	// aio.setValuesFull(objects);
+	// aios.add(aio);
+	// aio = new AIO();
+	// }
+	// return aios.size() > 0 ? aios : null;
+	// }
+	// return null;
+	// }
+
+	public ArrayList<AIODT> getAiodts(DBManager dao, String value) {
+		// 查詢調撥單的副檔
+		AIODT aiodt = new AIODT();
+		ArrayList<AIODT> aiodts = new ArrayList<>();
+		ArrayList<Object[]> arr = dao.query(aiodt.getTableName(), aiodt.getKeys()[1], value, aiodt.getLength());
+		for (Object[] objects : arr) {
+			aiodt.setValuesFull(objects);
+			aiodts.add(aiodt);
+			aiodt = new AIODT();
 		}
-		return null;
+		return aiodts;
 	}
 
 }
