@@ -8,8 +8,10 @@ public class AIODT {
 
 	private String vhno = ""; // auto
 	// 單據編號
-	private String fgno = "";
-	// 禮品編號
+	private String inno = "";
+	// 轉入禮品編號
+	private String outno = "";
+	// 轉入禮品編號
 	private Integer qty = 0;
 	// 進銷數量
 	private Float prc = 0.0f; // auto
@@ -21,10 +23,10 @@ public class AIODT {
 	private Date created;
 	private Date updated;
 
-	private String[] keys = { "_id", "vhno", "fgno", "qty", "prc", "order1", "note1" };
+	private String[] keys = { "_id", "vhno", "inno", "outno", "qty", "prc", "order1", "note1" };
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
-			fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(), prc.getClass().getSimpleName(),
-			order1.getClass().getSimpleName(), note1.getClass().getSimpleName() };
+			inno.getClass().getSimpleName(), outno.getClass().getSimpleName(), qty.getClass().getSimpleName(),
+			prc.getClass().getSimpleName(), order1.getClass().getSimpleName(), note1.getClass().getSimpleName() };
 	private String[] uniques = { "vhno" };
 
 	public String getTableName() {
@@ -64,12 +66,20 @@ public class AIODT {
 		this.vhno = vhno;
 	}
 
-	public String getFgno() {
-		return fgno;
+	public String getInno() {
+		return inno;
 	}
 
-	public void setFgno(String fgno) {
-		this.fgno = fgno;
+	public void setInno(String inno) {
+		this.inno = inno;
+	}
+
+	public String getOutno() {
+		return outno;
+	}
+
+	public void setOutno(String outno) {
+		this.outno = outno;
 	}
 
 	public Integer getQty() {
@@ -123,7 +133,7 @@ public class AIODT {
 	public void setValues(Object[] values) {
 		int i = 0;
 		setVhno((String) values[i++]);
-		setFgno((String) values[i++]);
+		setInno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
 		setOrder1((String) values[i++]);
@@ -134,7 +144,7 @@ public class AIODT {
 		int i = 0;
 		set_id((Integer) values[i++]);
 		setVhno((String) values[i++]);
-		setFgno((String) values[i++]);
+		setInno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
 		setOrder1((String) values[i++]);
@@ -144,11 +154,11 @@ public class AIODT {
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getVhno(), getFgno(), getQty(), getPrc(), getOrder1(), getNote1() };
+		return new Object[] { getVhno(), getInno(), getQty(), getPrc(), getOrder1(), getNote1() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getVhno(), getFgno(), getQty(), getPrc(), getOrder1(), getNote1(), getCreated(),
+		return new Object[] { get_id(), getVhno(), getInno(), getQty(), getPrc(), getOrder1(), getNote1(), getCreated(),
 				getUpdated() };
 	}
 

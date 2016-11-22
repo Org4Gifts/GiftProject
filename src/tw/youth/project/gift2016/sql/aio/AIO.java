@@ -9,13 +9,13 @@ public class AIO {
 	private String vhno = "";
 	// 單據編號
 	private String fno = "";
-	// 廠別
+	// 轉出廠別
 	private Date vhdt = null;
 	// 單據日期
 	private Date vrdt = null;
 	// 需求日期
 	private String ano = "";
-	// 單位編號
+	// 轉入廠別
 	private Character dc = 'D'; // ?
 	// 進/銷
 	private Float tamt = 0.0f;
