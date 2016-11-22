@@ -1,6 +1,6 @@
 package tw.youth.project.gift2016.sql.afab;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class AFAB {
 	// 廠別基本檔
@@ -10,8 +10,8 @@ public class AFAB {
 	// 廠別代碼
 	private String fname = "";
 	// 廠別名稱
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	private String[] keys = { "_id", "fno", "fname" };
 	private String[] types = { _id.getClass().getSimpleName(), fno.getClass().getSimpleName(),
@@ -63,19 +63,19 @@ public class AFAB {
 		this.fname = fname;
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 
@@ -90,8 +90,8 @@ public class AFAB {
 		set_id((Integer) values[i++]);
 		setFno((String) values[i++]);
 		setFame((String) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {

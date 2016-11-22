@@ -118,6 +118,10 @@ public class DBManager {
 			if (i == 0) {
 				sb.append(" ").append("AUTO_INCREMENT");
 			}
+			if (types[i].equals("Date")) {
+				sb.append(" ").append("DEFAULT").append(" ").append("0");
+			}
+
 			for (String string : uniques) {
 				if (keys[i].equals(string)) {
 					sb.append(" ").append("UNIQUE");
@@ -126,15 +130,15 @@ public class DBManager {
 
 			sb.append(",");
 		}
-		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("DEFAULT").append(" ")
-				.append("CURRENT_TIMESTAMP").append(",").append("updated").append(" ").append("TIMESTAMP").append(" ")
+		sb.append("created").append(" ").append("DATETIME").append(" ").append("DEFAULT").append(" ")
+				.append("CURRENT_TIMESTAMP").append(",").append("updated").append(" ").append("DATETIME").append(" ")
 				.append("ON").append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ")
 				.append("DEFAULT").append(" ").append("CURRENT_TIMESTAMP").append(",");
 		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
 		return sb.toString();
 	}
-	
-	//這個專門用於phpMyAdmin
+
+	// 這個專門用於phpMyAdmin
 	public String createTable2(String tableName, String[] keys, String[] types, String[] uniques) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("CREATE").append(" ").append("TABLE").append(" ").append(tableName).append(" ").append("(");
@@ -143,6 +147,9 @@ public class DBManager {
 			if (i == 0) {
 				sb.append(" ").append("AUTO_INCREMENT");
 			}
+			if (types[i].equals("Date")) {
+				sb.append(" ").append("DEFAULT").append(" ").append("0");
+			}
 			for (String string : uniques) {
 				if (keys[i].equals(string)) {
 					sb.append(" ").append("UNIQUE");
@@ -151,11 +158,11 @@ public class DBManager {
 
 			sb.append(",");
 		}
-		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("NOT").append(" ").append("NULL")
-		.append(" ").append("DEFAULT").append(" ").append("0").append(",")
-		.append("updated").append(" ").append("TIMESTAMP").append(" ").append("NOT").append(" ").append("NULL").append(" ")
-				.append("ON").append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ")
-				.append("DEFAULT").append(" ").append("0").append(",");
+		sb.append("created").append(" ").append("DATETIME").append(" ").append("NOT").append(" ").append("NULL")
+				.append(" ").append("DEFAULT").append(" ").append("0").append(",").append("updated").append(" ")
+				.append("DATETIME").append(" ").append("NOT").append(" ").append("NULL").append(" ").append("ON")
+				.append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ").append("DEFAULT")
+				.append(" ").append("0").append(",");
 		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
 		return sb.toString();
 	}
@@ -187,8 +194,8 @@ public class DBManager {
 		}
 
 	}
-	
-	//這個用於phpMyAdmin
+
+	// 這個用於phpMyAdmin
 	public synchronized String insert2(String tableName, String[] keys, Object[] values) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
@@ -197,21 +204,21 @@ public class DBManager {
 				continue;
 			sb.append(key).append(",");
 		}
-		sb.append("created").append(","); //增加的地方
+		sb.append("created").append(","); // 增加的地方
 		sb.replace(sb.length() - 1, sb.length(), ")").append(" ").append("VALUES").append("(");
 		for (String key : keys) {
 			if (key.equals("_id"))
 				continue;
 			sb.append("?").append(",");
 		}
-		sb.append("?").append(",");//增加的地方
+		sb.append("?").append(",");// 增加的地方
 		sb.replace(sb.length() - 1, sb.length(), ")");
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
 			for (int i = 0; i < values.length; i++) {
 				ps.setObject(i + 1, values[i]);
 			}
-			ps.setObject(values.length+1, "now()"); //增加的地方
+			ps.setObject(values.length + 1, "now()"); // 增加的地方
 			return "Insert " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -288,10 +295,10 @@ public class DBManager {
 
 	}
 
-//	public <T> Object query(T tableName) {
-//
-//		return null;
-//	}
+	// public <T> Object query(T tableName) {
+	//
+	// return null;
+	// }
 
 	public synchronized boolean close() {
 		try {

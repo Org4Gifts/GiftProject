@@ -157,7 +157,7 @@ public class TestSQL {
 
 	@Test
 	public void testCreateTables() { // 測試OK
-		testDropTables();
+//		testDropTables();
 
 		System.out.println("testCreateTable : " + new Date(System.currentTimeMillis()).toString());
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
@@ -296,7 +296,7 @@ public class TestSQL {
 		// AEMP
 		System.out.println("AEMP");
 		AEMP aemp = new AEMP();
-		Object[] objs1 = { "K123456", "odise", "123@com", "eng", 0, "132-5979", "K123400", "DEP" };
+		Object[] objs1 = { "K123456", "odise", "123@com", "eng", 0, "132-5979", "K123400", "DP" };
 		aemp.setValues(objs1);
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
 		arr = dao.query(aemp.getTableName(), "empno", "K", aemp.getLength());
@@ -321,22 +321,22 @@ public class TestSQL {
 		}
 		System.out.println(dao.drop(aemp.getTableName(), "empno", "K123456") + "\n");
 
-		objs1 = new Object[] { "K123456", "odise1", "123@com", "eng", 0, "132-5979", "K123400", "aaa" };
+		objs1 = new Object[] { "K123456", "odise1", "123@com", "eng", 0, "132-5979", "K123400", "aa" };
 		aemp.setValues(objs1);
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123457", "odise2", "124@com", "eng", 1, "132-5979", "K123400", "aaa" };
+		objs1 = new Object[] { "K123457", "odise2", "124@com", "eng", 1, "132-5979", "K123400", "aa" };
 		aemp.setValues(objs1);
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123458", "odise3", "125@com", "eng", 2, "132-5979", "K123400", "aab" };
+		objs1 = new Object[] { "K123458", "odise3", "125@com", "eng", 2, "132-5979", "K123400", "ab" };
 		aemp.setValues(objs1);
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123459", "odise4", "126@com", "eng", 3, "132-5979", "K123400", "aac" };
+		objs1 = new Object[] { "K123459", "odise4", "126@com", "eng", 3, "132-5979", "K123400", "ac" };
 		aemp.setValues(objs1);
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123460", "odise5", "127@com", "eng", 4, "132-5979", "K123400", "aad" };
+		objs1 = new Object[] { "K123460", "odise5", "127@com", "eng", 4, "132-5979", "K123400", "ad" };
 		aemp.setValues(objs1);
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123461", "odise6", "128@com", "enc", 5, "132-5979", "K123400", "aae" };
+		objs1 = new Object[] { "K123461", "odise6", "128@com", "enc", 5, "132-5979", "K123400", "ae" };
 		aemp.setValues(objs1);
 		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
 

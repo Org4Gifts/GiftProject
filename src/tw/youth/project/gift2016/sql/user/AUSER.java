@@ -3,7 +3,7 @@ package tw.youth.project.gift2016.sql.user;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class AUSER {
 
@@ -11,12 +11,13 @@ public class AUSER {
 	private String empno = "";
 	private String user = "";
 	private String pass = "";
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	
 	private Short authority;
 	private String dno;
+	private String fno;
 	private Short role;
 
 	private String[] keys = { "_id", "empno", "user", "pass" };
@@ -104,19 +105,19 @@ public class AUSER {
 		this.pass = pass;
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 	
@@ -134,6 +135,14 @@ public class AUSER {
 
 	public void setDno(String dno) {
 		this.dno = dno;
+	}
+
+	public String getFno() {
+		return fno;
+	}
+
+	public void setFno(String fno) {
+		this.fno = fno;
 	}
 
 	public Short getRole() {
@@ -157,8 +166,8 @@ public class AUSER {
 		setEmpno((String) values[i++]);
 		setUser((String) values[i++]);
 		setPass((String) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {

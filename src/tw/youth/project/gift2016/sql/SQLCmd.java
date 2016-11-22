@@ -61,8 +61,8 @@ public class SQLCmd {
 		case "Double":
 			sqlType = "DOUBLE";
 			break;
-		case "Timestamp":
-			sqlType ="TIMESTAMP";
+		case "Date":
+			sqlType ="DATETIME";
 		}
 		return sqlType;
 	}

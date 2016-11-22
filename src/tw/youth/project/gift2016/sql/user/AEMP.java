@@ -1,6 +1,6 @@
 package tw.youth.project.gift2016.sql.user;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class AEMP {
 	// 員工基本資料檔
@@ -22,8 +22,8 @@ public class AEMP {
 	// 直屬主管工號
 	private String dno = "";
 	// 部門代碼
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	private String[] keys = { "_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno" };
 	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
@@ -97,8 +97,8 @@ public class AEMP {
 		return authority;
 	}
 
-	public void setAuthority(Short authority) {
-		this.authority = authority;
+	public void setAuthority(Integer authority) {
+		this.authority = Short.parseShort(Integer.toString(authority));
 	}
 
 	public String getExt() {
@@ -125,19 +125,19 @@ public class AEMP {
 		this.dno = dno;
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 
@@ -147,7 +147,7 @@ public class AEMP {
 		setEname((String) values[i++]);
 		setEmail((String) values[i++]);
 		setJob((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);
 		setDno((String) values[i++]);
@@ -160,12 +160,12 @@ public class AEMP {
 		setEname((String) values[i++]);
 		setEmail((String) values[i++]);
 		setJob((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);
 		setDno((String) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {

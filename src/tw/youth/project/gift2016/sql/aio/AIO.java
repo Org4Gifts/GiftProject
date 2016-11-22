@@ -1,6 +1,6 @@
 package tw.youth.project.gift2016.sql.aio;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class AIO {
 	// 多廠別進/銷主檔
@@ -10,9 +10,9 @@ public class AIO {
 	// 單據編號
 	private String fno = "";
 	// 廠別
-	private Timestamp vhdt = null;
+	private Date vhdt = null;
 	// 單據日期
-	private Timestamp vrdt = null;
+	private Date vrdt = null;
 	// 需求日期
 	private String ano = "";
 	// 單位編號
@@ -22,8 +22,8 @@ public class AIO {
 	// 進銷金額
 	private String memo = "";
 	// 調撥理由
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	private String[] keys = { "_id", "vhno", "fno", "vhdt", "vrdt", "ano", "dc", "tamt", "memo" };
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
@@ -77,20 +77,20 @@ public class AIO {
 		this.fno = fno;
 	}
 
-	public Timestamp getVhdt() {
+	public Date getVhdt() {
 		return vhdt;
 	}
 
-	public void setVhdt(String vhdt) {
-		this.vhdt = Timestamp.valueOf(vhdt);
+	public void setVhdt(Date vhdt) {
+		this.vhdt = vhdt;
 	}
 
-	public Timestamp getVrdt() {
+	public Date getVrdt() {
 		return vrdt;
 	}
 
-	public void setVrdt(String vrdt) {
-		this.vrdt = Timestamp.valueOf(vrdt);
+	public void setVrdt(Date vrdt) {
+		this.vrdt = vrdt;
 	}
 
 	public String getAno() {
@@ -125,19 +125,19 @@ public class AIO {
 		this.memo = memo;
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 
@@ -145,8 +145,8 @@ public class AIO {
 		int i = 0;
 		setVhno((String) values[i++]);
 		setFno((String) values[i++]);
-		setVhdt((String) values[i++]);
-		setVrdt((String) values[i++]);
+		setVhdt((Date) values[i++]);
+		setVrdt((Date) values[i++]);
 		setAno((String) values[i++]);
 		setDc((String) values[i++]);
 		setTamt((Float) values[i++]);
@@ -158,14 +158,14 @@ public class AIO {
 		set_id((Integer) values[i++]);
 		setVhno((String) values[i++]);
 		setFno((String) values[i++]);
-		setVhdt((String) values[i++]);
-		setVrdt((String) values[i++]);
+		setVhdt((Date) values[i++]);
+		setVrdt((Date) values[i++]);
 		setAno((String) values[i++]);
 		setDc((String) values[i++]);
 		setTamt((Float) values[i++]);
 		setMemo((String) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {

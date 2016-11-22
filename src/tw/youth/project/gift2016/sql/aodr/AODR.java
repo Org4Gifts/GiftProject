@@ -1,6 +1,6 @@
 package tw.youth.project.gift2016.sql.aodr;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class AODR {
 	// 訂單主檔
@@ -30,8 +30,8 @@ public class AODR {
 	// 訂單最高簽核層級
 	private String purpose = "";
 	// 需求目的
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	private String[] keys = { "_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
 			"purpose" };
@@ -138,23 +138,23 @@ public class AODR {
 		return authority;
 	}
 
-	public void setAuthority(Short authority) {
-		this.authority = authority;
+	public void setAuthority(Integer authority) {
+		this.authority = Short.parseShort(Integer.toString(authority));
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 
@@ -167,7 +167,7 @@ public class AODR {
 		setDno((String) values[i++]);
 		setTamt((Long) values[i++]);
 		setStatus((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setPurpose((String) values[i++]);
 	}
 
@@ -181,10 +181,10 @@ public class AODR {
 		setDno((String) values[i++]);
 		setTamt((Long) values[i++]);
 		setStatus((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setPurpose((String) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {

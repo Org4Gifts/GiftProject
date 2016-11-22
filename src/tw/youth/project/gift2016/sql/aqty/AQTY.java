@@ -1,6 +1,6 @@
 package tw.youth.project.gift2016.sql.aqty;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class AQTY {
 	// 多廠別進/銷彙總檔
@@ -18,8 +18,8 @@ public class AQTY {
 	// 本月進貨
 	private Integer udqty = 0; // auto
 	// 本月銷貨
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	private String[] keys = { "_id", "yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
 	private String[] types = { _id.getClass().getSimpleName(), yymm.getClass().getSimpleName(),
@@ -104,19 +104,19 @@ public class AQTY {
 		this.udqty = udqty;
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 
@@ -139,8 +139,8 @@ public class AQTY {
 		setPmqty((Integer) values[i++]);
 		setInqty((Integer) values[i++]);
 		setUdqty((Integer) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {

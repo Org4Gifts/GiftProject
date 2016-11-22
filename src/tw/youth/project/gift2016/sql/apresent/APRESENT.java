@@ -1,6 +1,6 @@
 package tw.youth.project.gift2016.sql.apresent;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class APRESENT {
 	// 禮品基本檔
@@ -26,8 +26,8 @@ public class APRESENT {
 	// 安全庫存量
 	private Integer iqty = 0; // auto
 	// 即時庫存量
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	private String[] keys = { "_id", "fgno", "fgname", "prc", "grade", "authority", "fno", "status", "note1", "fqty",
 			"iqty" };
@@ -102,8 +102,8 @@ public class APRESENT {
 		return authority;
 	}
 
-	public void setAuthority(Short authority) {
-		this.authority = authority;
+	public void setAuthority(Integer authority) {
+		this.authority = Short.parseShort(Integer.toString(authority));
 	}
 
 	public String getFno() {
@@ -146,19 +146,19 @@ public class APRESENT {
 		this.iqty = iqty;
 	}
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 
@@ -168,7 +168,7 @@ public class APRESENT {
 		setFgname((String) values[i++]);
 		setPrc((Float) values[i++]);
 		setGrade((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setFno((String) values[i++]);
 		setStatus((String) values[i++]);
 		setNote1((String) values[i++]);
@@ -183,14 +183,14 @@ public class APRESENT {
 		setFgname((String) values[i++]);
 		setPrc((Float) values[i++]);
 		setGrade((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setFno((String) values[i++]);
 		setStatus((String) values[i++]);
 		setNote1((String) values[i++]);
 		setFqty((Integer) values[i++]);
 		setIqty((Integer) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {

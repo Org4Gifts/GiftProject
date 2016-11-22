@@ -1,6 +1,6 @@
 package tw.youth.project.gift2016.sql.aodr;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class AODRDT {
 	// 訂單副檔
@@ -24,8 +24,8 @@ public class AODRDT {
 	// 備註
 	// private Integer oqty = 0; // auto
 	// // 已出貨量
-	private Timestamp created;
-	private Timestamp updated;
+	private Date created;
+	private Date updated;
 
 	private String[] keys = { "_id", "order1", "comname", "pername", "authority", "fgno", "qty", "prc", "note1",
 			"oqty" };
@@ -137,19 +137,19 @@ public class AODRDT {
 	// this.oqty = oqty;
 	// }
 
-	public Timestamp getCreated() {
+	public Date getCreated() {
 		return created;
 	}
 
-	public void setCreated(Timestamp created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
 
-	public Timestamp getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 
@@ -178,8 +178,8 @@ public class AODRDT {
 		setPrc((Float) values[i++]);
 		setNote1((String) values[i++]);
 		// setOqty((Integer) values[i++]);
-		setCreated((Timestamp) values[i++]);
-		setUpdated((Timestamp) values[i++]);
+		setCreated((Date) values[i++]);
+		setUpdated((Date) values[i++]);
 	}
 
 	public Object[] getValues() {
