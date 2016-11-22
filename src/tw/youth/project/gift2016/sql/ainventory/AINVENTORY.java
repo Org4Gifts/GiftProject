@@ -10,7 +10,7 @@ public class AINVENTORY {
 	// 盤點單號
 	private String fno = "";
 	// 儲存廠別
-	private Date yymm = null;
+	private Integer yymm = 10511;
 	// 資料年月
 	private String fgno = "";
 	// 禮品編號
@@ -72,11 +72,11 @@ public class AINVENTORY {
 		this.fno = fno;
 	}
 
-	public Date getYymm() {
+	public Integer getYymm() {
 		return yymm;
 	}
 
-	public void setYymm(Date yymm) {
+	public void setYymm(Integer yymm) {
 		this.yymm = yymm;
 	}
 
