@@ -7,7 +7,7 @@ public class AQTY {
 	private Integer _id = 0;
 
 	private Integer yymm = 10511; // auto
-	// 資料年月
+	// 資料年月 紀錄型態如同初始值 所以使用int
 	private String fno = ""; // auto
 	// 廠別
 	private String fgno = ""; // auto
