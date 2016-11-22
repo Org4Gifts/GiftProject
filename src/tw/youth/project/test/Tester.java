@@ -5,10 +5,11 @@ import static org.junit.Assert.*;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
 import tw.youth.project.gift2016.sql.user.AUSER;
+import org.junit.Test;
 
-public class Test {
+public class Tester {
 
-	@org.junit.Test
+	// @Test
 	public void test() {
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
 		dao.starup();
@@ -20,6 +21,11 @@ public class Test {
 		user.setValues(objs);
 		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
 
+	}
+
+	@Test
+	public void tests() {
+		
 	}
 
 }

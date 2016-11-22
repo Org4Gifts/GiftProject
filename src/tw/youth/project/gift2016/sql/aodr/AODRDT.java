@@ -8,6 +8,12 @@ public class AODRDT {
 
 	private String order1 = "";
 	// 訂單編號
+	private String comname = "";
+	// 拜訪公司名稱
+	private String pername = "";
+	// 拜訪對象
+	private Short authority = 0;
+	// 拜訪職稱類別
 	private String fgno = "";
 	// 產品代號
 	private Integer qty = 0;
@@ -16,15 +22,18 @@ public class AODRDT {
 	// 產品單價
 	private String note1 = "";
 	// 備註
-	private Integer oqty = 0; // auto
-	// 已出貨量
+	// private Integer oqty = 0; // auto
+	// // 已出貨量
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "order1", "fgno", "qty", "prc", "note1", "oqty" };
+	private String[] keys = { "_id", "order1", "comname", "pername", "authority", "fgno", "qty", "prc", "note1",
+			"oqty" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(), prc.getClass().getSimpleName(),
-			note1.getClass().getSimpleName(), oqty.getClass().getSimpleName() };
+			comname.getClass().getSimpleName(), pername.getClass().getSimpleName(),
+			authority.getClass().getSimpleName(), fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(),
+			prc.getClass().getSimpleName(), note1.getClass()
+					.getSimpleName()/* , oqty.getClass().getSimpleName() */ };
 	private String[] uniques = { "" };
 
 	public String getTableName() {
@@ -64,6 +73,30 @@ public class AODRDT {
 		this.order1 = order1;
 	}
 
+	public String getComname() {
+		return comname;
+	}
+
+	public void setComname(String comname) {
+		this.comname = comname;
+	}
+
+	public String getPername() {
+		return pername;
+	}
+
+	public void setPername(String pername) {
+		this.pername = pername;
+	}
+
+	public Short getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Short authority) {
+		this.authority = authority;
+	}
+
 	public String getFgno() {
 		return fgno;
 	}
@@ -96,13 +129,13 @@ public class AODRDT {
 		this.note1 = note1;
 	}
 
-	public Integer getOqty() {
-		return oqty;
-	}
-
-	public void setOqty(Integer oqty) {
-		this.oqty = oqty;
-	}
+	// public Integer getOqty() {
+	// return oqty;
+	// }
+	//
+	// public void setOqty(Integer oqty) {
+	// this.oqty = oqty;
+	// }
 
 	public Timestamp getCreated() {
 		return created;
@@ -123,33 +156,40 @@ public class AODRDT {
 	public void setValues(Object[] values) {
 		int i = 0;
 		setOrder1((String) values[i++]);
+		setComname((String) values[i++]);
+		setPername((String) values[i++]);
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setFgno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
 		setNote1((String) values[i++]);
-		setOqty((Integer) values[i++]);
+		// setOqty((Integer) values[i++]);
 	}
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
 		set_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
+		setComname((String) values[i++]);
+		setPername((String) values[i++]);
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setFgno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
 		setNote1((String) values[i++]);
-		setOqty((Integer) values[i++]);
+		// setOqty((Integer) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getOrder1(), getFgno(), getQty(), getPrc(), getNote1(), getOqty() };
+		return new Object[] { getOrder1(), getComname(), getPername(), getAuthority(), getFgno(), getQty(), getPrc(),
+				getNote1()/* , getOqty() */ };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getFgno(), getQty(), getPrc(), getNote1(), getOqty(), getCreated(),
-				getUpdated() };
+		return new Object[] { get_id(), getOrder1(), getComname(), getPername(), getAuthority(), getFgno(), getQty(),
+				getPrc(), getNote1()/* , getOqty() */, getCreated(), getUpdated() };
 	}
 
 }

@@ -168,70 +168,70 @@ public class TestSQL {
 			AUSER user = new AUSER();// 上面已測過 僅列出
 			table = dao.createTable(user.getTableName(), user.getKeys(), user.getTypes(), user.getUniques());
 			System.out.println(table);
-//			System.out.println(user.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(user.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AEMP aemp = new AEMP();
 			table = dao.createTable(aemp.getTableName(), aemp.getKeys(), aemp.getTypes(), aemp.getUniques());
 			System.out.println(table);
-//			System.out.println(aemp.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(aemp.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AVDR avdr = new AVDR();
 			table = dao.createTable(avdr.getTableName(), avdr.getKeys(), avdr.getTypes(), avdr.getUniques());
 			System.out.println(table);
-//			System.out.println(avdr.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(avdr.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AQTY aqty = new AQTY();
 			table = dao.createTable(aqty.getTableName(), aqty.getKeys(), aqty.getTypes(), aqty.getUniques());
 			System.out.println(table);
-//			System.out.println(aqty.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(aqty.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			APRESENT apresent = new APRESENT();
 			table = dao.createTable(apresent.getTableName(), apresent.getKeys(), apresent.getTypes(),
 					apresent.getUniques());
 			System.out.println(table);
-//			System.out.println(apresent.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(apresent.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AODR aodr = new AODR();
 			table = dao.createTable(aodr.getTableName(), aodr.getKeys(), aodr.getTypes(), aodr.getUniques());
 			System.out.println(table);
-//			System.out.println(aodr.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(aodr.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AODRDT aodrdt = new AODRDT();
 			table = dao.createTable(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getTypes(), aodrdt.getUniques());
 			System.out.println(table);
-//			System.out.println(aodrdt.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(aodrdt.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			ASIGNLOG asignlog = new ASIGNLOG();
 			table = dao.createTable(asignlog.getTableName(), asignlog.getKeys(), asignlog.getTypes(),
 					asignlog.getUniques());
 			System.out.println(table);
-//			System.out.println(asignlog.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(asignlog.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AIO aio = new AIO();
 			table = dao.createTable(aio.getTableName(), aio.getKeys(), aio.getTypes(), aio.getUniques());
 			System.out.println(table);
-//			System.out.println(aio.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(aio.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AIODT aiodt = new AIODT();
 			table = dao.createTable(aiodt.getTableName(), aiodt.getKeys(), aiodt.getTypes(), aiodt.getUniques());
 			System.out.println(table);
-//			System.out.println(aiodt.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(aiodt.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AINVENTORY ainventory = new AINVENTORY();
 			table = dao.createTable(ainventory.getTableName(), ainventory.getKeys(), ainventory.getTypes(),
 					ainventory.getUniques());
 			System.out.println(table);
-//			System.out.println(ainventory.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(ainventory.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			AFAB afab = new AFAB();
 			table = dao.createTable(afab.getTableName(), afab.getKeys(), afab.getTypes(), afab.getUniques());
 			System.out.println(table);
-//			System.out.println(afab.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(afab.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 
 			ADEP adep = new ADEP();
 			table = dao.createTable(adep.getTableName(), adep.getKeys(), adep.getTypes(), adep.getUniques());
 			System.out.println(table);
-//			System.out.println(adep.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			System.out.println(adep.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
@@ -239,7 +239,7 @@ public class TestSQL {
 
 	}
 
-//	@Test
+	@Test
 	public void testInsertQueryUpdateDropTableColumns() { // 測試OK
 		System.out.println("testInsertUpdateDropTables : " + new Date(System.currentTimeMillis()).toString());
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
@@ -402,7 +402,7 @@ public class TestSQL {
 		// APRESENT
 		System.out.println("APRESENT");
 		APRESENT apresent = new APRESENT();
-		Object[] objs4 = { "P001", "筆記本", 10.0f, 1, 1, "可申請", "無備註", 100, 150 };
+		Object[] objs4 = { "P001", "筆記本", 10.0f, "E", 1, "可申請", "無備註", 100, 150 };
 		apresent.setValues(objs4);
 		System.out.println(dao.insert(apresent.getTableName(), apresent.getKeys(), apresent.getValues()));
 		arr = dao.query(apresent.getTableName(), "fgname", "筆", apresent.getLength());

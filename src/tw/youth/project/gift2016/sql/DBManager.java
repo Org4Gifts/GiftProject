@@ -152,10 +152,10 @@ public class DBManager {
 			sb.append(",");
 		}
 		sb.append("created").append(" ").append("TIMESTAMP").append(" ").append("NOT").append(" ").append("NULL")
-		.append(" ").append("DEFAULT").append("0").append(" ").append("CURRENT_TIMESTAMP").append(",")
+		.append(" ").append("DEFAULT").append(" ").append("0").append(",")
 		.append("updated").append(" ").append("TIMESTAMP").append(" ").append("NOT").append(" ").append("NULL").append(" ")
 				.append("ON").append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ")
-				.append("DEFAULT").append(" ").append("CURRENT_TIMESTAMP").append(",");
+				.append("DEFAULT").append(" ").append("0").append(",");
 		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
 		return sb.toString();
 	}

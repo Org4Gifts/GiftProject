@@ -115,7 +115,7 @@ public class ASIGNLOG {
 		setOrder1((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setSignature((String) values[i++]);
-		setSpent(Float.parseFloat(Integer.toString((Integer) values[i++])));
+		setSpent((Float) values[i++]);
 		setStatus((String) values[i++]);
 	}
 
@@ -125,7 +125,7 @@ public class ASIGNLOG {
 		setOrder1((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setSignature((String) values[i++]);
-		setSpent(Float.parseFloat(Integer.toString((Integer) values[i++])));
+		setSpent((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);

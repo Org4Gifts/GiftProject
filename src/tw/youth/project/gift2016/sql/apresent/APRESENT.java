@@ -12,12 +12,14 @@ public class APRESENT {
 	// 禮品名稱
 	private Float prc = 0.0f;
 	// 禮品單價
-	private Short grade = 0;
-	// 禮品等級
-	private Integer authority = 0;
+	private Character grade = 'E';
+	// 禮品等級 S A B C D E 最高級S 最低級E 沒有實際控制的功能，僅供簽核人員識別
+	private Short authority = 0;
 	// 申請層級
-	private String status = "";
-	// 申請狀態
+	private String fno = "";
+	// 廠區代碼
+	private Character status = 'N';
+	// 申請狀態 Y:可申請 N:不可申請
 	private String note1 = "";
 	// 備註
 	private Integer fqty = 0;
@@ -27,12 +29,13 @@ public class APRESENT {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "fgno", "fgname", "prc", "grade", "authority", "status", "note1", "fqty", "iqty" };
+	private String[] keys = { "_id", "fgno", "fgname", "prc", "grade", "authority", "fno", "status", "note1", "fqty",
+			"iqty" };
 	private String[] types = { _id.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
 			fgname.getClass().getSimpleName(), prc.getClass().getSimpleName(), grade.getClass().getSimpleName(),
-			authority.getClass().getSimpleName(), status.getClass().getSimpleName(), note1.getClass().getSimpleName(),
-			fqty.getClass().getSimpleName(), iqty.getClass().getSimpleName() };
-	private String[] uniques = { "fgno", "fgname" };
+			authority.getClass().getSimpleName(), fno.getClass().getSimpleName(), status.getClass().getSimpleName(),
+			note1.getClass().getSimpleName(), fqty.getClass().getSimpleName(), iqty.getClass().getSimpleName() };
+	private String[] uniques = { "fgno" };
 
 	public String getTableName() {
 		return getClass().getSimpleName();
@@ -87,28 +90,36 @@ public class APRESENT {
 		this.prc = prc;
 	}
 
-	public Short getGrade() {
+	public Character getGrade() {
 		return grade;
 	}
 
-	public void setGrade(Short grade) {
-		this.grade = grade;
+	public void setGrade(String grade) {
+		this.grade = grade.charAt(0);
 	}
 
-	public Integer getAuthority() {
+	public Short getAuthority() {
 		return authority;
 	}
 
-	public void setAuthority(Integer authority) {
+	public void setAuthority(Short authority) {
 		this.authority = authority;
 	}
 
-	public String getStatus() {
+	public String getFno() {
+		return fno;
+	}
+
+	public void setFno(String fno) {
+		this.fno = fno;
+	}
+
+	public Character getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
-		this.status = status;
+		this.status = status.charAt(0);
 	}
 
 	public String getNote1() {
@@ -156,8 +167,9 @@ public class APRESENT {
 		setFgno((String) values[i++]);
 		setFgname((String) values[i++]);
 		setPrc((Float) values[i++]);
-		setGrade(Short.parseShort(Integer.toString((Integer) values[i++])));
-		setAuthority((Integer) values[i++]);
+		setGrade((String) values[i++]);
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setFno((String) values[i++]);
 		setStatus((String) values[i++]);
 		setNote1((String) values[i++]);
 		setFqty((Integer) values[i++]);
@@ -170,8 +182,9 @@ public class APRESENT {
 		setFgno((String) values[i++]);
 		setFgname((String) values[i++]);
 		setPrc((Float) values[i++]);
-		setGrade(Short.parseShort(Integer.toString((Integer) values[i++])));
-		setAuthority((Integer) values[i++]);
+		setGrade((String) values[i++]);
+		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setFno((String) values[i++]);
 		setStatus((String) values[i++]);
 		setNote1((String) values[i++]);
 		setFqty((Integer) values[i++]);

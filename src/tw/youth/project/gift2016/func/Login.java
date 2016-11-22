@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.func;
 
 import java.util.ArrayList;
 
+import tw.youth.project.gift2016.consts.ConstValue;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.adep.ADEP;
 import tw.youth.project.gift2016.sql.user.AEMP;
@@ -10,14 +11,6 @@ import tw.youth.project.gift2016.sql.user.AUSER;
 public class Login {
 	private AUSER user;
 	private boolean login = false;
-
-	public final String SUCCESS = "登入成功";
-	public final String FAILURE = "登入失敗";
-	public final String NOT_LOGIN = "您尚未登入";
-	public final String OLD_PASS_ERROR = "舊密碼不正確，請重新操作";
-	public final String NEW_PASS_ERROR = "新密碼驗證失敗，請重新操作";
-	public final String SEND_EMAIL_SUCCESS = "已發送電子郵件至您的信箱 ";
-	public final String CHECK_EMAIL_FAILURE = "查無此電子郵件，請確認";
 
 	public Login(DBManager dao, String username, String passwd) {
 		// 登入建構子 先查詢使用者帳號和密碼
@@ -56,7 +49,7 @@ public class Login {
 
 	public String checkLogin() {
 		// 回傳是否登入成功
-		return login ? SUCCESS : FAILURE;
+		return login ? ConstValue.LOGIN_SUCCESS : ConstValue.LOGIN_FAILURE;
 	}
 
 	public AUSER getUser() {
@@ -67,16 +60,16 @@ public class Login {
 	public String changPassword(DBManager dao, String oldPasswd, String newPasswd1, String newPasswd2) {
 		// 修改密碼
 		if (!login)
-			return NOT_LOGIN;
+			return ConstValue.LOGIN_NOT_LOGIN;
 		if (user.toMD5Pass(oldPasswd).equals(user.getPass())) {
 			if (newPasswd1.equals(newPasswd2)) {
 				user.setPass(user.toMD5Pass(newPasswd2));
 				return dao.update(user.getTableName(), user.getKeys(), user.getValuesFull());
 			} else {
-				return NEW_PASS_ERROR;
+				return ConstValue.LOGIN_NEW_PASS_ERROR;
 			}
 		} else {
-			return OLD_PASS_ERROR;
+			return ConstValue.LOGIN_OLD_PASS_ERROR;
 		}
 	}
 
@@ -94,10 +87,10 @@ public class Login {
 						user.setValuesFull(objects2);
 					}
 				}
-				return SEND_EMAIL_SUCCESS;
+				return ConstValue.LOGIN_SEND_EMAIL_SUCCESS;
 			}
 		}
-		return CHECK_EMAIL_FAILURE;
+		return ConstValue.LOGIN_CHECK_EMAIL_FAILURE;
 	}
 
 }

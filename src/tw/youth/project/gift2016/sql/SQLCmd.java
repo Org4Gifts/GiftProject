@@ -43,6 +43,7 @@ public class SQLCmd {
 			break;
 		case "Integer":
 			sqlType = "INT";
+			// 長度11
 			break;
 		case "Float":
 			sqlType = "FLOAT";
@@ -52,6 +53,7 @@ public class SQLCmd {
 			break;
 		case "Short":
 			sqlType = "TINYINT";
+			// 0~255
 			break;
 		case "Long":
 			sqlType = "BIGINT";
@@ -59,6 +61,8 @@ public class SQLCmd {
 		case "Double":
 			sqlType = "DOUBLE";
 			break;
+		case "Timestamp":
+			sqlType ="TIMESTAMP";
 		}
 		return sqlType;
 	}

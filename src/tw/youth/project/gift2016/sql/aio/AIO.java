@@ -10,11 +10,13 @@ public class AIO {
 	// 單據編號
 	private String fno = "";
 	// 廠別
-	private String vhdt = "";
+	private Timestamp vhdt = null;
 	// 單據日期
+	private Timestamp vrdt = null;
+	// 需求日期
 	private String ano = "";
 	// 單位編號
-	private String dc = "D"; // ?
+	private Character dc = 'D'; // ?
 	// 進/銷
 	private Float tamt = 0.0f;
 	// 進銷金額
@@ -23,10 +25,11 @@ public class AIO {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "vhno", "fno", "vhdt", "ano", "dc", "tamt", "memo" };
+	private String[] keys = { "_id", "vhno", "fno", "vhdt", "vrdt", "ano", "dc", "tamt", "memo" };
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
-			fno.getClass().getSimpleName(), vhdt.getClass().getSimpleName(), ano.getClass().getSimpleName(),
-			dc.getClass().getSimpleName(), tamt.getClass().getSimpleName(), memo.getClass().getSimpleName() };
+			fno.getClass().getSimpleName(), vhdt.getClass().getSimpleName(), vrdt.getClass().getSimpleName(),
+			ano.getClass().getSimpleName(), dc.getClass().getSimpleName(), tamt.getClass().getSimpleName(),
+			memo.getClass().getSimpleName() };
 	private String[] uniques = { "vhno" };
 
 	public String getTableName() {
@@ -74,12 +77,20 @@ public class AIO {
 		this.fno = fno;
 	}
 
-	public String getVhdt() {
+	public Timestamp getVhdt() {
 		return vhdt;
 	}
 
 	public void setVhdt(String vhdt) {
-		this.vhdt = vhdt;
+		this.vhdt = Timestamp.valueOf(vhdt);
+	}
+
+	public Timestamp getVrdt() {
+		return vrdt;
+	}
+
+	public void setVrdt(String vrdt) {
+		this.vrdt = Timestamp.valueOf(vrdt);
 	}
 
 	public String getAno() {
@@ -90,12 +101,12 @@ public class AIO {
 		this.ano = ano;
 	}
 
-	public String getDc() {
+	public Character getDc() {
 		return dc;
 	}
 
 	public void setDc(String dc) {
-		this.dc = dc;
+		this.dc = dc.charAt(0);
 	}
 
 	public Float getTamt() {
@@ -135,6 +146,7 @@ public class AIO {
 		setVhno((String) values[i++]);
 		setFno((String) values[i++]);
 		setVhdt((String) values[i++]);
+		setVrdt((String) values[i++]);
 		setAno((String) values[i++]);
 		setDc((String) values[i++]);
 		setTamt((Float) values[i++]);
@@ -147,6 +159,7 @@ public class AIO {
 		setVhno((String) values[i++]);
 		setFno((String) values[i++]);
 		setVhdt((String) values[i++]);
+		setVrdt((String) values[i++]);
 		setAno((String) values[i++]);
 		setDc((String) values[i++]);
 		setTamt((Float) values[i++]);
@@ -156,12 +169,12 @@ public class AIO {
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getVhno(), getFno(), getVhdt(), getAno(), getDc(), getTamt(), getMemo() };
+		return new Object[] { getVhno(), getFno(), getVhdt(), getVrdt(), getAno(), getDc(), getTamt(), getMemo() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getVhno(), getFno(), getVhdt(), getAno(), getDc(), getTamt(), getMemo(),
-				getCreated(), getUpdated() };
+		return new Object[] { get_id(), getVhno(), getFno(), getVhdt(), getVrdt(), getAno(), getDc(), getTamt(),
+				getMemo(), getCreated(), getUpdated() };
 	}
 
 }

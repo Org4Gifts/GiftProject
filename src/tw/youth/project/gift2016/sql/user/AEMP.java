@@ -147,7 +147,6 @@ public class AEMP {
 		setEname((String) values[i++]);
 		setEmail((String) values[i++]);
 		setJob((String) values[i++]);
-		System.out.println(values[i].getClass().getSimpleName());
 		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);
@@ -161,7 +160,6 @@ public class AEMP {
 		setEname((String) values[i++]);
 		setEmail((String) values[i++]);
 		setJob((String) values[i++]);
-		System.out.println(values[i].getClass().getSimpleName());
 		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);

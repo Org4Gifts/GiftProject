@@ -12,6 +12,10 @@ public class AODR {
 	// 訂定日期
 	private String empno = "";
 	// 員工編號
+	private String fno = "";
+	// 廠區編號
+	private String dno = "";
+	// 部門編號
 	private Long tamt = 0L;
 	// 訂單金額
 	private String status = "";
@@ -29,11 +33,12 @@ public class AODR {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "order1", "odate", "empno", "tamt", "status", "authority", "purpose" };
+	private String[] keys = { "_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
+			"purpose" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), tamt.getClass().getSimpleName(),
-			status.getClass().getSimpleName(), authority.getClass().getSimpleName(),
-			purpose.getClass().getSimpleName() };
+			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+			dno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
+			authority.getClass().getSimpleName(), purpose.getClass().getSimpleName() };
 	private String[] uniques = { "order1" };
 
 	public String getTableName() {
@@ -89,6 +94,22 @@ public class AODR {
 		this.empno = empno;
 	}
 
+	public String getFno() {
+		return fno;
+	}
+
+	public void setFno(String fno) {
+		this.fno = fno;
+	}
+
+	public String getDno() {
+		return dno;
+	}
+
+	public void setDno(String dno) {
+		this.dno = dno;
+	}
+
 	public Long getTamt() {
 		return tamt;
 	}
@@ -142,6 +163,8 @@ public class AODR {
 		setOrder1((String) values[i++]);
 		setOdate((String) values[i++]);
 		setEmpno((String) values[i++]);
+		setFno((String) values[i++]);
+		setDno((String) values[i++]);
 		setTamt((Long) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
@@ -154,6 +177,8 @@ public class AODR {
 		setOrder1((String) values[i++]);
 		setOdate((String) values[i++]);
 		setEmpno((String) values[i++]);
+		setFno((String) values[i++]);
+		setDno((String) values[i++]);
 		setTamt((Long) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
