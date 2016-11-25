@@ -22,14 +22,15 @@ public class AEMP {
 	// 直屬主管工號
 	private String dno = "";
 	// 部門代碼
+	private String fno = "";
 	private Date created;
 	private Date updated;
 
-	private String[] keys = { "_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno" };
+	private String[] keys = { "_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno", "fno" };
 	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
 			ename.getClass().getSimpleName(), email.getClass().getSimpleName(), job.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), ext.getClass().getSimpleName(), mgr.getClass().getSimpleName(),
-			dno.getClass().getSimpleName() };
+			dno.getClass().getSimpleName(), fno.getClass().getSimpleName() };
 	private String[] uniques = { "empno", "email" };
 
 	public String getTableName() {
@@ -125,6 +126,14 @@ public class AEMP {
 		this.dno = dno;
 	}
 
+	public String getFno() {
+		return fno;
+	}
+
+	public void setFno(String fno) {
+		this.fno = fno;
+	}
+
 	public Date getCreated() {
 		return created;
 	}
@@ -151,6 +160,7 @@ public class AEMP {
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);
 		setDno((String) values[i++]);
+		setFno((String) values[i++]);
 	}
 
 	public void setValuesFull(Object[] values) {
@@ -166,15 +176,16 @@ public class AEMP {
 		setDno((String) values[i++]);
 		setCreated((Date) values[i++]);
 		setUpdated((Date) values[i++]);
+		setFno((String) values[i++]);
 	}
 
 	public Object[] getValues() {
 		return new Object[] { getEmpno(), getEname(), getEmail(), getJob(), getAuthority(), getExt(), getMgr(),
-				getDno() };
+				getDno(), getFno() };
 	}
 
 	public Object[] getValuesFull() {
 		return new Object[] { get_id(), getEmpno(), getEname(), getEmail(), getJob(), getAuthority(), getExt(),
-				getMgr(), getDno(), getCreated(), getUpdated() };
+				getMgr(), getDno(), getFno(), getCreated(), getUpdated() };
 	}
 }

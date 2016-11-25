@@ -8,7 +8,7 @@ public class AODR {
 
 	private String order1 = "";
 	// 訂單編號
-	private String odate = "";
+	private Date odate = null;
 	// 訂定日期
 	private String empno = "";
 	// 員工編號
@@ -78,11 +78,11 @@ public class AODR {
 		this.order1 = order1;
 	}
 
-	public String getOdate() {
+	public Date getOdate() {
 		return odate;
 	}
 
-	public void setOdate(String odate) {
+	public void setOdate(Date odate) {
 		this.odate = odate;
 	}
 
@@ -161,7 +161,7 @@ public class AODR {
 	public void setValues(Object[] values) {
 		int i = 0;
 		setOrder1((String) values[i++]);
-		setOdate((String) values[i++]);
+		setOdate((Date) values[i++]);
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);
@@ -175,7 +175,7 @@ public class AODR {
 		int i = 0;
 		set_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
-		setOdate((String) values[i++]);
+		setOdate((Date) values[i++]);
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);

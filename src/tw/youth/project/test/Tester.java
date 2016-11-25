@@ -2,9 +2,13 @@ package tw.youth.project.test;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
+
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
 import tw.youth.project.gift2016.sql.user.AUSER;
+import tw.youth.project.gift2016.tools.ToolBox;
+
 import org.junit.Test;
 
 public class Tester {
@@ -25,7 +29,12 @@ public class Tester {
 
 	@Test
 	public void tests() {
-		
+		java.util.Date dates = new java.util.Date();
+		java.sql.Date date = ToolBox.toSqlDate(dates);
+		System.out.println(date.getTime() + " " + dates.getTime());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(sdf.format(dates));
+		System.out.println(sdf.format(date));
 	}
 
 }

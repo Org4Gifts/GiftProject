@@ -23,4 +23,9 @@ public class ToolBox {
 		java.sql.Date sql = new java.sql.Date(date.getTime());
 		return sql;
 	}
+
+	public static String formatDate(Object date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return sdf.format(date);
+	}
 }

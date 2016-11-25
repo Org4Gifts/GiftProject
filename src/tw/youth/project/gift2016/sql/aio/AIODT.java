@@ -27,7 +27,7 @@ public class AIODT {
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
 			inno.getClass().getSimpleName(), outno.getClass().getSimpleName(), qty.getClass().getSimpleName(),
 			prc.getClass().getSimpleName(), order1.getClass().getSimpleName(), note1.getClass().getSimpleName() };
-	private String[] uniques = { "vhno" };
+	private String[] uniques = { "" };
 
 	public String getTableName() {
 		return getClass().getSimpleName().toLowerCase();
