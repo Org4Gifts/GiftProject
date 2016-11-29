@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.user;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AEMP {
 	// 員工基本資料檔
@@ -21,8 +22,9 @@ public class AEMP {
 	private String mgr = "";
 	// 直屬主管工號
 	private String dno = "";
-	// 部門代碼
+	// 部門代碼  4碼
 	private String fno = "";
+	// 廠區代碼  2碼
 	private Date created;
 	private Date updated;
 
@@ -138,16 +140,16 @@ public class AEMP {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -174,9 +176,9 @@ public class AEMP {
 		setExt((String) values[i++]);
 		setMgr((String) values[i++]);
 		setDno((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
 		setFno((String) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {

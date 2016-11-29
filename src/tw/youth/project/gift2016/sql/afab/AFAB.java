@@ -1,13 +1,14 @@
 package tw.youth.project.gift2016.sql.afab;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AFAB {
 	// 廠別基本檔
 	private Integer _id = 0;
 
 	private String fno = "";
-	// 廠別代碼
+	// 廠別代碼 2碼
 	private String fname = "";
 	// 廠別名稱
 	private Date created;
@@ -67,16 +68,16 @@ public class AFAB {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -90,8 +91,8 @@ public class AFAB {
 		set_id((Integer) values[i++]);
 		setFno((String) values[i++]);
 		setFame((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {

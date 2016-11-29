@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.ainventory;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AINVENTORY {
 	// 多廠別盤存檔
@@ -9,7 +10,7 @@ public class AINVENTORY {
 	private String invo = "";
 	// 盤點單號
 	private String fno = "";
-	// 儲存廠別
+	// 儲存廠別 2碼
 	private Integer yymm = 10511;
 	// 資料年月 紀錄型態如同初始值 所以使用int
 	private String fgno = "";
@@ -108,23 +109,23 @@ public class AINVENTORY {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
 		int i = 0;
 		setInvo((String) values[i++]);
 		setFno((String) values[i++]);
-		setYymm((Date) values[i++]);
+		setYymm((Integer) values[i++]);
 		setFgno((String) values[i++]);
 		setIvqty((Integer) values[i++]);
 		setSqty((Integer) values[i++]);
@@ -135,12 +136,12 @@ public class AINVENTORY {
 		set_id((Integer) values[i++]);
 		setInvo((String) values[i++]);
 		setFno((String) values[i++]);
-		setYymm((Date) values[i++]);
+		setYymm((Integer) values[i++]);
 		setFgno((String) values[i++]);
 		setIvqty((Integer) values[i++]);
 		setSqty((Integer) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {

@@ -1,5 +1,6 @@
 package tw.youth.project.gift2016.tools;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +23,10 @@ public class ToolBox {
 	public static java.sql.Date toSqlDate(Date date) {
 		java.sql.Date sql = new java.sql.Date(date.getTime());
 		return sql;
+	}
+
+	public static java.sql.Date timestampToSqlDate(Timestamp timestamp) {
+		return new java.sql.Date(timestamp.getTime());
 	}
 
 	public static String formatDate(Object date) {

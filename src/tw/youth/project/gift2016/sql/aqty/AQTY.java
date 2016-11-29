@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.aqty;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AQTY {
 	// 多廠別進/銷彙總檔
@@ -9,7 +10,7 @@ public class AQTY {
 	private Integer yymm = 10511; // auto
 	// 資料年月 紀錄型態如同初始值 所以使用int
 	private String fno = ""; // auto
-	// 廠別
+	// 廠區代碼 2碼
 	private String fgno = ""; // auto
 	// 禮品編號
 	private Integer pmqty = 0; // auto
@@ -108,16 +109,16 @@ public class AQTY {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -139,8 +140,8 @@ public class AQTY {
 		setPmqty((Integer) values[i++]);
 		setInqty((Integer) values[i++]);
 		setUdqty((Integer) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {

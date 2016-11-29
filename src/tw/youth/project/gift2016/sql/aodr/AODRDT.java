@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.aodr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AODRDT {
 	// 訂單副檔
@@ -28,7 +29,7 @@ public class AODRDT {
 	private Date updated;
 
 	private String[] keys = { "_id", "order1", "comname", "pername", "authority", "fgno", "qty", "prc", "note1",
-			"oqty" };
+			/*"oqty"*/ };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			comname.getClass().getSimpleName(), pername.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), fgno.getClass().getSimpleName(), qty.getClass().getSimpleName(),
@@ -93,8 +94,8 @@ public class AODRDT {
 		return authority;
 	}
 
-	public void setAuthority(Short authority) {
-		this.authority = authority;
+	public void setAuthority(Integer authority) {
+		this.authority = Short.parseShort(Integer.toString(authority));
 	}
 
 	public String getFgno() {
@@ -141,16 +142,16 @@ public class AODRDT {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -158,7 +159,7 @@ public class AODRDT {
 		setOrder1((String) values[i++]);
 		setComname((String) values[i++]);
 		setPername((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setFgno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
@@ -172,14 +173,14 @@ public class AODRDT {
 		setOrder1((String) values[i++]);
 		setComname((String) values[i++]);
 		setPername((String) values[i++]);
-		setAuthority(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setAuthority((Integer) values[i++]);
 		setFgno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
 		setNote1((String) values[i++]);
 		// setOqty((Integer) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {

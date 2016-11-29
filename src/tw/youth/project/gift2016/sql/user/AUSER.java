@@ -4,20 +4,28 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AUSER {
 
 	private Integer _id = 0;
 	private String empno = "";
+	//員工編號
 	private String user = "";
+	//使用者名稱
 	private String pass = "";
+	//使用者密碼
 	private Date created;
 	private Date updated;
 
-	
 	private Short authority;
-	private String dno;
-	private String fno;
+	//權限
+	private String mgr = "";
+	// 直屬主管工號
+	private String dno = "";
+	// 部門代碼  4碼
+	private String fno = "";
+	// 廠區代碼  2碼
 	private Short role;
 
 	private String[] keys = { "_id", "empno", "user", "pass" };
@@ -109,24 +117,34 @@ public class AUSER {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
-	
+
+	// 以下是額外需求的資料
+
 	public Short getAuthority() {
 		return authority;
 	}
 
 	public void setAuthority(Short authority) {
 		this.authority = authority;
+	}
+
+	public String getMgr() {
+		return mgr;
+	}
+
+	public void setMgr(String mgr) {
+		this.mgr = mgr;
 	}
 
 	public String getDno() {
@@ -166,8 +184,8 @@ public class AUSER {
 		setEmpno((String) values[i++]);
 		setUser((String) values[i++]);
 		setPass((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {

@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.adep;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ADEP {
 	// 部門基本資料檔
@@ -8,7 +9,7 @@ public class ADEP {
 	private Integer _id = 0;
 
 	private String dno = "";
-	// 部門代碼
+	// 部門代碼 4碼
 	private Short role = 0;
 	// 部門權限 : 一般部門0、核銷部門1、庫存部門2、管理部門3、董事長4
 	private String dname = "";
@@ -88,16 +89,16 @@ public class ADEP {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -115,8 +116,8 @@ public class ADEP {
 		setRole(Short.parseShort(Integer.toString((Integer) values[i++])));
 		setDname((String) values[i++]);
 		setFno((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {

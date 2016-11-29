@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.aio;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AIODT {
 	// 多廠別進/銷副檔
@@ -118,22 +119,23 @@ public class AIODT {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
 		int i = 0;
 		setVhno((String) values[i++]);
 		setInno((String) values[i++]);
+		setOutno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
 		setOrder1((String) values[i++]);
@@ -145,21 +147,22 @@ public class AIODT {
 		set_id((Integer) values[i++]);
 		setVhno((String) values[i++]);
 		setInno((String) values[i++]);
+		setOutno((String) values[i++]);
 		setQty((Integer) values[i++]);
 		setPrc((Float) values[i++]);
 		setOrder1((String) values[i++]);
 		setNote1((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getVhno(), getInno(), getQty(), getPrc(), getOrder1(), getNote1() };
+		return new Object[] { getVhno(), getInno(), getOutno(), getQty(), getPrc(), getOrder1(), getNote1() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getVhno(), getInno(), getQty(), getPrc(), getOrder1(), getNote1(), getCreated(),
-				getUpdated() };
+		return new Object[] { get_id(), getVhno(), getInno(), getOutno(), getQty(), getPrc(), getOrder1(), getNote1(),
+				getCreated(), getUpdated() };
 	}
 
 }

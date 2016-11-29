@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.apresent;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class APRESENT {
 	// 禮品基本檔
@@ -12,13 +13,13 @@ public class APRESENT {
 	// 禮品名稱
 	private Float prc = 0.0f;
 	// 禮品單價
-	private Character grade = 'E';
+	private String grade = "E";
 	// 禮品等級 S A B C D E 最高級S 最低級E 沒有實際控制的功能，僅供簽核人員識別
 	private Short authority = 0;
 	// 申請層級
 	private String fno = "";
-	// 廠區代碼
-	private Character status = 'N';
+	// 廠區代碼 2碼
+	private String status = "N";
 	// 申請狀態 Y:可申請 N:不可申請
 	private String note1 = "";
 	// 備註
@@ -90,12 +91,12 @@ public class APRESENT {
 		this.prc = prc;
 	}
 
-	public Character getGrade() {
+	public String getGrade() {
 		return grade;
 	}
 
 	public void setGrade(String grade) {
-		this.grade = grade.charAt(0);
+		this.grade = grade;
 	}
 
 	public Short getAuthority() {
@@ -114,12 +115,12 @@ public class APRESENT {
 		this.fno = fno;
 	}
 
-	public Character getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
-		this.status = status.charAt(0);
+		this.status = status;
 	}
 
 	public String getNote1() {
@@ -150,16 +151,16 @@ public class APRESENT {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -189,17 +190,17 @@ public class APRESENT {
 		setNote1((String) values[i++]);
 		setFqty((Integer) values[i++]);
 		setIqty((Integer) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getStatus(), getNote1(),
-				getFqty(), getIqty() };
+		return new Object[] { getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getFno(), getStatus(),
+				getNote1(), getFqty(), getIqty() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getStatus(),
+		return new Object[] { get_id(), getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getFno(), getStatus(),
 				getNote1(), getFqty(), getIqty(), getCreated(), getUpdated() };
 	}
 }

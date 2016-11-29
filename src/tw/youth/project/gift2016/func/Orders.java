@@ -41,9 +41,9 @@ public class Orders {
 		}
 	}
 
-	public Object getOrderValue(AUSER user) {
-		return null;
-	}
+//	public Object getOrderValue(AUSER user) {
+//		return null;
+//	}
 
 	public String createOrders(AUSER user, String key, Object[][] objs) {
 
@@ -83,7 +83,7 @@ public class Orders {
 			if (compare > num) {
 				aio.setVhno(order + compare);
 			} else {
-				aio.setOrder1(order + ++num);
+				aio.setVhno(order + ++num);
 			}
 			aiodt = new AIODT();
 			aiodt.setValues(objs);
@@ -93,8 +93,8 @@ public class Orders {
 				: (aodrdt != null ? ConstValue.ORDERS_AODRDT_SUCCESS : ConstValue.ORDERS_AIODT_SUCCESS);
 	}
 
-	public Object updateOrders(AUSER user, String key, Object obj) {
-
+	public String updateOrders(AUSER user, String key, Object obj) {
+		
 		return null;
 	}
 

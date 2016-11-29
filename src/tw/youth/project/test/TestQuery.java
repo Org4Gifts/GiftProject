@@ -15,8 +15,8 @@ import tw.youth.project.gift2016.sql.afab.AFAB;
 import tw.youth.project.gift2016.sql.ainventory.AINVENTORY;
 import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aio.AIODT;
-import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.ASIGNLOG;
 import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
@@ -25,20 +25,31 @@ import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 
 public class TestQuery {
-
+	//目前測試位置 108行
 	@Test
 	public void test() {
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
 		dao.starup();
 
 		System.out.println("取得使用者");
-		AUSER user = new Login(dao, "odise2", "116025").getUser();
+		AUSER user = new Login(dao, "odise1", "116025").getUser();
 		AEMP aemp = new AEMP();
+		ADEP adep0 = new ADEP();
 		System.out.println("取得使用者基本資料");
 		ArrayList<Object[]> arr = dao.query(aemp.getTableName(), aemp.getKeys()[1], user.getEmpno(), aemp.getLength());
 		for (Object[] objects : arr) {
 			aemp.setValuesFull(objects);
 		}
+		System.out.println(aemp.getDno() + " " + aemp.getFno());
+		user.setDno(aemp.getDno());
+		user.setFno(aemp.getFno());
+		ArrayList<Object[]> arr2 = dao.query(adep0.getTableName(), adep0.getKeys()[1], user.getDno(),
+				adep0.getLength());
+		for (Object[] objects : arr2) {
+			adep0.setValuesFull(objects);
+		}
+		System.out.println(adep0.getRole());
+		user.setRole(adep0.getRole());
 
 		System.out.println("查詢啟動");
 		Query query = new Query(user);
@@ -66,7 +77,7 @@ public class TestQuery {
 
 		APRESENT apresent = new APRESENT();
 		System.out.println("\n" + "一般查詢:指定禮品");
-		apresent = query.getApresents(dao, apresent.getKeys()[1], "123456").get(0);
+		apresent = query.getApresents(dao, apresent.getKeys()[1], "S001-F6").get(0);
 		System.out.println(apresent.getFgno());
 		System.out.println("\n" + "一般查詢:全部禮品");
 		ArrayList<APRESENT> apresents = query.getApresents(dao, apresent.getKeys()[1], "");
@@ -76,7 +87,7 @@ public class TestQuery {
 
 		AFAB afab = new AFAB();
 		System.out.println("\n" + "一般查詢:指定廠區");
-		afab = query.getAfabs(dao, afab.getKeys()[2], "一廠").get(0);
+		afab = query.getAfabs(dao, afab.getKeys()[2], "二廠").get(0);
 		System.out.println(afab.getFname());
 		System.out.println("\n" + "一般查詢:全部廠區");
 		ArrayList<AFAB> afabs = query.getAfabs(dao, afab.getKeys()[2], "");
@@ -86,7 +97,7 @@ public class TestQuery {
 
 		ADEP adep = new ADEP();
 		System.out.println("\n" + "一般查詢:指定部門");
-		adep = query.getAdeps(dao, adep.getKeys()[1], "0310").get(0);
+		adep = query.getAdeps(dao, adep.getKeys()[1], "0802").get(0);
 		System.out.println(adep.getDno());
 		System.out.println("\n" + "一般查詢:全部部門");
 		ArrayList<ADEP> adeps = query.getAdeps(dao, adep.getKeys()[1], "");
@@ -94,6 +105,7 @@ public class TestQuery {
 			System.out.println(adep2.getDno());
 		}
 
+		//目前測試位置 108
 		// 一般訂單 : 依登入之使用者權限而有不同的查詢結果，一般職員僅能查詢到自己的訂單，課長級可以查到整個部門的訂單
 		System.out.println("\n" + "使用者權限查詢:全部訂單、訂單的副檔、訂單的簽核狀態");
 		ArrayList<AODR> aodrs = query.getAodrs(dao);
@@ -111,7 +123,8 @@ public class TestQuery {
 
 		// 調撥訂單 : 依管理部門登入之使用者權限而有不同的查詢結果，一般職員僅能查詢到自己的調撥單，課長級可以查到整個部門的調撥單
 		System.out.println("\n" + "使用者權限查詢:全部調撥單、調撥單的副檔、調撥單的簽核狀態");
-		ArrayList<AIO> aios = query.getAios(dao);
+		AIO aio = new AIO();
+		ArrayList<AIO> aios = query.getAios(dao, aio.getKeys()[1], "");
 		for (AIO aio2 : aios) {
 			System.out.println(aio2.getVhno());
 			ArrayList<AIODT> aiodts = query.getAiodts(dao, aio2.getVhno());
@@ -153,8 +166,7 @@ public class TestQuery {
 		for (AINVENTORY ainventory2 : ainventorys) {
 			System.out.println(ainventory2.getFgno());
 		}
-		
-		
+
 	}
 
 }

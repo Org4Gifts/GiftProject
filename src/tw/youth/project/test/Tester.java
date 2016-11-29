@@ -3,9 +3,12 @@ package tw.youth.project.test;
 import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
+import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.user.AUSER;
 import tw.youth.project.gift2016.tools.ToolBox;
 
@@ -27,7 +30,7 @@ public class Tester {
 
 	}
 
-	@Test
+	// @Test
 	public void tests() {
 		java.util.Date dates = new java.util.Date();
 		java.sql.Date date = ToolBox.toSqlDate(dates);
@@ -35,6 +38,62 @@ public class Tester {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		System.out.println(sdf.format(dates));
 		System.out.println(sdf.format(date));
+
+		String str = sdf.format(dates);
+		System.out.println(str.substring(0, str.length() - 2));
+	}
+
+	@Test
+	public void testAodr() {
+		ArrayList<Object[]> arr = null;
+		ArrayList<Object[]> arr2 = null;
+		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		dao.starup();
+		// AODR
+		System.out.println("AODR");
+		AODR aodr = null;
+//		AODRSS aodrss = null;
+		try {
+			System.out.println(ToolBox.toSqlDate(new Date()).getClass().getName());
+//			aodrss = new AODRSS();
+			aodr = new AODR();			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Exception " + e.getMessage());
+		}
+		
+//		System.out.println(aodrss);
+////		System.out.println(aodr);
+////		System.out.println("");
+////		System.out.println("SetObj");
+		Object[] objs6 = { "A20161108", ToolBox.toSqlDate(new Date()), "K123456", "F1", "0800", 100L, "Preparing", 2,
+				"測試申請單1" };
+		System.out.println("SetSuccess");
+		aodr.setValues(objs6);
+		System.out.println("SetValue");
+		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));
+		arr = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
+		for (Object[] objects : arr) {
+			String str = "arr1 ";
+			for (Object object : objects) {
+				str += object + ", ";
+			}
+			System.out.println(str);
+			aodr.setValuesFull(objects);
+		}
+
+		objs6[6] = "Rejected";
+		aodr.setValues(objs6);
+		System.out.println(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
+		arr2 = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
+		for (Object[] objects : arr2) {
+			String str = "arr2 ";
+			for (Object object : objects) {
+				str += object + ", ";
+			}
+			System.out.println(str);
+		}
+		System.out.println(dao.drop(aodr.getTableName(), "empno", "K123456") + "\n");
 	}
 
 }

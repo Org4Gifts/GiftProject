@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.aodr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ASIGNLOG {
 	// 訂單主檔
@@ -15,7 +16,7 @@ public class ASIGNLOG {
 	private Float spent = 0.0f;
 	// 簽核花費時間 (上一個簽核人員的時間為主)
 	private String status = "";
-	// 訂單簽核狀態 Send 發送請求者 ,None 尚未簽核 ,Approve 同意 ,Reject 拒絕 ,Complete 完成
+	// 訂單簽核狀態  Send 發送請求者 ,None 尚未簽核 ,Approve 同意 ,Reject 拒絕 ,Complete 完成
 	private Date created;
 	private Date updated;
 
@@ -98,16 +99,16 @@ public class ASIGNLOG {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -127,8 +128,8 @@ public class ASIGNLOG {
 		setSignature((String) values[i++]);
 		setSpent((Float) values[i++]);
 		setStatus((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 
 	}
 

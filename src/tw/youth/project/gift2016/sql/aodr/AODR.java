@@ -1,6 +1,9 @@
 package tw.youth.project.gift2016.sql.aodr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
+import tw.youth.project.gift2016.tools.ToolBox;
 
 public class AODR {
 	// 訂單主檔
@@ -8,14 +11,14 @@ public class AODR {
 
 	private String order1 = "";
 	// 訂單編號
-	private Date odate = null;
+	private Date odate= new Date(100000L);
 	// 訂定日期
 	private String empno = "";
 	// 員工編號
 	private String fno = "";
-	// 廠區編號
+	// 廠區編號 2碼
 	private String dno = "";
-	// 部門編號
+	// 部門編號 4碼
 	private Long tamt = 0L;
 	// 訂單金額
 	private String status = "";
@@ -36,7 +39,7 @@ public class AODR {
 	private String[] keys = { "_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
 			"purpose" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+			odate.getClass().getSimpleName(),empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			dno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), purpose.getClass().getSimpleName() };
 	private String[] uniques = { "order1" };
@@ -82,8 +85,8 @@ public class AODR {
 		return odate;
 	}
 
-	public void setOdate(Date odate) {
-		this.odate = odate;
+	public void setOdate(Timestamp odate) {
+		this.odate = new Date(odate.getTime());
 	}
 
 	public String getEmpno() {
@@ -146,22 +149,22 @@ public class AODR {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
 		int i = 0;
 		setOrder1((String) values[i++]);
-		setOdate((Date) values[i++]);
+		setOdate((Timestamp) values[i++]);
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);
@@ -175,7 +178,7 @@ public class AODR {
 		int i = 0;
 		set_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
-		setOdate((Date) values[i++]);
+		setOdate((Timestamp) values[i++]);
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);
@@ -183,18 +186,18 @@ public class AODR {
 		setStatus((String) values[i++]);
 		setAuthority((Integer) values[i++]);
 		setPurpose((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getOrder1(), getOdate(), getEmpno(), getTamt(), getStatus(), getAuthority(),
-				getPurpose() };
+		return new Object[] { getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(), getStatus(),
+				getAuthority(), getPurpose() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getTamt(), getStatus(), getAuthority(),
-				getPurpose(), getCreated(), getUpdated() };
+		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(), getStatus(),
+				getAuthority(), getPurpose(), getCreated(), getUpdated() };
 	}
 
 }

@@ -1,6 +1,7 @@
 package tw.youth.project.gift2016.sql.avdr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AVDR {
 	// 廠/客基本資料檔
@@ -181,16 +182,16 @@ public class AVDR {
 		return created;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setCreated(Timestamp created) {
+		this.created = new Date(created.getTime());
 	}
 
 	public Date getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUpdated(Timestamp updated) {
+		this.updated = new Date(updated.getTime());
 	}
 
 	public void setValues(Object[] values) {
@@ -226,8 +227,8 @@ public class AVDR {
 		setFax((String) values[i++]);
 		setIadd((String) values[i++]);
 		setMemo((String) values[i++]);
-		setCreated((Date) values[i++]);
-		setUpdated((Date) values[i++]);
+		setCreated((Timestamp) values[i++]);
+		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
