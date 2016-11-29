@@ -45,7 +45,7 @@ public class Orders {
 //		return null;
 //	}
 
-	public String createOrders(AUSER user, String key, Object[][] objs) {
+	public String createOrders(AUSER user, String key, Object[][] aodrdts) {
 
 		if (key.equals("aodrdt")) {
 			aodr = new AODR();
@@ -63,7 +63,7 @@ public class Orders {
 			} else {
 				aodr.setOrder1(order + ++num);
 			}
-			for (Object[] obj : objs) {
+			for (Object[] obj : aodrdts) {
 				aodrdt = new AODRDT();
 				aodrdt.setValues(obj);
 				list.add(aodrdt);
@@ -86,7 +86,7 @@ public class Orders {
 				aio.setVhno(order + ++num);
 			}
 			aiodt = new AIODT();
-			aiodt.setValues(objs);
+			aiodt.setValues(aodrdts);
 		}
 
 		return (aodrdt == null) && (aiodt == null) ? ConstValue.ORDERS_FAILURE
@@ -94,7 +94,7 @@ public class Orders {
 	}
 
 	public String updateOrders(AUSER user, String key, Object obj) {
-		
+		aodr.
 		return null;
 	}
 
