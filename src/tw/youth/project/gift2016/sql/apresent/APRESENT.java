@@ -1,6 +1,5 @@
 package tw.youth.project.gift2016.sql.apresent;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class APRESENT {
@@ -27,8 +26,8 @@ public class APRESENT {
 	// 安全庫存量
 	private Integer iqty = 0; // auto
 	// 即時庫存量
-	private Date created;
-	private Date updated;
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "fgno", "fgname", "prc", "grade", "authority", "fno", "status", "note1", "fqty",
 			"iqty" };
@@ -147,20 +146,20 @@ public class APRESENT {
 		this.iqty = iqty;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	public void setValues(Object[] values) {
@@ -200,7 +199,7 @@ public class APRESENT {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getFno(), getStatus(),
-				getNote1(), getFqty(), getIqty(), getCreated(), getUpdated() };
+		return new Object[] { get_id(), getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getFno(),
+				getStatus(), getNote1(), getFqty(), getIqty(), getCreated(), getUpdated() };
 	}
 }

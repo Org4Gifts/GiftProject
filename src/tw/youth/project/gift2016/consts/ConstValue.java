@@ -11,7 +11,19 @@ public class ConstValue {
 	public static final String LOGIN_CHECK_EMAIL_FAILURE = "查無此電子郵件，請確認";
 
 	// Orders 使用的常數
-	public static final String ORDERS_FAILURE = "建立失敗";
-	public static final String ORDERS_AODRDT_SUCCESS = "訂單建立成功";
-	public static final String ORDERS_AIODT_SUCCESS = "調撥單建立成功";
+	public static final String ORDERS_ADD_FAILURE = "建立失敗";
+	public static final String ORDERS_ADD_AODR_SUCCESS = "訂單建立成功";
+	public static final String ORDERS_ADD_AIO_SUCCESS = "調撥單建立成功";
+
+	public static final String ORDERS_UPDATE_FAILURE = "修改失敗";
+	public static final String ORDERS_UPDATE_AODR_SUCCESS = "訂單修改成功";
+	public static final String ORDERS_UPDATE_AIO_SUCCESS = "調撥單修改成功";
+
+	public static final String ORDERS_CANCEL_FAILURE = "取消失敗";
+	public static final String ORDERS_CANCEL_AODR_SUCCESS = "訂單取消成功";
+	public static final String ORDERS_CANCEL_AIO_SUCCESS = "調撥單取消成功";
+
+	public static final String ORDERS_SUBMIT_FAILURE = "發送失敗";
+	public static final String ORDERS_SUBMIT_AODR_SUCCESS = "訂單發送成功";
+	public static final String ORDERS_SUBMIT_AIO_SUCCESS = "調撥單發送成功";
 }

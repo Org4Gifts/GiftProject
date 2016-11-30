@@ -3,30 +3,32 @@ package tw.youth.project.gift2016.sql.user;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class AUSER {
 
 	private Integer _id = 0;
 	private String empno = "";
-	//員工編號
+	// 員工編號
 	private String user = "";
-	//使用者名稱
+	// 使用者名稱
 	private String pass = "";
-	//使用者密碼
-	private Date created;
-	private Date updated;
+	// 使用者密碼
+	private Timestamp created;
+	private Timestamp updated;
+
+	// 額外需求部分
 
 	private Short authority;
-	//權限
+	// 權限
 	private String mgr = "";
 	// 直屬主管工號
 	private String dno = "";
-	// 部門代碼  4碼
+	// 部門代碼 4碼
 	private String fno = "";
-	// 廠區代碼  2碼
+	// 廠區代碼 2碼
 	private Short role;
+	// 部門權限
 
 	private String[] keys = { "_id", "empno", "user", "pass" };
 	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
@@ -113,20 +115,20 @@ public class AUSER {
 		this.pass = pass;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	// 以下是額外需求的資料

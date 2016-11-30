@@ -1,6 +1,5 @@
 package tw.youth.project.gift2016.sql.aio;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class AIO {
@@ -11,9 +10,9 @@ public class AIO {
 	// 單據編號
 	private String fno = "";
 	// 轉出廠別 2碼
-	private Date vhdt = new Date(100000L);
+	private Timestamp vhdt = new Timestamp(100000L);
 	// 單據日期
-	private Date vrdt = new Date(100000L);
+	private Timestamp vrdt = new Timestamp(100000L);
 	// 需求日期
 	private String ano = "";
 	// 轉入廠別 2碼
@@ -23,8 +22,8 @@ public class AIO {
 	// 進銷金額
 	private String memo = "";
 	// 調撥理由
-	private Date created;
-	private Date updated;
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "vhno", "fno", "vhdt", "vrdt", "ano", "dc", "tamt", "memo" };
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
@@ -78,20 +77,20 @@ public class AIO {
 		this.fno = fno;
 	}
 
-	public Date getVhdt() {
+	public Timestamp getVhdt() {
 		return vhdt;
 	}
 
 	public void setVhdt(Timestamp vhdt) {
-		this.vhdt = new Date(vhdt.getTime());
+		this.vhdt = vhdt;
 	}
 
-	public Date getVrdt() {
+	public Timestamp getVrdt() {
 		return vrdt;
 	}
 
 	public void setVrdt(Timestamp vrdt) {
-		this.vrdt = new Date(vrdt.getTime());
+		this.vrdt = vrdt;
 	}
 
 	public String getAno() {
@@ -126,20 +125,20 @@ public class AIO {
 		this.memo = memo;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	public void setValues(Object[] values) {

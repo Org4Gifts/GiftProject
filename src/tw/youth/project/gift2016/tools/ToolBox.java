@@ -1,11 +1,12 @@
 package tw.youth.project.gift2016.tools;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ToolBox {
-	public static String getCurrentTimeStamp() { // 完整時間戳記
+	public static String getStrCurrentTimestamp() { // 完整時間戳記
 		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd
 		// HH:mm:ss.SSS");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -32,5 +33,20 @@ public class ToolBox {
 	public static String formatDate(Object date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(date);
+	}
+
+	public static Timestamp getCurrentTimestamp() {
+		return new Timestamp(System.currentTimeMillis());
+	}
+
+	public static Timestamp strToSqlTimestamp(String str) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			return new Timestamp(sdf.parse(str).getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 }

@@ -1,6 +1,5 @@
 package tw.youth.project.gift2016.sql.aio;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class AIODT {
@@ -21,8 +20,8 @@ public class AIODT {
 	// 訂單編號
 	private String note1 = "";
 	// 備註
-	private Date created;
-	private Date updated;
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "vhno", "inno", "outno", "qty", "prc", "order1", "note1" };
 	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
@@ -115,20 +114,20 @@ public class AIODT {
 		this.note1 = note1;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	public void setValues(Object[] values) {

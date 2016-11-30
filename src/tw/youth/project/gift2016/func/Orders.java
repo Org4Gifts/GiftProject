@@ -2,7 +2,6 @@ package tw.youth.project.gift2016.func;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -21,7 +20,6 @@ public class Orders {
 	private AODRDT aodrdt;
 	private AIO aio;
 	private AIODT aiodt;
-	private List<Object> list = new ArrayList<>();
 	private StringBuilder msg = new StringBuilder();
 
 	private static Set<String> orderNum = new TreeSet<>();
@@ -29,6 +27,7 @@ public class Orders {
 
 	public Orders(DBManager dao) {
 		// TODO Auto-generated constructor stub
+		// 先取得資料庫上所有訂單/調撥單的編號
 		AODR aodr = new AODR();
 		ArrayList<Object[]> arr = dao.query(aodr.getTableName(), aodr.getKeys()[1], "", aodr.getLength());
 		for (Object[] objects : arr) {
@@ -41,86 +40,162 @@ public class Orders {
 		}
 	}
 
-//	public Object getOrderValue(AUSER user) {
-//		return null;
-//	}
+	public String createOrders(DBManager dao, AUSER user, Object priObj, Object[] secObjs) {
+		// 建立訂單/調撥單
+		if (msg.length() > 0)
+			msg.delete(0, msg.length());
 
-	public String createOrders(AUSER user, String key, Object[][] aodrdts) {
+		aodr = null;
+		aodrdt = null;
+		aio = null;
+		aiodt = null;
 
-		if (key.equals("aodrdt")) {
-			aodr = new AODR();
+		if (priObj instanceof AODR) {
+			aodr = (AODR) priObj;
 			Iterator<String> it = orderNum.iterator();
-			String order = "";
+			String order = "A";
 			int num = 0;
 			int compare = 0;
-			if (it.hasNext()) {
-				order = it.next().substring(0, 1);
-				num = Integer.parseInt(it.next().substring(1));
+			while (it.hasNext()) {
+				String str = it.next();
+				order = str.substring(0, 1);
+				num = Integer.parseInt(str.substring(1));
 			}
-			compare = Integer.parseInt(ToolBox.getCurrentTimeStamp().replace("-", "").split(" ")[0] + "001");
+			compare = Integer
+					.parseInt(ToolBox.getStrCurrentTimestamp().replace("-", "").split(" ")[0].substring(0, 6) + "001");
 			if (compare > num) {
 				aodr.setOrder1(order + compare);
 			} else {
 				aodr.setOrder1(order + ++num);
 			}
-			for (Object[] obj : aodrdts) {
-				aodrdt = new AODRDT();
-				aodrdt.setValues(obj);
-				list.add(aodrdt);
+			msg.append(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
+			if (!msg.toString().contains("error")) {
+				for (Object secObj : secObjs) {
+					aodrdt = (AODRDT) secObj;
+					aodrdt.setOrder1(aodr.getOrder1());
+					msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues())).append(" , ");
+				}
 			}
+		}
 
-		} else if (key.equals("aiodt")) {
-			aio = new AIO();
+		if (priObj instanceof AIO) {
+			aio = (AIO) priObj;
 			Iterator<String> it = vhnoNum.iterator();
-			String order = "";
+			String order = "B";
 			int num = 0;
 			int compare = 0;
 			if (it.hasNext()) {
-				order = it.next().substring(0, 1);
-				num = Integer.parseInt(it.next().substring(1));
+				String str = it.next();
+				order = str.substring(0, 1);
+				num = Integer.parseInt(str.substring(1));
 			}
-			compare = Integer.parseInt(ToolBox.getCurrentTimeStamp().replace("-", "").split(" ")[0] + "001");
+			compare = Integer
+					.parseInt(ToolBox.getStrCurrentTimestamp().replace("-", "").split(" ")[0].substring(0, 6) + "001");
 			if (compare > num) {
 				aio.setVhno(order + compare);
 			} else {
 				aio.setVhno(order + ++num);
 			}
-			aiodt = new AIODT();
-			aiodt.setValues(aodrdts);
+			msg.append(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues())).append(" , ");
+			if (!msg.toString().contains("error")) {
+				for (Object secObj : secObjs) {
+					aiodt = (AIODT) secObj;
+					aiodt.setVhno(aio.getVhno());
+					msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
+				}
+			}
 		}
+		if (msg.toString().contains("error"))
+			return ConstValue.ORDERS_ADD_FAILURE + "\n" + msg.toString();
 
-		return (aodrdt == null) && (aiodt == null) ? ConstValue.ORDERS_FAILURE
-				: (aodrdt != null ? ConstValue.ORDERS_AODRDT_SUCCESS : ConstValue.ORDERS_AIODT_SUCCESS);
+		return aodrdt != null ? ConstValue.ORDERS_ADD_AODR_SUCCESS : ConstValue.ORDERS_ADD_AIO_SUCCESS;
 	}
 
-	public String updateOrders(AUSER user, String key, Object obj) {
-		aodr.
-		return null;
-	}
-
-	public String submitOrders(DBManager dao, AUSER user, Object priObj, Object secObj) {
+	public String updateOrders(DBManager dao, AUSER user, Object priObj, Object[] secObjs) {
+		// 更新訂單/調撥單
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
 
 		if (priObj instanceof AODR) {
 			aodr = (AODR) priObj;
-			aodrdt = (AODRDT) secObj;
-			msg.append(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
-			msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues())).append(".");
-
+			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
+			for (Object secObj : secObjs) {
+				aodrdt = (AODRDT) secObj;
+				if (aodrdt.get_id() == 0)
+					msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
+							.append(" , ");
+				else
+					msg.append(dao.update(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
+							.append(" , ");
+			}
 		}
-		if (priObj instanceof AIODT) {
+		if (priObj instanceof AIO) {
 			aio = (AIO) priObj;
-			aiodt = (AIODT) secObj;
-			msg.append(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues())).append(" , ");
-			msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(".");
+			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
+			for (Object secObj : secObjs) {
+				aiodt = (AIODT) secObj;
+				msg.append(dao.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull())).append(" , ");
+			}
 		}
+		if (msg.toString().contains("error"))
+			return ConstValue.ORDERS_ADD_FAILURE + "\n" + msg.toString();
 
-		return msg.toString();
+		return priObj instanceof AODR ? ConstValue.ORDERS_UPDATE_AODR_SUCCESS : ConstValue.ORDERS_UPDATE_AIO_SUCCESS;
 	}
 
-	public String cancelOrders(AUSER user, String key) {
-		return "";
+	public String submitOrders(DBManager dao, AUSER user, Object priObj, Object[] secObj) {
+		// 送出訂單/調撥單
+		if (msg.length() > 0)
+			msg.delete(0, msg.length());
+
+		if (priObj instanceof AODR) {
+			aodr = (AODR) priObj;
+			msg.append(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
+			for (Object object : secObj) {
+				aodrdt = (AODRDT) object;
+				msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues())).append(" , ");
+			}
+
+		}
+		if (priObj instanceof AIO) {
+			aio = (AIO) priObj;
+			msg.append(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues())).append(" , ");
+			for (Object object : secObj) {
+				aiodt = (AIODT) object;
+				msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
+			}
+		}
+		if (msg.toString().contains("error"))
+			return ConstValue.ORDERS_SUBMIT_FAILURE + "\n" + msg.toString();
+
+		return priObj instanceof AODR ? ConstValue.ORDERS_SUBMIT_AODR_SUCCESS : ConstValue.ORDERS_SUBMIT_AIO_SUCCESS;
+	}
+
+	public String cancelOrders(DBManager dao, AUSER user, Object priObj) {
+		if (msg.length() > 0)
+			msg.delete(0, msg.length());
+
+		if (priObj instanceof AODR) {
+			aodr = (AODR) priObj;
+			msg.append(dao.drop(aodr.getTableName(), aodr.getKeys()[0], aodr.get_id())).append(" , ");
+			if (aodrdt != null)
+				msg.append(dao.drop(aodrdt.getTableName(), aodr.getKeys()[1], aodr.getOrder1())).append(" , ");
+			else
+				msg.append(dao.drop(new AODRDT().getTableName(), aodr.getKeys()[1], aodr.getOrder1())).append(" , ");
+		}
+		if (priObj instanceof AIO) {
+			aio = (AIO) priObj;
+			msg.append(dao.drop(aio.getTableName(), aio.getKeys()[0], aio.get_id())).append(" , ");
+			if (aiodt != null)
+				msg.append(dao.drop(aiodt.getTableName(), aio.getKeys()[1], aio.getVhno())).append(" , ");
+			else
+				msg.append(dao.drop(new AIODT().getTableName(), aio.getKeys()[1], aio.getVhno())).append(" , ");
+		}
+
+		if (msg.toString().contains("error"))
+			return ConstValue.ORDERS_CANCEL_FAILURE + "\n" + msg.toString();
+
+		return priObj instanceof AODR ? ConstValue.ORDERS_CANCEL_AODR_SUCCESS : ConstValue.ORDERS_CANCEL_AIO_SUCCESS;
 	}
 
 }

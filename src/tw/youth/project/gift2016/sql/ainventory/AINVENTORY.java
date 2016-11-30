@@ -1,6 +1,5 @@
 package tw.youth.project.gift2016.sql.ainventory;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class AINVENTORY {
@@ -19,8 +18,8 @@ public class AINVENTORY {
 	// 盤點數量
 	private Integer sqty = 0; // auto
 	// 系統數量
-	private Date created;
-	private Date updated;
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "invo", "fno", "yymm", "fgno", "ivqty", "sqty" };
 	private String[] types = { _id.getClass().getSimpleName(), invo.getClass().getSimpleName(),
@@ -105,20 +104,20 @@ public class AINVENTORY {
 		this.sqty = sqty;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	public void setValues(Object[] values) {

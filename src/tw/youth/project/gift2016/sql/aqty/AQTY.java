@@ -19,8 +19,8 @@ public class AQTY {
 	// 本月進貨
 	private Integer udqty = 0; // auto
 	// 本月銷貨
-	private Date created;
-	private Date updated;
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
 	private String[] types = { _id.getClass().getSimpleName(), yymm.getClass().getSimpleName(),
@@ -105,20 +105,20 @@ public class AQTY {
 		this.udqty = udqty;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	public void setValues(Object[] values) {

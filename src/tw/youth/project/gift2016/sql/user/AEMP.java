@@ -1,6 +1,5 @@
 package tw.youth.project.gift2016.sql.user;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class AEMP {
@@ -25,8 +24,8 @@ public class AEMP {
 	// 部門代碼  4碼
 	private String fno = "";
 	// 廠區代碼  2碼
-	private Date created;
-	private Date updated;
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno", "fno" };
 	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
@@ -136,20 +135,20 @@ public class AEMP {
 		this.fno = fno;
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	public void setValues(Object[] values) {

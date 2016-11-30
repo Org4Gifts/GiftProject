@@ -463,7 +463,7 @@ public class TestSQL {
 		System.out.println("AODR");
 		AODR aodr = new AODR();
 
-		Object[] objs6 = { "A20161108", new Timestamp(10000L), "K123456", "F1", "0800", 100L, "Preparing", 2,
+		Object[] objs6 = { "A20161108", new Timestamp(10000L), "K123456", "F1", "0800", 100.0f, "Preparing", 2,
 				"測試申請單1" };
 		aodr.setValues(objs6);
 		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));

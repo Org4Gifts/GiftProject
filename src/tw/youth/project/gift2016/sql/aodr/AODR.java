@@ -1,9 +1,6 @@
 package tw.youth.project.gift2016.sql.aodr;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-
-import tw.youth.project.gift2016.tools.ToolBox;
 
 public class AODR {
 	// 訂單主檔
@@ -11,7 +8,7 @@ public class AODR {
 
 	private String order1 = "";
 	// 訂單編號
-	private Date odate= new Date(100000L);
+	private Timestamp odate = new Timestamp(100000L);
 	// 訂定日期
 	private String empno = "";
 	// 員工編號
@@ -19,7 +16,7 @@ public class AODR {
 	// 廠區編號 2碼
 	private String dno = "";
 	// 部門編號 4碼
-	private Long tamt = 0L;
+	private Float tamt = 0.0f;
 	// 訂單金額
 	private String status = "";
 	// 訂單狀態
@@ -33,13 +30,13 @@ public class AODR {
 	// 訂單最高簽核層級
 	private String purpose = "";
 	// 需求目的
-	private Date created;
-	private Date updated;
+	private Timestamp created;
+	private Timestamp updated;
 
 	private String[] keys = { "_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
 			"purpose" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			odate.getClass().getSimpleName(),empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			dno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), purpose.getClass().getSimpleName() };
 	private String[] uniques = { "order1" };
@@ -81,12 +78,12 @@ public class AODR {
 		this.order1 = order1;
 	}
 
-	public Date getOdate() {
+	public Timestamp getOdate() {
 		return odate;
 	}
 
 	public void setOdate(Timestamp odate) {
-		this.odate = new Date(odate.getTime());
+		this.odate = odate;
 	}
 
 	public String getEmpno() {
@@ -113,11 +110,11 @@ public class AODR {
 		this.dno = dno;
 	}
 
-	public Long getTamt() {
+	public Float getTamt() {
 		return tamt;
 	}
 
-	public void setTamt(Long tamt) {
+	public void setTamt(Float tamt) {
 		this.tamt = tamt;
 	}
 
@@ -145,20 +142,20 @@ public class AODR {
 		this.authority = Short.parseShort(Integer.toString(authority));
 	}
 
-	public Date getCreated() {
+	public Timestamp getCreated() {
 		return created;
 	}
 
 	public void setCreated(Timestamp created) {
-		this.created = new Date(created.getTime());
+		this.created = created;
 	}
 
-	public Date getUpdated() {
+	public Timestamp getUpdated() {
 		return updated;
 	}
 
 	public void setUpdated(Timestamp updated) {
-		this.updated = new Date(updated.getTime());
+		this.updated = updated;
 	}
 
 	public void setValues(Object[] values) {
@@ -168,7 +165,7 @@ public class AODR {
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);
-		setTamt((Long) values[i++]);
+		setTamt((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority((Integer) values[i++]);
 		setPurpose((String) values[i++]);
@@ -182,7 +179,7 @@ public class AODR {
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);
-		setTamt((Long) values[i++]);
+		setTamt((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority((Integer) values[i++]);
 		setPurpose((String) values[i++]);
