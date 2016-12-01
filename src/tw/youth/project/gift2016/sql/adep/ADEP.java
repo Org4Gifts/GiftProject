@@ -110,19 +110,12 @@ public class ADEP {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		System.out.println(values[i]);
 		set_id((Integer) values[i++]);
-		System.out.println(values[i]);
 		setDno((String) values[i++]);
-		System.out.println(values[i]);
 		setRole((Integer) values[i++]);
-		System.out.println(values[i]);
 		setDname((String) values[i++]);
-		System.out.println(values[i]);
 		setFno((String) values[i++]);
-		System.out.println(values[i]);
 		setCreated((Timestamp) values[i++]);
-		System.out.println(values[i]);
 		setUpdated((Timestamp) values[i++]);
 	}
 

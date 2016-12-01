@@ -26,7 +26,7 @@ public class TestOrders {
 		dao.starup();
 
 		System.out.println("取得使用者");
-		AUSER user = new Login(dao, "odise1", "116025").getUser();
+		AUSER user = new Login(dao, "P0001", "P0001").getUser();
 		AEMP aemp = new AEMP();
 		ADEP adep0 = new ADEP();
 		System.out.println("取得使用者基本資料");
@@ -132,11 +132,12 @@ public class TestOrders {
 
 		System.out.println("發送修改訂單");
 		System.out.println(orders.updateOrders(dao, user, aodr, aodrdts));
-		System.out.println("發送修改訂單成功");
+		System.out.println("發送修改訂單完成");
 
 		// 修改調撥單
 		System.out.println("修改調撥單");
 		aio = query.getAios(dao, aio.getKeys()[1], "").get(0);
+		System.out.println(aio.getVhno());
 		aio.setTamt(100.0f);
 		aiodts = query.getAiodts(dao, aio.getVhno());
 		for (AIODT aiodt2 : aiodts) {
@@ -151,7 +152,7 @@ public class TestOrders {
 
 		System.out.println("發送修改調撥單");
 		System.out.println(orders.updateOrders(dao, user, aio, aiodts));
-		System.out.println("發送修改調撥單成功");
+		System.out.println("發送修改調撥單完成");
 
 	}
 

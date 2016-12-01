@@ -22,20 +22,20 @@ public class TestLogin {
 		System.out.println(login.checkLogin());
 		
 		System.out.println("測試修改密碼 : 舊密碼不正確範例");
-		System.out.println(login.changPassword(dao, "116021", "116025", "116025"));
+		System.out.println(login.changPassword(dao, "P0000", "P0002", "P0002"));
 		System.out.println("測試修改密碼 : 新密碼(1)不正確範例");
-		System.out.println(login.changPassword(dao, "116022", "116024", "116025"));
+		System.out.println(login.changPassword(dao, "P0001", "P0001", "P0002"));
 		System.out.println("測試修改密碼 : 新密碼(2)不正確範例");
-		System.out.println(login.changPassword(dao, "116022", "116025", "116024"));
+		System.out.println(login.changPassword(dao, "P0001", "P0002", "P0001"));
 		System.out.println("測試修改密碼 : 新舊密碼都正確範例");
-		System.out.println(login.changPassword(dao, "116022", "116025", "116025"));
+		System.out.println(login.changPassword(dao, "P0001", "P0002", "P0002"));
 		System.out.println("測試修改密碼 : 測試完畢，利用修改密碼方式來恢復成原密碼");
-		System.out.println(login.changPassword(dao, "116025", "116022", "116022") + "\n");
+		System.out.println(login.changPassword(dao, "P0002", "P0001", "P0001") + "\n");
 
 		System.out.println("測試發送電子郵件:不存在的電子郵件");
-		System.out.println(login.forgotPass(dao, "123@com"));
+		System.out.println(login.forgotPass(dao, "p0025@alaya.com"));
 		System.out.println("測試發送電子郵件:已存在的電子郵件");
-		System.out.println(login.forgotPass(dao, "456@com"));
+		System.out.println(login.forgotPass(dao, "p0024@alaya.com"));
 	}
 
 }

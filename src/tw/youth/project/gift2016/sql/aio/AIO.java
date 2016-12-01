@@ -243,8 +243,8 @@ public class AIO {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getEmpno(), getDno(), getVhno(), getFno(), getVhdt(), getVrdt(), getAno(), getDc(), getTamt(),
-				getMemo(), getStatus(), getAuthority(), getSignerno(), getCreated(), getUpdated() };
+		return new Object[] { get_id(), getVhno(), getEmpno(), getDno(), getFno(), getVhdt(), getVrdt(), getAno(),
+				getDc(), getTamt(), getStatus(), getAuthority(), getSignerno(), getMemo(), getCreated(), getUpdated() };
 	}
 
 }
