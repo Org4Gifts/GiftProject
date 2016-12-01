@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import tw.youth.project.gift2016.func.Login;
-import tw.youth.project.gift2016.func.Query;
+import tw.youth.project.gift2016.func.Querys;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
 import tw.youth.project.gift2016.sql.adep.ADEP;
@@ -25,7 +25,7 @@ import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 
 public class TestQuery {
-	//目前測試位置 108行
+	// 目前測試位置 108行
 	@Test
 	public void test() {
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
@@ -43,6 +43,7 @@ public class TestQuery {
 		System.out.println(aemp.getDno() + " " + aemp.getFno());
 		user.setDno(aemp.getDno());
 		user.setFno(aemp.getFno());
+		user.setEname(aemp.getEname());
 		ArrayList<Object[]> arr2 = dao.query(adep0.getTableName(), adep0.getKeys()[1], user.getDno(),
 				adep0.getLength());
 		for (Object[] objects : arr2) {
@@ -52,7 +53,7 @@ public class TestQuery {
 		user.setRole(adep0.getRole());
 
 		System.out.println("查詢啟動");
-		Query query = new Query(user);
+		Querys query = new Querys(user);
 
 		System.out.println("管理者查詢:使用者");
 		user = query.getUsers(dao, user.getKeys()[2], "odise").get(0);
@@ -72,8 +73,6 @@ public class TestQuery {
 		for (AEMP aemp2 : aemps) {
 			System.out.println(aemp2.getEmail());
 		}
-
-		// 以下尚未測試
 
 		APRESENT apresent = new APRESENT();
 		System.out.println("\n" + "一般查詢:指定禮品");
@@ -105,7 +104,7 @@ public class TestQuery {
 			System.out.println(adep2.getDno());
 		}
 
-		//目前測試位置 108
+		// 目前測試位置 108
 		// 一般訂單 : 依登入之使用者權限而有不同的查詢結果，一般職員僅能查詢到自己的訂單，課長級可以查到整個部門的訂單
 		System.out.println("\n" + "使用者權限查詢:全部訂單、訂單的副檔、訂單的簽核狀態");
 		ArrayList<AODR> aodrs = query.getAodrs(dao);

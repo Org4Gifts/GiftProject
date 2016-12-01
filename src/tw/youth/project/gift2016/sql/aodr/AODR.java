@@ -28,17 +28,20 @@ public class AODR {
 	// Status10 : Obsoleted (行政部門作廢，系統自動加回 【及時庫存量】)
 	private Short authority = 0;
 	// 訂單最高簽核層級
+	private String signerno = "";
+	// 訂單目前簽核人員
 	private String purpose = "";
 	// 需求目的
 	private Timestamp created;
 	private Timestamp updated;
 
 	private String[] keys = { "_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
-			"purpose" };
+			"signerno", "purpose" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			dno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
-			authority.getClass().getSimpleName(), purpose.getClass().getSimpleName() };
+			authority.getClass().getSimpleName(), signerno.getClass().getSimpleName(),
+			purpose.getClass().getSimpleName() };
 	private String[] uniques = { "order1" };
 
 	public String getTableName() {
@@ -118,14 +121,6 @@ public class AODR {
 		this.tamt = tamt;
 	}
 
-	public String getPurpose() {
-		return purpose;
-	}
-
-	public void setPurpose(String purpose) {
-		this.purpose = purpose;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -140,6 +135,22 @@ public class AODR {
 
 	public void setAuthority(Integer authority) {
 		this.authority = Short.parseShort(Integer.toString(authority));
+	}
+
+	public String getSignerno() {
+		return signerno;
+	}
+
+	public void setSignerno(String signerno) {
+		this.signerno = signerno;
+	}
+
+	public String getPurpose() {
+		return purpose;
+	}
+
+	public void setPurpose(String purpose) {
+		this.purpose = purpose;
 	}
 
 	public Timestamp getCreated() {
@@ -168,6 +179,7 @@ public class AODR {
 		setTamt((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority((Integer) values[i++]);
+		setSignerno((String) values[i++]);
 		setPurpose((String) values[i++]);
 	}
 
@@ -182,6 +194,7 @@ public class AODR {
 		setTamt((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority((Integer) values[i++]);
+		setSignerno((String) values[i++]);
 		setPurpose((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
@@ -189,12 +202,12 @@ public class AODR {
 
 	public Object[] getValues() {
 		return new Object[] { getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(), getStatus(),
-				getAuthority(), getPurpose() };
+				getAuthority(), getSignerno(), getPurpose() };
 	}
 
 	public Object[] getValuesFull() {
 		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(), getStatus(),
-				getAuthority(), getPurpose(), getCreated(), getUpdated() };
+				getAuthority(), getSignerno(), getPurpose(), getCreated(), getUpdated() };
 	}
 
 }

@@ -12,17 +12,19 @@ public class ASIGNLOG {
 	// 簽核人員工號
 	private String signature = "";
 	// 簽核人員名稱
+	private String dno = "";
+	// 簽核人員部門代碼 4碼
 	private Float spent = 0.0f;
 	// 簽核花費時間 (上一個簽核人員的時間為主)
 	private String status = "";
-	// 訂單簽核狀態  Send 發送請求者 ,None 尚未簽核 ,Approve 同意 ,Reject 拒絕 ,Complete 完成
+	// 訂單簽核狀態 Send 發送請求者 ,None 尚未簽核 ,Approve 同意 ,Reject 拒絕 ,Complete 完成
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "order1", "empno", "signature", "spent", "status" };
+	private String[] keys = { "_id", "order1", "empno", "signature", "dno", "spent", "status" };
 	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			empno.getClass().getSimpleName(), signature.getClass().getSimpleName(), spent.getClass().getSimpleName(),
-			status.getClass().getSimpleName() };
+			empno.getClass().getSimpleName(), signature.getClass().getSimpleName(), dno.getClass().getSimpleName(),
+			spent.getClass().getSimpleName(), status.getClass().getSimpleName() };
 	private String[] uniques = { "" };
 
 	public String getTableName() {
@@ -78,6 +80,14 @@ public class ASIGNLOG {
 		this.signature = signature;
 	}
 
+	public String getDno() {
+		return dno;
+	}
+
+	public void setDno(String dno) {
+		this.dno = dno;
+	}
+
 	public Float getSpent() {
 		return spent;
 	}
@@ -115,6 +125,7 @@ public class ASIGNLOG {
 		setOrder1((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setSignature((String) values[i++]);
+		setDno((String) values[i++]);
 		setSpent((Float) values[i++]);
 		setStatus((String) values[i++]);
 	}
@@ -125,6 +136,7 @@ public class ASIGNLOG {
 		setOrder1((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setSignature((String) values[i++]);
+		setDno((String) values[i++]);
 		setSpent((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
@@ -133,11 +145,11 @@ public class ASIGNLOG {
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getOrder1(), getEmpno(), getSignature(), getSpent(), getStatus() };
+		return new Object[] { getOrder1(), getEmpno(), getSignature(), getDno(), getSpent(), getStatus() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getEmpno(), getSignature(), getSpent(), getStatus(), getCreated(),
-				getUpdated() };
+		return new Object[] { get_id(), getOrder1(), getEmpno(), getSignature(), getDno(), getSpent(), getStatus(),
+				getCreated(), getUpdated() };
 	}
 }

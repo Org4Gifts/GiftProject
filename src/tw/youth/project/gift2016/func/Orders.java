@@ -7,10 +7,12 @@ import java.util.TreeSet;
 
 import tw.youth.project.gift2016.consts.ConstValue;
 import tw.youth.project.gift2016.sql.DBManager;
+import tw.youth.project.gift2016.sql.adep.ADEP;
 import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 import tw.youth.project.gift2016.tools.ToolBox;
 
@@ -20,6 +22,8 @@ public class Orders {
 	private AODRDT aodrdt;
 	private AIO aio;
 	private AIODT aiodt;
+	private ArrayList<ADEP> adeps;
+	private ArrayList<AEMP> signatures;
 	private StringBuilder msg = new StringBuilder();
 
 	private static Set<String> orderNum = new TreeSet<>();
@@ -38,9 +42,41 @@ public class Orders {
 		for (Object[] objects : arr) {
 			vhnoNum.add((String) objects[1]);
 		}
+
+		queryADEP(dao);
 	}
 
-	public String createOrders(DBManager dao, AUSER user, Object priObj, Object[] secObjs) {
+	public ArrayList<AEMP> getSignatures(DBManager dao, AUSER user) {
+		if (signatures == null)
+			querySignatures(dao, user);
+		return signatures;
+	}
+
+	public void queryADEP(DBManager dao) {
+		ADEP adep = new ADEP();
+		ArrayList<Object[]> adeps = dao.query(adep.getTableName(), adep.getKeys()[1], "", adep.getLength());
+		for (Object[] objects : adeps) {
+			adep.setValuesFull(objects);
+			this.adeps.add(adep);
+			adep = new ADEP();
+		}
+	}
+
+	public void querySignatures(DBManager dao, AUSER user) {
+		AEMP aemp = new AEMP();
+		ArrayList<Object[]> aemps = dao.query(aemp.getTableName(), aemp.getKeys()[1], "", aemp.getLength());
+		signatures = new ArrayList<>();
+		for (Object[] objects : aemps) {
+			aemp.setValuesFull(objects);
+			if (user.getAuthority() > 0 ? user.getAuthority() <= aemp.getAuthority()
+					: user.getAuthority() < aemp.getAuthority()) {
+				signatures.add(aemp);
+			}
+			aemp = new AEMP();
+		}
+	}
+
+	public <T> String createOrders(DBManager dao, AUSER user, Object priObj, ArrayList<T> secObjs) {
 		// 建立訂單/調撥單
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
@@ -111,7 +147,7 @@ public class Orders {
 		return aodrdt != null ? ConstValue.ORDERS_ADD_AODR_SUCCESS : ConstValue.ORDERS_ADD_AIO_SUCCESS;
 	}
 
-	public String updateOrders(DBManager dao, AUSER user, Object priObj, Object[] secObjs) {
+	public <T> String updateOrders(DBManager dao, AUSER user, Object priObj, ArrayList<T> secObjs) {
 		// 更新訂單/調撥單
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
@@ -122,8 +158,7 @@ public class Orders {
 			for (Object secObj : secObjs) {
 				aodrdt = (AODRDT) secObj;
 				if (aodrdt.get_id() == 0)
-					msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
-							.append(" , ");
+					msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues())).append(" , ");
 				else
 					msg.append(dao.update(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
 							.append(" , ");
@@ -134,7 +169,10 @@ public class Orders {
 			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
 			for (Object secObj : secObjs) {
 				aiodt = (AIODT) secObj;
-				msg.append(dao.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull())).append(" , ");
+				if (aiodt.get_id() == 0)
+					msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
+				else
+					msg.append(dao.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull())).append(" , ");
 			}
 		}
 		if (msg.toString().contains("error"))
@@ -143,7 +181,7 @@ public class Orders {
 		return priObj instanceof AODR ? ConstValue.ORDERS_UPDATE_AODR_SUCCESS : ConstValue.ORDERS_UPDATE_AIO_SUCCESS;
 	}
 
-	public String submitOrders(DBManager dao, AUSER user, Object priObj, Object[] secObj) {
+	public <T> String submitOrders(DBManager dao, AUSER user, Object priObj, ArrayList<T> secObj) {
 		// 送出訂單/調撥單
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());

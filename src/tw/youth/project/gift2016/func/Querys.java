@@ -17,10 +17,10 @@ import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 
-public class Query {
+public class Querys {
 	AUSER user;
 
-	public Query(AUSER user) {
+	public Querys(AUSER user) {
 		// TODO Auto-generated constructor stub
 		// 取得使用者資料
 		this.user = user;
@@ -66,7 +66,7 @@ public class Query {
 	}
 
 	public ArrayList<AODR> getAodrs(DBManager dao) {
-		// 查詢部門內的訂單 value 不填入 即為全查詢
+		// 查詢部門內的訂單
 		if (user.getAuthority() > 0) {
 			// 課長級簽核權限使用之功能
 			AEMP aemp = new AEMP();

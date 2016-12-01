@@ -463,7 +463,7 @@ public class TestSQL {
 		System.out.println("AODR");
 		AODR aodr = new AODR();
 
-		Object[] objs6 = { "A20161108", new Timestamp(10000L), "K123456", "F1", "0800", 100.0f, "Preparing", 2,
+		Object[] objs6 = { "A20161108", new Timestamp(10000L), "K123456", "F1", "0800", 100.0f, "Preparing", 2, "P0002",
 				"測試申請單1" };
 		aodr.setValues(objs6);
 		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));
@@ -493,7 +493,7 @@ public class TestSQL {
 		// ASIGNLOG
 		System.out.println("ASIGNLOG");
 		ASIGNLOG asignlog = new ASIGNLOG();
-		objs6 = new Object[] { "A20161108", "K123456", "歐帝斯", 0.0f, "Send" };
+		objs6 = new Object[] { "A20161108", "K123456", "歐帝斯","0800", 0.0f, "Send" };
 		asignlog.setValues(objs6);
 		System.out.println(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		arr = dao.query(asignlog.getTableName(), "order1", "1108", asignlog.getLength());
@@ -506,7 +506,7 @@ public class TestSQL {
 			asignlog.setValuesFull(objects);
 		}
 
-		objs6[4] = "Approve";
+		objs6[5] = "Approve";
 		asignlog.setValues(objs6);
 		System.out.println(dao.update(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValuesFull()));
 		arr2 = dao.query(asignlog.getTableName(), "order1", "1108", asignlog.getLength());
@@ -551,8 +551,8 @@ public class TestSQL {
 		// AIO
 		System.out.println("AIO");
 		AIO aio = new AIO();
-		Object[] objs8 = { "C60989", "eng", new Timestamp(100000L), new Timestamp(100000L), "F1", "D",
-				100.0f, "eng廠區庫存不足" };
+		Object[] objs8 = { "C60989", "P0002", "0800","F1", new Timestamp(100000L), new Timestamp(100000L), "F2", "D", 100.0f,
+				"Rejected",0,"P0001","eng廠區庫存不足" };
 		aio.setValues(objs8);
 		System.out.println(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues()));
 		arr = dao.query(aio.getTableName(), "vhno", "C60", aio.getLength());
@@ -564,7 +564,7 @@ public class TestSQL {
 			System.out.println(str);
 			aio.setValuesFull(objects);
 		}
-		objs8[6] = 200.0f;
+		objs8[8] = 200.0f;
 		aio.setValues(objs8);
 		System.out.println(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull()));
 		arr2 = dao.query(aio.getTableName(), "vhno", "C60", aio.getLength());
@@ -687,7 +687,7 @@ public class TestSQL {
 		adep.setValues(objs11);
 		System.out.println(dao.insert(adep.getTableName(), adep.getKeys(), adep.getValues()));
 
-		System.out.println("\nTest completed");
+		System.out.println("\n測試結束");
 	}
 
 	// setAutoCommit(false) 自動更新取消

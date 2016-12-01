@@ -19,7 +19,8 @@ public class AUSER {
 
 	// 額外需求部分
 
-	private Short authority;
+	private String ename = "";
+	private Short authority = 0;
 	// 權限
 	private String mgr = "";
 	// 直屬主管工號
@@ -132,6 +133,13 @@ public class AUSER {
 	}
 
 	// 以下是額外需求的資料
+	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
 
 	public Short getAuthority() {
 		return authority;
