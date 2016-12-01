@@ -125,7 +125,7 @@ public class TestOrders {
 		}
 
 		System.out.println("修改訂單之新增禮品");
-		secObjs = new Object[] { "訂單編號", "中原大學", "電機系院長", 4, "S001-F4", 1, 880.0f, "洽談產學合作-高爾夫球組一廠", 1 };
+		secObjs = new Object[] { aodr.getOrder1(), "中原大學", "電機系院長", 4, "S001-F4", 1, 880.0f, "洽談產學合作-高爾夫球組一廠", 1 };
 		aodrdt = new AODRDT();
 		aodrdt.setValues(secObjs);
 		aodrdts.add(aodrdt);
@@ -144,7 +144,7 @@ public class TestOrders {
 		}
 
 		System.out.println("修改調撥單之新增禮品");
-		secObjs = new Object[] { "調撥單編號", "E001-F1", "E001-F2", 10, 40.0f, "A201611002", "從一廠調撥10個橘色鍵盤刷到二廠" };
+		secObjs = new Object[] { aio.getVhno(), "E001-F1", "E001-F2", 10, 40.0f, "A201611002", "從一廠調撥10個橘色鍵盤刷到二廠" };
 		aiodt = new AIODT();
 		aiodt.setValues(secObjs);
 		aiodts.add(aiodt);

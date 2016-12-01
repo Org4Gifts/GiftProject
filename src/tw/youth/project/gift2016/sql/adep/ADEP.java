@@ -64,8 +64,8 @@ public class ADEP {
 		return role;
 	}
 
-	public void setRole(Short role) {
-		this.role = role;
+	public void setRole(Integer role) {
+		this.role = Short.parseShort(Integer.toString(role));
 	}
 
 	public String getDname() {
@@ -103,19 +103,26 @@ public class ADEP {
 	public void setValues(Object[] values) {
 		int i = 0;
 		setDno((String) values[i++]);
-		setRole(Short.parseShort(Integer.toString((Integer) values[i++])));
+		setRole((Integer) values[i++]);
 		setDname((String) values[i++]);
 		setFno((String) values[i++]);
 	}
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
+		System.out.println(values[i]);
 		set_id((Integer) values[i++]);
+		System.out.println(values[i]);
 		setDno((String) values[i++]);
-		setRole(Short.parseShort(Integer.toString((Integer) values[i++])));
+		System.out.println(values[i]);
+		setRole((Integer) values[i++]);
+		System.out.println(values[i]);
 		setDname((String) values[i++]);
+		System.out.println(values[i]);
 		setFno((String) values[i++]);
+		System.out.println(values[i]);
 		setCreated((Timestamp) values[i++]);
+		System.out.println(values[i]);
 		setUpdated((Timestamp) values[i++]);
 	}
 

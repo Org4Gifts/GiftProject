@@ -43,7 +43,7 @@ public class Tester {
 		System.out.println(str.substring(0, str.length() - 2));
 	}
 
-	@Test
+	// @Test
 	public void testAodr() {
 		ArrayList<Object[]> arr = null;
 		ArrayList<Object[]> arr2 = null;
@@ -52,20 +52,20 @@ public class Tester {
 		// AODR
 		System.out.println("AODR");
 		AODR aodr = null;
-//		AODRSS aodrss = null;
+		// AODRSS aodrss = null;
 		try {
 			System.out.println(ToolBox.toSqlDate(new Date()).getClass().getName());
-//			aodrss = new AODRSS();
-			aodr = new AODR();			
+			// aodrss = new AODRSS();
+			aodr = new AODR();
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Exception " + e.getMessage());
 		}
-		
-//		System.out.println(aodrss);
-////		System.out.println(aodr);
-////		System.out.println("");
-////		System.out.println("SetObj");
+
+		// System.out.println(aodrss);
+		//// System.out.println(aodr);
+		//// System.out.println("");
+		//// System.out.println("SetObj");
 		Object[] objs6 = { "A20161108", ToolBox.toSqlDate(new Date()), "K123456", "F1", "0800", 100L, "Preparing", 2,
 				"測試申請單1" };
 		System.out.println("SetSuccess");
@@ -94,6 +94,12 @@ public class Tester {
 			System.out.println(str);
 		}
 		System.out.println(dao.drop(aodr.getTableName(), "empno", "K123456") + "\n");
+	}
+
+	@Test
+	public void testMd5() {
+		AUSER user = new AUSER();
+		System.out.println(user.toMD5Pass("P0001"));
 	}
 
 }

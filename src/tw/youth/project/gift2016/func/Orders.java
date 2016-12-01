@@ -42,7 +42,6 @@ public class Orders {
 		for (Object[] objects : arr) {
 			vhnoNum.add((String) objects[1]);
 		}
-
 		queryADEP(dao);
 	}
 
@@ -53,11 +52,12 @@ public class Orders {
 	}
 
 	public void queryADEP(DBManager dao) {
+		adeps = new ArrayList<>();
 		ADEP adep = new ADEP();
-		ArrayList<Object[]> adeps = dao.query(adep.getTableName(), adep.getKeys()[1], "", adep.getLength());
-		for (Object[] objects : adeps) {
+		ArrayList<Object[]> arr = dao.query(adep.getTableName(), adep.getKeys()[1], "", adep.getLength());
+		for (Object[] objects : arr) {
 			adep.setValuesFull(objects);
-			this.adeps.add(adep);
+			adeps.add(adep);
 			adep = new ADEP();
 		}
 	}
@@ -176,7 +176,7 @@ public class Orders {
 			}
 		}
 		if (msg.toString().contains("error"))
-			return ConstValue.ORDERS_ADD_FAILURE + "\n" + msg.toString();
+			return ConstValue.ORDERS_UPDATE_FAILURE + "\n" + msg.toString();
 
 		return priObj instanceof AODR ? ConstValue.ORDERS_UPDATE_AODR_SUCCESS : ConstValue.ORDERS_UPDATE_AIO_SUCCESS;
 	}

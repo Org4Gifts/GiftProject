@@ -250,7 +250,7 @@ public class TestSQL {
 		// AUSER
 		System.out.println("AUSER");
 		AUSER user = new AUSER();
-		Object[] objs = { "K123456", "odise", "116025" };
+		Object[] objs = { "P0002", "odise", "P0002" };
 		user.setValues(objs);
 		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
 		ArrayList<Object[]> arr = dao.query(user.getTableName(), "user", "o", user.getLength());
@@ -263,7 +263,7 @@ public class TestSQL {
 			user.setValuesFull(objects);
 		}
 
-		user.setPass("116022");
+		user.setPass("P0003");
 		System.out.println(dao.update(user.getTableName(), user.getKeys(), user.getValuesFull()));
 		ArrayList<Object[]> arr2 = dao.query(user.getTableName(), "user", "o", user.getLength());
 		for (Object[] objects : arr2) {
@@ -274,26 +274,6 @@ public class TestSQL {
 			System.out.println(str);
 		}
 		System.out.println(dao.drop(user.getTableName(), "user", "odise") + "\n");
-
-		// Object[] objs = { "K123456", "odise", "116025" };
-		objs = new Object[] { "K123456", "odise1", user.toMD5Pass("116025") };
-		user.setValues(objs);
-		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
-		objs = new Object[] { "K123457", "odise2", user.toMD5Pass("116026") };
-		user.setValues(objs);
-		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
-		objs = new Object[] { "K123458", "odise3", user.toMD5Pass("116027") };
-		user.setValues(objs);
-		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
-		objs = new Object[] { "K123459", "odise4", user.toMD5Pass("116028") };
-		user.setValues(objs);
-		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
-		objs = new Object[] { "K123460", "odise5", user.toMD5Pass("116029") };
-		user.setValues(objs);
-		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
-		objs = new Object[] { "K123461", "odise6", user.toMD5Pass("116030") };
-		user.setValues(objs);
-		System.out.println(dao.insert(user.getTableName(), user.getKeys(), user.getValues()));
 
 		// AEMP
 		System.out.println("AEMP");
@@ -322,25 +302,6 @@ public class TestSQL {
 			System.out.println(str);
 		}
 		System.out.println(dao.drop(aemp.getTableName(), "empno", "K123456") + "\n");
-
-		objs1 = new Object[] { "K123456", "odise1", "123@com", "eng", 0, "132-5979", "K123400", "0804", "F1" };
-		aemp.setValues(objs1);
-		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123457", "odise2", "124@com", "eng", 9, "132-5979", "K123400", "0800", "F1" };
-		aemp.setValues(objs1);
-		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123458", "odise3", "125@com", "eng", 2, "132-5979", "K123400", "0800", "F1" };
-		aemp.setValues(objs1);
-		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123459", "odise4", "126@com", "eng", 3, "132-5979", "K123400", "0800", "F1" };
-		aemp.setValues(objs1);
-		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123460", "odise5", "127@com", "eng", 4, "132-5979", "K123400", "0800", "F1" };
-		aemp.setValues(objs1);
-		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
-		objs1 = new Object[] { "K123461", "odise6", "128@com", "enc", 5, "132-5979", "K123400", "0800", "F1" };
-		aemp.setValues(objs1);
-		System.out.println(dao.insert(aemp.getTableName(), aemp.getKeys(), aemp.getValues()));
 
 		// AVDR
 		System.out.println("AVDR");
@@ -635,13 +596,6 @@ public class TestSQL {
 		}
 		System.out.println(dao.drop(afab.getTableName(), "fno", "F1") + "\n");
 
-		objs10 = new Object[] { "F1", "A廠區" };
-		afab.setValues(objs10);
-		System.out.println(dao.insert(afab.getTableName(), afab.getKeys(), afab.getValues()));
-		objs10 = new Object[] { "F2", "B廠區" };
-		afab.setValues(objs10);
-		System.out.println(dao.insert(afab.getTableName(), afab.getKeys(), afab.getValues()));
-
 		// ADEP
 		System.out.println("ADEP");
 		ADEP adep = new ADEP();
@@ -670,22 +624,6 @@ public class TestSQL {
 			System.out.println(str);
 		}
 		System.out.println(dao.drop(adep.getTableName(), adep.getKeys()[1], adep.getDno()) + "\n");
-
-		objs11 = new Object[] { "0802", 0, "一般部門", "F2" };
-		adep.setValues(objs11);
-		System.out.println(dao.insert(adep.getTableName(), adep.getKeys(), adep.getValues()));
-		objs11 = new Object[] { "0803", 1, "核銷部門", "F2" };
-		adep.setValues(objs11);
-		System.out.println(dao.insert(adep.getTableName(), adep.getKeys(), adep.getValues()));
-		objs11 = new Object[] { "0802", 2, "庫存部門", "F2" };
-		adep.setValues(objs11);
-		System.out.println(dao.insert(adep.getTableName(), adep.getKeys(), adep.getValues()));
-		objs11 = new Object[] { "0804", 3, "管理部門", "F2" };
-		adep.setValues(objs11);
-		System.out.println(dao.insert(adep.getTableName(), adep.getKeys(), adep.getValues()));
-		objs11 = new Object[] { "0803", 4, "董事長", "F1" };
-		adep.setValues(objs11);
-		System.out.println(dao.insert(adep.getTableName(), adep.getKeys(), adep.getValues()));
 
 		System.out.println("\n測試結束");
 	}

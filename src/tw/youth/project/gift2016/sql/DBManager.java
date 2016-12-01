@@ -18,6 +18,7 @@ import tw.youth.project.gift2016.sql.aqty.AQTY;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
+import tw.youth.project.gift2016.tools.ToolBox;
 
 public class DBManager {
 	private static Connection conn;
@@ -110,6 +111,7 @@ public class DBManager {
 		return conn != null;
 	}
 
+	// 建立資料表
 	public String createTable(String tableName, String[] keys, String[] types, String[] uniques) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("CREATE").append(" ").append("TABLE").append(" ").append(tableName).append(" ").append("(");
@@ -167,6 +169,39 @@ public class DBManager {
 		return sb.toString();
 	}
 
+	// 插入資料
+	// public synchronized String insert(String tableName, String[] keys,
+	// Object[] values) {
+	// StringBuilder sb = new StringBuilder();
+	// sb.append("INSERT").append(" ").append("INTO").append("
+	// ").append(tableName).append(" ").append("(");
+	// for (String key : keys) {
+	// if (key.equals("_id"))
+	// continue;
+	// sb.append(key).append(",");
+	// }
+	// sb.replace(sb.length() - 1, sb.length(), ")").append("
+	// ").append("VALUES").append("(");
+	// for (String key : keys) {
+	// if (key.equals("_id"))
+	// continue;
+	// sb.append("?").append(",");
+	// }
+	// sb.replace(sb.length() - 1, sb.length(), ")");
+	// try {
+	// PreparedStatement ps = conn.prepareStatement(sb.toString());
+	// for (int i = 0; i < values.length; i++) {
+	// ps.setObject(i + 1, values[i]);
+	// }
+	// return "Insert " + (ps.executeUpdate() > 0);
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// return "Insert error, " + e.getMessage();
+	// }
+	//
+	// }
+
+	// 這個用於phpMyAdmin
 	public synchronized String insert(String tableName, String[] keys, Object[] values) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
@@ -175,36 +210,8 @@ public class DBManager {
 				continue;
 			sb.append(key).append(",");
 		}
-		sb.replace(sb.length() - 1, sb.length(), ")").append(" ").append("VALUES").append("(");
-		for (String key : keys) {
-			if (key.equals("_id"))
-				continue;
-			sb.append("?").append(",");
-		}
-		sb.replace(sb.length() - 1, sb.length(), ")");
-		try {
-			PreparedStatement ps = conn.prepareStatement(sb.toString());
-			for (int i = 0; i < values.length; i++) {
-				ps.setObject(i + 1, values[i]);
-			}
-			return "Insert " + (ps.executeUpdate() > 0);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			return "Insert error, " + e.getMessage();
-		}
-
-	}
-
-	// 這個用於phpMyAdmin
-	public synchronized String insert2(String tableName, String[] keys, Object[] values) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
-		for (String key : keys) {
-			if (key.equals("_id"))
-				continue;
-			sb.append(key).append(",");
-		}
 		sb.append("created").append(","); // 增加的地方
+		sb.append("updated").append(","); // 增加的地方
 		sb.replace(sb.length() - 1, sb.length(), ")").append(" ").append("VALUES").append("(");
 		for (String key : keys) {
 			if (key.equals("_id"))
@@ -212,13 +219,14 @@ public class DBManager {
 			sb.append("?").append(",");
 		}
 		sb.append("?").append(",");// 增加的地方
-		sb.replace(sb.length() - 1, sb.length(), ")");
+		sb.append("?").append(")");// 增加的地方
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
 			for (int i = 0; i < values.length; i++) {
 				ps.setObject(i + 1, values[i]);
 			}
-			ps.setObject(values.length + 1, "now()"); // 增加的地方
+			ps.setObject(values.length + 1, ToolBox.getCurrentTimestamp()); // 增加的地方
+			ps.setObject(values.length + 2, ToolBox.getCurrentTimestamp()); // 增加的地方
 			return "Insert " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -227,6 +235,37 @@ public class DBManager {
 
 	}
 
+	// 更新資料
+	// public synchronized String update(String tableName, String[] keys,
+	// Object[] values) {
+	// StringBuilder sb = new StringBuilder();
+	// sb.append("UPDATE").append(" ").append(tableName).append("
+	// ").append("SET").append(" ");
+	// for (String key : keys) {
+	// if (key.equals("_id"))
+	// continue;
+	// sb.append(key).append("=?,");
+	// }
+	// sb.replace(sb.length() - 1, sb.length(), " ");
+	// sb.append("WHERE").append(" ").append(keys[0]).append("=?");
+	// try {
+	// PreparedStatement ps = conn.prepareStatement(sb.toString());
+	// int i;
+	// for (i = 1; i < values.length; i++) {
+	// if (values.length - i <= 2)
+	// continue;
+	// ps.setObject(i, values[i]);
+	// }
+	// ps.setObject(i - 2, values[0]);
+	//
+	// return "update " + (ps.executeUpdate() > 0);
+	// } catch (SQLException e) {
+	// // TODO Auto-generated catch block
+	// return "update error, " + e.getMessage();
+	// }
+	// }
+
+	// 這個用於phpMyAdmin
 	public synchronized String update(String tableName, String[] keys, Object[] values) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE").append(" ").append(tableName).append(" ").append("SET").append(" ");
@@ -235,7 +274,8 @@ public class DBManager {
 				continue;
 			sb.append(key).append("=?,");
 		}
-		sb.replace(sb.length() - 1, sb.length(), " ");
+		sb.append("created").append("=?,");
+		sb.append("updated").append("=?").append(" ");
 		sb.append("WHERE").append(" ").append(keys[0]).append("=?");
 		try {
 			PreparedStatement ps = conn.prepareStatement(sb.toString());
@@ -245,7 +285,9 @@ public class DBManager {
 					continue;
 				ps.setObject(i, values[i]);
 			}
-			ps.setObject(i - 2, values[0]);
+			ps.setObject(i - 2, ToolBox.getCurrentTimestamp());
+			ps.setObject(i - 1, ToolBox.getCurrentTimestamp());
+			ps.setObject(i, values[0]);
 
 			return "update " + (ps.executeUpdate() > 0);
 		} catch (SQLException e) {
@@ -254,6 +296,7 @@ public class DBManager {
 		}
 	}
 
+	// 刪除資料
 	public synchronized String drop(String tableName, String key, Object value) {
 		String dropTable = "DELETE from %s WHERE %s=?";
 		try {
@@ -267,6 +310,7 @@ public class DBManager {
 		}
 	}
 
+	// 查詢資料
 	public synchronized ArrayList<Object[]> query(String tableName, String key, Object value, int length) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT").append(" ").append("*").append("FROM").append(" ").append(tableName).append(" ")

@@ -7,7 +7,6 @@ import org.junit.Test;
 import tw.youth.project.gift2016.func.Login;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
-import tw.youth.project.gift2016.sql.user.AUSER;
 
 public class TestLogin {
 
@@ -17,7 +16,7 @@ public class TestLogin {
 		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
 		dao.starup();
 		System.out.println("開始登入功能");
-		Login login = new Login(dao, "odise", "116022");
+		Login login = new Login(dao, "P0001", "P0001");
 		
 		System.out.println("測試驗證登入");
 		System.out.println(login.checkLogin());
