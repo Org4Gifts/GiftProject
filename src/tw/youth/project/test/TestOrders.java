@@ -90,13 +90,13 @@ public class TestOrders {
 		// 建立調撥單
 		System.out.println("建立調撥單");
 		priObjs = new Object[] { "調撥單編號", user.getEmpno(), user.getDno(), user.getFno(), ToolBox.getCurrentTimestamp(),
-				ToolBox.strToSqlTimestamp("2016-12-01 12:00:00"), "F2", "D", 20.0f, "Rejected", 1, user.getMgr(),
+				ToolBox.strToSqlTimestamp("2016-12-01 12:00:00"), "F2", "D", 20.0f, "Preparing", 1, user.getMgr(),
 				"調撥單測試一" };
 		AIO aio = new AIO();
 		aio.setValues(priObjs);
 
 		System.out.println("建立調撥單副檔");
-		secObjs = new Object[] { "調撥單編號", "E001-F1", "E001-F2", 10, 40.0f, "A201611002", "從一廠調撥10個橘色鍵盤刷到二廠" };
+		secObjs = new Object[] { "調撥單編號", "E001-F1", "E001-F2", 10, 40.0f, "A201612002", "從一廠調撥10個橘色鍵盤刷到二廠" };
 		ArrayList<AIODT> aiodts = new ArrayList<>();
 		AIODT aiodt = new AIODT();
 		aiodt.setValues(secObjs);
@@ -154,6 +154,15 @@ public class TestOrders {
 		System.out.println(orders.updateOrders(dao, user, aio, aiodts));
 		System.out.println("發送修改調撥單完成");
 
+		// 送出訂單
+		System.out.println("送出訂單");
+		System.out.println(orders.submitOrders(dao, user, aodr));
+		System.out.println("送出訂單完成");
+
+		// 送出調撥單
+		System.out.println("送出訂單");
+		System.out.println(orders.submitOrders(dao, user, aio));
+		System.out.println("送出訂單完成");
 	}
 
 }
