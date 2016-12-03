@@ -243,6 +243,7 @@ public class TestSQL {
 
 	@Test
 	public void testInsertQueryUpdateDropTableColumns() { // 測試OK
+		//測試所有table的新增、查詢、修改、刪除功能
 		System.out.println("testInsertUpdateDropTables : " + new Date(System.currentTimeMillis()).toString());
 		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
@@ -425,7 +426,7 @@ public class TestSQL {
 		AODR aodr = new AODR();
 
 		Object[] objs6 = { "A20161108", new Timestamp(10000L), "K123456", "F1", "0800", 100.0f, "Preparing", 2, "P0002",
-				"測試申請單1" };
+				"測試申請單1","自動增加" };
 		aodr.setValues(objs6);
 		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));
 		arr = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
@@ -513,7 +514,7 @@ public class TestSQL {
 		System.out.println("AIO");
 		AIO aio = new AIO();
 		Object[] objs8 = { "C60989", "P0002", "0800","F1", new Timestamp(100000L), new Timestamp(100000L), "F2", "D", 100.0f,
-				"Rejected",0,"P0001","eng廠區庫存不足" };
+				"Rejected",0,"P0001","eng廠區庫存不足","自動增加" };
 		aio.setValues(objs8);
 		System.out.println(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues()));
 		arr = dao.query(aio.getTableName(), "vhno", "C60", aio.getLength());
