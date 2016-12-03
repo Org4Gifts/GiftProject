@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class AODR {
 	// 訂單主檔
-	private Integer _id = 0;
+	private Integer aodr_id = 0;
 
 	private String order1 = "";
 	// 訂單編號
@@ -35,9 +35,9 @@ public class AODR {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
+	private String[] keys = { "aodr_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
 			"signerno", "purpose" };
-	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
+	private String[] types = { aodr_id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			dno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), signerno.getClass().getSimpleName(),
@@ -65,12 +65,12 @@ public class AODR {
 	}
 
 	// 以下是儲存的值
-	public Integer get_id() {
-		return _id;
+	public Integer getAodr_id() {
+		return aodr_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAodr_id(Integer aodr_id) {
+		this.aodr_id = aodr_id;
 	}
 
 	public String getOrder1() {
@@ -185,7 +185,7 @@ public class AODR {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAodr_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
 		setOdate((Timestamp) values[i++]);
 		setEmpno((String) values[i++]);
@@ -206,8 +206,8 @@ public class AODR {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(), getStatus(),
-				getAuthority(), getSignerno(), getPurpose(), getCreated(), getUpdated() };
+		return new Object[] { getAodr_id(), getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(),
+				getStatus(), getAuthority(), getSignerno(), getPurpose(), getCreated(), getUpdated() };
 	}
 
 }

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class APRESENT {
 	// 禮品基本檔
-	private Integer _id = 0;
+	private Integer apresent_id = 0;
 
 	private String fgno = "";
 	// 禮品編號
@@ -29,9 +29,9 @@ public class APRESENT {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "fgno", "fgname", "prc", "grade", "authority", "fno", "status", "note1", "fqty",
+	private String[] keys = { "apresent_id", "fgno", "fgname", "prc", "grade", "authority", "fno", "status", "note1", "fqty",
 			"iqty" };
-	private String[] types = { _id.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
+	private String[] types = { apresent_id.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
 			fgname.getClass().getSimpleName(), prc.getClass().getSimpleName(), grade.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), fno.getClass().getSimpleName(), status.getClass().getSimpleName(),
 			note1.getClass().getSimpleName(), fqty.getClass().getSimpleName(), iqty.getClass().getSimpleName() };
@@ -58,12 +58,12 @@ public class APRESENT {
 	}
 
 	// 以下是儲存的值
-	public Integer get_id() {
-		return _id;
+	public Integer getApresent_id() {
+		return apresent_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setApresent_id(Integer apresent_id) {
+		this.apresent_id = apresent_id;
 	}
 
 	public String getFgno() {
@@ -178,7 +178,7 @@ public class APRESENT {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setApresent_id((Integer) values[i++]);
 		setFgno((String) values[i++]);
 		setFgname((String) values[i++]);
 		setPrc((Float) values[i++]);
@@ -199,7 +199,7 @@ public class APRESENT {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getFno(),
+		return new Object[] { getApresent_id(), getFgno(), getFgname(), getPrc(), getGrade(), getAuthority(), getFno(),
 				getStatus(), getNote1(), getFqty(), getIqty(), getCreated(), getUpdated() };
 	}
 }

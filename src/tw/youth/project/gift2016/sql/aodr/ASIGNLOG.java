@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class ASIGNLOG {
 	// 訂單主檔
-	private Integer _id = 0;
+	private Integer asignlog_id = 0;
 
 	private String order1 = "";
 	// 訂單編號
@@ -21,8 +21,8 @@ public class ASIGNLOG {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "order1", "empno", "signature", "dno", "spent", "status" };
-	private String[] types = { _id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
+	private String[] keys = { "asignlog_id", "order1", "empno", "signature", "dno", "spent", "status" };
+	private String[] types = { asignlog_id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			empno.getClass().getSimpleName(), signature.getClass().getSimpleName(), dno.getClass().getSimpleName(),
 			spent.getClass().getSimpleName(), status.getClass().getSimpleName() };
 	private String[] uniques = { "" };
@@ -48,12 +48,12 @@ public class ASIGNLOG {
 	}
 
 	// 以下是儲存的值
-	public Integer get_id() {
-		return _id;
+	public Integer getAsignlog_id() {
+		return asignlog_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAsignlog_id(Integer asignlog_id) {
+		this.asignlog_id = asignlog_id;
 	}
 
 	public String getOrder1() {
@@ -132,7 +132,7 @@ public class ASIGNLOG {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAsignlog_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setSignature((String) values[i++]);
@@ -149,7 +149,7 @@ public class ASIGNLOG {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getOrder1(), getEmpno(), getSignature(), getDno(), getSpent(), getStatus(),
+		return new Object[] { getAsignlog_id(), getOrder1(), getEmpno(), getSignature(), getDno(), getSpent(), getStatus(),
 				getCreated(), getUpdated() };
 	}
 }

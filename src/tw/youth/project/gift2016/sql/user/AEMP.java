@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class AEMP {
 	// 員工基本資料檔
-	private Integer _id = 0;
+	private Integer aemp_id = 0;
 
 	private String empno = "";
 	// 工號
@@ -21,14 +21,14 @@ public class AEMP {
 	private String mgr = "";
 	// 直屬主管工號
 	private String dno = "";
-	// 部門代碼  4碼
+	// 部門代碼 4碼
 	private String fno = "";
-	// 廠區代碼  2碼
+	// 廠區代碼 2碼
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno", "fno" };
-	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
+	private String[] keys = { "aemp_id", "empno", "ename", "email", "job", "authority", "ext", "mgr", "dno", "fno" };
+	private String[] types = { aemp_id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
 			ename.getClass().getSimpleName(), email.getClass().getSimpleName(), job.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), ext.getClass().getSimpleName(), mgr.getClass().getSimpleName(),
 			dno.getClass().getSimpleName(), fno.getClass().getSimpleName() };
@@ -55,12 +55,12 @@ public class AEMP {
 	}
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAemp_id() {
+		return aemp_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAemp_id(Integer aemp_id) {
+		this.aemp_id = aemp_id;
 	}
 
 	public String getEmpno() {
@@ -166,7 +166,7 @@ public class AEMP {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAemp_id((Integer) values[i++]);
 		setEmpno((String) values[i++]);
 		setEname((String) values[i++]);
 		setEmail((String) values[i++]);
@@ -186,7 +186,7 @@ public class AEMP {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getEmpno(), getEname(), getEmail(), getJob(), getAuthority(), getExt(),
+		return new Object[] { getAemp_id(), getEmpno(), getEname(), getEmail(), getJob(), getAuthority(), getExt(),
 				getMgr(), getDno(), getFno(), getCreated(), getUpdated() };
 	}
 }

@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class AUSER {
 
-	private Integer _id = 0;
+	private Integer auser_id = 0;
 	private String empno = "";
 	// 員工編號
 	private String user = "";
@@ -31,8 +31,8 @@ public class AUSER {
 	private Short role;
 	// 部門權限
 
-	private String[] keys = { "_id", "empno", "user", "pass" };
-	private String[] types = { _id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
+	private String[] keys = { "auser_id", "empno", "user", "pass" };
+	private String[] types = { auser_id.getClass().getSimpleName(), empno.getClass().getSimpleName(),
 			user.getClass().getSimpleName(), pass.getClass().getSimpleName() };
 	private String[] uniques = { "empno", "user" };
 
@@ -84,12 +84,12 @@ public class AUSER {
 
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAuser_id() {
+		return auser_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAuser_id(Integer auser_id) {
+		this.auser_id = auser_id;
 	}
 
 	public String getEmpno() {
@@ -190,7 +190,7 @@ public class AUSER {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAuser_id((Integer) values[i++]);
 		setEmpno((String) values[i++]);
 		setUser((String) values[i++]);
 		setPass((String) values[i++]);
@@ -203,7 +203,7 @@ public class AUSER {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getEmpno(), getUser(), getPass(), getCreated(), getUpdated() };
+		return new Object[] { getAuser_id(), getEmpno(), getUser(), getPass(), getCreated(), getUpdated() };
 	}
 
 }

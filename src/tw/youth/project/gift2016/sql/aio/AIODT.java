@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class AIODT {
 	// 多廠別進/銷副檔
-	private Integer _id = 0;
+	private Integer aiodt_id = 0;
 
 	private String vhno = ""; // auto
 	// 單據編號
@@ -23,8 +23,8 @@ public class AIODT {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "vhno", "inno", "outno", "qty", "prc", "order1", "note1" };
-	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
+	private String[] keys = { "aiodt_id", "vhno", "inno", "outno", "qty", "prc", "order1", "note1" };
+	private String[] types = { aiodt_id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
 			inno.getClass().getSimpleName(), outno.getClass().getSimpleName(), qty.getClass().getSimpleName(),
 			prc.getClass().getSimpleName(), order1.getClass().getSimpleName(), note1.getClass().getSimpleName() };
 	private String[] uniques = { "" };
@@ -50,12 +50,12 @@ public class AIODT {
 	}
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAiodt_id() {
+		return aiodt_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAiodt_id(Integer aiodt_id) {
+		this.aiodt_id = aiodt_id;
 	}
 
 	public String getVhno() {
@@ -143,7 +143,7 @@ public class AIODT {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAiodt_id((Integer) values[i++]);
 		setVhno((String) values[i++]);
 		setInno((String) values[i++]);
 		setOutno((String) values[i++]);
@@ -160,8 +160,8 @@ public class AIODT {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getVhno(), getInno(), getOutno(), getQty(), getPrc(), getOrder1(), getNote1(),
-				getCreated(), getUpdated() };
+		return new Object[] { getAiodt_id(), getVhno(), getInno(), getOutno(), getQty(), getPrc(), getOrder1(),
+				getNote1(), getCreated(), getUpdated() };
 	}
 
 }

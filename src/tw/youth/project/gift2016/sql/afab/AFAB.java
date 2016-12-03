@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class AFAB {
 	// 廠別基本檔
-	private Integer _id = 0;
+	private Integer afab_id = 0;
 
 	private String fno = "";
 	// 廠別代碼 2碼
@@ -13,8 +13,8 @@ public class AFAB {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "fno", "fname" };
-	private String[] types = { _id.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+	private String[] keys = { "afab_id", "fno", "fname" };
+	private String[] types = { afab_id.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			fname.getClass().getSimpleName() };
 	private String[] uniques = { "fno" };
 
@@ -39,12 +39,12 @@ public class AFAB {
 	}
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAfab_id() {
+		return afab_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAfab_id(Integer afab_id) {
+		this.afab_id = afab_id;
 	}
 
 	public String getFno() {
@@ -87,7 +87,7 @@ public class AFAB {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAfab_id((Integer) values[i++]);
 		setFno((String) values[i++]);
 		setFame((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
@@ -99,6 +99,6 @@ public class AFAB {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getFno(), getFname(), getCreated(), getUpdated() };
+		return new Object[] { getAfab_id(), getFno(), getFname(), getCreated(), getUpdated() };
 	}
 }

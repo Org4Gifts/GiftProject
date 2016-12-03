@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class ADEP {
 	// 部門基本資料檔
 
-	private Integer _id = 0;
+	private Integer adep_id = 0;
 
 	private String dno = "";
 	// 部門代碼 4碼
@@ -18,8 +18,8 @@ public class ADEP {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "dno", "role", "dname", "fno" };
-	private String[] types = { _id.getClass().getSimpleName(), dno.getClass().getSimpleName(),
+	private String[] keys = { "adep_id", "dno", "role", "dname", "fno" };
+	private String[] types = { adep_id.getClass().getSimpleName(), dno.getClass().getSimpleName(),
 			role.getClass().getSimpleName(), dname.getClass().getSimpleName(), fno.getClass().getSimpleName() };
 	private String[] uniques = { "dno" };
 
@@ -44,12 +44,12 @@ public class ADEP {
 	}
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAdep_id() {
+		return adep_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAdep_id(Integer adep_id) {
+		this.adep_id = adep_id;
 	}
 
 	public String getDno() {
@@ -110,7 +110,7 @@ public class ADEP {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAdep_id((Integer) values[i++]);
 		setDno((String) values[i++]);
 		setRole((Integer) values[i++]);
 		setDname((String) values[i++]);
@@ -124,7 +124,7 @@ public class ADEP {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getDno(), getRole(), getDname(), getFno(), getCreated(), getUpdated() };
+		return new Object[] { getAdep_id(), getDno(), getRole(), getDname(), getFno(), getCreated(), getUpdated() };
 	}
 
 }

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class AVDR {
 	// 廠/客基本資料檔
-	private Integer _id = 0;
+	private Integer avdr_id = 0;
 
 	private String cono = "";
 	// 公司編號
@@ -35,9 +35,9 @@ public class AVDR {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "cono", "na", "name", "id", "bose", "agent", "title", "tel1", "tel2", "ptel",
+	private String[] keys = { "avdr_id", "cono", "na", "name", "id", "bose", "agent", "title", "tel1", "tel2", "ptel",
 			"fax", "iadd", "memo" };
-	private String[] types = { _id.getClass().getSimpleName(), cono.getClass().getSimpleName(),
+	private String[] types = { avdr_id.getClass().getSimpleName(), cono.getClass().getSimpleName(),
 			na.getClass().getSimpleName(), name.getClass().getSimpleName(), id.getClass().getSimpleName(),
 			bose.getClass().getSimpleName(), agent.getClass().getSimpleName(), title.getClass().getSimpleName(),
 			tel1.getClass().getSimpleName(), tel2.getClass().getSimpleName(), ptel.getClass().getSimpleName(),
@@ -65,12 +65,12 @@ public class AVDR {
 	}
 
 	// 以下是儲存的值
-	public Integer get_id() {
-		return _id;
+	public Integer getAvdr_id() {
+		return avdr_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAvdr_id(Integer avdr_id) {
+		this.avdr_id = avdr_id;
 	}
 
 	public String getCono() {
@@ -212,7 +212,7 @@ public class AVDR {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAvdr_id((Integer) values[i++]);
 		setCono((String) values[i++]);
 		setNa((String) values[i++]);
 		setName((String) values[i++]);
@@ -236,7 +236,7 @@ public class AVDR {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getCono(), getNa(), getName(), getId(), getBose(), getAgent(), getTitle(),
+		return new Object[] { getAvdr_id(), getCono(), getNa(), getName(), getId(), getBose(), getAgent(), getTitle(),
 				getTel1(), getTel2(), getPtel(), getFax(), getIadd(), getMemo(), getCreated(), getUpdated() };
 	}
 

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class AINVENTORY {
 	// 多廠別盤存檔
-	private Integer _id = 0;
+	private Integer ainventory_id = 0;
 
 	private String invo = "";
 	// 盤點單號
@@ -21,8 +21,8 @@ public class AINVENTORY {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "invo", "fno", "yymm", "fgno", "ivqty", "sqty" };
-	private String[] types = { _id.getClass().getSimpleName(), invo.getClass().getSimpleName(),
+	private String[] keys = { "ainventory_id", "invo", "fno", "yymm", "fgno", "ivqty", "sqty" };
+	private String[] types = { ainventory_id.getClass().getSimpleName(), invo.getClass().getSimpleName(),
 			fno.getClass().getSimpleName(), yymm.getClass().getSimpleName(), fgno.getClass().getSimpleName(),
 			ivqty.getClass().getSimpleName(), sqty.getClass().getSimpleName() };
 	private String[] uniques = { "invo" };
@@ -48,12 +48,12 @@ public class AINVENTORY {
 	}
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAinventory_id() {
+		return ainventory_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAinventory_id(Integer ainventory_id) {
+		this.ainventory_id = ainventory_id;
 	}
 
 	public String getInvo() {
@@ -132,7 +132,7 @@ public class AINVENTORY {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAinventory_id((Integer) values[i++]);
 		setInvo((String) values[i++]);
 		setFno((String) values[i++]);
 		setYymm((Integer) values[i++]);
@@ -148,7 +148,7 @@ public class AINVENTORY {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getInvo(), getFno(), getYymm(), getFgno(), getIvqty(), getSqty(), getCreated(),
-				getUpdated() };
+		return new Object[] { getAinventory_id(), getInvo(), getFno(), getYymm(), getFgno(), getIvqty(), getSqty(),
+				getCreated(), getUpdated() };
 	}
 }

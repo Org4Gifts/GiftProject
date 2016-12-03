@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class AIO {
 	// 多廠別進/銷主檔
-	private Integer _id = 0;
+	private Integer aio_id = 0;
 
 	private String vhno = "";
 	// 單據編號
@@ -41,9 +41,9 @@ public class AIO {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "vhno", "empno", "dno", "fno", "vhdt", "vrdt", "ano", "dc", "tamt", "status",
+	private String[] keys = { "aio_id", "vhno", "empno", "dno", "fno", "vhdt", "vrdt", "ano", "dc", "tamt", "status",
 			"authority", "signerno", "memo" };
-	private String[] types = { _id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
+	private String[] types = { aio_id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
 			empno.getClass().getSimpleName(), dno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			vhdt.getClass().getSimpleName(), vrdt.getClass().getSimpleName(), ano.getClass().getSimpleName(),
 			dc.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
@@ -72,12 +72,12 @@ public class AIO {
 	}
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAio_id() {
+		return aio_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAio_id(Integer aio_id) {
+		this.aio_id = aio_id;
 	}
 
 	public String getVhno() {
@@ -219,7 +219,7 @@ public class AIO {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAio_id((Integer) values[i++]);
 		setVhno((String) values[i++]);
 		setEmpno((String) values[i++]);
 		setDno((String) values[i++]);
@@ -243,7 +243,7 @@ public class AIO {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getVhno(), getEmpno(), getDno(), getFno(), getVhdt(), getVrdt(), getAno(),
+		return new Object[] { getAio_id(), getVhno(), getEmpno(), getDno(), getFno(), getVhdt(), getVrdt(), getAno(),
 				getDc(), getTamt(), getStatus(), getAuthority(), getSignerno(), getMemo(), getCreated(), getUpdated() };
 	}
 

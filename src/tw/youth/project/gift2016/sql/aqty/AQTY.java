@@ -1,11 +1,10 @@
 package tw.youth.project.gift2016.sql.aqty;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class AQTY {
 	// 多廠別進/銷彙總檔
-	private Integer _id = 0;
+	private Integer aqty_id = 0;
 
 	private Integer yymm = 10511; // auto
 	// 資料年月 紀錄型態如同初始值 所以使用int
@@ -22,8 +21,8 @@ public class AQTY {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "_id", "yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
-	private String[] types = { _id.getClass().getSimpleName(), yymm.getClass().getSimpleName(),
+	private String[] keys = { "aqty_id", "yymm", "fno", "fgno", "pmqty", "inqty", "udqty" };
+	private String[] types = { aqty_id.getClass().getSimpleName(), yymm.getClass().getSimpleName(),
 			fno.getClass().getSimpleName(), fgno.getClass().getSimpleName(), pmqty.getClass().getSimpleName(),
 			inqty.getClass().getSimpleName(), udqty.getClass().getSimpleName() };
 	private String[] uniques = { "" };
@@ -49,12 +48,12 @@ public class AQTY {
 	}
 	// 以下是儲存的值
 
-	public Integer get_id() {
-		return _id;
+	public Integer getAqty_id() {
+		return aqty_id;
 	}
 
-	public void set_id(Integer _id) {
-		this._id = _id;
+	public void setAqty_id(Integer aqty_id) {
+		this.aqty_id = aqty_id;
 	}
 
 	public Integer getYymm() {
@@ -133,7 +132,7 @@ public class AQTY {
 
 	public void setValuesFull(Object[] values) {
 		int i = 0;
-		set_id((Integer) values[i++]);
+		setAqty_id((Integer) values[i++]);
 		setYymm((Integer) values[i++]);
 		setFno((String) values[i++]);
 		setFgno((String) values[i++]);
@@ -149,7 +148,7 @@ public class AQTY {
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { get_id(), getYymm(), getFno(), getFgno(), getPmqty(), getInqty(), getUdqty(),
+		return new Object[] { getAqty_id(), getYymm(), getFno(), getFgno(), getPmqty(), getInqty(), getUdqty(),
 				getCreated(), getUpdated() };
 	}
 }

@@ -157,7 +157,7 @@ public class Orders {
 			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
 			for (Object secObj : secObjs) {
 				aodrdt = (AODRDT) secObj;
-				if (aodrdt.get_id() == 0)
+				if (aodrdt.getAodrdt_id() == 0)
 					msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues())).append(" , ");
 				else
 					msg.append(dao.update(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
@@ -169,7 +169,7 @@ public class Orders {
 			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
 			for (Object secObj : secObjs) {
 				aiodt = (AIODT) secObj;
-				if (aiodt.get_id() == 0)
+				if (aiodt.getAiodt_id() == 0)
 					msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
 				else
 					msg.append(dao.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull())).append(" , ");
