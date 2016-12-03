@@ -1,7 +1,9 @@
 package tw.youth.project.gift2016.func;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,14 +26,14 @@ public class Orders {
 	private AIO aio;
 	private AIODT aiodt;
 	private ArrayList<ADEP> adeps;
-	private ArrayList<AEMP> signatures;
+	private Map<String, AEMP> signatures;
 	private ASIGNLOG asignlog;
 	private StringBuilder msg = new StringBuilder();
 
 	private static Set<String> orderNum = new TreeSet<>();
 	private static Set<String> vhnoNum = new TreeSet<>();
 
-	public Orders(DBManager dao,AUSER user) {
+	public Orders(DBManager dao, AUSER user) {
 		// TODO Auto-generated constructor stub
 		// 先取得資料庫上所有訂單/調撥單的編號
 		AODR aodr = new AODR();
@@ -48,7 +50,7 @@ public class Orders {
 		getSignatures(dao, user);
 	}
 
-	public ArrayList<AEMP> getSignatures(DBManager dao, AUSER user) {
+	public Map<String, AEMP> getSignatures(DBManager dao, AUSER user) {
 		if (signatures == null)
 			querySignatures(dao, user);
 		return signatures;
@@ -68,12 +70,12 @@ public class Orders {
 	public void querySignatures(DBManager dao, AUSER user) {
 		AEMP aemp = new AEMP();
 		ArrayList<Object[]> aemps = dao.query(aemp.getTableName(), aemp.getKeys()[1], "", aemp.getLength());
-		signatures = new ArrayList<>();
+		signatures = new HashMap<>();
 		for (Object[] objects : aemps) {
 			aemp.setValuesFull(objects);
 			if (user.getAuthority() > 0 ? user.getAuthority() <= aemp.getAuthority()
 					: user.getAuthority() < aemp.getAuthority()) {
-				signatures.add(aemp);
+				signatures.put(aemp.getEmpno(), aemp);
 			}
 			aemp = new AEMP();
 		}
@@ -88,13 +90,17 @@ public class Orders {
 		aodrdt = null;
 		aio = null;
 		aiodt = null;
+		StringBuilder sb = new StringBuilder();
+		String tempKey;
+		String order = "A";
+		int num = 0;
+		int compare = 0;
+		float total = 0.0f;
 
 		if (priObj instanceof AODR) {
 			aodr = (AODR) priObj;
 			Iterator<String> it = orderNum.iterator();
-			String order = "A";
-			int num = 0;
-			int compare = 0;
+
 			while (it.hasNext()) {
 				String str = it.next();
 				order = str.substring(0, 1);
@@ -107,7 +113,27 @@ public class Orders {
 			} else {
 				aodr.setOrder1(order + ++num);
 			}
-			
+
+			tempKey = aodr.getSignerno();
+
+			while (!tempKey.equals("P0001")) {
+				// 設定查到董事長的工號就停止
+				AEMP aemp = signatures.get(tempKey);
+				sb.append(aemp.getEmpno()).append("_").append(aemp.getEname()).append("^");
+				tempKey = aemp.getMgr();
+			}
+
+			if (sb.toString().substring(sb.length() - 1).equals("^"))
+				sb.replace(sb.length() - 1, sb.length(), "");
+			aodr.setSignerlist(sb.toString());
+			aodr.setStatus(ConstValue.ORDERS_STATUS_PREPARING);
+
+			for (T t : secObjs) {
+				total += ((AODRDT) t).getPrc() * ((AODRDT) t).getQty();
+			}
+			aodr.setTamt(total);
+			System.out.println("Total : " + aodr.getTamt());
+
 			msg.append(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
 			if (!msg.toString().contains("error")) {
 				for (Object secObj : secObjs) {
@@ -121,9 +147,7 @@ public class Orders {
 		if (priObj instanceof AIO) {
 			aio = (AIO) priObj;
 			Iterator<String> it = vhnoNum.iterator();
-			String order = "B";
-			int num = 0;
-			int compare = 0;
+			order = "B";
 			while (it.hasNext()) {
 				String str = it.next();
 				order = str.substring(0, 1);
@@ -136,6 +160,27 @@ public class Orders {
 			} else {
 				aio.setVhno(order + ++num);
 			}
+
+			tempKey = aio.getSignerno();
+
+			while (!tempKey.equals("P0001")) {
+				// 設定查到董事長的工號就停止
+				AEMP aemp = signatures.get(tempKey);
+				sb.append(aemp.getEmpno()).append("_").append(aemp.getEname()).append("^");
+				tempKey = aemp.getMgr();
+			}
+			if (sb.toString().substring(sb.length() - 1).equals("^"))
+				sb.replace(sb.length() - 1, sb.length(), "");
+
+			aio.setSignerlist(sb.toString());
+
+			for (T t : secObjs) {
+				total += ((AIODT) t).getPrc() * ((AIODT) t).getQty();
+			}
+			aio.setTamt(total);
+
+			System.out.println("Total : " + aio.getTamt());
+
 			msg.append(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues())).append(" , ");
 			if (!msg.toString().contains("error")) {
 				for (Object secObj : secObjs) {
@@ -261,18 +306,18 @@ public class Orders {
 
 		if (priObj instanceof AODR) {
 			aodr = (AODR) priObj;
-			aodr.setStatus("Processing");
+			aodr.setStatus(ConstValue.ORDERS_STATUS_PROCESSING);
 			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
-			asignlog.setValues(new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f,
-					"Send" });
+			asignlog.setValues(
+					new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f, "Send" });
 			msg.append(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		}
 		if (priObj instanceof AIO) {
 			aio = (AIO) priObj;
-			aio.setStatus("Processing");
+			aio.setStatus(ConstValue.ORDERS_STATUS_PROCESSING);
 			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
-			asignlog.setValues(new Object[] { aio.getVhno(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f,
-					"Send" });
+			asignlog.setValues(
+					new Object[] { aio.getVhno(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f, "Send" });
 			msg.append(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		}
 		if (msg.toString().contains("error"))

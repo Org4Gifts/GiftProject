@@ -44,7 +44,7 @@ public class AIO {
 	private Timestamp updated;
 
 	private String[] keys = { "aio_id", "vhno", "empno", "dno", "fno", "vhdt", "vrdt", "ano", "dc", "tamt", "status",
-			"authority", "signerno", "memo","signerlist" };
+			"authority", "signerno", "memo", "signerlist" };
 	private String[] types = { aio_id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
 			empno.getClass().getSimpleName(), dno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			vhdt.getClass().getSimpleName(), vrdt.getClass().getSimpleName(), ano.getClass().getSimpleName(),
@@ -186,6 +186,14 @@ public class AIO {
 		this.memo = memo;
 	}
 
+	public String getSignerlist() {
+		return signerlist;
+	}
+
+	public void setSignerlist(String signerlist) {
+		this.signerlist = signerlist;
+	}
+
 	public Timestamp getCreated() {
 		return created;
 	}
@@ -217,6 +225,7 @@ public class AIO {
 		setAuthority((Integer) values[i++]);
 		setSignerno((String) values[i++]);
 		setMemo((String) values[i++]);
+		setSignerlist((String) values[i++]);
 	}
 
 	public void setValuesFull(Object[] values) {
@@ -235,18 +244,20 @@ public class AIO {
 		setAuthority((Integer) values[i++]);
 		setSignerno((String) values[i++]);
 		setMemo((String) values[i++]);
+		setSignerlist((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
 		return new Object[] { getVhno(), getEmpno(), getDno(), getFno(), getVhdt(), getVrdt(), getAno(), getDc(),
-				getTamt(), getStatus(), getAuthority(), getSignerno(), getMemo() };
+				getTamt(), getStatus(), getAuthority(), getSignerno(), getMemo(), getSignerlist() };
 	}
 
 	public Object[] getValuesFull() {
 		return new Object[] { getAio_id(), getVhno(), getEmpno(), getDno(), getFno(), getVhdt(), getVrdt(), getAno(),
-				getDc(), getTamt(), getStatus(), getAuthority(), getSignerno(), getMemo(), getCreated(), getUpdated() };
+				getDc(), getTamt(), getStatus(), getAuthority(), getSignerno(), getMemo(), getSignerlist(),
+				getCreated(), getUpdated() };
 	}
 
 }

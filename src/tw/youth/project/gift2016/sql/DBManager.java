@@ -206,7 +206,7 @@ public class DBManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT").append(" ").append("INTO").append(" ").append(tableName).append(" ").append("(");
 		for (String key : keys) {
-			if (key.equals("_id"))
+			if (key.contains("_id"))
 				continue;
 			sb.append(key).append(",");
 		}
@@ -214,7 +214,7 @@ public class DBManager {
 		sb.append("updated").append(","); // 增加的地方
 		sb.replace(sb.length() - 1, sb.length(), ")").append(" ").append("VALUES").append("(");
 		for (String key : keys) {
-			if (key.equals("_id"))
+			if (key.contains("_id"))
 				continue;
 			sb.append("?").append(",");
 		}
@@ -270,7 +270,7 @@ public class DBManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE").append(" ").append(tableName).append(" ").append("SET").append(" ");
 		for (String key : keys) {
-			if (key.equals("_id"))
+			if (key.contains("_id"))
 				continue;
 			sb.append(key).append("=?,");
 		}

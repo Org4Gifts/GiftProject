@@ -17,9 +17,9 @@ public class CreateUser {
 		dao.starup();
 
 		// USER
-		String aempno = "K123457";
-		String ausername = "odise2";
-		String auserpass = "116025";
+		String aempno = "P0006";
+		String ausername = "P0006";
+		String auserpass = "P0006";
 		System.out.println("USER");
 		AUSER user = new AUSER();
 		Object[] objs = { aempno, ausername, user.toMD5Pass(auserpass) };

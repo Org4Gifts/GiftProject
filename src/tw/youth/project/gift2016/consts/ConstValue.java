@@ -11,6 +11,19 @@ public class ConstValue {
 	public static final String LOGIN_CHECK_EMAIL_FAILURE = "查無此電子郵件，請確認";
 
 	// Orders 使用的常數
+	public static final String ORDERS_STATUS_PREPARING = "Preparing";
+	public static final String ORDERS_STATUS_PROCESSING = "Processing";
+	public static final String ORDERS_STATUS_APPROVED = "Approved";
+	public static final String OREDERS_STATUS_COMPLETED = "Completed";
+	public static final String ORDERS_STATUS_OBSOLETED = "Obsoleted";
+	public static final String ORDERS_STATUS_REJECTED = "Rejected";
+	// Status0 : Rejected (單據被退件)
+	// Status1 : Preparing (單據準備中，尚未送出)
+	// STatus2 : Processing (單據被送出，待簽核中)
+	// Status8 : Approved (簽核流程結束)
+	// Status9 : Completed (行政部門結案，禮品已轉出，系統自動扣除 【及時庫存量】)
+	// Status10 : Obsoleted (行政部門作廢，系統自動加回 【及時庫存量】)
+
 	public static final String ORDERS_ADD_FAILURE = "建立失敗";
 	public static final String ORDERS_ADD_AODR_SUCCESS = "訂單建立成功";
 	public static final String ORDERS_ADD_AIO_SUCCESS = "調撥單建立成功";
