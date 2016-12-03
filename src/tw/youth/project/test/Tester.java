@@ -18,7 +18,7 @@ public class Tester {
 
 	// @Test
 	public void test() {
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		// USER
@@ -47,7 +47,7 @@ public class Tester {
 	public void testAodr() {
 		ArrayList<Object[]> arr = null;
 		ArrayList<Object[]> arr2 = null;
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		// AODR
 		System.out.println("AODR");

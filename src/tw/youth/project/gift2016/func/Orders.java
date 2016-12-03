@@ -12,6 +12,7 @@ import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.aodr.ASIGNLOG;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 import tw.youth.project.gift2016.tools.ToolBox;
@@ -24,12 +25,13 @@ public class Orders {
 	private AIODT aiodt;
 	private ArrayList<ADEP> adeps;
 	private ArrayList<AEMP> signatures;
+	private ASIGNLOG asignlog;
 	private StringBuilder msg = new StringBuilder();
 
 	private static Set<String> orderNum = new TreeSet<>();
 	private static Set<String> vhnoNum = new TreeSet<>();
 
-	public Orders(DBManager dao) {
+	public Orders(DBManager dao,AUSER user) {
 		// TODO Auto-generated constructor stub
 		// 先取得資料庫上所有訂單/調撥單的編號
 		AODR aodr = new AODR();
@@ -43,6 +45,7 @@ public class Orders {
 			vhnoNum.add((String) objects[1]);
 		}
 		queryADEP(dao);
+		getSignatures(dao, user);
 	}
 
 	public ArrayList<AEMP> getSignatures(DBManager dao, AUSER user) {
@@ -104,6 +107,7 @@ public class Orders {
 			} else {
 				aodr.setOrder1(order + ++num);
 			}
+			
 			msg.append(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
 			if (!msg.toString().contains("error")) {
 				for (Object secObj : secObjs) {
@@ -253,16 +257,23 @@ public class Orders {
 		// 送出訂單/調撥單
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
+		asignlog = new ASIGNLOG();
 
 		if (priObj instanceof AODR) {
 			aodr = (AODR) priObj;
 			aodr.setStatus("Processing");
 			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
+			asignlog.setValues(new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f,
+					"Send" });
+			msg.append(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		}
 		if (priObj instanceof AIO) {
 			aio = (AIO) priObj;
 			aio.setStatus("Processing");
 			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
+			asignlog.setValues(new Object[] { aio.getVhno(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f,
+					"Send" });
+			msg.append(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		}
 		if (msg.toString().contains("error"))
 			return ConstValue.ORDERS_SUBMIT_FAILURE + "\n" + msg.toString();

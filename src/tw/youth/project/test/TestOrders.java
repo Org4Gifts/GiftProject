@@ -22,7 +22,7 @@ public class TestOrders {
 
 	@Test
 	public void test() {
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		System.out.println("取得使用者");
@@ -44,7 +44,7 @@ public class TestOrders {
 			adep0.setValuesFull(objects);
 		}
 		user.setRole(adep0.getRole());
-		Orders orders = new Orders(dao);
+		Orders orders = new Orders(dao, user);
 
 		// 建立訂單
 		System.out.println("建立訂單");

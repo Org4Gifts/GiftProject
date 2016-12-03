@@ -38,11 +38,13 @@ public class AIO {
 	// 調撥單目前簽核人員
 	private String memo = "";
 	// 調撥理由
+	private String signerlist = "";
+	// 簽核人員名單 員工編號_員工姓名^員工編號_員工姓名
 	private Timestamp created;
 	private Timestamp updated;
 
 	private String[] keys = { "aio_id", "vhno", "empno", "dno", "fno", "vhdt", "vrdt", "ano", "dc", "tamt", "status",
-			"authority", "signerno", "memo" };
+			"authority", "signerno", "memo","signerlist" };
 	private String[] types = { aio_id.getClass().getSimpleName(), vhno.getClass().getSimpleName(),
 			empno.getClass().getSimpleName(), dno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			vhdt.getClass().getSimpleName(), vrdt.getClass().getSimpleName(), ano.getClass().getSimpleName(),

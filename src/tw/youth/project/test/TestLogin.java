@@ -13,7 +13,7 @@ public class TestLogin {
 	@Test
 	public void test() {
 		// fail("Not yet implemented");
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		System.out.println("開始登入功能");
 		Login login = new Login(dao, "P0001", "P0001");

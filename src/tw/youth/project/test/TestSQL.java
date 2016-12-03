@@ -30,7 +30,7 @@ public class TestSQL {
 
 	// @Test
 	public void testSQL() throws SQLException { // 測試OK
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/", "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		// mydb1?useUnicode=true&characterEncoding=utf-8
 		PreparedStatement ps = dao.getConn().prepareStatement("select * from cmdev.dept where deptno LIKE ?");
@@ -47,7 +47,7 @@ public class TestSQL {
 	public void testTableExistAndTestTableFunc() throws InterruptedException { // 測試OK
 		boolean exists = false;
 
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		try {
@@ -132,7 +132,7 @@ public class TestSQL {
 
 	// @Test
 	public void testDropTables() { // 測試OK
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		System.out.println("testDropTables : " + new Date(System.currentTimeMillis()).toString());
 		try {
@@ -162,7 +162,7 @@ public class TestSQL {
 		// testDropTables();
 
 		System.out.println("testCreateTable : " + new Date(System.currentTimeMillis()).toString());
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		String table;
@@ -244,7 +244,7 @@ public class TestSQL {
 	@Test
 	public void testInsertQueryUpdateDropTableColumns() { // 測試OK
 		System.out.println("testInsertUpdateDropTables : " + new Date(System.currentTimeMillis()).toString());
-		DBManager dao = new DBManager("jdbc:mysql://localhost:3306/" + SQLCmd.DB, "odise", "116025");
+		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		// AUSER

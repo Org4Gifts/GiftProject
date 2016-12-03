@@ -32,16 +32,18 @@ public class AODR {
 	// 訂單目前簽核人員
 	private String purpose = "";
 	// 需求目的
+	private String signerlist = "";
+	// 簽核人員名單 員工編號_員工姓名^員工編號_員工姓名
 	private Timestamp created;
 	private Timestamp updated;
 
 	private String[] keys = { "aodr_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
-			"signerno", "purpose" };
+			"signerno", "purpose", "signerlist" };
 	private String[] types = { aodr_id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
 			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
 			dno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), signerno.getClass().getSimpleName(),
-			purpose.getClass().getSimpleName() };
+			purpose.getClass().getSimpleName(), signerlist.getClass().getSimpleName() };
 	private String[] uniques = { "order1" };
 
 	public String getTableName() {
@@ -153,6 +155,14 @@ public class AODR {
 		this.purpose = purpose;
 	}
 
+	public String getSignerlist() {
+		return signerlist;
+	}
+
+	public void setSignerlist(String signerlist) {
+		this.signerlist = signerlist;
+	}
+
 	public Timestamp getCreated() {
 		return created;
 	}
@@ -181,6 +191,7 @@ public class AODR {
 		setAuthority((Integer) values[i++]);
 		setSignerno((String) values[i++]);
 		setPurpose((String) values[i++]);
+		setSignerlist((String) values[i++]);
 	}
 
 	public void setValuesFull(Object[] values) {
@@ -196,18 +207,19 @@ public class AODR {
 		setAuthority((Integer) values[i++]);
 		setSignerno((String) values[i++]);
 		setPurpose((String) values[i++]);
+		setSignerlist((String) values[i++]);
 		setCreated((Timestamp) values[i++]);
 		setUpdated((Timestamp) values[i++]);
 	}
 
 	public Object[] getValues() {
 		return new Object[] { getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(), getStatus(),
-				getAuthority(), getSignerno(), getPurpose() };
+				getAuthority(), getSignerno(), getPurpose(), getSignerlist() };
 	}
 
 	public Object[] getValuesFull() {
 		return new Object[] { getAodr_id(), getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(),
-				getStatus(), getAuthority(), getSignerno(), getPurpose(), getCreated(), getUpdated() };
+				getStatus(), getAuthority(), getSignerno(), getPurpose(), getSignerlist(), getCreated(), getUpdated() };
 	}
 
 }

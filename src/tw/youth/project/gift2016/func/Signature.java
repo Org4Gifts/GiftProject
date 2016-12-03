@@ -42,11 +42,12 @@ public class Signature {
 	}
 
 	public <T> String approveOrder(DBManager dao, AUSER user, T obj) {
+		ASIGNLOG signlog = new ASIGNLOG();
+		Object[] objs;
 		if (obj instanceof AODR) {
 			AODR aodr = (AODR) obj;
 			aodr.setSignerno(user.getMgr());
-			ASIGNLOG signlog = new ASIGNLOG();
-			
+			objs = new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f, "Send" };
 			return dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull());
 		} else {
 			AIO aio = (AIO) obj;
