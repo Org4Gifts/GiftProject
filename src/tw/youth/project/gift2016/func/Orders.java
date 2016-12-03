@@ -201,9 +201,9 @@ public class Orders {
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
 
+		float total = 0.0f;
+
 		if (priObj instanceof AODR) {
-			aodr = (AODR) priObj;
-			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
 			for (Object secObj : secObjs) {
 				aodrdt = (AODRDT) secObj;
 				if (aodrdt.getAodrdt_id() == 0)
@@ -211,18 +211,24 @@ public class Orders {
 				else
 					msg.append(dao.update(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
 							.append(" , ");
+				total += aodrdt.getPrc() * aodrdt.getQty();
 			}
+			aodr = (AODR) priObj;
+			aodr.setTamt(total);
+			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
 		}
 		if (priObj instanceof AIO) {
-			aio = (AIO) priObj;
-			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
 			for (Object secObj : secObjs) {
 				aiodt = (AIODT) secObj;
 				if (aiodt.getAiodt_id() == 0)
 					msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
 				else
 					msg.append(dao.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull())).append(" , ");
+				total += aiodt.getPrc() * aiodt.getQty();
 			}
+			aio = (AIO) priObj;
+			aio.setTamt(total);
+			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
 		}
 		if (msg.toString().contains("error"))
 			return ConstValue.ORDERS_UPDATE_FAILURE + "\n" + msg.toString();
