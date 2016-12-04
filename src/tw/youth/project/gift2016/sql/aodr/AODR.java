@@ -8,14 +8,14 @@ public class AODR {
 
 	private String order1 = "";
 	// 訂單編號
-	private Timestamp odate = new Timestamp(100000L);
-	// 訂定日期
 	private String empno = "";
 	// 員工編號
 	private String fno = "";
 	// 廠區編號 2碼
 	private String dno = "";
 	// 部門編號 4碼
+	private Timestamp odate = new Timestamp(100000L);
+	// 訂定日期
 	private Float tamt = 0.0f;
 	// 訂單金額
 	private String status = "";
@@ -37,11 +37,11 @@ public class AODR {
 	private Timestamp created;
 	private Timestamp updated;
 
-	private String[] keys = { "aodr_id", "order1", "odate", "empno", "fno", "dno", "tamt", "status", "authority",
+	private String[] keys = { "aodr_id", "order1", "empno", "fno", "dno", "odate", "tamt", "status", "authority",
 			"signerno", "purpose", "signerlist" };
 	private String[] types = { aodr_id.getClass().getSimpleName(), order1.getClass().getSimpleName(),
-			odate.getClass().getSimpleName(), empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
-			dno.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
+			 empno.getClass().getSimpleName(), fno.getClass().getSimpleName(),
+			dno.getClass().getSimpleName(),odate.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), signerno.getClass().getSimpleName(),
 			purpose.getClass().getSimpleName(), signerlist.getClass().getSimpleName() };
 	private String[] uniques = { "order1" };
@@ -83,14 +83,6 @@ public class AODR {
 		this.order1 = order1;
 	}
 
-	public Timestamp getOdate() {
-		return odate;
-	}
-
-	public void setOdate(Timestamp odate) {
-		this.odate = odate;
-	}
-
 	public String getEmpno() {
 		return empno;
 	}
@@ -113,6 +105,14 @@ public class AODR {
 
 	public void setDno(String dno) {
 		this.dno = dno;
+	}
+
+	public Timestamp getOdate() {
+		return odate;
+	}
+
+	public void setOdate(Timestamp odate) {
+		this.odate = odate;
 	}
 
 	public Float getTamt() {
@@ -182,10 +182,10 @@ public class AODR {
 	public void setValues(Object[] values) {
 		int i = 0;
 		setOrder1((String) values[i++]);
-		setOdate((Timestamp) values[i++]);
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);
+		setOdate((Timestamp) values[i++]);
 		setTamt((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority((Integer) values[i++]);
@@ -198,10 +198,10 @@ public class AODR {
 		int i = 0;
 		setAodr_id((Integer) values[i++]);
 		setOrder1((String) values[i++]);
-		setOdate((Timestamp) values[i++]);
 		setEmpno((String) values[i++]);
 		setFno((String) values[i++]);
 		setDno((String) values[i++]);
+		setOdate((Timestamp) values[i++]);
 		setTamt((Float) values[i++]);
 		setStatus((String) values[i++]);
 		setAuthority((Integer) values[i++]);
@@ -213,12 +213,12 @@ public class AODR {
 	}
 
 	public Object[] getValues() {
-		return new Object[] { getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(), getStatus(),
+		return new Object[] { getOrder1(), getEmpno(), getFno(), getDno(), getOdate(), getTamt(), getStatus(),
 				getAuthority(), getSignerno(), getPurpose(), getSignerlist() };
 	}
 
 	public Object[] getValuesFull() {
-		return new Object[] { getAodr_id(), getOrder1(), getOdate(), getEmpno(), getFno(), getDno(), getTamt(),
+		return new Object[] { getAodr_id(), getOrder1(), getEmpno(), getFno(), getDno(), getOdate(), getTamt(),
 				getStatus(), getAuthority(), getSignerno(), getPurpose(), getSignerlist(), getCreated(), getUpdated() };
 	}
 

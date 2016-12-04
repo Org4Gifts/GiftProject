@@ -39,4 +39,12 @@ public class ConstValue {
 	public static final String ORDERS_SUBMIT_FAILURE = "發送失敗";
 	public static final String ORDERS_SUBMIT_AODR_SUCCESS = "訂單發送成功";
 	public static final String ORDERS_SUBMIT_AIO_SUCCESS = "調撥單發送成功";
+
+	// SIGNATURE 使用的常數
+	public static final String SIGNATURE_STATUS_SEND = "Send";
+	public static final String SIGNATURE_STATUS_NONE = "None";
+	public static final String SIGNATURE_STATUS_APPROVE = "APPROVE";
+	public static final String SIGNATURE_STATUS_REJECT = "Reject";
+	public static final String SIGNATURE_STATUS_COMPLETE = "Complete";
+	// 訂單簽核狀態 Send 發送請求者 ,None 尚未簽核 ,Approve 同意 ,Reject 拒絕 ,Complete 完成
 }

@@ -1,4 +1,4 @@
-package tw.youth.project.gift2016.sql.aodr;
+package tw.youth.project.gift2016.sql.asignlog;
 
 import java.sql.Timestamp;
 

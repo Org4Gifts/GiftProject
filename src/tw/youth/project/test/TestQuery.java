@@ -17,9 +17,9 @@ import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
-import tw.youth.project.gift2016.sql.aodr.ASIGNLOG;
 import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
+import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
@@ -165,7 +165,7 @@ public class TestQuery {
 		for (AINVENTORY ainventory2 : ainventorys) {
 			System.out.println(ainventory2.getFgno());
 		}
-
+		System.out.println("測試完成");
 	}
 
 }

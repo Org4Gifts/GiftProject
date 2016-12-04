@@ -14,7 +14,7 @@ import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
-import tw.youth.project.gift2016.sql.aodr.ASIGNLOG;
+import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 import tw.youth.project.gift2016.tools.ToolBox;
@@ -25,41 +25,55 @@ public class Orders {
 	private AODRDT aodrdt;
 	private AIO aio;
 	private AIODT aiodt;
+	private ArrayList<Object> orderList;
 	private ArrayList<ADEP> adeps;
-	private Map<String, AEMP> signatures;
+	private static Map<String, AEMP> signatures;
 	private ASIGNLOG asignlog;
 	private StringBuilder msg = new StringBuilder();
 
-	private static Set<String> orderNum = new TreeSet<>();
-	private static Set<String> vhnoNum = new TreeSet<>();
+	// private static String orderNum = "";
+	// private static String vhnoNum = "";
+	private static Set<String> orderNum;
+	private static Set<String> vhnoNum;
 
-	public Orders(DBManager dao, AUSER user) {
+	public Orders(DBManager manager, AUSER user) {
 		// TODO Auto-generated constructor stub
 		// 先取得資料庫上所有訂單/調撥單的編號
-		AODR aodr = new AODR();
-		ArrayList<Object[]> arr = dao.query(aodr.getTableName(), aodr.getKeys()[1], "", aodr.getLength());
-		for (Object[] objects : arr) {
-			orderNum.add((String) objects[1]);
+		ArrayList<Object[]> arr = null;
+		if (orderNum == null) {
+			orderNum = new TreeSet<>();
+			AODR aodr = new AODR();
+			arr = manager.query(aodr.getTableName(), aodr.getKeys()[1], "", aodr.getLength());
+			for (Object[] objects : arr) {
+				orderNum.add((String) objects[1]);
+			}
 		}
-		AIO aio = new AIO();
-		arr = dao.query(aio.getTableName(), aio.getKeys()[1], "", aio.getLength());
-		for (Object[] objects : arr) {
-			vhnoNum.add((String) objects[1]);
+		// orderNum = (String) arr.get(arr.size() - 1)[1];
+		if (vhnoNum == null) {
+			vhnoNum = new TreeSet<>();
+			AIO aio = new AIO();
+			arr = manager.query(aio.getTableName(), aio.getKeys()[1], "", aio.getLength());
+			for (Object[] objects : arr) {
+				vhnoNum.add((String) objects[1]);
+			}
 		}
-		queryADEP(dao);
-		getSignatures(dao, user);
+
+		// vhnoNum = (String) arr.get(arr.size() - 1)[1];
+		// queryADEP(dao);
+		getSigners(manager, user);
 	}
 
-	public Map<String, AEMP> getSignatures(DBManager dao, AUSER user) {
+	private Map<String, AEMP> getSigners(DBManager manager, AUSER user) {
 		if (signatures == null)
-			querySignatures(dao, user);
+			querySigners(manager, user);
 		return signatures;
 	}
 
-	public void queryADEP(DBManager dao) {
+	// 查詢部門
+	private void queryADEP(DBManager manager) {
 		adeps = new ArrayList<>();
 		ADEP adep = new ADEP();
-		ArrayList<Object[]> arr = dao.query(adep.getTableName(), adep.getKeys()[1], "", adep.getLength());
+		ArrayList<Object[]> arr = manager.query(adep.getTableName(), adep.getKeys()[1], "", adep.getLength());
 		for (Object[] objects : arr) {
 			adep.setValuesFull(objects);
 			adeps.add(adep);
@@ -67,9 +81,38 @@ public class Orders {
 		}
 	}
 
-	public void querySignatures(DBManager dao, AUSER user) {
+	// 查詢訂單
+	public <T> ArrayList<Object> queryOrders(DBManager manager, AUSER user, String key) {
+		orderList = new ArrayList<>();
+		ArrayList<Object[]> arr = null;
+		if (key.equals("aodr")) {
+			aodr = new AODR();
+			arr = manager.query(aodr.getTableName(), aodr.getKeys()[2], user.getEmpno(), aodr.getLength());
+		}
+		if (key.equals("aio")) {
+			aio = new AIO();
+			arr = manager.query(aio.getTableName(), aio.getKeys()[2], user.getEmpno(), aio.getLength());
+		}
+
+		for (Object[] objects : arr) {
+			if (key.equals("aodr")) {
+				aodr = new AODR();
+				aodr.setValuesFull(objects);
+				orderList.add(aodr);
+			} else {
+
+				aio = new AIO();
+				aio.setValuesFull(objects);
+				orderList.add(aio);
+			}
+		}
+		return orderList;
+	}
+
+	// 查詢所有簽核人員
+	private void querySigners(DBManager manager, AUSER user) {
 		AEMP aemp = new AEMP();
-		ArrayList<Object[]> aemps = dao.query(aemp.getTableName(), aemp.getKeys()[1], "", aemp.getLength());
+		ArrayList<Object[]> aemps = manager.query(aemp.getTableName(), aemp.getKeys()[1], "", aemp.getLength());
 		signatures = new HashMap<>();
 		for (Object[] objects : aemps) {
 			aemp.setValuesFull(objects);
@@ -81,8 +124,9 @@ public class Orders {
 		}
 	}
 
-	public <T> String createOrders(DBManager dao, AUSER user, Object priObj, ArrayList<T> secObjs) {
+	public synchronized <T> String createOrders(DBManager manager, AUSER user, Object priObj, ArrayList<T> secObjs) {
 		// 建立訂單/調撥單
+		// 因為orderNum跟編號的關係，所以使用 synchronized 鎖定建立訂單的功能
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
 
@@ -114,6 +158,8 @@ public class Orders {
 				aodr.setOrder1(order + ++num);
 			}
 
+			orderNum.add(aodr.getOrder1());
+
 			tempKey = aodr.getSignerno();
 
 			while (!tempKey.equals("P0001")) {
@@ -134,12 +180,13 @@ public class Orders {
 			aodr.setTamt(total);
 			System.out.println("Total : " + aodr.getTamt());
 
-			msg.append(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
+			msg.append(manager.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
 			if (!msg.toString().contains("error")) {
 				for (Object secObj : secObjs) {
 					aodrdt = (AODRDT) secObj;
 					aodrdt.setOrder1(aodr.getOrder1());
-					msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues())).append(" , ");
+					msg.append(manager.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues()))
+							.append(" , ");
 				}
 			}
 		}
@@ -161,6 +208,8 @@ public class Orders {
 				aio.setVhno(order + ++num);
 			}
 
+			orderNum.add(aio.getVhno());
+
 			tempKey = aio.getSignerno();
 
 			while (!tempKey.equals("P0001")) {
@@ -181,12 +230,12 @@ public class Orders {
 
 			System.out.println("Total : " + aio.getTamt());
 
-			msg.append(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues())).append(" , ");
+			msg.append(manager.insert(aio.getTableName(), aio.getKeys(), aio.getValues())).append(" , ");
 			if (!msg.toString().contains("error")) {
 				for (Object secObj : secObjs) {
 					aiodt = (AIODT) secObj;
 					aiodt.setVhno(aio.getVhno());
-					msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
+					msg.append(manager.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
 				}
 			}
 		}
@@ -196,7 +245,7 @@ public class Orders {
 		return aodrdt != null ? ConstValue.ORDERS_ADD_AODR_SUCCESS : ConstValue.ORDERS_ADD_AIO_SUCCESS;
 	}
 
-	public <T> String updateOrders(DBManager dao, AUSER user, Object priObj, ArrayList<T> secObjs) {
+	public <T> String updateOrders(DBManager manager, AUSER user, Object priObj, ArrayList<T> secObjs) {
 		// 更新訂單/調撥單
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
@@ -207,28 +256,30 @@ public class Orders {
 			for (Object secObj : secObjs) {
 				aodrdt = (AODRDT) secObj;
 				if (aodrdt.getAodrdt_id() == 0)
-					msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues())).append(" , ");
+					msg.append(manager.insert(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValues()))
+							.append(" , ");
 				else
-					msg.append(dao.update(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
+					msg.append(manager.update(aodrdt.getTableName(), aodrdt.getKeys(), aodrdt.getValuesFull()))
 							.append(" , ");
 				total += aodrdt.getPrc() * aodrdt.getQty();
 			}
 			aodr = (AODR) priObj;
 			aodr.setTamt(total);
-			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
+			msg.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
 		}
 		if (priObj instanceof AIO) {
 			for (Object secObj : secObjs) {
 				aiodt = (AIODT) secObj;
 				if (aiodt.getAiodt_id() == 0)
-					msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
+					msg.append(manager.insert(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValues())).append(" , ");
 				else
-					msg.append(dao.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull())).append(" , ");
+					msg.append(manager.update(aiodt.getTableName(), aiodt.getKeys(), aiodt.getValuesFull()))
+							.append(" , ");
 				total += aiodt.getPrc() * aiodt.getQty();
 			}
 			aio = (AIO) priObj;
 			aio.setTamt(total);
-			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
+			msg.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
 		}
 		if (msg.toString().contains("error"))
 			return ConstValue.ORDERS_UPDATE_FAILURE + "\n" + msg.toString();
@@ -304,7 +355,7 @@ public class Orders {
 	// ConstValue.ORDERS_SUBMIT_AIO_SUCCESS;
 	// }
 
-	public <T> String submitOrders(DBManager dao, AUSER user, T priObj) {
+	public <T> String submitOrders(DBManager manager, AUSER user, T priObj) {
 		// 送出訂單/調撥單
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
@@ -313,18 +364,18 @@ public class Orders {
 		if (priObj instanceof AODR) {
 			aodr = (AODR) priObj;
 			aodr.setStatus(ConstValue.ORDERS_STATUS_PROCESSING);
-			msg.append(dao.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
+			msg.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append(" , ");
 			asignlog.setValues(
 					new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f, "Send" });
-			msg.append(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
+			msg.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		}
 		if (priObj instanceof AIO) {
 			aio = (AIO) priObj;
 			aio.setStatus(ConstValue.ORDERS_STATUS_PROCESSING);
-			msg.append(dao.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
+			msg.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append(" , ");
 			asignlog.setValues(
 					new Object[] { aio.getVhno(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f, "Send" });
-			msg.append(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
+			msg.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		}
 		if (msg.toString().contains("error"))
 			return ConstValue.ORDERS_SUBMIT_FAILURE + "\n" + msg.toString();

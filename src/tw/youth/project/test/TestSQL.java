@@ -18,9 +18,9 @@ import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aio.AIODT;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
-import tw.youth.project.gift2016.sql.aodr.ASIGNLOG;
 import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
+import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
@@ -425,7 +425,7 @@ public class TestSQL {
 		System.out.println("AODR");
 		AODR aodr = new AODR();
 
-		Object[] objs6 = { "A20161108", new Timestamp(10000L), "K123456", "F1", "0800", 100.0f, "Preparing", 2, "P0002",
+		Object[] objs6 = { "A20161108", "K123456", "F1", "0800", new Timestamp(10000L), 100.0f, "Preparing", 2, "P0002",
 				"測試申請單1","自動增加" };
 		aodr.setValues(objs6);
 		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));
