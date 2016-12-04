@@ -8,10 +8,11 @@ import tw.youth.project.gift2016.sql.aio.AIO;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.user.AUSER;
+import tw.youth.project.gift2016.tools.ToolBox;
 
 public class Signatures {
 
-	StringBuilder sb = new StringBuilder();
+	private StringBuilder sb = new StringBuilder();
 
 	// 取得單筆訂單/調撥單
 	public Object getOrder(DBManager manager, AUSER user, String key, String orderNum) {
@@ -48,7 +49,6 @@ public class Signatures {
 	public <T> String approveOrder(DBManager manager, AUSER user, T obj) {
 		sb.delete(0, sb.length());
 		ASIGNLOG signlog = new ASIGNLOG();
-		ArrayList<ASIGNLOG> signlogs = new ArrayList<>();
 		Object[] objs;
 		if (obj instanceof AODR) {
 			AODR aodr = (AODR) obj;
@@ -57,8 +57,11 @@ public class Signatures {
 					signlog.getLength());
 			signlog.setValuesFull(arr.get(arr.size() - 1));
 
-			objs = new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f,
+			objs = new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(),
+					((float) (ToolBox.getCurrentTimestamp().getTime() - signlog.getCreated().getTime()))
+							/ (60 * 60 * 1000),
 					ConstValue.SIGNATURE_STATUS_APPROVE };
+			System.out.println(objs[4]);
 			signlog.setValues(objs);
 			sb.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append("\n");
 			sb.append(manager.insert(signlog.getTableName(), signlog.getKeys(), signlog.getValues())).append("\n");
@@ -66,7 +69,12 @@ public class Signatures {
 		} else {
 			AIO aio = (AIO) obj;
 			aio.setSignerno(user.getMgr());
-			objs = new Object[] { aio.getVhno(), user.getEmpno(), user.getEname(), user.getDno(), 0.0f,
+			ArrayList<Object[]> arr = manager.query(signlog.getTableName(), signlog.getKeys()[1], aio.getVhno(),
+					signlog.getLength());
+			signlog.setValuesFull(arr.get(arr.size() - 1));
+			objs = new Object[] { aio.getVhno(), user.getEmpno(), user.getEname(), user.getDno(),
+					((float) (ToolBox.getCurrentTimestamp().getTime() - signlog.getCreated().getTime()))
+							/ (60 * 60 * 1000),
 					ConstValue.SIGNATURE_STATUS_APPROVE };
 			signlog.setValues(objs);
 			sb.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append("\n");
