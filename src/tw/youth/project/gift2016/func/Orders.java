@@ -81,7 +81,7 @@ public class Orders {
 		}
 	}
 
-	// 查詢訂單
+	// 查詢訂/調撥單
 	public <T> ArrayList<Object> queryOrders(DBManager manager, AUSER user, String key) {
 		orderList = new ArrayList<>();
 		ArrayList<Object[]> arr = null;
@@ -287,73 +287,88 @@ public class Orders {
 		return priObj instanceof AODR ? ConstValue.ORDERS_UPDATE_AODR_SUCCESS : ConstValue.ORDERS_UPDATE_AIO_SUCCESS;
 	}
 
-	// // 取消訂單/調撥單
-	// public String cancelOrders(DBManager dao, AUSER user, Object priObj) {
-	// if (msg.length() > 0)
-	// msg.delete(0, msg.length());
-	//
-	// if (priObj instanceof AODR) {
-	// aodr = (AODR) priObj;
-	// msg.append(dao.drop(aodr.getTableName(), aodr.getKeys()[0],
-	// aodr.get_id())).append(" , ");
-	// if (aodrdt != null)
-	// msg.append(dao.drop(aodrdt.getTableName(), aodr.getKeys()[1],
-	// aodr.getOrder1())).append(" , ");
-	// else
-	// msg.append(dao.drop(new AODRDT().getTableName(), aodr.getKeys()[1],
-	// aodr.getOrder1())).append(" , ");
-	// }
-	// if (priObj instanceof AIO) {
-	// aio = (AIO) priObj;
-	// msg.append(dao.drop(aio.getTableName(), aio.getKeys()[0],
-	// aio.get_id())).append(" , ");
-	// if (aiodt != null)
-	// msg.append(dao.drop(aiodt.getTableName(), aio.getKeys()[1],
-	// aio.getVhno())).append(" , ");
-	// else
-	// msg.append(dao.drop(new AIODT().getTableName(), aio.getKeys()[1],
-	// aio.getVhno())).append(" , ");
-	// }
-	//
-	// if (msg.toString().contains("error"))
-	// return ConstValue.ORDERS_CANCEL_FAILURE + "\n" + msg.toString();
-	//
-	// return priObj instanceof AODR ? ConstValue.ORDERS_CANCEL_AODR_SUCCESS :
-	// ConstValue.ORDERS_CANCEL_AIO_SUCCESS;
-	// }
+	// 刪除訂/調撥單副檔
+	public String delOrderdt(DBManager manager, AUSER user, Object priObj) {
+		float tempCount = 0.0f;
+		if (msg.length() > 0)
+			msg.delete(0, msg.length());
+		if (priObj instanceof AODRDT) {
+			aodrdt = (AODRDT) priObj;
+			msg.append(manager.drop(aodrdt.getTableName(), aodrdt.getKeys()[0], aodrdt.getAodrdt_id()));
+			aodr = new AODR();
+			for (Object[] dts : manager.query(aodrdt.getTableName(), aodrdt.getKeys()[1], aodrdt.getOrder1(),
+					aodrdt.getLength())) {
+				aodrdt.setValuesFull(dts);
+				tempCount += aodrdt.getQty() * aodrdt.getPrc();
+			}
+			aodr.setValuesFull(
+					manager.query(aodr.getTableName(), aodr.getKeys()[1], aodrdt.getOrder1(), aodr.getLength()).get(0));
+			aodr.setTamt(tempCount);
+			msg.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
+		}
+		if (priObj instanceof AIODT) {
+			aiodt = (AIODT) priObj;
+			msg.append(manager.drop(aiodt.getTableName(), aiodt.getKeys()[0], aiodt.getAiodt_id()));
+			aio = new AIO();
+			for (Object[] dts : manager.query(aiodt.getTableName(), aiodt.getKeys()[1], aiodt.getOrder1(),
+					aodrdt.getLength())) {
+				aiodt.setValuesFull(dts);
+				tempCount += aiodt.getQty() * aiodt.getPrc();
+			}
+			aodr.setValuesFull(
+					manager.query(aio.getTableName(), aio.getKeys()[1], aio.getVhno(), aio.getLength()).get(0));
+			aodr.setTamt(tempCount);
+			msg.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull()));
+		}
 
-	// public <T> String submitOrders(DBManager dao, AUSER user, T priObj,
-	// ArrayList<T> secObj) {
-	// // 送出訂單/調撥單
-	// if (msg.length() > 0)
-	// msg.delete(0, msg.length());
-	//
-	// if (priObj instanceof AODR) {
-	// aodr = (AODR) priObj;
-	// msg.append(dao.insert(aodr.getTableName(), aodr.getKeys(),
-	// aodr.getValues())).append(" , ");
-	// for (Object object : secObj) {
-	// aodrdt = (AODRDT) object;
-	// msg.append(dao.insert(aodrdt.getTableName(), aodrdt.getKeys(),
-	// aodrdt.getValues())).append(" , ");
-	// }
-	// }
-	// if (priObj instanceof AIO) {
-	// aio = (AIO) priObj;
-	// msg.append(dao.insert(aio.getTableName(), aio.getKeys(),
-	// aio.getValues())).append(" , ");
-	// for (Object object : secObj) {
-	// aiodt = (AIODT) object;
-	// msg.append(dao.insert(aiodt.getTableName(), aiodt.getKeys(),
-	// aiodt.getValues())).append(" , ");
-	// }
-	// }
-	// if (msg.toString().contains("error"))
-	// return ConstValue.ORDERS_SUBMIT_FAILURE + "\n" + msg.toString();
-	//
-	// return priObj instanceof AODR ? ConstValue.ORDERS_SUBMIT_AODR_SUCCESS :
-	// ConstValue.ORDERS_SUBMIT_AIO_SUCCESS;
-	// }
+		if (msg.toString().contains("error"))
+			return ConstValue.ORDERS_DROP_FAILURE + "\n" + msg.toString();
+
+		return priObj instanceof AODR ? ConstValue.ORDERS_DROP_AODRDT_SUCCESS : ConstValue.ORDERS_DROP_AIODT_SUCCESS;
+	}
+
+	// 取消訂單/調撥單 使用更新方式替換Status訊息
+	public String cancelOrders(DBManager manager, AUSER user, Object priObj) {
+		if (msg.length() > 0)
+			msg.delete(0, msg.length());
+
+		if (priObj instanceof AODR) {
+			aodr = (AODR) priObj;
+			aodr.setStatus(ConstValue.ORDERS_STATUS_CANCEL);
+			msg.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
+			// msg.append(manager.drop(aodr.getTableName(), aodr.getKeys()[0],
+			// aodr.getAodr_id())).append(" , ");
+			// if (aodrdt != null)
+			// msg.append(manager.drop(aodrdt.getTableName(), aodr.getKeys()[1],
+			// aodr.getOrder1())).append(" , ");
+			// else
+			// msg.append(manager.drop(new AODRDT().getTableName(),
+			// aodr.getKeys()[1],
+			// aodr.getOrder1())).append(" , ");
+		}
+
+		if (priObj instanceof AIO) {
+			aio = (AIO) priObj;
+			aio.setStatus(ConstValue.ORDERS_STATUS_CANCEL);
+			msg.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull()));
+			// msg.append(manager.drop(aio.getTableName(), aio.getKeys()[0],
+			// aio.getAio_id())).append(" , ");
+
+			// if (aiodt != null)
+			// msg.append(manager.drop(aiodt.getTableName(), aio.getKeys()[1],
+			// aio.getVhno())).append(" , ");
+			// else
+			// msg.append(manager.drop(new AIODT().getTableName(),
+			// aio.getKeys()[1],
+			// aio.getVhno())).append(" , ");
+
+		}
+
+		if (msg.toString().contains("error"))
+			return ConstValue.ORDERS_CANCEL_FAILURE + "\n" + msg.toString();
+
+		return priObj instanceof AODR ? ConstValue.ORDERS_CANCEL_AODR_SUCCESS : ConstValue.ORDERS_CANCEL_AIO_SUCCESS;
+	}
 
 	public <T> String submitOrders(DBManager manager, AUSER user, T priObj) {
 		// 送出訂單/調撥單

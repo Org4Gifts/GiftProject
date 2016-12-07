@@ -139,7 +139,13 @@ public class TestOrders {
 		System.out.println("發送修改調撥單");
 		System.out.println(orders.updateOrders(manager, user, aio, aiodts));
 		System.out.println("發送修改調撥單完成");
-
+		
+		//刪除訂單副檔
+		System.out.println("刪除訂單副檔");
+		System.out.println(orders.delOrderdt(manager, user, aodrdt));
+		System.out.println("刪除訂單副檔完成");
+		
+		//刪除調撥單副檔
 		// 送出訂單
 		System.out.println("送出訂單");
 		System.out.println(orders.submitOrders(manager, user, aodr));

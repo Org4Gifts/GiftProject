@@ -1,6 +1,9 @@
 package tw.youth.project.gift2016.consts;
 
 public class ConstValue {
+	// 通用常數
+	public static final String PERMISSION_NOT_ENOUGH = "權限不足";
+
 	// Login 使用的常數
 	public static final String LOGIN_SUCCESS = "登入成功";
 	public static final String LOGIN_FAILURE = "登入失敗";
@@ -17,12 +20,14 @@ public class ConstValue {
 	public static final String OREDERS_STATUS_COMPLETED = "Completed";
 	public static final String ORDERS_STATUS_OBSOLETED = "Obsoleted";
 	public static final String ORDERS_STATUS_REJECTED = "Rejected";
+	public static final String ORDERS_STATUS_CANCEL = "Cancel";
 	// Status0 : Rejected (單據被退件)
 	// Status1 : Preparing (單據準備中，尚未送出)
 	// STatus2 : Processing (單據被送出，待簽核中)
 	// Status8 : Approved (簽核流程結束)
 	// Status9 : Completed (行政部門結案，禮品已轉出，系統自動扣除 【及時庫存量】)
 	// Status10 : Obsoleted (行政部門作廢，系統自動加回 【及時庫存量】)
+	// Status11 : Cancel (取消訂單)
 
 	public static final String ORDERS_ADD_FAILURE = "建立失敗";
 	public static final String ORDERS_ADD_AODR_SUCCESS = "訂單建立成功";
@@ -39,6 +44,10 @@ public class ConstValue {
 	public static final String ORDERS_SUBMIT_FAILURE = "發送失敗";
 	public static final String ORDERS_SUBMIT_AODR_SUCCESS = "訂單發送成功";
 	public static final String ORDERS_SUBMIT_AIO_SUCCESS = "調撥單發送成功";
+
+	public static final String ORDERS_DROP_FAILURE = "訂單副檔刪除失敗";
+	public static final String ORDERS_DROP_AODRDT_SUCCESS = "訂單副檔刪除成功";
+	public static final String ORDERS_DROP_AIODT_SUCCESS = "調撥單副檔刪除成功";
 
 	// SIGNATURE 使用的常數
 	public static final String SIGNATURE_STATUS_SEND = "Send";

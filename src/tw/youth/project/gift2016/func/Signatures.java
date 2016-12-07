@@ -47,7 +47,46 @@ public class Signatures {
 
 	// 同意訂/調撥單
 	public <T> String approveOrder(DBManager manager, AUSER user, T obj) {
-		sb.delete(0, sb.length());
+		return orderFunc(manager, user, obj, ConstValue.SIGNATURE_STATUS_APPROVE);
+	}
+
+	// 拒絕訂/調撥單
+	public <T> String rejectOrder(DBManager manager, AUSER user, T obj) {
+		return orderFunc(manager, user, obj, ConstValue.SIGNATURE_STATUS_REJECT);
+	}
+
+	// 完成訂/調撥單 role=3的管理部門使用，還有更新庫存沒做
+	public <T> String completeOrder(DBManager manager, AUSER user, T obj) {
+		if (user.getRole() == 3)
+			return orderFunc(manager, user, obj, ConstValue.SIGNATURE_STATUS_COMPLETE);
+		else
+			return ConstValue.PERMISSION_NOT_ENOUGH;
+	}
+
+	// 作廢訂/調撥單 role=3的管理部門使用，還有更新庫存沒做
+	public <T> String obsoleteOrder(DBManager manager, AUSER user, T obj) {
+		if (user.getRole() == 3) {
+			if (sb.length() > 0)
+				sb.delete(0, sb.length());
+			if (obj instanceof AODR) {
+				AODR aodr = (AODR) obj;
+				aodr.setSignerno(user.getEmpno());
+				aodr.setStatus(ConstValue.ORDERS_STATUS_OBSOLETED);
+				return manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull());
+			} else {
+				AIO aio = (AIO) obj;
+				aio.setSignerno(user.getEmpno());
+				aio.setStatus(ConstValue.ORDERS_STATUS_OBSOLETED);
+				return manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull());
+			}
+		} else
+			return ConstValue.PERMISSION_NOT_ENOUGH;
+	}
+
+	// 訂/調撥單功能
+	public <T> String orderFunc(DBManager manager, AUSER user, T obj, String cmd) {
+		if (sb.length() > 0)
+			sb.delete(0, sb.length());
 		ASIGNLOG signlog = new ASIGNLOG();
 		Object[] objs;
 		if (obj instanceof AODR) {
@@ -60,7 +99,7 @@ public class Signatures {
 			objs = new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(),
 					((float) (ToolBox.getCurrentTimestamp().getTime() - signlog.getCreated().getTime()))
 							/ (60 * 60 * 1000),
-					ConstValue.SIGNATURE_STATUS_APPROVE };
+					cmd };
 			System.out.println(objs[4]);
 			signlog.setValues(objs);
 			sb.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append("\n");
@@ -75,17 +114,12 @@ public class Signatures {
 			objs = new Object[] { aio.getVhno(), user.getEmpno(), user.getEname(), user.getDno(),
 					((float) (ToolBox.getCurrentTimestamp().getTime() - signlog.getCreated().getTime()))
 							/ (60 * 60 * 1000),
-					ConstValue.SIGNATURE_STATUS_APPROVE };
+					cmd };
 			signlog.setValues(objs);
 			sb.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append("\n");
 			sb.append(manager.insert(signlog.getTableName(), signlog.getKeys(), signlog.getValues())).append("\n");
 			return sb.toString();
 		}
-	}
-
-	// 拒絕訂/調撥單
-	public <T> String rejectOrder(DBManager manager, AUSER user, T obj) {
-		return "";
 	}
 
 }
