@@ -16,11 +16,16 @@ import tw.youth.project.gift2016.sql.user.AUSER;
 
 public class SQLCmd {
 	// 通用參數
-	public static final String DB_URL = "jdbc:mysql://localhost:3306/";
-	public static final String DB = "GIFT";
-	public static final String DB_USER = "odise";
-	public static final String DB_PASS = "116025";
+//	public static final String DB_URL = "jdbc:mysql://localhost:3306/";
+//	public static final String DB = "GIFT";
+//	public static final String DB_USER = "odise";
+//	public static final String DB_PASS = "116025";
 
+	public static final String DB_URL = "jdbc:mysql://localhost:6033/";
+	public static final String DB = "giftdbo";
+	public static final String DB_USER = "root";
+	public static final String DB_PASS = "1qaz@wsx";
+	
 	public static final String[] TABLES = { AUSER.class.getSimpleName(), AEMP.class.getSimpleName(),
 			AVDR.class.getSimpleName(), AQTY.class.getSimpleName(), APRESENT.class.getSimpleName(),
 			ASIGNLOG.class.getSimpleName(), AODRDT.class.getSimpleName(), AODR.class.getSimpleName(),

@@ -26,7 +26,8 @@ public class TestOrders {
 		manager.starup();
 
 		System.out.println("取得使用者");
-		AUSER user = new Login(manager, "P0006", "P0006").getUser();
+		//AUSER user = new Login(manager, "P0006", "P0006").getUser();
+		AUSER user = new Login(manager, "P0001", "P0001").getUser();
 		AEMP aemp = new AEMP();
 		ADEP adep0 = new ADEP();
 		System.out.println("取得使用者基本資料");
