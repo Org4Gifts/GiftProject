@@ -178,7 +178,6 @@ public class Orders {
 				total += ((AODRDT) t).getPrc() * ((AODRDT) t).getQty();
 			}
 			aodr.setTamt(total);
-			System.out.println("Total : " + aodr.getTamt());
 
 			msg.append(manager.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues())).append(" , ");
 			if (!msg.toString().contains("error")) {
@@ -227,8 +226,6 @@ public class Orders {
 				total += ((AIODT) t).getPrc() * ((AIODT) t).getQty();
 			}
 			aio.setTamt(total);
-
-			System.out.println("Total : " + aio.getTamt());
 
 			msg.append(manager.insert(aio.getTableName(), aio.getKeys(), aio.getValues())).append(" , ");
 			if (!msg.toString().contains("error")) {
@@ -287,14 +284,15 @@ public class Orders {
 		return priObj instanceof AODR ? ConstValue.ORDERS_UPDATE_AODR_SUCCESS : ConstValue.ORDERS_UPDATE_AIO_SUCCESS;
 	}
 
-	// 刪除訂/調撥單副檔
 	public String delOrderdt(DBManager manager, AUSER user, Object priObj) {
+		// 刪除訂/調撥單副檔
 		float tempCount = 0.0f;
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
+
 		if (priObj instanceof AODRDT) {
 			aodrdt = (AODRDT) priObj;
-			msg.append(manager.drop(aodrdt.getTableName(), aodrdt.getKeys()[0], aodrdt.getAodrdt_id()));
+			msg.append(manager.drop(aodrdt.getTableName(), aodrdt.getKeys()[0], aodrdt.getAodrdt_id())).append("\n");
 			aodr = new AODR();
 			for (Object[] dts : manager.query(aodrdt.getTableName(), aodrdt.getKeys()[1], aodrdt.getOrder1(),
 					aodrdt.getLength())) {
@@ -303,21 +301,25 @@ public class Orders {
 			}
 			aodr.setValuesFull(
 					manager.query(aodr.getTableName(), aodr.getKeys()[1], aodrdt.getOrder1(), aodr.getLength()).get(0));
+			System.out.println(aodr.getOrder1());
 			aodr.setTamt(tempCount);
 			msg.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
+			System.out.println(msg.toString());
 		}
+
 		if (priObj instanceof AIODT) {
 			aiodt = (AIODT) priObj;
-			msg.append(manager.drop(aiodt.getTableName(), aiodt.getKeys()[0], aiodt.getAiodt_id()));
+			msg.append(manager.drop(aiodt.getTableName(), aiodt.getKeys()[0], aiodt.getAiodt_id())).append("\n");
 			aio = new AIO();
-			for (Object[] dts : manager.query(aiodt.getTableName(), aiodt.getKeys()[1], aiodt.getOrder1(),
-					aodrdt.getLength())) {
+			for (Object[] dts : manager.query(aiodt.getTableName(), aiodt.getKeys()[1], aiodt.getVhno(),
+					aiodt.getLength())) {
 				aiodt.setValuesFull(dts);
 				tempCount += aiodt.getQty() * aiodt.getPrc();
 			}
-			aodr.setValuesFull(
+			aio.setValuesFull(
 					manager.query(aio.getTableName(), aio.getKeys()[1], aio.getVhno(), aio.getLength()).get(0));
-			aodr.setTamt(tempCount);
+			System.out.println(aio.getVhno());
+			aio.setTamt(tempCount);
 			msg.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull()));
 		}
 
