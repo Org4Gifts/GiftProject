@@ -304,7 +304,7 @@ public class Orders {
 			System.out.println(aodr.getOrder1());
 			aodr.setTamt(tempCount);
 			msg.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
-			System.out.println(msg.toString());
+			
 		}
 
 		if (priObj instanceof AIODT) {
