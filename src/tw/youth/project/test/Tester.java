@@ -6,9 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import tw.youth.project.gift2016.func.Login;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
 import tw.youth.project.gift2016.sql.aodr.AODR;
+import tw.youth.project.gift2016.sql.aodr.AODRDT;
 import tw.youth.project.gift2016.sql.user.AUSER;
 import tw.youth.project.gift2016.tools.ToolBox;
 
@@ -16,9 +18,29 @@ import org.junit.Test;
 
 public class Tester {
 
+	@Test
+	public void testAodrdt() {
+		DBManager manager = new DBManager(SQLCmd.DB_URL,SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		manager.starup();
+		// AUSER user = new Login(manager, "P0006", "P0006").getUser();
+		AODRDT aodrdt = new AODRDT();
+		AODR aodr = new AODR();
+		float tempCount = 0.0f;
+		aodrdt.setOrder1("A201612015");
+		for (Object[] dts : manager.query(aodrdt.getTableName(), aodrdt.getKeys()[1], aodrdt.getOrder1(),
+				aodrdt.getLength())) {
+			aodrdt.setValuesFull(dts);
+			tempCount += aodrdt.getQty() * aodrdt.getPrc();
+		}
+		aodr.setValuesFull(
+				manager.query(aodr.getTableName(), aodr.getKeys()[1], aodrdt.getOrder1(), aodr.getLength()).get(0));
+		aodr.setTamt(tempCount);
+		manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull());
+	}
+
 	// @Test
 	public void test() {
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		// USER
@@ -47,7 +69,7 @@ public class Tester {
 	public void testAodr() {
 		ArrayList<Object[]> arr = null;
 		ArrayList<Object[]> arr2 = null;
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		// AODR
 		System.out.println("AODR");
@@ -96,7 +118,7 @@ public class Tester {
 		System.out.println(dao.drop(aodr.getTableName(), "empno", "K123456") + "\n");
 	}
 
-	@Test
+	// @Test
 	public void testMd5() {
 		AUSER user = new AUSER();
 		System.out.println(user.toMD5Pass("P0001"));

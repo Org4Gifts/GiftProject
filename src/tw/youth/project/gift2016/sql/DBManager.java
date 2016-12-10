@@ -23,11 +23,13 @@ import tw.youth.project.gift2016.tools.ToolBox;
 public class DBManager {
 	private static Connection conn;
 	private String url;
+	private String db;
 	private String name;
 	private String password;
 
-	public DBManager(String url, String name, String password) {
+	public DBManager(String url, String db, String name, String password) {
 		this.url = url;
+		this.db = db;
 		this.name = name;
 		this.password = password;
 	}
@@ -107,7 +109,7 @@ public class DBManager {
 	}
 
 	public boolean starup() {
-		conn = new DAO().getConn(url, name, password);
+		conn = new DAO().getConn(url,db, name, password);
 		return conn != null;
 	}
 
@@ -284,6 +286,7 @@ public class DBManager {
 				if (values.length - i <= 2)
 					continue;
 				ps.setObject(i, values[i]);
+				System.out.println(i + " ; " + values[i]);
 			}
 			ps.setObject(i - 2, ToolBox.getCurrentTimestamp());
 			ps.setObject(i - 1, ToolBox.getCurrentTimestamp());

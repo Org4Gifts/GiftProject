@@ -286,6 +286,7 @@ public class Orders {
 
 	public String delOrderdt(DBManager manager, AUSER user, Object priObj) {
 		// 刪除訂/調撥單副檔
+		
 		float tempCount = 0.0f;
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());
@@ -301,10 +302,8 @@ public class Orders {
 			}
 			aodr.setValuesFull(
 					manager.query(aodr.getTableName(), aodr.getKeys()[1], aodrdt.getOrder1(), aodr.getLength()).get(0));
-			System.out.println(aodr.getOrder1());
 			aodr.setTamt(tempCount);
 			msg.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull()));
-			
 		}
 
 		if (priObj instanceof AIODT) {
@@ -326,7 +325,7 @@ public class Orders {
 		if (msg.toString().contains("error"))
 			return ConstValue.ORDERS_DROP_FAILURE + "\n" + msg.toString();
 
-		return priObj instanceof AODR ? ConstValue.ORDERS_DROP_AODRDT_SUCCESS : ConstValue.ORDERS_DROP_AIODT_SUCCESS;
+		return priObj instanceof AODRDT ? ConstValue.ORDERS_DROP_AODRDT_SUCCESS : ConstValue.ORDERS_DROP_AIODT_SUCCESS;
 	}
 
 	// 取消訂單/調撥單 使用更新方式替換Status訊息

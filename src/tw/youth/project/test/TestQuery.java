@@ -28,7 +28,7 @@ public class TestQuery {
 	// 目前測試位置 108行
 	@Test
 	public void test() {
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		System.out.println("取得使用者");

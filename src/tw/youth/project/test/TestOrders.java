@@ -22,7 +22,7 @@ public class TestOrders {
 
 	@Test
 	public void test() {
-		DBManager manager = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager manager = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		manager.starup();
 
 		System.out.println("取得使用者");
@@ -104,7 +104,7 @@ public class TestOrders {
 		System.out.println("修改訂單");
 		Querys query = new Querys(user);
 		ArrayList<AODR> arrs = query.getAodrs(manager);
-		aodr = arrs.get(arrs.size()-1);
+		aodr = arrs.get(arrs.size() - 1);
 		aodr.setTamt(aodr.getTamt() - 100);
 		aodrdts = query.getAodrdts(manager, aodr.getOrder1());
 		for (AODRDT aodrdt2 : aodrdts) {
@@ -124,7 +124,7 @@ public class TestOrders {
 		// 修改調撥單
 		System.out.println("修改調撥單");
 		ArrayList<AIO> arrs2 = query.getAios(manager, aio.getKeys()[1], "");
-		aio = arrs2.get(arrs2.size()-1);
+		aio = arrs2.get(arrs2.size() - 1);
 		System.out.println(aio.getVhno());
 		aio.setTamt(aio.getTamt() - 100);
 		aiodts = query.getAiodts(manager, aio.getVhno());
@@ -147,7 +147,7 @@ public class TestOrders {
 		System.out.println(orders.delOrderdt(manager, user, aodrdts.get(1)));
 		System.out.println("刪除訂單副檔完成");
 
-		// 刪除調撥單副檔 還有問題  12/8進度
+		// 刪除調撥單副檔 還有問題 12/8進度
 		System.out.println("刪除調撥單副檔");
 		System.out.println(orders.delOrderdt(manager, user, aiodts.get(1)));
 		System.out.println("刪除調撥單副檔完成");
@@ -173,7 +173,7 @@ public class TestOrders {
 			aio = (AIO) obj;
 			System.out.println(aio.getEmpno() + " ; " + aio.getVhno());
 		}
-		
+
 		System.out.println("測試完成");
 	}
 

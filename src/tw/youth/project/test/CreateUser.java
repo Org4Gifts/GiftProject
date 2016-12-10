@@ -13,7 +13,7 @@ public class CreateUser {
 	@Test
 	public void test() {
 		// fail("Not yet implemented");
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		// USER

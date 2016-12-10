@@ -30,7 +30,7 @@ public class TestSQL {
 
 	// @Test
 	public void testSQL() throws SQLException { // 測試OK
-		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, "", SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		// mydb1?useUnicode=true&characterEncoding=utf-8
 		PreparedStatement ps = dao.getConn().prepareStatement("select * from cmdev.dept where deptno LIKE ?");
@@ -47,7 +47,7 @@ public class TestSQL {
 	public void testTableExistAndTestTableFunc() throws InterruptedException { // 測試OK
 		boolean exists = false;
 
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		try {
@@ -132,7 +132,7 @@ public class TestSQL {
 
 	// @Test
 	public void testDropTables() { // 測試OK
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		System.out.println("testDropTables : " + new Date(System.currentTimeMillis()).toString());
 		try {
@@ -162,7 +162,7 @@ public class TestSQL {
 		// testDropTables();
 
 		System.out.println("testCreateTable : " + new Date(System.currentTimeMillis()).toString());
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		String table;
@@ -243,9 +243,9 @@ public class TestSQL {
 
 	@Test
 	public void testInsertQueryUpdateDropTableColumns() { // 測試OK
-		//測試所有table的新增、查詢、修改、刪除功能
+		// 測試所有table的新增、查詢、修改、刪除功能
 		System.out.println("testInsertUpdateDropTables : " + new Date(System.currentTimeMillis()).toString());
-		DBManager dao = new DBManager(SQLCmd.DB_URL + SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		// AUSER
@@ -426,7 +426,7 @@ public class TestSQL {
 		AODR aodr = new AODR();
 
 		Object[] objs6 = { "A20161108", "K123456", "F1", "0800", new Timestamp(10000L), 100.0f, "Preparing", 2, "P0002",
-				"測試申請單1","自動增加" };
+				"測試申請單1", "自動增加" };
 		aodr.setValues(objs6);
 		System.out.println(dao.insert(aodr.getTableName(), aodr.getKeys(), aodr.getValues()));
 		arr = dao.query(aodr.getTableName(), "empno", "234", aodr.getLength());
@@ -455,7 +455,7 @@ public class TestSQL {
 		// ASIGNLOG
 		System.out.println("ASIGNLOG");
 		ASIGNLOG asignlog = new ASIGNLOG();
-		objs6 = new Object[] { "A20161108", "K123456", "歐帝斯","0800", 0.0f, "Send" };
+		objs6 = new Object[] { "A20161108", "K123456", "歐帝斯", "0800", 0.0f, "Send" };
 		asignlog.setValues(objs6);
 		System.out.println(dao.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()));
 		arr = dao.query(asignlog.getTableName(), "order1", "1108", asignlog.getLength());
@@ -513,8 +513,8 @@ public class TestSQL {
 		// AIO
 		System.out.println("AIO");
 		AIO aio = new AIO();
-		Object[] objs8 = { "C60989", "P0002", "0800","F1", new Timestamp(100000L), new Timestamp(100000L), "F2", "D", 100.0f,
-				"Rejected",0,"P0001","eng廠區庫存不足","自動增加" };
+		Object[] objs8 = { "C60989", "P0002", "0800", "F1", new Timestamp(100000L), new Timestamp(100000L), "F2", "D",
+				100.0f, "Rejected", 0, "P0001", "eng廠區庫存不足", "自動增加" };
 		aio.setValues(objs8);
 		System.out.println(dao.insert(aio.getTableName(), aio.getKeys(), aio.getValues()));
 		arr = dao.query(aio.getTableName(), "vhno", "C60", aio.getLength());
