@@ -44,6 +44,7 @@ public class Orders {
 			if (orderNum == null) {
 				orderNum = new TreeSet<>();
 				AODR aodr = new AODR();
+				//特殊查詢方式，Query是供使用者使用，所以沒有全查詢
 				arr = manager.query(aodr.getTableName(), aodr.getKeys()[1], "", aodr.getLength());
 				for (Object[] objects : arr) {
 					orderNum.add((String) objects[1]);
@@ -53,6 +54,7 @@ public class Orders {
 			if (vhnoNum == null) {
 				vhnoNum = new TreeSet<>();
 				AIO aio = new AIO();
+				//特殊查詢方式，Query是供使用者使用，所以沒有全查詢
 				arr = manager.query(aio.getTableName(), aio.getKeys()[1], "", aio.getLength());
 				for (Object[] objects : arr) {
 					vhnoNum.add((String) objects[1]);
@@ -139,6 +141,7 @@ public class Orders {
 
 	// 查詢所有簽核人員
 	private void querySigners(DBManager manager, AUSER user) {
+		//特殊查詢方式，Query是供使用者使用
 		if (user != null && !user.getEname().equals("")) {
 			AEMP aemp = new AEMP();
 			ArrayList<Object[]> aemps = manager.query(aemp.getTableName(), aemp.getKeys()[1], "", aemp.getLength());
@@ -335,6 +338,7 @@ public class Orders {
 				msg.append(manager.drop(aodrdt.getTableName(), aodrdt.getKeys()[0], aodrdt.getAodrdt_id()))
 						.append("\n");
 				aodr = new AODR();
+				//特殊查詢方式，Query是供使用者使用
 				for (Object[] dts : manager.query(aodrdt.getTableName(), aodrdt.getKeys()[1], aodrdt.getOrder1(),
 						aodrdt.getLength())) {
 					aodrdt.setValuesFull(dts);
@@ -350,11 +354,13 @@ public class Orders {
 				aiodt = (AIODT) priObj;
 				msg.append(manager.drop(aiodt.getTableName(), aiodt.getKeys()[0], aiodt.getAiodt_id())).append("\n");
 				aio = new AIO();
+				//特殊查詢方式，Query是供使用者使用
 				for (Object[] dts : manager.query(aiodt.getTableName(), aiodt.getKeys()[1], aiodt.getVhno(),
 						aiodt.getLength())) {
 					aiodt.setValuesFull(dts);
 					tempCount += aiodt.getQty() * aiodt.getPrc();
 				}
+				//特殊查詢方式，Query是供使用者使用
 				aio.setValuesFull(
 						manager.query(aio.getTableName(), aio.getKeys()[1], aiodt.getVhno(), aio.getLength()).get(0));
 				aio.setTamt(tempCount);
