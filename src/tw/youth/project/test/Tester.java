@@ -20,7 +20,7 @@ public class Tester {
 
 	@Test
 	public void testAodrdt() {
-		DBManager manager = new DBManager(SQLCmd.DB_URL,SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager manager = new DBManager(SQLCmd.DB_URL,SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		manager.starup();
 		// AUSER user = new Login(manager, "P0006", "P0006").getUser();
 		AODRDT aodrdt = new AODRDT();
@@ -40,7 +40,7 @@ public class Tester {
 
 	// @Test
 	public void test() {
-		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		// USER
@@ -69,7 +69,7 @@ public class Tester {
 	public void testAodr() {
 		ArrayList<Object[]> arr = null;
 		ArrayList<Object[]> arr2 = null;
-		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL , SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		// AODR
 		System.out.println("AODR");

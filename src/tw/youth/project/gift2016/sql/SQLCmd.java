@@ -17,7 +17,7 @@ import tw.youth.project.gift2016.sql.user.AUSER;
 public class SQLCmd {
 	// 通用參數
 	public static final String DB_URL = "jdbc:mysql://localhost:3306/";
-	public static final String DB = "GIFT";
+	public static final String DB_NAME = "GIFT";
 	public static final String DB_USER = "odise";
 	public static final String DB_PASS = "116025";
 

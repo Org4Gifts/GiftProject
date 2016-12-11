@@ -20,6 +20,7 @@ public class AUSER {
 	// 額外需求部分
 
 	private String ename = "";
+	// 中文姓名
 	private Short authority = 0;
 	// 權限
 	private String mgr = "";

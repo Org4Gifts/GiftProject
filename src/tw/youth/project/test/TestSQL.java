@@ -47,7 +47,7 @@ public class TestSQL {
 	public void testTableExistAndTestTableFunc() throws InterruptedException { // 測試OK
 		boolean exists = false;
 
-		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		try {
@@ -132,7 +132,7 @@ public class TestSQL {
 
 	// @Test
 	public void testDropTables() { // 測試OK
-		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 		System.out.println("testDropTables : " + new Date(System.currentTimeMillis()).toString());
 		try {
@@ -162,7 +162,7 @@ public class TestSQL {
 		// testDropTables();
 
 		System.out.println("testCreateTable : " + new Date(System.currentTimeMillis()).toString());
-		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		String table;
@@ -245,7 +245,7 @@ public class TestSQL {
 	public void testInsertQueryUpdateDropTableColumns() { // 測試OK
 		// 測試所有table的新增、查詢、修改、刪除功能
 		System.out.println("testInsertUpdateDropTables : " + new Date(System.currentTimeMillis()).toString());
-		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		dao.starup();
 
 		// AUSER

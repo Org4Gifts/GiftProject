@@ -286,7 +286,6 @@ public class DBManager {
 				if (values.length - i <= 2)
 					continue;
 				ps.setObject(i, values[i]);
-				System.out.println(i + " ; " + values[i]);
 			}
 			ps.setObject(i - 2, ToolBox.getCurrentTimestamp());
 			ps.setObject(i - 1, ToolBox.getCurrentTimestamp());

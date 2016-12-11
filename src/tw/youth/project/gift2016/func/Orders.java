@@ -39,28 +39,30 @@ public class Orders {
 	public Orders(DBManager manager, AUSER user) {
 		// TODO Auto-generated constructor stub
 		// 先取得資料庫上所有訂單/調撥單的編號
-		ArrayList<Object[]> arr = null;
-		if (orderNum == null) {
-			orderNum = new TreeSet<>();
-			AODR aodr = new AODR();
-			arr = manager.query(aodr.getTableName(), aodr.getKeys()[1], "", aodr.getLength());
-			for (Object[] objects : arr) {
-				orderNum.add((String) objects[1]);
+		if (user != null && !user.getEname().equals("")) {
+			ArrayList<Object[]> arr = null;
+			if (orderNum == null) {
+				orderNum = new TreeSet<>();
+				AODR aodr = new AODR();
+				arr = manager.query(aodr.getTableName(), aodr.getKeys()[1], "", aodr.getLength());
+				for (Object[] objects : arr) {
+					orderNum.add((String) objects[1]);
+				}
 			}
-		}
-		// orderNum = (String) arr.get(arr.size() - 1)[1];
-		if (vhnoNum == null) {
-			vhnoNum = new TreeSet<>();
-			AIO aio = new AIO();
-			arr = manager.query(aio.getTableName(), aio.getKeys()[1], "", aio.getLength());
-			for (Object[] objects : arr) {
-				vhnoNum.add((String) objects[1]);
+			// orderNum = (String) arr.get(arr.size() - 1)[1];
+			if (vhnoNum == null) {
+				vhnoNum = new TreeSet<>();
+				AIO aio = new AIO();
+				arr = manager.query(aio.getTableName(), aio.getKeys()[1], "", aio.getLength());
+				for (Object[] objects : arr) {
+					vhnoNum.add((String) objects[1]);
+				}
 			}
-		}
 
-		// vhnoNum = (String) arr.get(arr.size() - 1)[1];
-		// queryADEP(dao);
-		getSigners(manager, user);
+			// vhnoNum = (String) arr.get(arr.size() - 1)[1];
+			// queryADEP(dao);
+			getSigners(manager, user);
+		}
 	}
 
 	private Map<String, AEMP> getSigners(DBManager manager, AUSER user) {
@@ -81,8 +83,24 @@ public class Orders {
 		}
 	}
 
-	// 查詢訂/調撥單
-	public <T> ArrayList<Object> queryOrders(DBManager manager, AUSER user, String key) {
+	// 查詢並取代單筆訂單
+	public <T> void queryOrder(DBManager manager, AUSER user, T key) {
+		if (key instanceof AODR) {
+			aodr = (AODR) key;
+			Object[] objs = manager.query(aodr.getTableName(), aodr.getKeys()[1], aodr.getOrder1(), aodr.getLength())
+					.get(0);
+			aodr.setValuesFull(objs);
+		}
+
+		if (key instanceof AIO) {
+			aio = (AIO) key;
+			Object[] objs = manager.query(aio.getTableName(), aio.getKeys()[1], aio.getVhno(), aio.getLength()).get(0);
+			aio.setValuesFull(objs);
+		}
+	}
+
+	// 查詢所有訂/調撥單
+	public ArrayList<Object> queryOrders(DBManager manager, AUSER user, String key) {
 		orderList = new ArrayList<>();
 		ArrayList<Object[]> arr = null;
 		if (key.equals("aodr")) {
@@ -286,7 +304,7 @@ public class Orders {
 
 	public String delOrderdt(DBManager manager, AUSER user, Object priObj) {
 		// 刪除訂/調撥單副檔
-		
+
 		float tempCount = 0.0f;
 		if (msg.length() > 0)
 			msg.delete(0, msg.length());

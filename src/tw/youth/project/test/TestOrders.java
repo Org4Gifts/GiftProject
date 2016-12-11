@@ -22,7 +22,7 @@ public class TestOrders {
 
 	@Test
 	public void test() {
-		DBManager manager = new DBManager(SQLCmd.DB_URL, SQLCmd.DB, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		DBManager manager = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		manager.starup();
 
 		System.out.println("取得使用者");
@@ -152,8 +152,12 @@ public class TestOrders {
 		System.out.println(orders.delOrderdt(manager, user, aiodts.get(1)));
 		System.out.println("刪除調撥單副檔完成");
 
+		
+		
 		// 送出訂單
 		System.out.println("送出訂單");
+		orders.queryOrders(manager, user, aodr.getTableName());
+		System.out.println();
 		System.out.println(orders.submitOrders(manager, user, aodr));
 		System.out.println("送出訂單完成");
 

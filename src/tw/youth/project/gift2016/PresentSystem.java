@@ -3,6 +3,7 @@ package tw.youth.project.gift2016;
 import javax.swing.JFrame;
 import tw.youth.project.gift2016.info.SystemInfo;
 import tw.youth.project.gift2016.sql.DBManager;
+import tw.youth.project.gift2016.sql.SQLCmd;
 
 public class PresentSystem extends JFrame {
 
@@ -10,7 +11,7 @@ public class PresentSystem extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	DBManager dao;
 
 	public static void main(String[] args) {
@@ -27,7 +28,7 @@ public class PresentSystem extends JFrame {
 
 	public synchronized boolean login(String name, String password) {
 		System.out.println("Initial login");
-		dao = new DBManager("localhost", name, password);
+		dao = new DBManager(SQLCmd.DB_URL, SQLCmd.DB_NAME, name, password);
 		return dao.starup();
 	}
 
