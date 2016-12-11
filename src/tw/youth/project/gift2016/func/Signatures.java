@@ -28,7 +28,11 @@ public class Signatures {
 
 			if (key.equals("aio")) {
 				ArrayList<AIO> arr = query.getAios(manager, key, orderNum);
-				return arr.get(0);
+				for (AIO aio : arr) {
+					if (aio.getVhno().equals(orderNum))
+						return aio;
+				}
+
 			}
 		}
 		return null;
@@ -115,7 +119,6 @@ public class Signatures {
 						((float) (ToolBox.getCurrentTimestamp().getTime() - signlog.getCreated().getTime()))
 								/ (60 * 60 * 1000),
 						cmd };
-				System.out.println(objs[4]);
 				signlog.setValues(objs);
 				sb.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append("\n");
 				sb.append(manager.insert(signlog.getTableName(), signlog.getKeys(), signlog.getValues())).append("\n");
