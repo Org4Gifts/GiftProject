@@ -334,8 +334,7 @@ public class Orders {
 				tempCount += aiodt.getQty() * aiodt.getPrc();
 			}
 			aio.setValuesFull(
-					manager.query(aio.getTableName(), aio.getKeys()[1], aio.getVhno(), aio.getLength()).get(0));
-			System.out.println(aio.getVhno());
+					manager.query(aio.getTableName(), aio.getKeys()[1], aiodt.getVhno(), aio.getLength()).get(0));
 			aio.setTamt(tempCount);
 			msg.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull()));
 		}

@@ -27,11 +27,11 @@ public class DBManager {
 	private String name;
 	private String password;
 
-	public DBManager(String url, String db, String name, String password) {
+	public DBManager(String url, String db, String name, String pwd) {
 		this.url = url;
 		this.db = db;
 		this.name = name;
-		this.password = password;
+		this.password = pwd;
 	}
 
 	public Connection getConn() {

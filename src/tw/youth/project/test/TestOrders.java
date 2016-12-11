@@ -125,7 +125,6 @@ public class TestOrders {
 		System.out.println("修改調撥單");
 		ArrayList<AIO> arrs2 = query.getAios(manager, aio.getKeys()[1], "");
 		aio = arrs2.get(arrs2.size() - 1);
-		System.out.println(aio.getVhno());
 		aio.setTamt(aio.getTamt() - 100);
 		aiodts = query.getAiodts(manager, aio.getVhno());
 		for (AIODT aiodt2 : aiodts) {
@@ -142,27 +141,27 @@ public class TestOrders {
 		System.out.println(orders.updateOrders(manager, user, aio, aiodts));
 		System.out.println("發送修改調撥單完成");
 
-		// 刪除訂單副檔 還有問題
+		// 刪除訂單副檔
 		System.out.println("刪除訂單副檔");
 		System.out.println(orders.delOrderdt(manager, user, aodrdts.get(1)));
 		System.out.println("刪除訂單副檔完成");
 
-		// 刪除調撥單副檔 還有問題 12/8進度
+		// 刪除調撥單副檔
 		System.out.println("刪除調撥單副檔");
 		System.out.println(orders.delOrderdt(manager, user, aiodts.get(1)));
 		System.out.println("刪除調撥單副檔完成");
 
-		
-		
 		// 送出訂單
 		System.out.println("送出訂單");
-		orders.queryOrders(manager, user, aodr.getTableName());
-		System.out.println();
+		orders.queryOrder(manager, user, aodr);
+		System.out.println("先查詢後修改");
 		System.out.println(orders.submitOrders(manager, user, aodr));
 		System.out.println("送出訂單完成");
 
 		// 送出調撥單
 		System.out.println("送出訂單");
+		orders.queryOrder(manager, user, aio);
+		System.out.println("先查詢後修改");
 		System.out.println(orders.submitOrders(manager, user, aio));
 		System.out.println("送出訂單完成");
 
