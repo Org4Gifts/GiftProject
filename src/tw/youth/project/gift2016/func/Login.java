@@ -35,6 +35,10 @@ public class Login {
 								adep.setValuesFull(objects3);
 								user.setRole(adep.getRole());
 								user.setAuthority(aemp.getAuthority());
+								user.setEname(aemp.getEname());
+								user.setDno(aemp.getDno());
+								user.setFno(aemp.getFno());
+								user.setMgr(aemp.getMgr());
 							}
 						}
 						login = true;

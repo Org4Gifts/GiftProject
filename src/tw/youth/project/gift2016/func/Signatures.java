@@ -16,6 +16,7 @@ public class Signatures {
 
 	// 取得單筆訂單/調撥單
 	public Object getOrder(DBManager manager, AUSER user, String key, String orderNum) {
+		System.out.println(user.getEname() + " ; " + key + " ; " + orderNum);
 		if (user != null && !user.getEname().equals("")) {
 			Querys query = new Querys(user);
 			if (key.equals("aodr")) {
