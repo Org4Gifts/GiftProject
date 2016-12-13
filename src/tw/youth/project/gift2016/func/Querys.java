@@ -70,13 +70,11 @@ public class Querys {
 		if (user.getAuthority() > 0) {
 			// 課長級簽核權限使用之功能
 			AEMP aemp = new AEMP();
-			ArrayList<Object[]> arr = manager.query(aemp.getTableName(), aemp.getKeys()[8], user.getDno(),
-					aemp.getLength());
 			ArrayList<AODR> aodrs = new ArrayList<>();
-			for (Object[] objs : arr) {
+			for (Object[] objs : manager.query(aemp.getTableName(), aemp.getKeys()[8], user.getDno(),
+					aemp.getLength())) {
 				AODR aodr = new AODR();
-				ArrayList<Object[]> arr2 = manager.query(aodr.getTableName(), aodr.getKeys()[3], objs[1], aodr.getLength());
-				for (Object[] objects : arr2) {
+				for (Object[] objects : manager.query(aodr.getTableName(), aodr.getKeys()[3], objs[1], aodr.getLength())) {
 					aodr.setValuesFull(objects);
 					aodrs.add(aodr);
 					aodr = new AODR();
@@ -88,10 +86,9 @@ public class Querys {
 		} else {
 			// 一般職員使用之功能 查詢自己的訂單
 			AODR aodr = new AODR();
-			ArrayList<Object[]> arr = manager.query(aodr.getTableName(), user.getKeys()[1], user.getEmpno(),
-					aodr.getLength());
 			ArrayList<AODR> aodrs = new ArrayList<>();
-			for (Object[] objects : arr) {
+			for (Object[] objects : manager.query(aodr.getTableName(), user.getKeys()[1], user.getEmpno(),
+					aodr.getLength())) {
 				aodr.setValuesFull(objects);
 				aodrs.add(aodr);
 				aodr = new AODR();

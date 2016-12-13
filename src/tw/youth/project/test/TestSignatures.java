@@ -29,18 +29,29 @@ public class TestSignatures {
 		System.out.println("檢查 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno());
 		System.out.println("同意 : " + signatures.approveOrder(manager, user, aodr));
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
+		System.out.println("確認 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno() + " ; " + aodr.getStatus());
 
 		user = new Login(manager, "P0003", "P0003").getUser();
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
 		System.out.println("檢查 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno());
 		System.out.println("同意 : " + signatures.approveOrder(manager, user, aodr));
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
-		
+		System.out.println("確認 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno() + " ; " + aodr.getStatus());
+
 		user = new Login(manager, "P0002", "P0002").getUser();
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
 		System.out.println("檢查 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno());
 		System.out.println("同意 : " + signatures.approveOrder(manager, user, aodr));
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
+		System.out.println("確認 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno() + " ; " + aodr.getStatus());
+
+		System.out.println("指定完成簽核者");
+		user = new Login(manager, "P0016", "P0016").getUser();
+		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
+		System.out.println("檢查 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno());
+		System.out.println("同意 : " + signatures.completeOrder(manager, user, aodr));
+		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
+		System.out.println("確認 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno() + " ; " + aodr.getStatus());
 
 		// 取得單筆調撥單
 		System.out.println("取得單筆調撥單");

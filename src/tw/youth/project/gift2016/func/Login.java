@@ -24,21 +24,19 @@ public class Login {
 						// 密碼也正確之後才將值儲存
 						user.setValuesFull(objects);
 						AEMP aemp = new AEMP();
-						ArrayList<Object[]> arr = manager.query(aemp.getTableName(), aemp.getKeys()[1], user.getEmpno(),
-								aemp.getLength());
-						for (Object[] objects2 : arr) {
+						for (Object[] objects2 : manager.query(aemp.getTableName(), aemp.getKeys()[1], user.getEmpno(),
+								aemp.getLength())) {
 							aemp.setValuesFull(objects2);
+							user.setAuthority(aemp.getAuthority());
+							user.setEname(aemp.getEname());
+							user.setDno(aemp.getDno());
+							user.setFno(aemp.getFno());
+							user.setMgr(aemp.getMgr());
 							ADEP adep = new ADEP();
-							ArrayList<Object[]> arr2 = manager.query(adep.getTableName(), adep.getKeys()[2], aemp.getDno(),
-									aemp.getLength());
-							for (Object[] objects3 : arr2) {
+							for (Object[] objects3 : manager.query(adep.getTableName(), adep.getKeys()[2],
+									aemp.getDno(), aemp.getLength())) {
 								adep.setValuesFull(objects3);
 								user.setRole(adep.getRole());
-								user.setAuthority(aemp.getAuthority());
-								user.setEname(aemp.getEname());
-								user.setDno(aemp.getDno());
-								user.setFno(aemp.getFno());
-								user.setMgr(aemp.getMgr());
 							}
 						}
 						login = true;
