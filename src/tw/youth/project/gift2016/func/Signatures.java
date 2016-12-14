@@ -2,6 +2,7 @@ package tw.youth.project.gift2016.func;
 
 import java.util.ArrayList;
 
+import tw.youth.project.gift2016.asetup.ASETUP;
 import tw.youth.project.gift2016.consts.ConstValue;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.adep.ADEP;
@@ -75,20 +76,12 @@ public class Signatures {
 	}
 	
 	// 查詢廠區管理部門簽核者
-	public String getLastSigner(DBManager manager, AUSER user,String key){
-		ADEP adep = new ADEP();
-		for(Object[] obj : manager.query(adep.getTableName(), adep.getKeys()[4], user.getFno(), adep.getLength())){
-			adep.setValuesFull(obj);
-			AEMP aemp = new AEMP();
-			for (Object[] objs : manager.query(aemp.getTableName(), aemp.getKeys()[4], user.getFno(), adep.getLength())) {
-				aemp.setValuesFull(objs);
-				if(aemp.get){
-					
-				}
-			}
+	public String getLastSigner(DBManager manager, AUSER user){
+		ASETUP asetup = new ASETUP();
+		for (Object[] objs : manager.query(asetup.getTableName(), asetup.getKeys()[1], user.getFno(), asetup.getLength())) {
+			asetup.setValuesFull(objs);
 		}
-		return "";
-		
+		return asetup.getEmpno();
 	}
 
 	// 同意訂/調撥單

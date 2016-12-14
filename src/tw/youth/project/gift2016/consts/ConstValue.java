@@ -4,6 +4,11 @@ public class ConstValue {
 	// 通用常數
 	public static final String PERMISSION_NOT_ENOUGH = "權限不足";
 
+	//Mail專用常數
+	public static final String SUBJECT = "密碼通知信函";
+	public static final String MSG = "親愛的使用者您好，這是忘記密碼通知信函。\n"
+			+ "您的密碼修改連結為：%s";
+	
 	// Login 使用的常數
 	public static final String LOGIN_SUCCESS = "登入成功";
 	public static final String LOGIN_FAILURE = "登入失敗";

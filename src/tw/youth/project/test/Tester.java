@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import tw.youth.project.gift2016.func.Login;
+import tw.youth.project.gift2016.mail.MailService;
 import tw.youth.project.gift2016.mail.Sender;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
@@ -25,6 +26,16 @@ public class Tester {
 		Sender.loadProperties();
 		Sender sender = new Sender("odise9411272@gmail.com", "Test", "For test");
 		sender.start();
+	}
+	
+	@Test
+	public void testJavaMail(){
+		String to = "odise9411272@gmail.com";
+        String subject = "Test Java Mail Test 1214-1";
+        String messageText = "Hi! This is a test mail sent from Alaya." + "\n"; 
+        MailService mailService = new MailService();
+        System.out.println("寄送email中,請稍後...");
+        mailService.sendMail(to, subject, messageText);
 	}
 //	@Test
 	public void testAodrdt() {

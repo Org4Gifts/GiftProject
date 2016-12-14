@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ToolBox {
+	
 	public static String getStrCurrentTimestamp() { // 完整時間戳記
 		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd
 		// HH:mm:ss.SSS");

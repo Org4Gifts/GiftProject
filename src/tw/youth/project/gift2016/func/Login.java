@@ -3,6 +3,7 @@ package tw.youth.project.gift2016.func;
 import java.util.ArrayList;
 
 import tw.youth.project.gift2016.consts.ConstValue;
+import tw.youth.project.gift2016.mail.MailService;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.adep.ADEP;
 import tw.youth.project.gift2016.sql.user.AEMP;
@@ -89,6 +90,7 @@ public class Login {
 						user.setValuesFull(objects2);
 					}
 				}
+				new MailService().sendMail((String) objects[3], ConstValue.SUBJECT, String.format(ConstValue.MSG, "www.google.com"));
 				return ConstValue.LOGIN_SEND_EMAIL_SUCCESS;
 			}
 		}
