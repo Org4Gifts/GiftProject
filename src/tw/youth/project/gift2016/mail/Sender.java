@@ -18,10 +18,10 @@ package tw.youth.project.gift2016.mail;
 	        try {
 	            p = new Properties();
 	            // log.info(this.getClass().getResource("/mail.properties").getPath());
-	            System.out.println(Sender.class.getResource("/mail.properties"));
+	            System.out.println(Sender.class.getResource("mail.properties"));
 	            java.io.BufferedReader reader = new java.io.BufferedReader(
 	                    new java.io.FileReader(Sender.class.getResource(
-	                            "/mail.properties").getFile()));
+	                            "mail.properties").getFile()));
 	            ;
 	            String str = null;
 	            while ((str = reader.readLine()) != null) {
@@ -89,10 +89,10 @@ package tw.youth.project.gift2016.mail;
 //	            log.info(e);
 	        }
 	    }
-	    public static void main(String args[])
-	    {
-	        (new Sender("taa@yslifes.com","test","test")).start();
-	    }
+//	    public static void main(String args[])
+//	    {
+//	        (new Sender("taa@yslifes.com","test","test")).start();
+//	    }
 	 
 	}
 

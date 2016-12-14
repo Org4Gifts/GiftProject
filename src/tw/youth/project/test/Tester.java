@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import tw.youth.project.gift2016.func.Login;
+import tw.youth.project.gift2016.mail.Sender;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
 import tw.youth.project.gift2016.sql.aodr.AODR;
@@ -18,7 +19,14 @@ import org.junit.Test;
 
 public class Tester {
 
+	
 	@Test
+	public void testSender(){
+		Sender.loadProperties();
+		Sender sender = new Sender("odise9411272@gmail.com", "Test", "For test");
+		sender.start();
+	}
+//	@Test
 	public void testAodrdt() {
 		DBManager manager = new DBManager(SQLCmd.DB_URL,SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
 		manager.starup();

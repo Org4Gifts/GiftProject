@@ -80,10 +80,11 @@ public class Signatures {
 		for(Object[] obj : manager.query(adep.getTableName(), adep.getKeys()[4], user.getFno(), adep.getLength())){
 			adep.setValuesFull(obj);
 			AEMP aemp = new AEMP();
-			for (Object[] obj : manager.query(aemp.getTableName(), aemp.getKeys()[4], user.getFno(), adep.getLength())) {
+			for (Object[] objs : manager.query(aemp.getTableName(), aemp.getKeys()[4], user.getFno(), adep.getLength())) {
 				
 			}
 		}
+		return "";
 		
 	}
 
