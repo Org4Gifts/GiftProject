@@ -81,7 +81,10 @@ public class Signatures {
 			adep.setValuesFull(obj);
 			AEMP aemp = new AEMP();
 			for (Object[] objs : manager.query(aemp.getTableName(), aemp.getKeys()[4], user.getFno(), adep.getLength())) {
-				
+				aemp.setValuesFull(objs);
+				if(aemp.get){
+					
+				}
 			}
 		}
 		return "";
