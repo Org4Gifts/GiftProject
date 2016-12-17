@@ -18,11 +18,17 @@ package tw.youth.project.gift2016.mail;
 	        try {
 	            p = new Properties();
 	            // log.info(this.getClass().getResource("/mail.properties").getPath());
-	            System.out.println(Sender.class.getResource("/mail.properties"));
+	            //ResourceBundle bundle = ResourceBundle.getBundle("tw.youth.project.gift2016.mail.mail"); //取得資料來源
+	            System.out.println("loadProperties...");
+	            String ss = Sender.class.getResource("mail.properties").getPath();
+	            System.out.println("ss="+ss);
+	            //System.out.println(Sender.class.getResource("/mail.properties"));
+	            System.out.println("1236");
 	            java.io.BufferedReader reader = new java.io.BufferedReader(
 	                    new java.io.FileReader(Sender.class.getResource(
-	                            "/mail.properties").getFile()));
+	                            "mail.properties").getFile()));
 	            ;
+	            System.out.println("456");
 	            String str = null;
 	            while ((str = reader.readLine()) != null) {
 	                String sp[] = str.split("=");
