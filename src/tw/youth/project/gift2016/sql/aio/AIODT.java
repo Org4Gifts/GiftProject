@@ -9,9 +9,9 @@ public class AIODT {
 	private String vhno = ""; // auto
 	// 單據編號
 	private String inno = "";
-	// 轉入禮品編號
+	// 轉出禮品編號
 	private String outno = "";
-	// 轉入禮品編號
+	// 要轉出禮品編號
 	private Integer qty = 0;
 	// 進銷數量
 	private Float prc = 0.0f; // auto

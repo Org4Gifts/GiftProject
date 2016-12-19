@@ -1,4 +1,4 @@
-package tw.youth.project.gift2016.asetup;
+package tw.youth.project.gift2016.sql.asetup;
 
 import java.sql.Timestamp;
 

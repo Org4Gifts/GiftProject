@@ -4,11 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import tw.youth.project.gift2016.consts.ConstValue;
 import tw.youth.project.gift2016.func.Login;
 import tw.youth.project.gift2016.func.Signatures;
 import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
 import tw.youth.project.gift2016.sql.aodr.AODR;
+import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.apresent.APRESENT;
+import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.user.AUSER;
 
 public class TestSignatures {
@@ -49,9 +53,36 @@ public class TestSignatures {
 		user = new Login(manager, "P0016", "P0016").getUser();
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
 		System.out.println("檢查 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno());
+		System.out.println("user = " + user.getEmpno()+" ; "+user.getEname());
 		System.out.println("同意 : " + signatures.completeOrder(manager, user, aodr));
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
 		System.out.println("確認 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno() + " ; " + aodr.getStatus());
+		APRESENT apresent = new APRESENT();
+		AODRDT aodrdt = new AODRDT();
+		for (Object[] objs : manager.query(aodrdt.getTableName(), aodrdt.getKeys()[1], "A201612023",
+				aodrdt.getLength())) {
+			aodrdt.setValuesFull(objs);
+			apresent.setValuesFull(manager
+					.query(apresent.getTableName(), apresent.getKeys()[1], aodrdt.getFgno(), apresent.getLength())
+					.get(0));
+			aodrdt = new AODRDT();
+		}
+
+		System.out.println("作廢訂單");
+		user = new Login(manager, "P0006", "P0006").getUser();
+
+		System.out.println("復原");
+		aodr.setStatus(ConstValue.ORDERS_STATUS_PROCESSING);
+		aodr.setSignerno("P0006");
+		manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull());
+		ASIGNLOG signlog = new ASIGNLOG();
+		for (Object[] objs : manager.query(signlog.getTableName(), signlog.getKeys()[1], "A201612023",
+				signlog.getLength())) {
+			manager.drop(signlog.getTableName(), signlog.getKeys()[0], objs[0]);
+		}
+		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
+		System.out.println("確認 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno() + " ; " + aodr.getStatus());
+		System.out.println("復原完成");
 
 		// 取得單筆調撥單
 		System.out.println("取得單筆調撥單");
