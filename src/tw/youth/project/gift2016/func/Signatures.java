@@ -103,10 +103,10 @@ public class Signatures {
 
 	// 完成訂/調撥單 role=3的管理部門使用，還有更新庫存沒做
 	public <T> String completeOrder(DBManager manager, AUSER user, T obj) {
-		System.out.println(user.getUser()+" "+user.getRole());
 		if (user != null && !user.getEname().equals("")) {
 			if (user.getRole() == 3) {
 				refreshApresent(manager, user, obj, true);
+				System.out.println("Check1");
 				return orderFunc(manager, user, obj, ConstValue.SIGNATURE_STATUS_COMPLETE);
 			} else
 				return ConstValue.PERMISSION_NOT_ENOUGH;
@@ -150,7 +150,8 @@ public class Signatures {
 				apresent.setValuesFull(manager
 						.query(apresent.getTableName(), apresent.getKeys()[1], aodrdt.getFgno(), apresent.getLength())
 						.get(0));
-				apresent.setIqty(completeOrObsolete ? apresent.getIqty() - aodrdt.getQty() : apresent.getIqty() + aodrdt.getQty());
+				apresent.setIqty(completeOrObsolete ? apresent.getIqty() - aodrdt.getQty()
+						: apresent.getIqty() + aodrdt.getQty());
 				manager.update(apresent.getTableName(), apresent.getKeys(), apresent.getValuesFull());
 				aodrdt = new AODRDT();
 			}
@@ -167,14 +168,17 @@ public class Signatures {
 						.query(apresent.getTableName(), apresent.getKeys()[1], aiodt.getInno(), apresent.getLength())
 						.get(0));
 				if (aio.getAno().equals(user.getFno()))
-					apresent.setIqty(completeOrObsolete ? apresent.getIqty() + aiodt.getQty() : apresent.getIqty() - aiodt.getQty());
+					apresent.setIqty(completeOrObsolete ? apresent.getIqty() + aiodt.getQty()
+							: apresent.getIqty() - aiodt.getQty());
 				else
-					apresent.setIqty(completeOrObsolete ? apresent.getIqty() - aiodt.getQty() : apresent.getIqty() + aiodt.getQty());
+					apresent.setIqty(completeOrObsolete ? apresent.getIqty() - aiodt.getQty()
+							: apresent.getIqty() + aiodt.getQty());
 
 				manager.update(apresent.getTableName(), apresent.getKeys(), apresent.getValuesFull());
 				aiodt = new AIODT();
 			}
 		}
+
 
 	}
 
@@ -196,8 +200,8 @@ public class Signatures {
 						aodr.setSignerno(signerno);
 				}
 				// 特殊查詢功能
-				ArrayList<Object[]> arr = manager.query(asignlog.getTableName(), asignlog.getKeys()[1], aodr.getOrder1(),
-						asignlog.getLength());
+				ArrayList<Object[]> arr = manager.query(asignlog.getTableName(), asignlog.getKeys()[1],
+						aodr.getOrder1(), asignlog.getLength());
 				asignlog.setValuesFull(arr.get(arr.size() - 1));
 
 				objs = new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(),
@@ -207,7 +211,8 @@ public class Signatures {
 				objs[objs.length - 2] = (float) objs[objs.length - 2] < 0.0f ? 0.0f : objs[objs.length - 2];
 				asignlog.setValues(objs);
 				sb.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append("\n");
-				sb.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues())).append("\n");
+				sb.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()))
+						.append("\n");
 				return sb.toString();
 			} else {
 				AIO aio = (AIO) obj;
@@ -230,7 +235,8 @@ public class Signatures {
 				objs[objs.length - 2] = (float) objs[objs.length - 2] < 0.0f ? 0.0f : objs[objs.length - 2];
 				asignlog.setValues(objs);
 				sb.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append("\n");
-				sb.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues())).append("\n");
+				sb.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()))
+						.append("\n");
 				return sb.toString();
 			}
 		}

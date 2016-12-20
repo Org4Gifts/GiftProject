@@ -112,7 +112,7 @@ public class TestOrders {
 		}
 
 		System.out.println("修改訂單之新增禮品");
-		secObjs = new Object[] { aodr.getOrder1(), "中原大學", "電機系院長", 4, "S001-F4", 1, 880.0f, "洽談產學合作-高爾夫球組一廠", 1 };
+		secObjs = new Object[] { aodr.getOrder1(), "中原大學", "電機系院長", 4, "S001-F5", 1, 880.0f, "洽談產學合作-高爾夫球組一廠", 1 };
 		aodrdt = new AODRDT();
 		aodrdt.setValues(secObjs);
 		aodrdts.add(aodrdt);
