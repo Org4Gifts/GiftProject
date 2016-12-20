@@ -53,7 +53,7 @@ public class TestSignatures {
 		user = new Login(manager, "P0016", "P0016").getUser();
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
 		System.out.println("檢查 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno());
-		System.out.println("user = " + user.getEmpno()+" ; "+user.getEname());
+		System.out.println("檢查 : " + user.getRole());
 		System.out.println("同意 : " + signatures.completeOrder(manager, user, aodr));
 		aodr = (AODR) signatures.getOrder(manager, user, aodr.getTableName(), "A201612023");
 		System.out.println("確認 : " + aodr.getSignerlist() + " ; " + aodr.getSignerno() + " ; " + aodr.getStatus());

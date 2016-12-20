@@ -103,6 +103,7 @@ public class Signatures {
 
 	// 完成訂/調撥單 role=3的管理部門使用，還有更新庫存沒做
 	public <T> String completeOrder(DBManager manager, AUSER user, T obj) {
+		System.out.println(user.getUser()+" "+user.getRole());
 		if (user != null && !user.getEname().equals("")) {
 			if (user.getRole() == 3) {
 				refreshApresent(manager, user, obj, true);

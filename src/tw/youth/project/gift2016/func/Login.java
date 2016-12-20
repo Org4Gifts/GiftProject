@@ -34,8 +34,10 @@ public class Login {
 							user.setFno(aemp.getFno());
 							user.setMgr(aemp.getMgr());
 							ADEP adep = new ADEP();
-							for (Object[] objects3 : manager.query(adep.getTableName(), adep.getKeys()[2],
-									aemp.getDno(), aemp.getLength())) {
+							System.out.println("Login ADEP = " + adep.getKeys()[2]);
+							for (Object[] objects3 : manager.query(adep.getTableName(), adep.getKeys()[1],
+									aemp.getDno(), adep.getLength())) {
+								System.out.println("Login = " + objects3[0]);
 								adep.setValuesFull(objects3);
 								user.setRole(adep.getRole());
 							}
@@ -90,7 +92,8 @@ public class Login {
 						user.setValuesFull(objects2);
 					}
 				}
-				new MailService().sendMail((String) objects[3], ConstValue.SUBJECT, String.format(ConstValue.MSG, "www.google.com"));
+				new MailService().sendMail((String) objects[3], ConstValue.SUBJECT,
+						String.format(ConstValue.MSG, "www.google.com"));
 				return ConstValue.LOGIN_SEND_EMAIL_SUCCESS;
 			}
 		}
