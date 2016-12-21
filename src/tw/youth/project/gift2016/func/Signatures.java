@@ -106,7 +106,6 @@ public class Signatures {
 		if (user != null && !user.getEname().equals("")) {
 			if (user.getRole() == 3) {
 				refreshApresent(manager, user, obj, true);
-				System.out.println("Check1");
 				return orderFunc(manager, user, obj, ConstValue.SIGNATURE_STATUS_COMPLETE);
 			} else
 				return ConstValue.PERMISSION_NOT_ENOUGH;
@@ -116,22 +115,32 @@ public class Signatures {
 
 	// 作廢訂/調撥單 role=3的管理部門使用，還有更新庫存沒做
 	public <T> String obsoleteOrder(DBManager manager, AUSER user, T obj) {
+//		if (user != null && !user.getEname().equals("")) {
+//			if (user.getRole() == 3) {
+//				if (sb.length() > 0)
+//					sb.delete(0, sb.length());
+//				if (obj instanceof AODR) {
+//					AODR aodr = (AODR) obj;
+//					aodr.setSignerno(user.getEmpno());
+//					aodr.setStatus(ConstValue.ORDERS_STATUS_OBSOLETED);
+//					refreshApresent(manager, user, obj, false);
+////					return manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull());
+//					return orderFunc(manager, user, obj, ConstValue.ORDERS_STATUS_OBSOLETED);
+//				} else {
+//					AIO aio = (AIO) obj;
+//					aio.setSignerno(user.getEmpno());
+//					aio.setStatus(ConstValue.ORDERS_STATUS_OBSOLETED);
+////					return manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull());
+//					return orderFunc(manager, user, obj, ConstValue.ORDERS_STATUS_OBSOLETED);
+//				}
+//			} else
+//				return ConstValue.PERMISSION_NOT_ENOUGH;
+//		}
+//		return ConstValue.LOGIN_NOT_LOGIN;
 		if (user != null && !user.getEname().equals("")) {
 			if (user.getRole() == 3) {
-				if (sb.length() > 0)
-					sb.delete(0, sb.length());
-				if (obj instanceof AODR) {
-					AODR aodr = (AODR) obj;
-					aodr.setSignerno(user.getEmpno());
-					aodr.setStatus(ConstValue.ORDERS_STATUS_OBSOLETED);
-					refreshApresent(manager, user, obj, false);
-					return manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull());
-				} else {
-					AIO aio = (AIO) obj;
-					aio.setSignerno(user.getEmpno());
-					aio.setStatus(ConstValue.ORDERS_STATUS_OBSOLETED);
-					return manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull());
-				}
+				refreshApresent(manager, user, obj, false);
+				return orderFunc(manager, user, obj, ConstValue.ORDERS_STATUS_OBSOLETED);
 			} else
 				return ConstValue.PERMISSION_NOT_ENOUGH;
 		}
@@ -179,7 +188,6 @@ public class Signatures {
 			}
 		}
 
-
 	}
 
 	// 訂/調撥單功能
@@ -193,7 +201,8 @@ public class Signatures {
 			if (obj instanceof AODR) {
 				AODR aodr = (AODR) obj;
 				if (!user.getMgr().equals("P0001")) {
-					if (!cmd.equals(ConstValue.ORDERS_STATUS_OBSOLETED))
+					if (!cmd.equals(ConstValue.ORDERS_STATUS_OBSOLETED)
+							&& !cmd.equals(ConstValue.SIGNATURE_STATUS_COMPLETE))
 						aodr.setSignerno(user.getMgr());
 				} else {
 					if (!user.getEmpno().equals(signerno))
@@ -202,6 +211,7 @@ public class Signatures {
 				// 特殊查詢功能
 				ArrayList<Object[]> arr = manager.query(asignlog.getTableName(), asignlog.getKeys()[1],
 						aodr.getOrder1(), asignlog.getLength());
+				System.out.println(aodr.getOrder1());
 				asignlog.setValuesFull(arr.get(arr.size() - 1));
 
 				objs = new Object[] { aodr.getOrder1(), user.getEmpno(), user.getEname(), user.getDno(),
@@ -210,14 +220,19 @@ public class Signatures {
 						cmd };
 				objs[objs.length - 2] = (float) objs[objs.length - 2] < 0.0f ? 0.0f : objs[objs.length - 2];
 				asignlog.setValues(objs);
-				sb.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append("\n");
+
+				if (cmd.equals(ConstValue.SIGNATURE_STATUS_COMPLETE) || cmd.equals(ConstValue.ORDERS_STATUS_OBSOLETED))
+					aodr.setStatus(cmd);
+
+					sb.append(manager.update(aodr.getTableName(), aodr.getKeys(), aodr.getValuesFull())).append("\n");
 				sb.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()))
 						.append("\n");
 				return sb.toString();
 			} else {
 				AIO aio = (AIO) obj;
 				if (!user.getMgr().equals("P0001")) {
-					if (!cmd.equals(ConstValue.ORDERS_STATUS_OBSOLETED))
+					if (!cmd.equals(ConstValue.ORDERS_STATUS_OBSOLETED)
+							&& !cmd.equals(ConstValue.SIGNATURE_STATUS_COMPLETE))
 						aio.setSignerno(user.getMgr());
 				} else {
 					if (!user.getEmpno().equals(signerno))
@@ -234,6 +249,10 @@ public class Signatures {
 						cmd };
 				objs[objs.length - 2] = (float) objs[objs.length - 2] < 0.0f ? 0.0f : objs[objs.length - 2];
 				asignlog.setValues(objs);
+				
+				if (cmd.equals(ConstValue.SIGNATURE_STATUS_COMPLETE) || cmd.equals(ConstValue.ORDERS_STATUS_OBSOLETED))
+					aio.setStatus(cmd);
+				
 				sb.append(manager.update(aio.getTableName(), aio.getKeys(), aio.getValuesFull())).append("\n");
 				sb.append(manager.insert(asignlog.getTableName(), asignlog.getKeys(), asignlog.getValues()))
 						.append("\n");
