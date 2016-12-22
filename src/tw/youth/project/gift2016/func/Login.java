@@ -76,6 +76,13 @@ public class Login {
 		}
 	}
 
+	public String changPasswordByMail(DBManager manager, AUSER user, String newPasswd) {
+		// 修改密碼
+		user.setPass(user.toMD5Pass(newPasswd));
+		return manager.update(user.getTableName(), user.getKeys(), user.getValuesFull());
+
+	}
+
 	public String forgotPass(DBManager manager, String email) {
 		// 忘記密碼的發送郵件功能 (未完成)
 		AEMP aemp = new AEMP();
