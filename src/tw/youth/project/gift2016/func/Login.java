@@ -83,7 +83,7 @@ public class Login {
 
 	}
 
-	public String forgotPass(DBManager manager, String email) {
+	public String forgotPass(DBManager manager, String email,String url) {
 		// 忘記密碼的發送郵件功能 (未完成)
 		AEMP aemp = new AEMP();
 		ArrayList<Object[]> arr = manager.query(aemp.getTableName(), aemp.getKeys()[3], email, aemp.getLength());
@@ -98,7 +98,7 @@ public class Login {
 					}
 				}
 				new MailService().sendMail((String) objects[3], ConstValue.SUBJECT,
-						String.format(ConstValue.MSG, "www.google.com"));
+						String.format(ConstValue.MSG, url));
 				return ConstValue.LOGIN_SEND_EMAIL_SUCCESS;
 			}
 		}

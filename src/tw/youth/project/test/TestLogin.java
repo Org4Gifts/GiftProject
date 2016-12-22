@@ -33,9 +33,9 @@ public class TestLogin {
 		System.out.println(login.changPassword(dao, "P0002", "P0001", "P0001") + "\n");
 
 		System.out.println("測試發送電子郵件:不存在的電子郵件");
-		System.out.println(login.forgotPass(dao, "p0025@alaya.com"));
+		System.out.println(login.forgotPass(dao, "p0025@alaya.com","www.google.com"));
 		System.out.println("測試發送電子郵件:已存在的電子郵件");
-		System.out.println(login.forgotPass(dao, "p0024@alaya.com"));
+		System.out.println(login.forgotPass(dao, "p0024@alaya.com","www.google.com"));
 	}
 
 }
