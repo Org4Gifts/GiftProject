@@ -170,6 +170,7 @@ public class Orders {
 			aiodt = null;
 			StringBuilder sb = new StringBuilder();
 			String tempKey;
+			Short authority = 0;
 			String order = "A";
 			int num = 0;
 			int compare = 0;
@@ -196,11 +197,13 @@ public class Orders {
 
 				tempKey = aodr.getSignerno();
 
-				while (!tempKey.equals("P0001")) {
-					// 設定查到董事長的工號就停止
+//				while (!tempKey.equals("P0001")) {
+					while (authority!=6) {
+					// 設定查到董事長的權限就停止
 					AEMP aemp = signatures.get(tempKey);
 					sb.append(aemp.getEmpno()).append("_").append(aemp.getEname()).append("^");
 					tempKey = aemp.getMgr();
+					authority = aemp.getAuthority();
 				}
 
 				if (sb.toString().substring(sb.length() - 1).equals("^"))
