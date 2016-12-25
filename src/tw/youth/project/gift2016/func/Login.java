@@ -84,7 +84,7 @@ public class Login {
 	}
 
 	public Object[] forgotPass(DBManager manager, String email,String url) {
-		// 忘記密碼的發送郵件功能 (未完成)
+		// 忘記密碼的發送郵件功能
 		AEMP aemp = new AEMP();
 		ArrayList<Object[]> arr = manager.query(aemp.getTableName(), aemp.getKeys()[3], email, aemp.getLength());
 		for (Object[] objects : arr) {
