@@ -13,6 +13,9 @@ public class Login {
 	private AUSER user;
 	private boolean login = false;
 
+	public Login(){
+		//撰寫空的供修改密碼使用
+	}
 	public Login(DBManager manager, String username, String passwd) {
 		// 登入建構子 先查詢使用者帳號和密碼
 		// TODO Auto-generated constructor stub
@@ -60,10 +63,10 @@ public class Login {
 		return user;
 	}
 
-	public String changPassword(DBManager manager, String oldPasswd, String newPasswd1, String newPasswd2) {
+	public String changPassword(DBManager manager,AUSER user, String oldPasswd, String newPasswd1, String newPasswd2) {
 		// 修改密碼
-		if (!login)
-			return ConstValue.LOGIN_NOT_LOGIN;
+//		if (!login)
+//			return ConstValue.LOGIN_NOT_LOGIN;
 		if (user.toMD5Pass(oldPasswd).equals(user.getPass())) {
 			if (newPasswd1.equals(newPasswd2)) {
 				user.setPass(user.toMD5Pass(newPasswd2));
