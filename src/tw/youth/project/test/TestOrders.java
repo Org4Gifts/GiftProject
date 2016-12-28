@@ -109,6 +109,7 @@ public class TestOrders {
 		aodrdts = query.getAodrdts(manager, aodr.getOrder1());
 		for (AODRDT aodrdt2 : aodrdts) {
 			aodrdt2.setQty(40);
+			
 		}
 
 		System.out.println("修改訂單之新增禮品");
