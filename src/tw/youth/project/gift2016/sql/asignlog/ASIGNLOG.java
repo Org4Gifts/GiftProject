@@ -3,7 +3,7 @@ package tw.youth.project.gift2016.sql.asignlog;
 import java.sql.Timestamp;
 
 public class ASIGNLOG {
-	// 訂單主檔
+	// 訂單簽核紀錄
 	private Integer asignlog_id = 0;
 
 	private String order1 = "";
