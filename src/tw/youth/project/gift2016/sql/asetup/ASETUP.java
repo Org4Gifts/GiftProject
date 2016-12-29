@@ -3,7 +3,7 @@ package tw.youth.project.gift2016.sql.asetup;
 import java.sql.Timestamp;
 
 public class ASETUP {
-
+	//廠簽結者
 	private Integer asetup_id = 0;
 	private String fno = "";
 	private String empno = "";
