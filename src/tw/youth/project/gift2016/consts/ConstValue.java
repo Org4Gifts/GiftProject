@@ -62,5 +62,7 @@ public class ConstValue {
 	public static final String SIGNATURE_STATUS_COMPLETE = "Complete";
 	// 訂單簽核狀態 Send 發送請求者 ,None 尚未簽核 ,Approve 同意 ,Reject 拒絕 ,Complete 完成
 	
+	//Querys用常數
+	public static final String QUERY_NOT_FOUND ="無搜尋結果";
 	
 }
