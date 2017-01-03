@@ -1,7 +1,5 @@
 package tw.youth.project.gift2016.tools;
 
-import java.util.ArrayList;
-
 import tw.youth.project.gift2016.sql.adep.ADEP;
 import tw.youth.project.gift2016.sql.afab.AFAB;
 import tw.youth.project.gift2016.sql.ainventory.AINVENTORY;
