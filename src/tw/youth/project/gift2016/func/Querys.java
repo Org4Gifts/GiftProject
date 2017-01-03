@@ -74,7 +74,8 @@ public class Querys {
 			for (Object[] objs : manager.query(aemp.getTableName(), aemp.getKeys()[8], user.getDno(),
 					aemp.getLength())) {
 				AODR aodr = new AODR();
-				for (Object[] objects : manager.query(aodr.getTableName(), aodr.getKeys()[3], objs[1], aodr.getLength())) {
+				for (Object[] objects : manager.query(aodr.getTableName(), aodr.getKeys()[4], objs[8],
+						aodr.getLength())) {				
 					aodr.setValuesFull(objects);
 					aodrs.add(aodr);
 					aodr = new AODR();
