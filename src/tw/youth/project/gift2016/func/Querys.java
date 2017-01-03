@@ -186,7 +186,7 @@ public class Querys {
 
 	public ArrayList<AUSER> getUsers(DBManager manager, String key, String value) {
 		// 查詢符合條件的使用者們 value 不填入 即為全查詢
-		if (user.getRole() > 2) {
+		if (user.getRole() > 1) {
 			AUSER user = new AUSER();
 			ArrayList<AUSER> users = new ArrayList<>();
 			ArrayList<Object[]> arr = manager.query(user.getTableName(), key, value, user.getLength());
@@ -202,7 +202,7 @@ public class Querys {
 
 	public ArrayList<AEMP> getAemps(DBManager manager, String key, String value) {
 		// 查詢符合條件之多個員工基本資料檔 value 不填入 即為全查詢
-		if (user.getRole() > 2) {
+		if (user.getRole() > 1) {
 			AEMP aemp = new AEMP();
 			ArrayList<AEMP> aemps = new ArrayList<>();
 			ArrayList<Object[]> arr = manager.query(aemp.getTableName(), key, value, aemp.getLength());
@@ -218,7 +218,7 @@ public class Querys {
 
 	public ArrayList<AIO> getAios(DBManager manager, String key, String value) {
 		// 查詢符合條件之多個調撥單狀態 value 不填入 即為全查詢 目前兩個權限的功能一樣
-		if (user.getRole() > 2 && user.getAuthority() > 0) {
+		if (user.getRole() > 1 && user.getAuthority() > 0) {
 			// 管理部門以上單位以及課長級以上職位才可使用
 			AIO aio = new AIO();
 			ArrayList<AIO> aios = new ArrayList<>();
@@ -229,7 +229,7 @@ public class Querys {
 				aio = new AIO();
 			}
 			return aios.size() > 0 ? aios : null;
-		} else if (user.getRole() > 2) {
+		} else if (user.getRole() > 1) {
 			// 管理部門以上單位才可使用
 			AIO aio = new AIO();
 			ArrayList<AIO> aios = new ArrayList<>();
