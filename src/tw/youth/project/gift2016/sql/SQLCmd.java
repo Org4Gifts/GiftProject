@@ -9,6 +9,7 @@ import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
 import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
+import tw.youth.project.gift2016.sql.asetup.ASETUP;
 import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
 import tw.youth.project.gift2016.sql.user.AEMP;
@@ -21,11 +22,14 @@ public class SQLCmd {
 	public static final String DB_USER = "odise";
 	public static final String DB_PASS = "116025";
 
-	public static final String[] TABLES = { AUSER.class.getSimpleName(), AEMP.class.getSimpleName(),
-			AVDR.class.getSimpleName(), AQTY.class.getSimpleName(), APRESENT.class.getSimpleName(),
-			ASIGNLOG.class.getSimpleName(), AODRDT.class.getSimpleName(), AODR.class.getSimpleName(),
-			AIODT.class.getSimpleName(), AIO.class.getSimpleName(), AINVENTORY.class.getSimpleName(),
-			AFAB.class.getSimpleName(), ADEP.class.getSimpleName() };
+	public static final String[] TABLES = { AUSER.class.getSimpleName().toLowerCase(),
+			AEMP.class.getSimpleName().toLowerCase(), AVDR.class.getSimpleName().toLowerCase(),
+			ASIGNLOG.class.getSimpleName().toLowerCase(), ASETUP.class.getSimpleName().toLowerCase(),
+			AQTY.class.getSimpleName().toLowerCase(), APRESENT.class.getSimpleName().toLowerCase(),
+			AODRDT.class.getSimpleName().toLowerCase(), AODR.class.getSimpleName().toLowerCase(),
+			AIODT.class.getSimpleName().toLowerCase(), AIO.class.getSimpleName().toLowerCase(),
+			AINVENTORY.class.getSimpleName().toLowerCase(), AFAB.class.getSimpleName().toLowerCase(),
+			ADEP.class.getSimpleName().toLowerCase() };
 	// // 通用操作
 	// public static final String LOGIN = "";
 	// public static final String SHOW_TABLES = "show tables from %s";
