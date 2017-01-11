@@ -13,6 +13,7 @@ import tw.youth.project.gift2016.sql.DBManager;
 import tw.youth.project.gift2016.sql.SQLCmd;
 import tw.youth.project.gift2016.sql.aodr.AODR;
 import tw.youth.project.gift2016.sql.aodr.AODRDT;
+import tw.youth.project.gift2016.sql.normal.Bulletin;
 import tw.youth.project.gift2016.sql.user.AUSER;
 import tw.youth.project.gift2016.tools.ToolBox;
 
@@ -22,13 +23,33 @@ public class Tester {
 
 	
 	@Test
+	public void testBulletin(){
+		System.out.println("testBulletin");
+		DBManager manager = new DBManager(SQLCmd.DB_URL , SQLCmd.DB_NAME, SQLCmd.DB_USER, SQLCmd.DB_PASS);
+		manager.starup();
+		
+		System.out.println("check : " +manager);
+		Object[] obj = {"測試標題","測試內容 djsdakjdhafkhasfkjasfk \n fsdkjfshdfkjshfkjshfksdjfhsdkjfsdfkjdsdfhskjfskfjs \n dsiajdoidjasoidjasoidjasoida \n"};
+		Bulletin bu = new Bulletin();
+		bu.setValues(obj);
+		manager.insert(bu.getTableName(), bu.getKeys(), bu.getValues());
+		System.out.println("insert success");
+		ArrayList<Object[]> objs = manager.query(bu.getTableName(), bu.getKeys()[1], bu.getValues()[0], bu.getLength());
+		System.out.println("query success : objs = "+objs);
+		Bulletin bu2 = new Bulletin();
+		System.out.println(objs.get(0)[2]);
+		bu2.setValuesFull(objs.get(0));
+		System.out.println(bu2.getSubject()+" ; "+bu2.getContent());
+	}
+	
+//	@Test
 	public void testSender(){
 		Sender.loadProperties();
 		Sender sender = new Sender("odise9411272@gmail.com", "Test", "For test");
 		sender.start();
 	}
 	
-	@Test
+//	@Test
 	public void testJavaMail(){
 		String to = "odise9411272@gmail.com";
         String subject = "Test Java Mail Test 1214-1";
