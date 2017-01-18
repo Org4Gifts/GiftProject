@@ -15,11 +15,11 @@ public class AODRDT {
 	private Short authority = 0;
 	// 拜訪職稱類別
 	private String fgno = "";
-	// 產品代號
+	// 禮品代號
 	private Integer qty = 0;
-	// 產品數量
+	// 禮品數量
 	private Float prc = 0.0f;
-	// 產品單價
+	// 禮品單價
 	private String note1 = "";
 	// 備註
 	// private Integer oqty = 0; // auto

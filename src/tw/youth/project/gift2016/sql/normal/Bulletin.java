@@ -2,7 +2,7 @@ package tw.youth.project.gift2016.sql.normal;
 import java.sql.Timestamp;
 public class Bulletin {
 
-		// 廠別基本檔
+		// 系統公告用
 		private Integer bulletin_id = 0;
 
 		private String subject = "";
