@@ -6,7 +6,7 @@ public class AQTY {
 	// 多廠別進/銷彙總檔
 	private Integer aqty_id = 0;
 
-	private Integer yymm = 10511; // auto
+	private Integer yymm = 1611; // auto
 	// 資料年月 紀錄型態如同初始值 所以使用int
 	private String fno = ""; // auto
 	// 廠區代碼 2碼
