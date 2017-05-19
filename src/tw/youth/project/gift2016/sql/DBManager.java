@@ -138,7 +138,8 @@ public class DBManager {
 				.append("CURRENT_TIMESTAMP").append(",").append("updated").append(" ").append("DATETIME").append(" ")
 				.append("ON").append(" ").append("UPDATE").append(" ").append("CURRENT_TIMESTAMP").append(" ")
 				.append("DEFAULT").append(" ").append("CURRENT_TIMESTAMP").append(",");
-		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
+//		sb.append("PRIMARY KEY").append("(").append("_id").append("));");
+		sb.append("PRIMARY KEY").append("(").append(keys[0]).append("));");
 		return sb.toString();
 	}
 
