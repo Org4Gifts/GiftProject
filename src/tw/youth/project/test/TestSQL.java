@@ -22,6 +22,7 @@ import tw.youth.project.gift2016.sql.apresent.APRESENT;
 import tw.youth.project.gift2016.sql.aqty.AQTY;
 import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
+import tw.youth.project.gift2016.sql.normal.Bulletin;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 import tw.youth.project.gift2016.tools.ToolBox;
@@ -149,6 +150,7 @@ public class TestSQL {
 			System.out.println("drop ainventory " + dao.getConn().prepareStatement("Drop table ainventory;").execute());
 			System.out.println("drop afab " + dao.getConn().prepareStatement("Drop table afab;").execute());
 			System.out.println("drop adep " + dao.getConn().prepareStatement("Drop table adep;").execute());
+			System.out.println("drop bulletin " + dao.getConn().prepareStatement("Drop table bulletin;").execute());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
@@ -157,7 +159,7 @@ public class TestSQL {
 
 	}
 
-	// @Test
+//	 @Test
 	public void testCreateTables() { // 測試OK
 		// testDropTables();
 
@@ -234,6 +236,11 @@ public class TestSQL {
 			table = dao.createTable(adep.getTableName(), adep.getKeys(), adep.getTypes(), adep.getUniques());
 			System.out.println(table);
 			System.out.println(adep.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
+			
+			Bulletin bulletin = new Bulletin();
+			table = dao.createTable(bulletin.getTableName(), bulletin.getKeys(), bulletin.getTypes(), bulletin.getUniques());
+			System.out.println(table);
+			System.out.println(bulletin.getTableName() + " " + dao.getConn().prepareStatement(table).execute());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
