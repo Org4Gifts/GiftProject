@@ -12,6 +12,7 @@ import tw.youth.project.gift2016.sql.aqty.AQTY;
 import tw.youth.project.gift2016.sql.asetup.ASETUP;
 import tw.youth.project.gift2016.sql.asignlog.ASIGNLOG;
 import tw.youth.project.gift2016.sql.avdr.AVDR;
+import tw.youth.project.gift2016.sql.normal.Bulletin;
 import tw.youth.project.gift2016.sql.user.AEMP;
 import tw.youth.project.gift2016.sql.user.AUSER;
 
@@ -29,7 +30,7 @@ public class SQLCmd {
 			AODRDT.class.getSimpleName().toLowerCase(), AODR.class.getSimpleName().toLowerCase(),
 			AIODT.class.getSimpleName().toLowerCase(), AIO.class.getSimpleName().toLowerCase(),
 			AINVENTORY.class.getSimpleName().toLowerCase(), AFAB.class.getSimpleName().toLowerCase(),
-			ADEP.class.getSimpleName().toLowerCase() };
+			ADEP.class.getSimpleName().toLowerCase(),Bulletin.class.getSimpleName().toLowerCase()};
 	// // 通用操作
 	// public static final String LOGIN = "";
 	// public static final String SHOW_TABLES = "show tables from %s";
@@ -72,6 +73,10 @@ public class SQLCmd {
 			break;
 		case "Date":
 			sqlType = "DATETIME";
+			break;
+		case "Timestamp":
+			sqlType = "DATETIME";
+			break;
 		}
 		return sqlType;
 	}

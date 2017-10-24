@@ -50,7 +50,7 @@ public class AIO {
 			vhdt.getClass().getSimpleName(), vrdt.getClass().getSimpleName(), ano.getClass().getSimpleName(),
 			dc.getClass().getSimpleName(), tamt.getClass().getSimpleName(), status.getClass().getSimpleName(),
 			authority.getClass().getSimpleName(), signerno.getClass().getSimpleName(),
-			memo.getClass().getSimpleName() };
+			memo.getClass().getSimpleName(),signerlist.getClass().getSimpleName()};
 	private String[] uniques = { "vhno" };
 
 	public String getTableName() {
